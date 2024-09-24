@@ -1,6 +1,8 @@
 """
 A script that can generate fake donor data
 
+insert_donors_1.sql is an example of the commands that have been made
+
 Some considerations:
 1. Usually passwords have specific requirements (min x characters, at least one number and one symbol etc. I did not include that here, it can be added later if we want)
 2. Eligibility is dependant on the last donation date, which I have not coded in yet
