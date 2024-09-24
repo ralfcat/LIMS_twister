@@ -28,8 +28,13 @@
             <h2>Donation History</h2>
             <ul>
                 <!--We need to add list items here with backend later-->
-                <li>Menu Item 1</li>
-                <li>Menu Item 2</li>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+                <li>Item 4</li>
+                <li>Item 5</li>
+                <li>Item 6</li>
+                <li>Item 7</li>
             </ul>
         </div>
 

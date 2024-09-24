@@ -144,23 +144,31 @@ button {
     display: block; 
 }
 
+/* Scrollmenu styles */
 div.scrollmenu {
     background-color: #fff;
-    overflow-y: auto;
-    white-space: nowrap;
-  }
-  
-  div.scrollmenu a {
+    padding: 20px;
+    max-height: 100%; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column; 
+}
+
+div.scrollmenu ul {
+    flex: 1; 
+    overflow-y: auto; 
+    list-style-type: none; 
+    max-height: 100%; 
+}
+
+div.scrollmenu ul li a {
     display: inline-block;
     color: white;
     text-align: center;
     padding: 14px;
     text-decoration: none;
-  }
-  
-  div.scrollmenu a:hover {
-    background-color: #777;
-  }
+    background-color: #af093c; /* Button background color */
+}
 
 /*Blood donor front page*/
 .container {
@@ -178,7 +186,6 @@ div.scrollmenu {
 .scrollmenu ul li {
     margin-left: 20px;
     margin-top: 20px;
-    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .upcoming-donations {
