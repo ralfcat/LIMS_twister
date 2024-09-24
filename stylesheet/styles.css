@@ -12,6 +12,34 @@ body {
     box-sizing: border-box;
 }
 
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between; /* Space between items in the header */
+    align-items: center; /* Vertically align items in the header */
+    padding: 10px 20px; /* Add some padding for better layout */
+}
+
+.logo {
+    height: 50px; /* Adjust height as needed */
+    width: auto; /* Maintain aspect ratio */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Display list items in a row */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+nav li {
+    margin-left: 20px; /* Add spacing between menu items */
+}
+
+.logout-button {
+    margin-left: 20px; /* Add spacing to the logout button */
+}
+
 /* New user link styles */
 .new-user p {
     font-size: 10.9 ;
@@ -44,6 +72,13 @@ body {
 
 h1 {
     font-size: 32px; 
+    font-weight: 1000; 
+    text-align: center;
+    color: #af093c; 
+}
+
+h2 {
+    font-size: 20px; 
     font-weight: 1000; 
     text-align: center;
     color: #af093c; 
