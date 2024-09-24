@@ -216,6 +216,12 @@ div.scrollmenu ul li a {
     margin: 20px; 
 }
 
+.bbank-container h2 {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 /*Current levels square*/
 .Current_levels {
     flex: 1; 
