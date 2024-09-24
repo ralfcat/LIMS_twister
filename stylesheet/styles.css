@@ -211,28 +211,64 @@ div.scrollmenu ul li a {
 
 /*blood bank front page*/
 .bbank-container {
-    display: flex; /* Create a flex container */
-    justify-content: space-between; /* Space between the two items */
-    margin: 20px; /* Margin around the container */
+    display: flex; 
+    justify-content: space-between; 
+    margin: 20px; 
 }
 
+/*Current levels square*/
 .Current_levels {
-    flex: 1; /* Allow this section to grow */
-    margin-right: 20px; /* Space between the current levels and notification thresholds */
+    flex: 1; 
+    margin-right: 20px; 
     background-color: white;
-    border-radius: 15px; /* Adjust the value for more or less rounding */
-    max-height: 300px;
+    border-radius: 15px; 
+    max-height: 320px;
 
 }
 
+/*Threshold level form*/
 .bbank-container form {
-    flex: 1; /* Allow the form to grow */
-    margin-left: 20px; /* Optional spacing for clarity */
+    flex: 1; 
     background-color: white;
-    border-radius: 15px; /* Adjust the value for more or less rounding */
-    padding: 3rem;
-    max-height: 200px;
+    border-radius: 15px; 
+    padding: 10px; 
+    max-height: 300px; 
+}
 
+.bbank-container form h2 {
+    text-align: center; 
+}
+
+.bbank-container form label {
+    display: flex; 
+    justify-content: space-between; 
+
+}
+
+.bbank-container form .input-group {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.bbank-container form input[type="text"] {
+    width: 30%; 
+    padding: 5px; 
+    border-radius: 15px; 
+    background-color: #efefef; 
+}
+
+.bbank-container form input[type="submit"] {
+    width: 20%; 
+    background-color: #af093c; 
+    color: white; 
+    border: none; 
+    border-radius: 15px; 
+    cursor: pointer; 
+    padding: 10px;
+    margin-top: 15px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block; 
 }
 
 /* Styles for the donation form */

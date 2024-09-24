@@ -30,14 +30,22 @@
 
         <form action="#" method="POST"> <!--We need to change this-->
             <h2>Notification Thresholds</h2>
-            <label>0+:<input type="text" name="mname"></label><br>
-            <label>0-:<input type="text" name="mname"></label><br>
-            <label>A+:<input type="text" name="mname"></label><br>
-            <label>A-:<input type="text" name="mname"></label><br>
-            <label>B+:<input type="text" name="mname"></label><br>
-            <label>B-:<input type="text" name="mname"></label><br>
-            <label>AB+:<input type="text" name="mname"></label><br>
-            <label>AB-:<input type="text" name="mname"></label><br>
+            <div class="input-group">
+                <label>0+:<input type="text" name="mname"></label>
+                <label>0-:<input type="text" name="mname"></label>
+            </div>
+            <div class="input-group">
+                <label>A+:<input type="text" name="mname"></label>
+                <label>A-:<input type="text" name="mname"></label>
+            </div>
+            <div class="input-group">
+                <label>B+:<input type="text" name="mname"></label>
+                <label>B-:<input type="text" name="mname"></label>
+            </div>
+            <div class="input-group">
+                <label>AB+:<input type="text" name="mname"></label>
+                <label>AB-:<input type="text" name="mname"></label>
+            </div>
             <input type="submit" value="SAVE">
         </form>
     </div>
