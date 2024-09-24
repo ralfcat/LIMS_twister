@@ -23,23 +23,24 @@
     </nav>
     </header>
 
-    <div class="Current_levels">
-           <h2>Current levels</h2>
+    <div class="bbank-container"> <!-- New container -->
+        <div class="Current_levels">
+            <h2>Current Levels</h2>
+        </div>
 
+        <form action="#" method="POST"> <!--We need to change this-->
+            <h2>Notification Thresholds</h2>
+            <label>0+:<input type="text" name="mname"></label><br>
+            <label>0-:<input type="text" name="mname"></label><br>
+            <label>A+:<input type="text" name="mname"></label><br>
+            <label>A-:<input type="text" name="mname"></label><br>
+            <label>B+:<input type="text" name="mname"></label><br>
+            <label>B-:<input type="text" name="mname"></label><br>
+            <label>AB+:<input type="text" name="mname"></label><br>
+            <label>AB-:<input type="text" name="mname"></label><br>
+            <input type="submit" value="SAVE">
+        </form>
     </div>
-
-    <form action="#" method="POST"> <!--We need to change this-->
-        <h2>Notification thresholds</h2>
-        0+:<input type="text" name="mname"><br>
-        0-:<input type="text" name="mname"><br>
-        A+:<input type="text" name="mname"><br>
-        A-:<input type="text" name="mname"><br>
-        B+:<input type="text" name="mname"><br>
-        B-:<input type="text" name="mname"><br>
-        AB+:<input type="text" name="mname"><br>
-        AB-:<input type="text" name="mname"><br>
-        <input type="submit" value="SAVE">
-    </form>
 
     <form action="#" method="POST">  <!--We need to change this-->
         Blood type:<input type="text" name="mname"><br>

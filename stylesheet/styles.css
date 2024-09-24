@@ -178,3 +178,25 @@ div.scrollmenu {
     margin-left: 20px; 
     background-color: white;
 }
+
+.bbank-container {
+    display: flex; /* Create a flex container */
+    justify-content: space-between; /* Space between the two items */
+    margin: 20px; /* Margin around the container */
+}
+
+.Current_levels {
+    flex: 1; /* Allow this section to grow */
+    margin-right: 20px; /* Space between the current levels and notification thresholds */
+    background-color: white;
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+
+}
+
+.bbank-container form {
+    flex: 1; /* Allow the form to grow */
+    margin-left: 20px; /* Optional spacing for clarity */
+    background-color: white;
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+
+}
