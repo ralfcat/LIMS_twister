@@ -43,6 +43,7 @@
     <select id="donated">
         <option value="n">No</option>
         <option value="y">Yes</option>
+        <option value="yt">Yetts</option>
     </select> <br>
 
     <input type="submit" value="Register">
