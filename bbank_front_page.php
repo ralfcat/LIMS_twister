@@ -42,16 +42,20 @@
         </form>
     </div>
 
-    <form action="#" method="POST" class="donation-form">  <!--We need to change this-->
-        <div class="form-group">
-            <label for="last-donation">Blood type:</label>
-            <input type="text" name="mname" id="last-donation">
+    <form action="#" method="POST" class="donation-form"> <!--We need to chage this-->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="last-donation">Bloodtype:</label>
+                <input type="text" name="mname" id="last-donation">
+            </div>
+            <div class="form-group">
+                <label for="blood-center">Units:</label>
+                <input type="text" name="myear" id="blood-center">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="blood-center">Units:</label>
-            <input type="text" name="myear" id="blood-center"> <!-- We need to implement a selection list here with help of PHP -->
+        <div class="submit-btn">
+            <input type="submit" value="Update levels">
         </div>
-        <input type="submit" value="Update levels">
     </form>
 
 </body>
