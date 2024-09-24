@@ -23,6 +23,7 @@
     </nav>
 
     <div class="scrollmenu">
+        <h1>Donation History</h1>
         <ul>
             <li>Menu Item 1</li>
             <li>Menu Item 2</li>
