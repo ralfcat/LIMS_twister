@@ -11,8 +11,7 @@
 <body>
     <header>
         <a href="bbank_front_page.php"><img class="logo" src="BloodAlert_logo.png" alt="logo"></a>            
-    </header>
-
+    
     <nav> <!--navigation-->
             <ul>
                 <li class="active"><a href="bbank_front_page.php">Blood level inventory</a></li>
@@ -20,5 +19,6 @@
                 <button class="logout-button" onclick="logout()">Log Out</button> <!--Add logout function-->
             </ul>
     </nav>
+    </header>
 
 </body>
