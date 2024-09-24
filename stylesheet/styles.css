@@ -162,6 +162,7 @@ div.scrollmenu {
     background-color: #777;
   }
 
+/*Blood donor front page*/
 .container {
     display: flex; /* Create a flex container */
     justify-content: space-between; /* Space between items */
@@ -179,6 +180,8 @@ div.scrollmenu {
     background-color: white;
 }
 
+
+/*blood bank front page*/
 .bbank-container {
     display: flex; /* Create a flex container */
     justify-content: space-between; /* Space between the two items */
