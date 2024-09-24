@@ -3,27 +3,46 @@ body {
     font-family: 'Nunito', sans-serif; 
     color: #333; 
     background-color: #e4adbc;
-    margin: 0;
-    padding: 20px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-    box-sizing: border-box;
 }
 
+body header a {
+    padding-right: 20rem;
+}
 /* Header styles */
 header {
+    width: 100%;
     display: flex;
+    flex-direction: row;
     justify-content: space-between; 
-    align-items: center; 
     padding: 10px 20px; 
     background-color: white;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    align-items: right;
 }
 
 .logo {
     height: 50px; 
     width: auto; 
+    margin-right: 20rem; /* Space between logo and navigation */
+
+}
+
+nav {
+    width: 100%; /* Make navigation take full width */
+}
+
+/* Link styles */
+nav a { 
+    color: black; 
+    text-decoration: none; 
+}
+
+nav a:hover { 
+    text-decoration: underline; 
 }
 
 nav ul {
@@ -39,7 +58,9 @@ nav li {
 
 .logout-button {
     margin-left: 20px;
+    font-weight: bold;
     color: #af093c;
+    background-color: white;
 }
 
 /* New user link styles */
@@ -138,3 +159,4 @@ div.scrollmenu {
   div.scrollmenu a:hover {
     background-color: #777;
   }
+
