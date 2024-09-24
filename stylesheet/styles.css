@@ -31,23 +31,34 @@ header nav {
 
 }
 /*nav*/
-nav{
+/*nav*/
+nav {
     font-size: 1.3rem;
     font-weight: bold;
+    display: flex; /* Add flex to the nav */
+    justify-content: flex-end; /* Align links to the right */
 }
 
-nav ul{
+nav ul {
     text-transform: uppercase;
     background-color: #fff;
-    display: flex; /*Flexbox*/
+    display: flex; /* Flexbox for horizontal layout */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    list-style: none; /* Remove bullet points */
 }
 
-nav ul li a{
+nav ul li {
+    margin-left: 20px; /* Space between links */
+}
+
+nav ul li a {
     outline: none;
     color: black;
+    text-decoration: none; /* Remove underline */
 }
 
-nav a:hover, nav a:focus{
+nav a:hover, nav a:focus {
     color: rgb(81, 80, 80); 
     font-weight: bold;
 }
