@@ -17,6 +17,7 @@
             <ul>
                 <li class="active"><a href="bbank_front_page.php">Blood level inventory</a></li>
                 <li><a href="">Profile</a></li>
+                <button class="logout-button" onclick="logout()">Log Out</button> <!--Add logout function-->
             </ul>
     </nav>
 
