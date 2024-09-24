@@ -38,4 +38,11 @@
         </ul>
     </div>
 
+    <div class="upcoming-donations">
+            <h2>Upcoming donations</h2>
+            <p>You don’t have any upcoming donations,<br> 
+                book a new appointment <a href="#">here</a>.
+            </p>
+    </div>
+
 </body>
