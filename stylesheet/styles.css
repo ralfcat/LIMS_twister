@@ -230,30 +230,51 @@ div.scrollmenu {
 
 /* Styles for the donation form */
 .donation-form {
-    display: flex; /* Enable flexbox for the form */
-    flex-direction: column; /* Stack the items vertically */
-    max-width: 600px; /* Set a max width for the form */
-    margin: 20px auto; /* Center the form */
-    padding: 20px; /* Add some padding around the form */
-    border-radius: 15px; /* Rounded corners */
+    max-width: 600px;  
+    margin: 0 auto;  
 }
 
-.donation-form .form-group {
-    display: flex; /* Use flexbox to place inputs beside each other */
-    justify-content: space-between; /* Space between the inputs */
-    margin: 10px 0; /* Space between groups */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .donation-form label {
-    width: 30%; /* Fixed width for labels */
-    margin-right: 10px; /* Space between label and input */
-    font-weight: bold; /* Optional: make labels bold */
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .donation-form input[type="text"] {
-    flex: 1; /* Allow inputs to take up the remaining space */
-    flex-direction: row; /* Stack the items vertically */
-    color: #333; /* Text color in input fields */
-    padding: 10px; /* Padding for inputs */
-    border-radius: 30px; /* Rounded corners */
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.submit-btn input[type="submit"] {
+    width: 20%;
+    background-color: #af093c;
+    border-radius: 15px; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
 }
