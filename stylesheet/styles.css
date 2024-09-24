@@ -14,6 +14,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between; 
+    align-items: center; /* Center align items vertically */
     padding: 10px 20px; 
     background-color: white;
 }
@@ -28,9 +29,8 @@ header nav {
     height: 50px; 
     width: auto; 
     margin-right: 20rem; /* Space between logo and navigation */
-
 }
-/*nav*/
+
 /*nav*/
 nav {
     font-size: 1.3rem;
@@ -42,14 +42,10 @@ nav {
 nav ul {
     text-transform: uppercase;
     background-color: #fff;
-    display: flex; /* Flexbox for horizontal layout */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     list-style: none; /* Remove bullet points */
-}
-
-nav ul li {
-    margin-left: 20px; /* Space between links */
 }
 
 nav ul li a {
@@ -60,7 +56,6 @@ nav ul li a {
 
 nav a:hover, nav a:focus {
     color: rgb(81, 80, 80); 
-    font-weight: bold;
 }
 
 .logout-button {
@@ -167,7 +162,7 @@ div.scrollmenu {
     background-color: #777;
   }
 
-  .container {
+.container {
     display: flex; /* Create a flex container */
     justify-content: space-between; /* Space between items */
     margin: 20px; /* Margin around the container */
