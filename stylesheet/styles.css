@@ -84,7 +84,7 @@ button {
 }
 
 div.scrollmenu {
-    background-color: #333;
+    background-color: #fff;
     overflow-y: auto;
     white-space: nowrap;
   }
