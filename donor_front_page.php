@@ -23,16 +23,9 @@
     <div class="scrollmenu">
         <h1>Donation History</h1>
         <ul>
+            <!--We need to add list items here with backend later-->
             <li>Menu Item 1</li>
             <li>Menu Item 2</li>
-            <li>Menu Item 3</li>
-            <li>Menu Item 4</li>
-            <li>Menu Item 5</li>
-            <li>Menu Item 6</li>
-            <li>Menu Item 7</li>
-            <li>Menu Item 8</li>
-            <li>Menu Item 9</li>
-            <li>Menu Item 10</li>
         </ul>
     </div>
 
