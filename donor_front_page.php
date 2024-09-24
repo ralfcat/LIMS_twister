@@ -42,9 +42,15 @@
     </div>
 
 
-    <form action="#" method="POST">  <!--We need to change this-->
-        Enter name of last donation:<input type="text" name="mname"><br>
-        Choose blood center:<input type="text" name="myear"><br> <!--We need to implement a selection list here with help of PHP-->
+    <form action="#" method="POST" class="donation-form">  <!--We need to change this-->
+        <div class="form-group">
+            <label for="last-donation">Enter name of last donation:</label>
+            <input type="text" name="mname" id="last-donation">
+        </div>
+        <div class="form-group">
+            <label for="blood-center">Choose blood center:</label>
+            <input type="text" name="myear" id="blood-center"> <!-- We need to implement a selection list here with help of PHP -->
+        </div>
         <input type="submit" value="Add Donation">
     </form>
 

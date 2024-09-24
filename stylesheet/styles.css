@@ -171,13 +171,34 @@ div.scrollmenu {
 
 .scrollmenu {
     flex: 1;
-    margin-right: 20px; 
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+    padding-bottom: 100px;
+
+}
+
+.scrollmenu ul li {
+    margin-left: 20px;
+    margin-top: 20px;
 }
 
 .upcoming-donations {
     flex: 1;
     margin-left: 20px; 
     background-color: white;
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+    padding-bottom: 100px;
+
+}
+
+.upcoming-donations h2, .scrollmenu h2{
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.upcoming-donations p{
+    margin: 2rem;
+    text-align: center;
 }
 
 
@@ -193,6 +214,7 @@ div.scrollmenu {
     margin-right: 20px; /* Space between the current levels and notification thresholds */
     background-color: white;
     border-radius: 15px; /* Adjust the value for more or less rounding */
+    max-height: 300px;
 
 }
 
@@ -201,5 +223,37 @@ div.scrollmenu {
     margin-left: 20px; /* Optional spacing for clarity */
     background-color: white;
     border-radius: 15px; /* Adjust the value for more or less rounding */
+    padding: 3rem;
+    max-height: 200px;
 
+}
+
+/* Styles specifically for the donation form */
+.donation-form {
+    display: flex; /* Enable flexbox for the form */
+    flex-direction: column; /* Stack the items vertically */
+    max-width: 600px; /* Set a max width for the form */
+    margin: 20px auto; /* Center the form */
+    padding: 20px; /* Add some padding around the form */
+    border-radius: 15px; /* Rounded corners */
+}
+
+.donation-form .form-group {
+    display: flex; /* Use flexbox to place inputs beside each other */
+    justify-content: space-between; /* Space between the inputs */
+    margin: 10px 0; /* Space between groups */
+}
+
+.donation-form label {
+    width: 30%; /* Fixed width for labels */
+    margin-right: 10px; /* Space between label and input */
+    font-weight: bold; /* Optional: make labels bold */
+}
+
+.donation-form input[type="text"] {
+    flex: 1; /* Allow inputs to take up the remaining space */
+    flex-direction: row; /* Stack the items vertically */
+    color: #333; /* Text color in input fields */
+    padding: 10px; /* Padding for inputs */
+    border-radius: 30px; /* Rounded corners */
 }
