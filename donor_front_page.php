@@ -39,7 +39,7 @@
     <form action="index.php" method="POST">
         Enter name of last donation:<input type="text" name="mname"><br>
         Choose blood center:<input type="text" name="myear"><br> <!--We need to implement a selection list here with help of PHP-->
-        <input type="submit" value="Add">
+        <input type="submit" value="Add Donation">
     </form>
 
 
