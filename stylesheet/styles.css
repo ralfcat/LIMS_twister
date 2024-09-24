@@ -160,3 +160,19 @@ div.scrollmenu {
     background-color: #777;
   }
 
+  .container {
+    display: flex; /* Create a flex container */
+    justify-content: space-between; /* Space between items */
+    margin: 20px; /* Margin around the container */
+}
+
+.scrollmenu {
+    flex: 1;
+    margin-right: 20px; 
+}
+
+.upcoming-donations {
+    flex: 1;
+    margin-left: 20px; 
+    background-color: white;
+}

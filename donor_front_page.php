@@ -23,21 +23,24 @@
     </nav>
     </header>
 
-    <div class="scrollmenu">
-        <h2>Donation History</h2>
-        <ul>
-            <!--We need to add list items here with backend later-->
-            <li>Menu Item 1</li>
-            <li>Menu Item 2</li>
-        </ul>
-    </div>
+    <div class="container">
+        <div class="scrollmenu">
+            <h2>Donation History</h2>
+            <ul>
+                <!--We need to add list items here with backend later-->
+                <li>Menu Item 1</li>
+                <li>Menu Item 2</li>
+            </ul>
+        </div>
 
-    <div class="upcoming-donations">
+        <div class="upcoming-donations">
             <h2>Upcoming donations</h2>
             <p>You don’t have any upcoming donations,<br> 
                 book a new appointment <a href="#">here</a>.
             </p>
+        </div>
     </div>
+
 
     <form action="#" method="POST">  <!--We need to change this-->
         Enter name of last donation:<input type="text" name="mname"><br>
