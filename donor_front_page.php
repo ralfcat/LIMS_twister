@@ -21,7 +21,7 @@
     </nav>
 
     <div class="scrollmenu">
-        <h1>Donation History</h1>
+        <h2>Donation History</h2>
         <ul>
             <!--We need to add list items here with backend later-->
             <li>Menu Item 1</li>
