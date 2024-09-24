@@ -10,7 +10,11 @@
 </head>
 
 <body>
-<nav> <!--navigation-->
+    <header>
+        <a href="bbank_front_page.php"><img class="logo" src="BloodAlert_logo.png" alt="logo"></a>            
+    </header>
+
+    <nav> <!--navigation-->
             <ul>
                 <li class="active"><a href="bbank_front_page.php">Blood level inventory</a></li>
                 <li><a href="">Profile</a></li>

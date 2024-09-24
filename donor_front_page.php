@@ -10,13 +10,15 @@
 </head>
 
 <body>
+    <header>
+        <a href="donor_front_page.php"><img class="logo" src="BloodAlert_logo.png" alt="logo"></a>            
+    </header>
 
     <nav> <!--navigation-->
             <ul>
                 <li class="active"><a href="donor_front_page.php">My donations</a></li>
                 <li><a href="">Profile</a></li>
             </ul>
-
     </nav>
 
 </body>
