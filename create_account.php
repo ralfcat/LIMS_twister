@@ -1,4 +1,7 @@
+<body>
+
 <h1>Donor Register Page</h1>
+
 <form>
     <label for="fname"> First Name</label>
     <input type="text" id="fname"> <br>
@@ -40,16 +43,43 @@
     </select> <br>
 
     <label for="donated"> Have you donated blood before?</label>
-    <select id="donated">
-        <option value="n">No</option>
-        <option value="y">Yes</option>
-        <option value="yt">Yetts</option>
+    <select id="donateds" onchange = "last_donated_date()">
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
     </select> <br>
 
+    <label for="donate-date" id = "dn"></label>
+    <input type="hidden" id="donate-date"> <br>
+
     <input type="submit" value="Register">
+    <p id="demo"></p>
 
 
 
 
 
 </form>
+
+</body>
+
+<script>
+
+    console.log('Hello');
+
+
+
+    function last_donated_date() {
+        var donated = document.getElementById("donateds").value;
+        if (donated === "No") {
+            document.getElementById("dn").innerHTML = ''
+            document.getElementById("donate-date").type = 'hidden'
+        } else {
+            document.getElementById("dn").innerHTML = 'When did you last donate?'
+            document.getElementById("donate-date").type = 'date'
+        }
+
+        
+
+    }
+    // document.getElementById("donateds").addEventListener("change", last_donated_date);
+</script>
