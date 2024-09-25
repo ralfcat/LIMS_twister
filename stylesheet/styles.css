@@ -276,9 +276,7 @@ div.scrollmenu ul li a {
     display: block; 
 }
 
-.input-group input[type="text"] {
-    text-align: right; 
-}
+
 /* Styles for the donation form */
 .donation-form {
     max-width: 600px;  
