@@ -247,7 +247,7 @@ def create_sql(N):
         # is_eligible = np.random.choice(np.repeat(['True', 'False'], [1,1]) , size = 1, p = None)[0]
         is_eli = is_eligible(donation_date)
 
-        sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{hashed_pass}', '{blood_type}', '{donation_date}', '{is_eli}')"
+        sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{hashed_pass}', '{blood_type}', '{donation_date}', {is_eli})"
 
         
 
