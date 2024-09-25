@@ -221,6 +221,19 @@ div.scrollmenu ul li a {
     font-weight: bold;
 }
 
+.bbank-container form .input-group {
+    display: flex; 
+    justify-content: flex-end; /* Align all items to the right */
+}
+
+.bbank-container form input[type="text"] {
+    width: 30%; 
+    padding: 5px; 
+    border-radius: 15px; 
+    background-color: #efefef; 
+    text-align: right; /* Align text inside the input to the right */
+}
+
 /*Current levels square*/
 .Current_levels {
     flex: 1; 
@@ -228,7 +241,6 @@ div.scrollmenu ul li a {
     background-color: white;
     border-radius: 15px; 
     max-height: 320px;
-
 }
 
 /*Threshold level form*/
