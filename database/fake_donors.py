@@ -13,7 +13,7 @@ import os
 import numpy as np
 import argparse
 from typing import NamedTuple
-from datetime import datetime
+from datetime import datetime, timedelta
 from random import randrange
 from datetime import timedelta
 import hashlib
@@ -167,16 +167,34 @@ def get_password():
     np_urn = np.repeat(characters, np_count)
     generate_password = np.random.choice(np_urn, size = pass_length, replace = True)
     passwrd = ''.join(generate_password)
-    hashed_passwrd = hashlib.md5(passwrd)
+    hashed_passwrd = hashlib.md5(passwrd.encode())
     hashed_passwrd = hashed_passwrd.hexdigest()
-    return hashed_passwrd
+    return passwrd, hashed_passwrd
 
 def is_eligible(don_date):
     """
     This function will determine if the donor has donated within the last 6 months, determining eligibility
 
     """
+    # datetime.datetime(2023, 12, 11, 14, 32, 26)
+    # x = get_don_date()
+    # >>> x
+    # datetime.datetime(2024, 3, 26, 17, 36, 57)
+    # >>> x - timedelta(days = 6 * 30)
+    # datetime.datetime(2023, 9, 28, 17, 36, 57)
     ...
+    #  get the current time
+    curr_time = datetime.now()
+    # get the time 6 months ago 
+    six_mon_ago = curr_time - timedelta(days = 6 * 30)
+    if six_mon_ago <= don_date <= curr_time:
+        return True
+    return False
+
+    
+
+
+
 
     
 
@@ -218,14 +236,18 @@ def create_sql(N):
         fname, lname, sex = get_full_name_gender()
         email = get_email(fname,lname)
         address = get_address()
-        password = get_password()
+        password, hashed_pass = get_password()
+
+        with open('users.csv', 'a') as users:
+            users.write(f'{email}\t{password}\n')
         age = np.random.randint(18, 60)
         # sex = np.random.choice(np.repeat(['Female', 'Male'], [1,1]) , size = 1, p = None)[0]
         donation_date = get_don_date()
         blood_type = get_btype()
-        is_eligible = np.random.choice(np.repeat(['True', 'False'], [1,1]) , size = 1, p = None)[0]
+        # is_eligible = np.random.choice(np.repeat(['True', 'False'], [1,1]) , size = 1, p = None)[0]
+        is_eli = is_eligible(donation_date)
 
-        sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{password}', '{blood_type}', '{donation_date}', '{is_eligible}')"
+        sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{hashed_pass}', '{blood_type}', '{donation_date}', '{is_eli}')"
 
         
         
