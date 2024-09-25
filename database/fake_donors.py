@@ -167,7 +167,8 @@ def get_password():
     np_urn = np.repeat(characters, np_count)
     generate_password = np.random.choice(np_urn, size = pass_length, replace = True)
     passwrd = ''.join(generate_password)
-    hashed_passwrd = bcrypt.hashpw(passwrd.encode(), bcrypt.gensalt()).decode()
+    hashed_passwrd = hashlib.md5(passwrd.encode())
+    hashed_passwrd = hashed_passwrd.hexdigest()
     return passwrd, hashed_passwrd
 
 def is_eligible(don_date):
