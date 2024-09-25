@@ -82,7 +82,7 @@ $link->close();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blood Donor Log in</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="../styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
     
 </head>
@@ -91,7 +91,7 @@ $link->close();
     <div class="box">
         <p>Hello world 👽👽👽.</p>
         <!-- for logging out, put it where its needed! -->
-        <a href="logout.php">Log out</a>
+        <a href="donor_log_out.php">Log out</a>
     </div>
 </body>
 </html>
