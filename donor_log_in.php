@@ -112,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- New user link on the same line -->
         <div class="new-user">
             <p>New user? <a href="create_account.php">Create an account here</a></p>
+            
         </div>
     </div>
 </body>
