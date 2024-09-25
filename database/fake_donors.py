@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 from random import randrange
 from datetime import timedelta
 import hashlib
-
+import bcrypt
 
 def get_full_name_gender():
     name_gender_dict = {
@@ -249,7 +249,6 @@ def create_sql(N):
 
         sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{hashed_pass}', '{blood_type}', '{donation_date}', {is_eli})"
 
-        
         
 
 
