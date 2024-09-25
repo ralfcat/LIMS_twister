@@ -17,7 +17,7 @@ from datetime import datetime, timedelta
 from random import randrange
 from datetime import timedelta
 import hashlib
-
+import bcrypt
 
 def get_full_name_gender():
     name_gender_dict = {
@@ -167,8 +167,7 @@ def get_password():
     np_urn = np.repeat(characters, np_count)
     generate_password = np.random.choice(np_urn, size = pass_length, replace = True)
     passwrd = ''.join(generate_password)
-    hashed_passwrd = hashlib.md5(passwrd.encode())
-    hashed_passwrd = hashed_passwrd.hexdigest()
+    hashed_passwrd = bcrypt.hashpw(passwrd.encode(), bcrypt.gensalt()).decode()
     return passwrd, hashed_passwrd
 
 def is_eligible(don_date):

@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $row = $result -> fetch_assoc();
         $hashed_password = $row['password'];
-        //if (password_verify($password, $hashed_password)) {
-        if ($password == $hashed_password) {
+        if (password_verify($password, $hashed_password)) {
+        //if ($password == $hashed_password) {
             //password matches, the user is logged in and redirected to their "my donation page"
             $_SESSION['email'] = $row['email'];
             header("Location: my_donations.php");
