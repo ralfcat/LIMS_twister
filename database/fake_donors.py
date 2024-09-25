@@ -234,7 +234,7 @@ def create_sql(N):
     for _ in range(N):
 
         fname, lname, sex = get_full_name_gender()
-        email = get_email(fname,lname)
+        email = get_email(fname,lname).lower()
         address = get_address()
         password, hashed_pass = get_password()
 

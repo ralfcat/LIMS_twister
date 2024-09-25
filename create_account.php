@@ -93,7 +93,6 @@ if (mysqli_connect_error()) {
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // $myear = $_POST['myear'];
     // use email catherine_miller_356@outlook.com
     echo '<script type="text/javascript">
     let err = document.getElementById("error_msg");
@@ -140,13 +139,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script>
 function validate_form() {
-    let pass = document.getElementById("password").value;
-    let repass = document.getElementById("re-password").value;
+    var pass = document.getElementById("password").value;
+    var repass = document.getElementById("re-password").value;
+    var email = document.getElementById("email").value;
 
+    if (!email.includes('@'))
+    
     if (pass !==repass) {
         document.getElementById("error_msg").innerHTML = "Passwords do not match";
         return false;
+    }else if (pass ===repass && pass ==='') {
+        document.getElementById("error_msg").innerHTML = "Please enter a password";
+        return false;
     }
+
+    return false;
 
     // <label for="password"> Password</label>
     //     <input type="password" id="password" name = "password"> <br>
