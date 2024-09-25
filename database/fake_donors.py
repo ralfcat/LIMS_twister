@@ -227,7 +227,11 @@ def create_sql(N):
         blood_type = get_btype()
         is_eligible = np.random.choice(np.repeat(['True', 'False'], [1,1]) , size = 1, p = None)[0]
 
+<<<<<<< Updated upstream
         sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{password}', '{blood_type}', '{donation_date}', '{is_eligible}')"
+=======
+        sql_command = f"INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES ('{fname} {lname}',{age}, '{sex}', '{address}', '{email}', '{hashed_pass}', '{blood_type}', '{donation_date}', {is_eli})"
+>>>>>>> Stashed changes
 
         
         
