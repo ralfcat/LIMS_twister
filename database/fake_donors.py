@@ -16,6 +16,7 @@ from typing import NamedTuple
 from datetime import datetime
 from random import randrange
 from datetime import timedelta
+import hashlib
 
 
 def get_full_name_gender():
@@ -137,18 +138,6 @@ def get_full_name_gender():
     return (fname,lname, gender)
 
 
-
-def get_name():
-    name_length = np.random.randint(3,10)
-    # The chr function converts an ASCII value to its equivalent character
-    letters = list(map(chr, range(97, 123)))
-    np_count = np.asarray(len(letters) * [1])
-    np_urn = np.repeat(letters, np_count)
-    generate_name = np.random.choice(np_urn, size = name_length, replace = True)
-    name = ''.join(generate_name)
-    return name
-
-
 def get_email(f,l):
     mails = ['outlook.com', 'gmail.com', 'yahoo.com', 'icloud.com']
     r = np.random.randint(0, len(mails) - 1)
@@ -178,7 +167,18 @@ def get_password():
     np_urn = np.repeat(characters, np_count)
     generate_password = np.random.choice(np_urn, size = pass_length, replace = True)
     passwrd = ''.join(generate_password)
-    return passwrd
+    hashed_passwrd = hashlib.md5(passwrd)
+    hashed_passwrd = hashed_passwrd.hexdigest()
+    return hashed_passwrd
+
+def is_eligible(don_date):
+    """
+    This function will determine if the donor has donated within the last 6 months, determining eligibility
+
+    """
+    ...
+
+    
 
 def get_don_date():
     def random_date(start, end):
@@ -216,8 +216,6 @@ def create_sql(N):
     for _ in range(N):
 
         fname, lname, sex = get_full_name_gender()
-        # fname = get_name()
-        # lname = get_name()
         email = get_email(fname,lname)
         address = get_address()
         password = get_password()
