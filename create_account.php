@@ -11,13 +11,16 @@ $link = mysqli_connect($servername, $username, $password, $dbname);
 if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+$reg_req = "SELECT region FROM Region";
+$reg_res = $link->query($reg_req);
 ?>
 
 <body>
 
     <h1>Donor Register Page</h1>
-
-    <form action=<?php echo $_SERVER['PHP_SELF']; ?> onsubmit="return validate_form()" method="POST">
+    <!-- onsubmit="return validate_form()" -->
+    <form action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
         <label for="fname"> First Name</label>
         <input type="text" id="fname" name = "fname"> <br>
 
@@ -26,13 +29,14 @@ if (mysqli_connect_error()) {
 
         <label for="address"> Address</label>
         <select id="address" name = "address">
-            <!-- Change this so that the regions comes from the database -->
-            <option value="Stockholm">Stockholm</option>
-            <option value="Jönköping">Jönköping</option>
-            <option value="Kalmar">Kalmar</option>
+             <?php while ($row = $reg_res-> fetch_assoc()) {
+                echo "<option value = " . $row['region'] . ">" . $row['region'] . "</option>";
+             }
+             
+             ?>
         </select> <br>
 
-        <label for="age"> Age</label>
+        <label> Age</label>
         <input type="number" id="age" name = "age"> <br>
 
         <label for="sex"> Sex</label>
@@ -74,6 +78,7 @@ if (mysqli_connect_error()) {
         <select id="donateds" onchange="last_donated_date()" name = "donateds">
             <option value="No">No</option>
             <option value="Yes">Yes</option>
+            <option value="I don't remember">I don't remember</option>
         </select>
 
         <label for="donate-date" id="dn"></label>
@@ -93,7 +98,7 @@ if (mysqli_connect_error()) {
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // use email catherine_miller_356@outlook.com
+    // use email catherine_miller_356@outlook.com for testing
     echo '<script type="text/javascript">
     let err = document.getElementById("error_msg");
     document.getElementById("error_msg").innerHTML = "";
@@ -108,12 +113,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $preg = $_POST["preg"];
     $email = $_POST["email"];
     $passowrd = $_POST["password"];
-    echo 'the email entered is ' . $email;
+    echo '<p>the email entered is ' . $email . '</p>';
 
     $repassword = $_POST["repassword"];
     $btype = $_POST["btype"];
     $donateds = $_POST["donateds"];
     $donateddate = $_POST["donateddate"];
+    $is_eli = false;
+
+    
+
+    if ($donateds == "Yes") {
+        $donated_date_format = date($donateddate);
+        $today = getdate();
+        $day = $today['mday'];
+        $mon = $today['mon'];
+        $year = $today['year'];
+        $date_str = $year . "-" . $mon . "-" . $day;
+        $todays_date = date_create($date_str);
+        $six_mon_ago = date_sub($todays_date, date_interval_create_from_date_string('6 months'));
+        $six_mon_ago =$six_mon_ago->format('Y-m-d');
+
+        if (($donated_date_format >= $six_mon_ago) && ($donated_date_format <= $date_str)) {
+            echo '<p> You donated within 6 months </p>';
+            $is_eli = true;
+        } else {
+            $is_eli = false;
+            echo '<p> It has been so long since you donated </p>';
+        }
+
+
+    }
+
 
 
     $sql_req = "SELECT COUNT(email) FROM Donor WHERE email = '" . $email. "'";
@@ -142,8 +173,22 @@ function validate_form() {
     var pass = document.getElementById("password").value;
     var repass = document.getElementById("re-password").value;
     var email = document.getElementById("email").value;
+    var age = document.getElementById('age').value;
+    age = Number(age);
+    // mariam.alabi@outlook.com    
 
-    if (!email.includes('@'))
+    if (!email.includes('@')) {
+        document.getElementById("error_msg").innerHTML = "Please enter a valid email";
+        return false;
+    }
+    if (age < 18) {
+        document.getElementById("error_msg").innerHTML = "You are too young to register";
+        return false;
+    }
+    if (age > 60) {
+        document.getElementById("error_msg").innerHTML = "You are too old to register";
+        return false;
+    }
     
     if (pass !==repass) {
         document.getElementById("error_msg").innerHTML = "Passwords do not match";
