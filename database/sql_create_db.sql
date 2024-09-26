@@ -10,6 +10,34 @@ CREATE TABLE Donor (
     last_donation_date DATE,
     is_eligible BOOLEAN
 );
+
+CREATE TABLE Region (
+    rid INT PRIMARY KEY AUTO_INCREMENT,
+    region VARCHAR(100)
+);
+
+INSERT INTO Region (region) VALUES ('Blekinge');
+INSERT INTO Region (region) VALUES ('Dalarna');
+INSERT INTO Region (region) VALUES ('Gotland');
+INSERT INTO Region (region) VALUES ('Gävleborg');
+INSERT INTO Region (region) VALUES ('Halland');
+INSERT INTO Region (region) VALUES ('Jämtland');
+INSERT INTO Region (region) VALUES ('Jönköping');
+INSERT INTO Region (region) VALUES ('Kalmar');
+INSERT INTO Region (region) VALUES ('Kronoberg');
+INSERT INTO Region (region) VALUES ('Norrbotten');
+INSERT INTO Region (region) VALUES ('Skåne');
+INSERT INTO Region (region) VALUES ('Stockholm');
+INSERT INTO Region (region) VALUES ('Södermanland');
+INSERT INTO Region (region) VALUES ('Uppsala');
+INSERT INTO Region (region) VALUES ('Värmland');
+INSERT INTO Region (region) VALUES ('Västerbotten');
+INSERT INTO Region (region) VALUES ('Västernorrland');
+INSERT INTO Region (region) VALUES ('Västmanland');
+INSERT INTO Region (region) VALUES ('Västra Götaland');
+INSERT INTO Region (region) VALUES ('Örebro');
+INSERT INTO Region (region) VALUES ('Östergötland');
+
 CREATE TABLE Blood_Bank (
     blood_bank_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100),
