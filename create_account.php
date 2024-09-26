@@ -61,7 +61,7 @@ $reg_res = $link->query($reg_req);
 
     <h1>Donor Register Page</h1>
     <!-- onsubmit="return validate_form();" -->
-    <form action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
+    <form onsubmit="return validate_form();" action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
         <label for> First Name</label>
         <input type="text" id="fname" name="fname">
         <span id="error_msg_fn"></span>
