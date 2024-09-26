@@ -12,30 +12,37 @@ require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
 require 'config.php';
 
-function sendMail($email) {
+function sendMail($email, $activation_token) {
     $mail = new PHPMailer(true);
+    $mail->isHTML(true);
     $mail->isSMTP();
     $mail->SMTPAuth = true;
     $mail->Host = MAILHOST;
     $mail->Username = USERNAME;
     $mail->Password = PASSWORD;
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->SMTPSecure = 'tls'; 
     $mail->Port=587;
     $mail->setFrom(SEND_FROM,SEND_FROM_NAME);
     $mail->addAddress($email);
     $mail->addReplyTo(REPLY_TO, REPLY_TO_NAME);
     $mail->isHTML(false);
-    $mail->Subject = 'A tetsing email';
-    $mail->Body = "This is a message from bloodalert";
-    $mail->AltBody = "This is a message from bloodalert";
+    $mail->Subject = 'Activate your account';
+    $mail->Body = 'Click <a href="http://localhost:8888/activate-account.php?token='.$activation_token.'"> to activate your account';
 
-    if (!$mail->send()) {
-        echo 'EMAIL WAS NOT SENT';
-        return 'EMAIL WAS NOT SENT';
-    } else {
-        echo 'SUCCESS';
-        return 'SUCCESS';
-    }
+    $mail->AltBody = 'Click <a href="http://localhost:8888/activate-account.php?token='.$activation_token.'"> to activate your account';
+
+    // if (!$mail->send()) {
+    //     echo 'EMAIL WAS NOT SENT';
+    //     return 'EMAIL WAS NOT SENT';
+    // } else {
+    //     echo 'SUCCESS';
+    //     return 'SUCCESS';
+    // }
+
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        echo "Message could not be sent Error:". $mail->ErrorInfo ."";}
 }
 
 // Create connection
@@ -53,8 +60,8 @@ $reg_res = $link->query($reg_req);
 <body>
 
     <h1>Donor Register Page</h1>
-    <!-- onsubmit="return validate_form()" -->
-    <form onsubmit="return validate_form();" action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
+    <!-- onsubmit="return validate_form();" -->
+    <form action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
         <label for> First Name</label>
         <input type="text" id="fname" name="fname">
         <span id="error_msg_fn"></span>
@@ -213,7 +220,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insert_res = $stmt->execute();
 
         if ($insert_res) {
-            $amail = sendMail($email);
+            $amail = sendMail($email, $activation_token);
             echo "<h2> Please check your email to activate your account </h2>";
         } else {
             echo "<h2> Error: " . $stmt->error . "</h2>";
