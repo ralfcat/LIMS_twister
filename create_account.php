@@ -191,7 +191,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script>
     function validate_form() {
-        let ids = ["error_msg_fn", "error_msg_ln", "error_msg_ag", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg"] 
+        let ids = ["error_msg_fn", "error_msg_ln", "error_msg_ag", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg"];
+        let symbols = "!@#$%^&*()_+";
+        symbols = [...symbols];
         for (id of ids) {
             document.getElementById(id).innerHTML = "";
 
@@ -253,6 +255,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             return false;
         } else if (pass === repass && pass === '') {
             document.getElementById("error_msg").innerHTML = "Please enter a password";
+            return false;
+        }
+        if (pass.length < 6 || !symbols.some(s => pass.includes(s))) {
+            document.getElementById("error_msg").innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short</li> <li>The password does not contain a symbol</li></ul>";
             return false;
         }
         return true;
