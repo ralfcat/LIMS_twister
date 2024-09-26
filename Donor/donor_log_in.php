@@ -23,7 +23,7 @@ $error_password = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $sql = "SELECT email, password from Donor WHERE email = ?";
+    $sql = "SELECT email, password, account_activation_hash from Donor WHERE email = ? AND (account_activation_hash = '' OR account_activation_hash IS NULL)";
     //to prevent sql injections
     $stmt = $link->prepare($sql);
     $stmt -> bind_param('s', $email);
