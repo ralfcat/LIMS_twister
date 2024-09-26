@@ -1,9 +1,9 @@
 <?php
 session_start();
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 
 // Database connection parameters
 $servername = "localhost";
@@ -20,10 +20,11 @@ if (mysqli_connect_error()) {
 }
 $error_email = "";
 $error_password = "";
+$error_activation = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $sql = "SELECT email, password, account_activation_hash from Donor WHERE email = ? AND (account_activation_hash = '' OR account_activation_hash IS NULL)";
+    $sql = "SELECT email, password, account_activation_hash FROM donor WHERE email = ?";
     //to prevent sql injections
     $stmt = $link->prepare($sql);
     $stmt -> bind_param('s', $email);
@@ -31,31 +32,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $stmt -> get_result(); 
 
     if ($result->num_rows > 0) {
-        $row = $result -> fetch_assoc();
-        $hashed_password = $row['password'];
-        //if (password_verify($password, $hashed_password)) {
-        if (md5($password) == $hashed_password) {
-            //password matches, the user is logged in and redirected to their "my donation page"
-            $_SESSION['email'] = $row['email'];
-            header("Location: my_donations.php");
-            exit(); 
-        } else {
-            //password not matching
-            $error_password = "Invalid password.";
+        // The email exists, now check the account activation status
+        $row = $result->fetch_assoc();
+        
+        // Check if account_activation_hash is empty or null
+        if (empty($row['account_activation_hash'])) {
+            //The account is activated, check the password
+            $hashed_password = $row['password'];
+            if (md5($password) == $hashed_password) {
+                //Password matches, log the user in and redirect
+                $_SESSION['email'] = $row['email'];
+                header("Location: my_donations.php");
+                exit(); 
+            } 
+            else {
+                $error_password = "Invalid password.";
+            }
+        }
+        else {
+            $error_activation = "You need to activate your account. Please check your email for further instructions.";
         }
     } else {
-        //no user found with email
         $error_email = "No user found with that email.";
-    }
+    }  
 
-    // Close statement and connection
     $stmt->close();
     $link->close();
-    }
-        
-    
-
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <div id="error-message2" style="color:red;">
                 <?php echo $error_password; ?>
+                <?php echo $error_activation; ?>
             </div>
             <button type="submit">Log in</button>
         </form>
