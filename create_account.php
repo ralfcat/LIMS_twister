@@ -22,12 +22,12 @@ $reg_res = $link->query($reg_req);
     <!-- onsubmit="return validate_form()" -->
     <form onsubmit="return validate_form();" action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
         <label for> First Name</label>
-        <input type="text" id="fname" name="fname"> 
-        <p id="error_msg_fn"></p>
+        <input type="text" id="fname" name="fname">
+        <span id="error_msg_fn"></span>
         <br>
 
         <label for> Last Name</label>
-        <input type="text" id="lname" name="lname"><p id="error_msg_ln"></p> <br>
+        <input type="text" id="lname" name="lname"><span id="error_msg_ln"></span> <br>
 
         <label for="address"> Address</label>
         <select id="address" name="address">
@@ -39,7 +39,7 @@ $reg_res = $link->query($reg_req);
         </select> <br>
 
         <label> Age</label>
-        <input type="number" id="age" name="age"> <br>
+        <input type="number" id="age" name="age"><span id="error_msg_ag"></span> <br>
 
         <label for="sex"> Sex</label>
         <select id="sexes" onchange="check_preg()" name="sexes">
@@ -55,13 +55,13 @@ $reg_res = $link->query($reg_req);
         </select> <br>
 
         <label for="email"> Email</label>
-        <input type="text" id="email" name="email"> <br>
+        <input type="text" id="email" name="email"> <span id="error_msg_em"></span><br>
 
         <label for="password"> Password</label>
-        <input type="password" id="password" name="password"> <br>
+        <input type="password" id="password" name="password"> <span id="error_msg_ps"></span><br>
 
         <label for="re-password"> Re-type Password</label>
-        <input type="password" id="re-password" name="repassword"> <br>
+        <input type="password" id="re-password" name="repassword"><span id="error_msg_rps"></span> <br>
 
         <label for="btype"> Blood Type</label>
         <select id="btype" name="btype">
@@ -191,6 +191,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <script>
     function validate_form() {
+        let ids = ["error_msg_fn", "error_msg_ln", "error_msg_ag", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg"] 
+        for (id of ids) {
+            document.getElementById(id).innerHTML = "";
+
+        }
         var pass = document.getElementById("password").value;
         var repass = document.getElementById("re-password").value;
         var email = document.getElementById("email").value;
@@ -203,21 +208,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-        if (fname == ""){
- 
+        if (fname == "") {
+
             document.getElementById("error_msg_fn").innerHTML = "Please fill in the field";
             return false;
         }
-        if (lname === ""){
+        if (lname === "") {
 
             document.getElementById("error_msg_ln").innerHTML = "Please fill in the field";
+            return false;
+        }
+        if (age == "") {
+            document.getElementById("error_msg_ag").innerHTML = "Please fill in the field";
+            return false;
+        }
+        if (email === "") {
+            document.getElementById("error_msg_em").innerHTML = "Please fill in the field";
+            return false;
+        }
+        if (pass === "") {
+            document.getElementById("error_msg_ps").innerHTML = "Please fill in the field";
+            return false;
+        }
+        if (repass === "") {
+            document.getElementById("error_msg_rps").innerHTML = "Please fill in the field";
             return false;
         }
         if (!email.includes('@')) {
             document.getElementById("error_msg").innerHTML = "Please enter a valid email";
             return false;
         }
-        
+
         if (age < 18) {
             document.getElementById("error_msg").innerHTML = "You are too young to register";
             return false;
@@ -234,9 +255,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById("error_msg").innerHTML = "Please enter a password";
             return false;
         }
-        return false;
+        return true;
 
-        
+
 
         // <label for="password"> Password</label>
         //     <input type="password" id="password" name = "password"> <br>
