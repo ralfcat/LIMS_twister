@@ -3,6 +3,40 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "twister";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;  
+use PHPMailer\PHPMailer\SMTP;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+require 'config.php';
+
+function sendMail($email) {
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Host = MAILHOST;
+    $mail->Username = USERNAME;
+    $mail->Password = PASSWORD;
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port=587;
+    $mail->setFrom(SEND_FROM,SEND_FROM_NAME);
+    $mail->addAddress($email);
+    $mail->addReplyTo(REPLY_TO, REPLY_TO_NAME);
+    $mail->isHTML(false);
+    $mail->Subject = 'A tetsing email';
+    $mail->Body = "This is a message from bloodalert";
+    $mail->AltBody = "This is a message from bloodalert";
+
+    if (!$mail->send()) {
+        echo 'EMAIL WAS NOT SENT';
+        return 'EMAIL WAS NOT SENT';
+    } else {
+        echo 'SUCCESS';
+        return 'SUCCESS';
+    }
+}
 
 // Create connection
 $link = mysqli_connect($servername, $username, $password, $dbname);
@@ -115,10 +149,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sexes = $_POST["sexes"];
     $preg = $_POST["preg"];
     $email = $_POST["email"];
+    $activation_token = bin2hex(random_bytes(16));
+    $activation_token_hash = hash("md5", $activation_token);
+
     $password = $_POST["password"];
 
     $hashed_password = hash('md5', $password);
-    echo '<p>the email entered is ' . $email . '</p>';
 
 
     $btype = $_POST["btype"];
@@ -142,21 +178,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $six_mon_ago = $six_mon_ago->format('Y-m-d');
 
         if (($donated_date_format >= $six_mon_ago) && ($donated_date_format <= $date_str)) {
-            echo '<p> You donated within 6 months </p>';
             $eli = true;
         } else {
             $eli = false;
-            echo '<p> It has been so long since you donated </p>';
         }
 
-        $insert_sql = "INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible) VALUES (?,?,?,?,?,?,?,?,?)";
+        $insert_sql = "INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?, ?)";
         $stmt = $link->prepare($insert_sql);
-        $stmt->bind_param("sisssssss", $name, $age, $sexes, $address, $email, $hashed_password, $btype, $donateddate, $eli);
+        $stmt->bind_param("sissssssss", $name, $age, $sexes, $address, $email, $hashed_password, $btype, $donateddate, $eli, $activation_token_hash);
     } else {
-        $insert_sql = "INSERT INTO Donor (name, age, sex, address, email, password, blood_type, is_eligible) VALUES (?,?,?,?,?,?,?,?)";
+        $insert_sql = "INSERT INTO Donor (name, age, sex, address, email, password, blood_type, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?)";
         $stmt = $link->prepare($insert_sql);
-        $stmt->bind_param("sisssssi", $name, $age, $sexes, $address, $email, $hashed_password, $btype, $eli);
+        $stmt->bind_param("sisssssis", $name, $age, $sexes, $address, $email, $hashed_password, $btype, $eli, $activation_token_hash);
     }
+
 
 
 
@@ -165,7 +200,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $res = $link->query($sql_req);
     $row = $res->fetch_assoc();
     $count = $row['COUNT(email)'];
-    echo 'the value of row is  ' . $count;
 
     if ($count > 0) {
         echo '<p id=error_msg>The email you entered already exists</p>';
@@ -179,7 +213,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insert_res = $stmt->execute();
 
         if ($insert_res) {
-            echo "<h2> New record created successfully </h2>";
+            $amail = sendMail($email);
+            echo "<h2> Please check your email to activate your account </h2>";
         } else {
             echo "<h2> Error: " . $stmt->error . "</h2>";
         }
@@ -262,14 +297,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             return false;
         }
         return true;
-
-
-
-        // <label for="password"> Password</label>
-        //     <input type="password" id="password" name = "password"> <br>
-
-        //     <label for="re-password"> Re-type Password</label>
-        //     <input type="password" id="re-password" name = "repassword"> <br>
 
 
     }
