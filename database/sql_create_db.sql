@@ -8,7 +8,8 @@ CREATE TABLE Donor (
     password VARCHAR(100),
     blood_type VARCHAR(3),
     last_donation_date DATE,
-    is_eligible BOOLEAN
+    is_eligible BOOLEAN,
+    account_activation_hash VARCHAR(64) UNIQUE
 );
 CREATE TABLE Blood_Bank (
     blood_bank_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,7 +19,7 @@ CREATE TABLE Blood_Bank (
     email VARCHAR(100),
     password VARCHAR(100)
 );
-CREATE TABLE Donation (
+CREATE TABLE Donation (8
     donation_id INT PRIMARY KEY AUTO_INCREMENT,
     donor_id INT,
     blood_bank_id INT,
