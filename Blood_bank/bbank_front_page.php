@@ -26,6 +26,7 @@
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
                 <h2>Current Levels</h2> <!--Implement the graph based on inventory levels here-->
+                <canvas id="myCanvas" width="500" height="400"></canvas> <!--Beginning of graph, we need to implement backend here-->
             </div>
 
             <form action="#" method="POST" class="form-bbank"> <!--We need to change this-->
