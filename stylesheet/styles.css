@@ -165,6 +165,94 @@ input[type="text"], select {
     background-color: #af093c; /* Darker color on hover */
 }
 
+/* Login Page Specific Styles */
+.login-page .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;               /* Full height of the viewport */
+    background-color: #f5d5dd;
+    margin: 0;
+}
+
+.login-page .box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+}
+
+.login-page h1 {
+    font-size: 28px;
+    color: #af093c;
+    margin-bottom: 30px;
+}
+
+.login-page .input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.login-page .input-group label {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.login-page .input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-page .input-group input:focus {
+    border-color: #af093c;
+    outline: none;
+}
+
+.login-page button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #af093c;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.login-page button[type="submit"]:hover {
+    background-color: #872832;
+}
+
+.login-page .new-user {
+    margin-top: 20px;
+}
+
+.login-page .new-user p {
+    font-size: 14px;
+}
+
+.login-page .new-user a {
+    color: #af093c;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.login-page .new-user a:hover {
+    text-decoration: underline;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .dashboard {
@@ -183,5 +271,10 @@ input[type="text"], select {
 
     .logout-button {
         margin-top: 10px;
+    }
+
+    .login-page .box {
+        width: 100%;
+        max-width: 320px;
     }
 }

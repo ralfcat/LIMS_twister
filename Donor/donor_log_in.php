@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blood Donor Log in</title>
-    <link rel="stylesheet" href="../styles.css" />
+    <link rel="stylesheet" href="../stylesheet/styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
     <script>
         function validateForm() {
@@ -89,30 +89,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </head>
 
-<body>
-    <div class="box">
-        <h1>Donor Log in</h1>
-        <form name ="loginform" action="donor_log_in.php" method="POST" onsubmit="return validateForm()">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Type email" />
-            </div>
-            <div id="error-message" style="color:red;">
-                <?php echo $error_email; ?>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Type password" />
-            </div>
-            <div id="error-message2" style="color:red;">
-                <?php echo $error_password; ?>
-            </div>
-            <button type="submit">Log in</button>
-        </form>
-        <!-- New user link on the same line -->
-        <div class="new-user">
-            <p>New user? <a href="../create_account.php">Create an account here</a></p>
-            
+<body class="login-page">
+    <div class="login-container">
+        <div class="box">
+            <h1>Donor Log in</h1>
+            <form name="loginform" action="donor_log_in.php" method="POST" onsubmit="return validateForm()">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Type email" />
+                </div>
+                <div id="error-message" style="color:red;">
+                    <?php echo $error_email; ?>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Type password" />
+                </div>
+                <div id="error-message2" style="color:red;">
+                    <?php echo $error_password; ?>
+                </div>
+                <button type="submit">Log in</button>
+            </form>
+            <div class="new-user">
+                <p>New user? <a href="../create_account.php">Create an account here</a></p>
         </div>
     </div>
 </body>
