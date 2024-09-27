@@ -18,7 +18,7 @@
             <ul>
                 <li class="active"><a href="donor_front_page.php">My donations</a></li>
                 <li><a href="">Profile</a></li>
-                <button class="logout-button" onclick="logout()">Log Out</button> <!--Add logout function-->
+                <li><button class="logout-button" onclick="logout()">Log Out</button></li> <!--Add logout function-->
             </ul>
     </nav>
     </header>
