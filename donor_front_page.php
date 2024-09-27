@@ -39,11 +39,26 @@
         </div>
 
         <div class="upcoming-donations">
-            <h2>Upcoming donations</h2>
-            <p>You don’t have any upcoming donations,<br> 
-                book a new appointment <a href="#">here</a>.
-            </p>
-        </div>
+    <h2>Upcoming donations</h2>
+
+    <?php if ($result->num_rows > 0): ?> <!--We need to add connection to database here-->
+        <!-- If donations exist, display them in a table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+        </table>
+    <?php else: ?>
+        <!-- If no upcoming donations, display this message -->
+        <p>You don’t have any upcoming donations,<br> 
+            book a new appointment <a href="#">here</a>.
+        </p>
+    <?php endif; ?>
+
+</div>
     </div>
 
     <form action="#" method="POST" class="donation-form"> <!--We need to chage this-->
