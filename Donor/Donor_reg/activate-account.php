@@ -30,4 +30,4 @@ $stmt->execute();
 ?>
 
 <h1>Account Activated</h1>
-<p>Account activated successfully. You can now <a href="Donor/donor_log_in.php">log in</a>.</p>
+<p>Account activated successfully. You can now <a href="/Donor/Donor_login/donor_log_in.php">log in</a>.</p>

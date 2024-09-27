@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -27,9 +30,9 @@ function sendMail($email, $activation_token) {
     $mail->addReplyTo(REPLY_TO, REPLY_TO_NAME);
     $mail->isHTML(false);
     $mail->Subject = 'Activate your account';
-    $mail->Body = 'Click <a href="http://localhost:8888/activate-account.php?token='.$activation_token.'"> to activate your account';
+    $mail->Body = 'Click <a href="http://localhost:8888/Donor/Donor_reg/activate-account.php?token='.$activation_token.'"> to activate your account';
 
-    $mail->AltBody = 'Click <a href="http://localhost:8888/activate-account.php?token='.$activation_token.'"> to activate your account';
+    $mail->AltBody = 'Click <a href="http://localhost:8888/Donor/Donor_reg/activate-account.php?token='.$activation_token.'"> to activate your account';
 
     // if (!$mail->send()) {
     //     echo 'EMAIL WAS NOT SENT';
