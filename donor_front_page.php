@@ -61,7 +61,7 @@
 </div>
     </div>
 
-    <form action="#" method="POST" class="donation-form"> <!--We need to chage this-->
+    <form action="#" method="POST" class="donation-form"> <!--We need to change action here-->
         <div class="form-row">
             <div class="form-group">
                 <label for="last-donation">Enter name of last donation:</label>
