@@ -1,0 +1,187 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5d5dd;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    height: 50px; /* Adjust the size as needed */
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #af093c;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.logout-button {
+    padding: 10px 20px;
+    background-color: #af093c;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Main dashboard layout */
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+    padding: 20px;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Donation History and Upcoming Donations */
+.donation-history, .upcoming-donations {
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+    color: #af093c;
+}
+
+.donation-history ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.donation-history ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Donation Form Styling */
+.donation-form {
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.donation-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-donation-button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #af093c;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Styling for the form container */
+.form-container {
+    display: flex;             /* Use flexbox to create columns */
+    justify-content: space-between; /* Space out the columns */
+    margin: 20px 0;            /* Add some margin around the form */
+}
+
+/* Each form column */
+.form-column {
+    flex: 1;                   /* Each column takes equal space */
+    margin-right: 20px;         /* Add some spacing between columns */
+}
+
+/* Remove right margin from the last column */
+.form-column:last-child {
+    margin-right: 0;
+}
+
+/* Styling for headings and inputs */
+h3 {
+    margin: 10px 0;            /* Margin for headings */
+}
+
+input[type="text"], select {
+    width: 100%;               /* Full width for each input */
+    padding: 10px;            /* Padding inside the inputs */
+    margin: 5px 0;            /* Margin for inputs */
+    border-radius: 5px;       /* Rounded corners */
+    border: 1px solid #ccc;   /* Border for inputs */
+    box-sizing: border-box;    /* Box-sizing to include padding in width */
+}
+
+/* Button styling */
+.profile-changes-button {
+    margin-top: 20px;          /* Space above the button */
+    padding: 10px 20px;        /* Padding for the button */
+    background-color: #af093c; /* Background color */
+    color: white;              /* Text color */
+    border: none;              /* No border */
+    border-radius: 5px;       /* Rounded corners */
+    cursor: pointer;           /* Pointer cursor on hover */
+}
+
+.profile-changes-button:hover {
+    background-color: #af093c; /* Darker color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logout-button {
+        margin-top: 10px;
+    }
+}
