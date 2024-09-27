@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blood Bank Log in</title>
+    <title>Blood Donor Log in</title>
     <link rel="stylesheet" href="stylesheet/styles.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
 </head>
 
 <body>
     <div class="box">
-        <h1>Blood bank Log in</h1>
+        <h1>Donor Log in</h1>
         <form action="my_donations.php" method="GET">
             <div class="input-group">
                 <label for="email">Email</label>
@@ -29,3 +29,6 @@
         </div>
     </div>
 </body>
+</html>
+
+
