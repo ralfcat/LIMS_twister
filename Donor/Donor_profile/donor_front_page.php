@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['email'])) {
     //if the user is not logged in send them to the donor_login
-    header("Location: donor_log_in.php");
+    header("Location: /Donor/Donor_login/donor_log_in.php");
     exit();
 }
 
@@ -57,7 +57,7 @@ if ($result->num_rows > 0) {
     
 } }
 else {
-    header("Location: /Donor/Donor_login/donor_log_in.php"); // if there is no result, then send them back since they dont have an account
+    header("Location: Donor/Donor_login/donor_log_in.php"); // if there is no result, then send them back since they dont have an account
     exit();
 }
 
