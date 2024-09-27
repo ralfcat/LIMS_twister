@@ -12,12 +12,12 @@
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="donor_front_page.php">My Donations</a></li>
-                <li><a href="donor_info.php">Profile</a></li>
+                <li><a href="donor_front_page_backend.php">My Donations</a></li>
+                <li><a href="../../Donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button">Log Out</button>
