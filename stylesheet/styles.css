@@ -1,0 +1,329 @@
+
+body {
+    font-family: 'Nunito', sans-serif; 
+    color: #333; 
+    background-color: #e4adbc;
+}
+
+body header a {
+    padding-right: 20rem;
+}
+/* Header styles */
+header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; 
+    align-items: center; /* Center align items vertically */
+    padding: 10px 20px; 
+    background-color: white;
+}
+
+header nav {
+    display: flex;
+    flex-direction: row;
+    align-items: right;
+}
+
+.logo {
+    height: 50px; 
+    width: auto; 
+    margin-right: 20rem; /* Space between logo and navigation */
+}
+
+/*nav*/
+nav {
+    font-size: 1.3rem;
+    font-weight: bold;
+    display: flex; /* Add flex to the nav */
+    justify-content: flex-end; /* Align links to the right */
+}
+
+nav ul {
+    text-transform: uppercase;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style: none; /* Remove bullet points */
+}
+
+nav ul li a {
+    outline: none;
+    color: black;
+    text-decoration: none; /* Remove underline */
+}
+
+nav a:hover, nav a:focus {
+    color: rgb(81, 80, 80); 
+}
+
+.logout-button {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #af093c;
+    background-color: white;
+}
+
+/* New user link styles */
+.new-user p {
+    font-size: 10.9 ;
+    color: #af093c; 
+    display: inline; 
+    margin: 20px; 
+}
+
+.new-user a {
+    font-size: 10.9 ;
+    color: #af093c; 
+    font-weight: 800; 
+    text-decoration: none; /* Remove underline */
+}
+
+.new-user a:hover {
+    text-decoration: underline; 
+}
+
+
+.box {
+    width: 300px; 
+    margin: auto; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 30px; 
+    background-color: #f9f9f9; 
+    text-align: center; 
+}
+
+h1 {
+    font-size: 32px; 
+    font-weight: 1000; 
+    text-align: center;
+    color: #af093c; 
+}
+
+h2 {
+    font-size: 20px; 
+    font-weight: 1000; 
+    text-align: center;
+    color: #af093c; 
+}
+
+.input-group {
+    margin: 5px 0; 
+}
+
+label {
+    display: block; 
+    margin-bottom: 0px; 
+    font-weight: 400; 
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 80%; /* Set width for input fields */
+    background-color: #efefef; /* Background color for input fields */
+    color: #333; /* Text color in input fields */
+    padding: 10px; /* Padding for inputs */
+    margin: 10px 0; /* Margin for spacing */
+    border: 1px solid #ccc; /* Border for inputs */
+    border-radius: 30px; /* Rounded corners */
+}
+
+/* Button styles */
+button {
+    width: 80%; 
+    background-color: #af093c; 
+    color: white; 
+    border: none; 
+    border-radius: 30px; 
+    cursor: pointer; 
+    padding: 10px; 
+    margin: 20px auto 10px; 
+    display: block; 
+}
+
+/* Scrollmenu styles */
+div.scrollmenu {
+    background-color: #fff;
+    padding: 20px;
+    max-height: 100%; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column; 
+}
+
+div.scrollmenu ul {
+    flex: 1; 
+    overflow-y: auto; 
+    list-style-type: none; 
+    max-height: 100%; 
+}
+
+div.scrollmenu ul li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    background-color: #af093c; /* Button background color */
+}
+
+/*Blood donor front page*/
+.container {
+    display: flex; /* Create a flex container */
+    justify-content: space-between; /* Space between items */
+    margin: 20px; /* Margin around the container */
+}
+
+.scrollmenu {
+    flex: 1;
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+    padding-bottom: 100px;
+}
+
+.scrollmenu ul li {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.upcoming-donations {
+    flex: 1;
+    margin-left: 20px; 
+    background-color: white;
+    border-radius: 15px; /* Adjust the value for more or less rounding */
+    padding-bottom: 100px;
+
+}
+
+.upcoming-donations h2, .scrollmenu h2{
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.upcoming-donations p{
+    margin: 2rem;
+    text-align: center;
+}
+
+/*blood bank front page*/
+.bbank-container {
+    display: flex; 
+    justify-content: space-between; 
+    margin: 20px; 
+}
+
+.bbank-container h2 {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/*Current levels square*/
+.Current_levels {
+    flex: 1; 
+    margin-right: 20px; 
+    background-color: white;
+    border-radius: 15px; 
+    max-height: 320px;
+
+}
+
+/*Threshold level form*/
+.bbank-container form {
+    flex: 1; 
+    background-color: white;
+    border-radius: 15px; 
+    padding: 10px; 
+    max-height: 300px; 
+}
+
+.bbank-container form h2 {
+    text-align: center; 
+}
+
+.bbank-container form label {
+    display: flex; 
+    justify-content: space-between; 
+
+}
+
+.bbank-container form .input-group {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.bbank-container form input[type="text"] {
+    width: 30%; 
+    padding: 5px; 
+    border-radius: 15px; 
+    background-color: #efefef; 
+}
+
+.bbank-container form input[type="submit"] {
+    width: 20%; 
+    background-color: #af093c; 
+    color: white; 
+    border: none; 
+    border-radius: 15px; 
+    cursor: pointer; 
+    padding: 10px;
+    margin-top: 15px; 
+    margin-left: auto; 
+    margin-right: auto; 
+    display: block; 
+}
+
+
+/* Styles for the donation form */
+.donation-form {
+    max-width: 600px;  
+    margin: 0 auto;  
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-group:last-child {
+    margin-right: 0;
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.donation-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.donation-form input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+/* Style for the submit button */
+.submit-btn input[type="submit"] {
+    width: 20%;
+    background-color: #af093c;
+    border-radius: 15px; 
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+}
