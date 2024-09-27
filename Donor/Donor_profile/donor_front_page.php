@@ -1,3 +1,73 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['email'])) {
+    //if the user is not logged in send them to the donor_login
+    header("Location: donor_log_in.php");
+    exit();
+}
+
+// Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "twister";
+
+// Create connection
+$link = new mysqli($servername, $username, $password, $dbname);
+
+// Check if connection is established
+if ($link->connect_error) {
+    die("Connection failed: " . $link->connect_error);
+}
+
+
+$email = $_SESSION['email'];
+
+
+
+$sql = "SELECT * FROM Donor WHERE email = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('s', $email);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+    $donor_name = $user['name'];
+    $donor_email = $user['email'];
+    $donor_blood_type = $user['blood_type']; 
+    $donor_sex = $user['sex'];
+    $donor_address = $user['address'];
+    $donor_donation_date = $user['last_donation_date'];
+    $donor_eligible = $user['is_eligible'];
+    $donor_age = $user['age'];
+    $donor_id = $user['donor_id'];
+
+    $sql = "SELECT donation.donation_date, donation.amount, blood_bank.name FROM donation JOIN blood_bank ON donation.blood_bank_id = blood_bank.blood_bank_id WHERE donor_id = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param('i', $donor_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $donations = [];
+    if ($result->num_rows > 0) { 
+        while ($row = $result->fetch_assoc()) {
+            $donations[] = $row; // Store each donation row in the array
+        }
+    
+} }
+else {
+    header("Location: /Donor/Donor_login/donor_log_in.php"); // if there is no result, then send them back since they dont have an account
+    exit();
+}
+
+// Close the statement and connection
+//
+
+$stmt->close();
+$link->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +88,7 @@
             <ul>
                 <li class="active"><a href="donor_front_page.php">My donations</a></li>
                 <li><a href="">Profile</a></li>
-                <button class="logout-button" onclick="logout()">Log Out</button> <!--Add logout function-->
+                <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>
             </ul>
     </nav>
     </header>
@@ -26,16 +96,28 @@
     <div class="container">
         <div class="scrollmenu">
             <h2>Donation History</h2>
-            <ul>
-                <!--We need to add list items here with backend later-->
-                <li>Item 1</li>
-                <li>Item 2</li>
-                <li>Item 3</li>
-                <li>Item 4</li>
-                <li>Item 5</li>
-                <li>Item 6</li>
-                <li>Item 7</li>
-            </ul>
+            <?php if (!empty($donations)): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Blood Bank</th>
+                            <th>Amount (liters)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($donations as $donation): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($donation['donation_date']); ?></td>
+                                <td><?php echo htmlspecialchars($donation['name']); ?></td>
+                                <td><?php echo htmlspecialchars($donation['amount']); ?> L</td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>No donation history available.</p>
+            <?php endif; ?>
         </div>
 
         <div class="upcoming-donations">
