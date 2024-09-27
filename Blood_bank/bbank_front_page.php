@@ -6,7 +6,7 @@
     <title>Blood Bank front page</title>
     <link rel="stylesheet" href="/stylesheet/styles.css" />
     <link rel="stylesheet" href="/stylesheet/reset.css" />
-    <link href="BloodAlert_logo.png" rel="icon">
+    <link href="../BloodAlert_logo.png" rel="icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
 </head>
 
