@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="BloodAlert_logo.png">
     <title>Donor Dashboard</title>
-    <link rel="stylesheet" href="stylesheet/styles.css">
-    <link rel="stylesheet" href="stylesheet/reset.css">
-    <link rel="stylesheet" href="stylesheet/font.css">
+    <link rel="stylesheet" href="../stylesheet/styles.css">
+    <link rel="stylesheet" href="../stylesheet/reset.css">
+    <link rel="stylesheet" href="../stylesheet/font.css">
 </head>
 <body>
     <header>
