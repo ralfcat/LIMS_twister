@@ -75,6 +75,22 @@ main {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/*Bbank front page structure*/
+.bbank-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    padding: 20px;
+}
+
+.Current_levels, .form-bbank {
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 h2 {
     margin-top: 0;
     color: #af093c;
@@ -88,6 +104,35 @@ h2 {
 .donation-history ul li {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
+}
+
+/*Donation form bbank*/
+.donation-form-bbank {
+    padding: 20px;
+    margin: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.donation-form-bbank input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-donation-button {
+    display: block;
+    padding: 10px 20px;
+    background-color: #af093c;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
 }
 
 /* Donation Form Styling */

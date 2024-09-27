@@ -26,7 +26,7 @@
             <h2>Current Levels</h2>
         </div>
 
-        <form action="#" method="POST"> <!--We need to change this-->
+        <form action="#" method="POST" class="form-bbank"> <!--We need to change this-->
             <h2>Notification Thresholds</h2>
             <div class="input-group">
                 <label>0+:<input type="text" name="mname"></label>
@@ -48,20 +48,12 @@
         </form>
     </div>
 
-    <form action="#" method="POST" class="donation-form"> <!--We need to chage this-->
-        <div class="form-row">
-            <div class="form-group">
-                <label for="last-donation">Bloodtype:</label>
-                <input type="text" name="mname" id="last-donation">
-            </div>
-            <div class="form-group">
-                <label for="blood-center">Units:</label>
-                <input type="text" name="myear" id="blood-center">
-            </div>
-        </div>
-        <div class="submit-btn">
-            <input type="submit" value="Update levels">
-        </div>
-    </form>
+    <section class="donation-form-bbank">
+            <h3>Bloodtype:</h3>
+            <input type="text" placeholder="Enter name">
+            <h3>Units:</h3>
+            <input type="text" placeholder="Enter blood center">
+            <button class="add-donation-button">Add Donation</button>
+        </section>
 
 </body>
