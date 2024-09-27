@@ -14,7 +14,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="bbank_front_page.php">Blood level inventory</a></li>
+                <li><a href="Blood_bank/bbank_front_page.php">Blood level inventory</a></li>
                 <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
