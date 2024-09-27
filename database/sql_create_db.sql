@@ -10,6 +10,7 @@ CREATE TABLE Donor (
     last_donation_date DATE,
     is_eligible BOOLEAN
 );
+
 CREATE TABLE Region (
     rid INT PRIMARY KEY AUTO_INCREMENT,
     region VARCHAR(100)
