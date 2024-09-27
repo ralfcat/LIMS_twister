@@ -5,25 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="BloodAlert_logo.png">
     <title>Donor Dashboard</title>
-    <link rel="stylesheet" href="stylesheet/styles.css">
-    <link rel="stylesheet" href="stylesheet/reset.css">
-    <link rel="stylesheet" href="stylesheet/font.css">
+    <link rel="stylesheet" href="../../stylesheet/styles.css">
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="donor_front_page.php">My Donations</a></li>
-                <li><a href="donor_info.php">Profile</a></li>
+                <li><a href="donor_front_page_backend.php">My Donations</a></li>
+                <li><a href="../../Donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button">Log Out</button>
     </header>
 
     <main>
+        <h1>My donations</h1>
+
         <section class="dashboard">
             <div class="donation-history">
                 <h2>Donation History</h2>
