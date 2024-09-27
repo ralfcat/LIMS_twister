@@ -14,8 +14,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">My Donations</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a href="donor_front_page.php">My Donations</a></li>
+                <li><a href="donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button">Log Out</button>
