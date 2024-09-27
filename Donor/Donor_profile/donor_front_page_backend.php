@@ -6,8 +6,6 @@
     <link rel="icon" type="image/png" href="BloodAlert_logo.png">
     <title>Donor Dashboard</title>
     <link rel="stylesheet" href="../../stylesheet/styles.css">
-    <link rel="stylesheet" href="../../stylesheet/reset.css">
-    <link rel="stylesheet" href="../../stylesheet/font.css">
 </head>
 <body>
     <header>
@@ -24,6 +22,8 @@
     </header>
 
     <main>
+        <h1>My donations</h1>
+
         <section class="dashboard">
             <div class="donation-history">
                 <h2>Donation History</h2>
