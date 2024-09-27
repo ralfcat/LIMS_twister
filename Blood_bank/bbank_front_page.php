@@ -20,33 +20,36 @@
             </ul>
     </nav>
     </header>
+    <main>
+        <h1>Blood level inventory</h1>
 
-    <div class="bbank-container"> <!-- New container -->
-        <div class="Current_levels">
-            <h2>Current Levels</h2>
+        <div class="bbank-container"> <!-- New container -->
+            <div class="Current_levels">
+                <h2>Current Levels</h2> <!--Implement the graph based on inventory levels here-->
+            </div>
+
+            <form action="#" method="POST" class="form-bbank"> <!--We need to change this-->
+                <h2>Notification Thresholds</h2>
+                <div class="input-group">
+                    <label>0+:<input type="text" name="mname"></label>
+                    <label>0-:<input type="text" name="mname"></label>
+                </div>
+                <div class="input-group">
+                    <label>A+:<input type="text" name="mname"></label>
+                    <label>A-:<input type="text" name="mname"></label>
+                </div>
+                <div class="input-group">
+                    <label>B+:<input type="text" name="mname"></label>
+                    <label>B-:<input type="text" name="mname"></label>
+                </div>
+                <div class="input-group">
+                    <label>AB+:<input type="text" name="mname"></label>
+                    <label>AB-:<input type="text" name="mname"></label>
+                </div>
+                <input type="submit" value="SAVE">
+            </form>
         </div>
-
-        <form action="#" method="POST" class="form-bbank"> <!--We need to change this-->
-            <h2>Notification Thresholds</h2>
-            <div class="input-group">
-                <label>0+:<input type="text" name="mname"></label>
-                <label>0-:<input type="text" name="mname"></label>
-            </div>
-            <div class="input-group">
-                <label>A+:<input type="text" name="mname"></label>
-                <label>A-:<input type="text" name="mname"></label>
-            </div>
-            <div class="input-group">
-                <label>B+:<input type="text" name="mname"></label>
-                <label>B-:<input type="text" name="mname"></label>
-            </div>
-            <div class="input-group">
-                <label>AB+:<input type="text" name="mname"></label>
-                <label>AB-:<input type="text" name="mname"></label>
-            </div>
-            <input type="submit" value="SAVE">
-        </form>
-    </div>
+    </main>
 
     <section class="donation-form-bbank">
             <h3>Bloodtype:</h3>
