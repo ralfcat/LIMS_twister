@@ -17,7 +17,8 @@ from datetime import datetime, timedelta
 from random import randrange
 from datetime import timedelta
 import hashlib
-import bcrypt
+
+# import bcrypt
 
 def get_full_name_gender():
     name_gender_dict = {
@@ -149,15 +150,20 @@ def get_email(f,l):
 
 def get_address():
     regions = []
-    with open('counties.csv', 'r') as c:
-        line = c.readline()
-        while line:
+    FILE_NAME = '../counties.csv'
+    try:
+        with open(FILE_NAME, 'r') as c:
             line = c.readline()
-            region = line.split('\t')
-            if len(region) > 2:
-                regions.append(region[1])
-    n = np.random.randint(0, len(regions) - 1)
-    return regions[n]
+            while line:
+                line = c.readline()
+                region = line.split('\t')
+                if len(region) > 2:
+                    regions.append(region[1])
+        n = np.random.randint(0, len(regions) - 1)
+        return regions[n]
+    except FileNotFoundError:
+        print(f"The file you are trying to open ({FILE_NAME}) does not exist")
+        exit()
 
 def get_password():
     pass_length = np.random.randint(6,20)
