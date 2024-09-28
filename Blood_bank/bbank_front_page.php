@@ -47,7 +47,7 @@
                     <label>AB+:<input type="text" name="mname"></label>
                     <label>AB-:<input type="text" name="mname"></label>
                 </div>
-                <input type="submit" value="SAVE">
+                <input class="add-donation-button" type="submit" value="SAVE">
             </form>
         </div>
     </main>
