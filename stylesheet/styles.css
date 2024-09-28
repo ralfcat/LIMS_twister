@@ -109,14 +109,13 @@ h2 {
 /*Donation form bbank*/
 .donation-form-bbank {
     padding: 20px;
-    margin: 20px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.donation-form-bbank input {
-    width: calc(100% - 20px);
+.donation-form-bbank input[type="text"] {
+    width: 20px;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
@@ -137,19 +136,20 @@ h2 {
 
 /* Donation Form Styling */
 .donation-form {
-    padding: 20px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;                /* Use flexbox to center content */
+    flex-direction: column;       /* Stack items vertically */
+    align-items: center;          /* Center items horizontally */
+    justify-content: center;      /* Center items vertically */
+    margin: 20px;                /* Add margin for spacing */
+    padding: 20px;               /* Add padding for better appearance */
+    border: 1px solid #ccc;      /* Optional: add border for clarity */
+    border-radius: 8px;          /* Optional: rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow effect */
+    max-width: 400px;            /* Optional: limit width */
+    margin-left: auto;           /* Center horizontally */
+    margin-right: auto;          /* Center horizontally */
 }
 
-.donation-form input {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
 
 .add-donation-button {
     display: block;
@@ -209,6 +209,7 @@ input[type="text"], select {
 .profile-changes-button:hover {
     background-color: #af093c; /* Darker color on hover */
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
