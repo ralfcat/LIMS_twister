@@ -39,7 +39,7 @@
             </div>
 
             <div class="upcoming-donations">
-                <h2>Upcoming Donations</h2>
+                <h2>Upcoming Donations</h2> <!--We need to add information here with backend if someone has upcoming donations-->
                 <p>You don't have any upcoming donations, book a new appointment <a href="#">here</a>.</p>
             </div>
         </section>
