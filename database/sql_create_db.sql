@@ -47,7 +47,7 @@ CREATE TABLE Blood_Bank (
     email VARCHAR(100),
     password VARCHAR(100)
 );
-CREATE TABLE Donation (8
+CREATE TABLE Donation (
     donation_id INT PRIMARY KEY AUTO_INCREMENT,
     donor_id INT,
     blood_bank_id INT,
