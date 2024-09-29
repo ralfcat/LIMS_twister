@@ -46,7 +46,7 @@ CREATE TABLE Blood_Bank (
     address VARCHAR(255),
     email VARCHAR(100),
     password VARCHAR(100),
-    account_activation_hash VARCHAR(64) UNIQUE.
+    account_activation_hash VARCHAR(64) UNIQUE,
     FOREIGN KEY (region_id) REFERENCES Region(rid)
 );
 CREATE TABLE Donation (
