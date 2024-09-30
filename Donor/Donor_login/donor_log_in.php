@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
@@ -113,15 +113,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form name ="loginform" action="donor_log_in.php"  method="POST" onsubmit="return validateForm()">
                 <div class="input-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Type email" />
+                <input type="text" id="email" name="email" placeholder="Email" />
                 </div>
                 <div id="error-message" style="color:red;">
                 <?php echo $error_email; ?>
                 </div>
                 <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Type password" />
+                <input type="password" id="password" name="password" placeholder="Password" />
                 </div>
                 <div id="error-message2" style="color:red;">
                 <?php echo $error_password; ?>
