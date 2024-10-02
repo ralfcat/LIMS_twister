@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (md5($password) == $hashed_password) {
                 //Password matches, log the user in and redirect
                 $_SESSION['email'] = $row['email'];
-                header("Location: /Donor/Donor_profile/donor_front_page.php");
+                header("Location: /Donor/Donor_profile/donor_front_page_backend.php");
                 exit(); 
             } 
             else {

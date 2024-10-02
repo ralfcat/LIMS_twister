@@ -66,16 +66,32 @@ if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $donations[] = $row; // Store each donation row in the array
         }
-    
-} }
+            } 
 else {
-    header("Location: Donor/Donor_login/donor_log_in.php"); // if there is no result, then send them back since they dont have an account
+    header("Location: /Donor/Donor_login/donor_log_in.php"); // if there is no result, then send them back since they dont have an account
     exit();
 }
+}
 
-// Close the statement and connection
-//
+ //Close the statement and connection
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $donation_date = $_POST['donation_date'];
+    $blood_center = $_POST['blood_center']; 
+    $amount = $_POST['amount'];
+
+    $sql3 = "INSERT INTO Donation (donor_id, blood_bank_id, amount, donation_date) VALUES (?, ?, ?, ?)";
+
+    $stmt = $link->prepare($sql3);
+    $stmt->bind_param('iids', $donor_id, $blood_center, $amount, $donation_date);
+
+    if ($stmt->execute()) {
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
 
 $stmt->close();
 $link->close();
@@ -133,7 +149,7 @@ $link->close();
 
     <section class="donation-form">
     <h3>Enter name of last donation:</h3>
-    <form method="POST" action="add_donation.php">
+    <form method="POST" action="donor_front_page_backend.php">
     
         <label for="donation_date">Donation Date:</label>
         <input type="date" id="donation_date" name="donation_date" required><br>
