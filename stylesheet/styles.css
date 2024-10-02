@@ -136,20 +136,20 @@ h2 {
 
 /* Donation Form Styling */
 .donation-form {
-    display: flex;                /* Use flexbox to center content */
-    flex-direction: column;       /* Stack items vertically */
-    align-items: center;          /* Center items horizontally */
-    justify-content: center;      /* Center items vertically */
-    margin: 20px;                /* Add margin for spacing */
-    padding: 20px;               /* Add padding for better appearance */
-    border: 1px solid #ccc;      /* Optional: add border for clarity */
-    border-radius: 8px;          /* Optional: rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow effect */
-    max-width: 400px;            /* Optional: limit width */
-    margin-left: auto;           /* Center horizontally */
-    margin-right: auto;          /* Center horizontally */
+    display: flex;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.donation-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
 
 .add-donation-button {
     display: block;
