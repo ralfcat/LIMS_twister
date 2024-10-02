@@ -10,10 +10,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;  
 use PHPMailer\PHPMailer\SMTP;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'config.php';
+require '../../PHPMailer/src/Exception.php';
+require '../../PHPMailer/src/PHPMailer.php';
+require '../../PHPMailer/src/SMTP.php';
+require '../../config.php';
 
 function sendMail($email, $activation_token) {
     $mail = new PHPMailer(true);
@@ -64,7 +64,8 @@ $reg_res = $link->query($reg_req);
 
     <h1>Donor Register Page</h1>
     <!-- onsubmit="return validate_form();" -->
-    <form onsubmit="return validate_form();" action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
+    <!-- <form action=php echo $_SERVER['PHP_SELF'];  method="POST"> -->
+    <form onsubmit="return validate_form();" action= <?php echo $_SERVER['PHP_SELF'];?>  method="POST">
         <label for> First Name</label>
         <input type="text" id="fname" name="fname">
         <span id="error_msg_fn"></span>
@@ -213,10 +214,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($count > 0) {
         echo '<p id=error_msg>The email you entered already exists</p>';
-        // echo '<script type="text/javascript">
-        // let err = document.getElementById("error_msg");
-        // document.getElementById("error_msg").innerHTML = "Email already exists";
-        // </script>';
     } else {
 
 
@@ -249,9 +246,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         var age = document.getElementById('age').value;
         age = Number(age);
         let fname = document.getElementById("fname").value;
-        // alert(`the value of the first name is ${fname === ""}`);
         var lname = document.getElementById("lname").value;
-        // mariam.alabi@outlook.com    
+   
 
 
 

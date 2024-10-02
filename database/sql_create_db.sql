@@ -42,12 +42,14 @@ INSERT INTO Region (region) VALUES ('Östergötland');
 CREATE TABLE Blood_Bank (
     blood_bank_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100),
-    region VARCHAR(100),
+    region_id INT,
     address VARCHAR(255),
     email VARCHAR(100),
-    password VARCHAR(100)
+    password VARCHAR(100),
+    account_activation_hash VARCHAR(64) UNIQUE,
+    FOREIGN KEY (region_id) REFERENCES Region(rid)
 );
-CREATE TABLE Donation (8
+CREATE TABLE Donation (
     donation_id INT PRIMARY KEY AUTO_INCREMENT,
     donor_id INT,
     blood_bank_id INT,
