@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <a href="donor_front_page.php"><img class="logo" src="../../BloodAlert_logo.png" alt="logo"></a>            
+        <a href="donor_front_page_backend.php"><img class="logo" src="../../BloodAlert_logo.png" alt="logo"></a>            
         <nav> <!--navigation-->
                 <ul>
                     <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
