@@ -9,16 +9,15 @@
 </head>
 <body>
     <header>
-        <div class="logo-container">
-            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
-        </div>
-        <nav>
-            <ul>
-                <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
-                <li><a href="../../Donor_info.php">Profile</a></li>
-            </ul>
+        <a href="donor_front_page.php"><img class="logo" src="../BloodAlert_logo.png" alt="logo"></a>            
+
+        <nav> <!--navigation-->
+                <ul>
+                    <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
+                    <li><a href="../Blood_bank/bbank_front_page.php">Profile</a></li>
+                    <li><button class="logout-button" onclick="logout()">Log Out</button></li> <!--Add logout function-->
+                </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
     </header>
 
     <main>
