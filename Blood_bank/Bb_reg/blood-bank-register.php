@@ -81,9 +81,7 @@ $reg_res = $link->query($reg_req);
 
 
 
-        <label for="donate-date" id="dn"></label>
-        <input type="hidden" id="donate-date" name="donateddate"> <br>
-
+        <input type ="checkbox" id = "chckbx" > I have read and agreed to the <a href ="terms_cond_bb.html" target="blank" rel="noreferrer noopener">Terms and Conditions </a> <br>
         <input type="submit" value="Register">
         <p id="demo"></p>
 
@@ -112,6 +110,7 @@ $reg_res = $link->query($reg_req);
         let repass = new ErrId(document.getElementById("re-password").value, "error_msg_rps");
         let email = new ErrId(document.getElementById("email").value, "error_msg_em");
         the_ids = new Array(name, email, pass, repass);
+        const checked_terms = document.getElementById("chckbx").checked;
 
 
 
@@ -120,7 +119,6 @@ $reg_res = $link->query($reg_req);
             document.getElementById(id.id_name).innerHTML = "";
         }
         document.getElementById("error_msg").innerHTML = "";
-
         for (id of the_ids) {
             if (id.val === "") {
                 document.getElementById(id.id_name).innerHTML = "Please fill in the field";
@@ -142,6 +140,12 @@ $reg_res = $link->query($reg_req);
                 "Your password does not fulfil the password requirements:<br><ul><li>The password is too short (min. 6 characters) </li> <li>The password does not contain a symbol</li></ul>";
             return false;
         }
+        if (!checked_terms) {
+            document.getElementById("error_msg").innerHTML = "Please read and agree to the terms and conditions";
+            return false;
+
+        }
+
 
 
     }
