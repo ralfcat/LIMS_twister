@@ -10,15 +10,17 @@
 
 <body>
     <header>
-        <a href="bbank_front_page.php"><img class="logo" src="../BloodAlert_logo.png" alt="logo"></a>            
-    
-    <nav> <!--navigation-->
+    <div class="logo-container">
+            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+        </div>       
+        <nav> <!--navigation-->
             <ul>
-                <li class="active"><a href="bbank_front_page.php">Blood level inventory</a></li>
+                <li><a class="active"><a href="bbank_front_page.php">Blood level inventory</a></li>
                 <li><a href="../bbank_info.php">Profile</a></li>
-                <li><button class="logout-button" onclick="logout()">Log Out</button></li> <!--Add logout function-->
             </ul>
-    </nav>
+        </nav>
+    <button class="logout-button" onclick="logout()">Log Out</button> <!--Add logout function-->
+
     </header>
     <main>
         <h1>Blood level inventory</h1>
