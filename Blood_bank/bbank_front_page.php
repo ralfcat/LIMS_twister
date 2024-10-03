@@ -16,7 +16,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="bbank_front_page.php">My Donations</a></li>
+                <li class="active"><a href="bbank_front_page.php">Inventory</a></li>
                 <li><a href="../../bbank_info.php">Profile</a></li>
             </ul>
         </nav>
