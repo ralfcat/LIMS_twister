@@ -15,8 +15,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="Blood_bank/bbank_front_page.php">Blood level inventory</a></li>
-                <li><a href="bbank_info.php">Profile</a></li>
+                <li><a href="Blood_bank/bbank_front_page.php">Inventory</a></li>
+                <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button">Log Out</button>

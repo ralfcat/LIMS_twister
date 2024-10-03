@@ -16,7 +16,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="donor_front_page_backend.php">My Donations</a></li>
+                <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
                 <li><a href="../../donor_info.php">Profile</a></li>
             </ul>
         </nav>

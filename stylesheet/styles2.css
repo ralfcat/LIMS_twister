@@ -16,21 +16,21 @@ h1, h2, h3 {
 
 h1 {
     text-transform: uppercase;
-    color: #131313 ;
+    color: #141414;
     font-size: 1.7rem; 
     margin: 1.5rem 0 1.5rem 1.5rem;
 }
 
 h2 {
-    color: #141414 ;
+    color: #141414;
     font-size: 1.5rem;
     margin: 1rem 0 1.2rem 1.2rem;
 }
 
 h3 {
-    color: #0b0b0b; 
-    margin-bottom: 0.7rem;
-    margin-top: 0.7rem;
+    color: #141414 ; 
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 header {
@@ -306,6 +306,20 @@ input {
 }
 
 .bbank-container form .input-group {
-    display: flex; 
-    justify-content: space-between; 
+    display: flex;
+    justify-content: center;  
+    align-items: center;       
+    gap: 3rem;                 
+}
+
+nav .active {
+    position: relative; 
+    background-color: #f5d5dd; 
+    color: white; 
+    font-weight: bold; 
+    letter-spacing: 0.15rem; 
+    padding: 10px 20px; 
+    margin-top: -10px;
+    margin-bottom: -33px; 
+    border-radius: 5px;       
 }
