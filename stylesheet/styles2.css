@@ -263,15 +263,20 @@ input {
 /*Donation form bbank*/
 .donation-form-bbank {
     padding: 20px;
-    margin: 20px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;   
+    align-items: center;    
+    justify-content: center;  
+    padding: 1rem;          
 }
 
 .donation-form-bbank input[type="text"] {
     border: 1px solid #ddd;
-
+    background-color: white;
+    max-width: 30rem;
+    display: block;          
+    margin: 0 auto;          
 }
 
 .add-donation-button {

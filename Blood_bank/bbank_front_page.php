@@ -55,9 +55,9 @@
 
         <section class="donation-form-bbank">
             <h3>Bloodtype:</h3>
-            <input type="text" placeholder="Enter name">
+            <input type="text" placeholder="Enter Blodtype"> <!--We should have a dropdown list here-->
             <h3>Units:</h3>
-            <input type="text" placeholder="Enter blood center">
+            <input type="text" placeholder="Enter units">
             <button class="add-donation-button">Add Donation</button>
         </section>
     </main>
