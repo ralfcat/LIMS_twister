@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="BloodAlert_logo.png">
     <title>Donor Dashboard</title>
-    <link rel="stylesheet" href="stylesheet/styles.css">
+    <link rel="stylesheet" href="stylesheet/reset.css">
+    <link rel="stylesheet" href="stylesheet/styles2.css">
 </head>
 <body>
     <header>
@@ -35,6 +36,8 @@
                 <input type="text" placeholder="Enter password">
                 <h3>Repeat password:</h3>
                 <input type="text" placeholder="Enter password">
+                <button class="profile-changes-button">Save changes</button>
+
             </div>
 
             <!-- Right Column -->
@@ -67,7 +70,6 @@
                 <input type="text" placeholder="Region">
             </div>
         </div>
-        <button class="profile-changes-button">Save changes</button>
     </section>
 </main>
 </body>
