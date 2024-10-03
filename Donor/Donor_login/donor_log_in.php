@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Log in</title>
     <link rel="stylesheet" href="../../stylesheet/styles.css">
+    <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
     <script>
         function validateForm() {
