@@ -7,7 +7,6 @@
     <title>Blood Bank front page</title>
     <link rel="stylesheet" href="../stylesheet/reset.css">
     <link rel="stylesheet" href="../stylesheet/styles2.css" />
-    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
 </head>
 
 <body>
@@ -50,7 +49,7 @@
                     <label>AB+<input type="text" name="mname"></label>
                     <label> AB-<input type="text" name="mname"></label>
                 </div>
-                <input class="add-donation-button" type="submit" value="SAVE">
+                <input class="save-donation-button" type="submit" value="SAVE">
             </form>
         </div>
 

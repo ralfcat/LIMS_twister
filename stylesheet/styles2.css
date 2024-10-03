@@ -232,6 +232,11 @@ input {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.donation-history ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
 /*Bbank front page structure*/
 .bbank-container {
     display: grid;
@@ -272,6 +277,20 @@ input {
     cursor: pointer;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.save-donation-button {
+    display: block;
+    background-color: #af093c;
+    color: white;
+    border: none;
+    width: 10rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 auto;  /* This will center it horizontally */
+    margin-top: 1.2rem;
+
 }
 
 .bbank-container form .input-group {
