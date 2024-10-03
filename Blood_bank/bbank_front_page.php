@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="../BloodAlert_logo.png">
     <title>Blood Bank front page</title>
     <link rel="stylesheet" href="../stylesheet/styles.css" />
+    <link rel="stylesheet" href="../../stylesheet/reset.css">
 </head>
 
 <body>
