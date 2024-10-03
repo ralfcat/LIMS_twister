@@ -29,6 +29,8 @@ h2 {
 
 h3 {
     color: #0b0b0b; 
+    margin-bottom: 0.7rem;
+    margin-top: 0.7rem;
 }
 
 header {
@@ -235,6 +237,11 @@ input {
 .donation-history ul li {
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
+}
+
+.upcoming-donations p {
+    margin-top: 6rem;
+    text-align: center;
 }
 
 /*Bbank front page structure*/
