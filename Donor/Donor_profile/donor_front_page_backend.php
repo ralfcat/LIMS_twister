@@ -5,19 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Dashboard</title>
-    <link rel="stylesheet" href="../../stylesheet/styles2.css">
     <link rel="stylesheet" href="../../stylesheet/reset.css">
+    <link rel="stylesheet" href="../../stylesheet/styles2.css">
 </head>
+
 <body>
     <header>
-        <a href="donor_front_page_backend.php"><img class="logo" src="../../BloodAlert_logo.png" alt="logo"></a>            
-        <nav> <!--navigation-->
-                <ul>
-                    <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
-                    <li><a href="../Blood_bank/bbank_front_page.php">Profile</a></li>
-                    <li><button class="logout-button" onclick="logout()">Log Out</button></li> <!--Add logout function-->
-                </ul>
+        <div class="logo-container">
+            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="donor_front_page_backend.php">My Donations</a></li>
+                <li><a href="../../donor_info.php">Profile</a></li>
+            </ul>
         </nav>
+        <button class="logout-button">Log Out</button>
     </header>
 
     <main>
@@ -43,7 +46,7 @@
             </div>
         </section>
 
-        <section class="donation-form">
+        <section class="donation-form-bbank">
             <h3>Enter name of last donation:</h3>
             <input type="text" placeholder="Enter name">
             <h3>Choose blood center:</h3>
