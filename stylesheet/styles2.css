@@ -18,11 +18,13 @@ h1 {
     text-transform: uppercase;
     color: #131313 ;
     font-size: 1.7rem; 
+    margin: 1.5rem 0 1.5rem 1.5rem;
 }
 
 h2 {
     color: #141414 ;
     font-size: 1.5rem;
+    margin: 1rem 0 1.2rem 1.2rem;
 }
 
 h3 {
