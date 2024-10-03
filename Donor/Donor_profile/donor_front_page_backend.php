@@ -47,9 +47,9 @@
         </section>
 
         <section class="donation-form-bbank">
-            <h3>Enter name of last donation:</h3>
+            <h3>Date of last donation</h3>
             <input type="text" placeholder="Enter name">
-            <h3>Choose blood center:</h3>
+            <h3>Choose blood center</h3>
             <input type="text" placeholder="Enter blood center"> <!--We should have a dropdown list here-->
             <button class="add-donation-button">Add Donation</button>
         </section>
