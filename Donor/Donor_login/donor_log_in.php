@@ -61,16 +61,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
-    <title>Donor Log in</title>
-    <link rel="stylesheet" href="../../stylesheet/styles.css">
-    <link rel="stylesheet" href="../../stylesheet/reset.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Donor Log in</title>
+    <link rel="stylesheet" href="/stylesheet/reset.css" />
+    <link rel="stylesheet" href="/stylesheet/styles2.css" />
     <script>
         function validateForm() {
             let email = document.forms["loginform"]["email"].value;
@@ -99,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
         </div>
         <nav>
             <ul>

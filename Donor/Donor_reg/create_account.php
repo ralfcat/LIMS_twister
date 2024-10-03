@@ -10,10 +10,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;  
 use PHPMailer\PHPMailer\SMTP;
 
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'config.php';
+require '../../PHPMailer/src/Exception.php';
+require '../../PHPMailer/src/PHPMailer.php';
+require '../../PHPMailer/src/SMTP.php';
+require '../../config.php';
 
 function sendMail($email, $activation_token) {
     $mail = new PHPMailer(true);
@@ -64,7 +64,8 @@ $reg_res = $link->query($reg_req);
 
     <h1>Donor Register Page</h1>
     <!-- onsubmit="return validate_form();" -->
-    <form onsubmit="return validate_form();" action=<?php echo $_SERVER['PHP_SELF']; ?> method="POST">
+    <!-- <form action=php echo $_SERVER['PHP_SELF'];  method="POST"> -->
+    <form onsubmit="return validate_form();" action= <?php echo $_SERVER['PHP_SELF'];?>  method="POST">
         <label for> First Name</label>
         <input type="text" id="fname" name="fname">
         <span id="error_msg_fn"></span>
@@ -129,6 +130,7 @@ $reg_res = $link->query($reg_req);
 
         <label for="donate-date" id="dn"></label>
         <input type="hidden" id="donate-date" name="donateddate"> <br>
+        <input type ="checkbox" id = "chckbx" > I have read and agreed to the <a href ="terms_cond_donor.html" target="blank" rel="noreferrer noopener">Terms and Conditions </a> <br>
 
         <input type="submit" value="Register">
         <p id="demo"></p>
@@ -213,10 +215,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($count > 0) {
         echo '<p id=error_msg>The email you entered already exists</p>';
-        // echo '<script type="text/javascript">
-        // let err = document.getElementById("error_msg");
-        // document.getElementById("error_msg").innerHTML = "Email already exists";
-        // </script>';
     } else {
 
 
@@ -243,17 +241,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById(id).innerHTML = "";
 
         }
+        const checked_terms = document.getElementById("chckbx").checked;
         var pass = document.getElementById("password").value;
         var repass = document.getElementById("re-password").value;
         var email = document.getElementById("email").value;
         var age = document.getElementById('age').value;
         age = Number(age);
         let fname = document.getElementById("fname").value;
-        // alert(`the value of the first name is ${fname === ""}`);
         var lname = document.getElementById("lname").value;
-        // mariam.alabi@outlook.com    
-
-
+   
 
         if (fname == "") {
 
@@ -305,6 +301,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (pass.length < 6 || !symbols.some(s => pass.includes(s))) {
             document.getElementById("error_msg").innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short</li> <li>The password does not contain a symbol</li></ul>";
             return false;
+        }
+        if (!checked_terms) {
+            document.getElementById("error_msg").innerHTML = "Please read and agree to the terms and conditions";
+            return false;
+
         }
         return true;
 
