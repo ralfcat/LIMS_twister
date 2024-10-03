@@ -54,10 +54,11 @@
         </div>
 
         <section class="donation-form-bbank">
-            <h3>Bloodtype:</h3>
+        <h2>Add blood levels</h2>
+            <h4>Bloodtype</h4>
             <input type="text" placeholder="Enter Blodtype"> <!--We should have a dropdown list here-->
-            <h3>Units:</h3>
-            <input type="text" placeholder="Enter units">
+            <h4>Units</h4>
+            <input type="text" placeholder="Enter Units">
             <button class="add-donation-button">Add Donation</button>
         </section>
     </main>
