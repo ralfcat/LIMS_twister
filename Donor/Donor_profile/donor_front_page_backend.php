@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Dashboard</title>
-    <link rel="stylesheet" href="../../stylesheet/styles.css">
+    <link rel="stylesheet" href="../../stylesheet/reset.css">
+    <link rel="stylesheet" href="../../stylesheet/styles2.css">
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -15,7 +17,7 @@
         <nav>
             <ul>
                 <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
-                <li><a href="../../Donor_info.php">Profile</a></li>
+                <li><a href="../../donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button">Log Out</button>
@@ -44,11 +46,11 @@
             </div>
         </section>
 
-        <section class="donation-form">
-            <h3>Enter name of last donation:</h3>
+        <section class="donation-form-bbank">
+            <h3>Date of last donation</h3>
             <input type="text" placeholder="Enter name">
-            <h3>Choose blood center:</h3>
-            <input type="text" placeholder="Enter blood center">
+            <h3>Choose blood center</h3>
+            <input type="text" placeholder="Enter blood center"> <!--We should have a dropdown list here-->
             <button class="add-donation-button">Add Donation</button>
         </section>
     </main>

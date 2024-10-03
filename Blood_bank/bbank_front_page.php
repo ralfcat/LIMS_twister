@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../BloodAlert_logo.png">
     <title>Blood Bank front page</title>
-    <link rel="stylesheet" href="../stylesheet/styles.css" />
+    <link rel="stylesheet" href="../stylesheet/reset.css">
+    <link rel="stylesheet" href="../stylesheet/styles2.css" />
 </head>
 
 <body>
-    <header>
-        <a href="bbank_front_page.php"><img class="logo" src="../BloodAlert_logo.png" alt="logo"></a>            
-    
-    <nav> <!--navigation-->
+<header>
+        <div class="logo-container">
+            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+        </div>
+        <nav>
             <ul>
-                <li class="active"><a href="bbank_front_page.php">Blood level inventory</a></li>
-                <li><a href="../bbank_info.php">Profile</a></li>
-                <li><button class="logout-button" onclick="logout()">Log Out</button></li> <!--Add logout function-->
+                <li class="active"><a href="bbank_front_page.php">Inventory</a></li>
+                <li><a href="../../bbank_info.php">Profile</a></li>
             </ul>
-    </nav>
+        </nav>
+        <button class="logout-button">Log Out</button>
     </header>
     <main>
         <h1>Blood level inventory</h1>
@@ -32,32 +34,32 @@
             <form action="#" method="POST" class="form-bbank"> <!--We need to change this-->
                 <h2>Notification Thresholds</h2>
                 <div class="input-group">
-                    <label>0+:<input type="text" name="mname"></label>
-                    <label>0-:<input type="text" name="mname"></label>
+                    <label>O+<input type="text" name="mname"></label>
+                    <label>O- <input type="text" name="mname"></label>
                 </div>
                 <div class="input-group">
-                    <label>A+:<input type="text" name="mname"></label>
-                    <label>A-:<input type="text" name="mname"></label>
+                    <label>A+<input type="text" name="mname"></label>
+                    <label>A- <input type="text" name="mname"></label>
                 </div>
                 <div class="input-group">
-                    <label>B+:<input type="text" name="mname"></label>
-                    <label>B-:<input type="text" name="mname"></label>
+                    <label>B+<input type="text" name="mname"></label>
+                    <label>B- <input type="text" name="mname"></label>
                 </div>
                 <div class="input-group">
-                    <label>AB+:<input type="text" name="mname"></label>
-                    <label>AB-:<input type="text" name="mname"></label>
+                    <label>AB+<input type="text" name="mname"></label>
+                    <label> AB-<input type="text" name="mname"></label>
                 </div>
-                <input class="add-donation-button" type="submit" value="SAVE">
+                <input class="save-donation-button" type="submit" value="SAVE">
             </form>
         </div>
-    </main>
 
-    <section class="donation-form-bbank">
-            <h3>Bloodtype:</h3>
-            <input type="text" placeholder="Enter name">
-            <h3>Units:</h3>
-            <input type="text" placeholder="Enter blood center">
+        <section class="donation-form-bbank">
+            <h3>Bloodtype</h3>
+            <input type="text" placeholder="Enter Blodtype"> <!--We should have a dropdown list here-->
+            <h3>Units</h3>
+            <input type="text" placeholder="Enter Units">
             <button class="add-donation-button">Add Donation</button>
         </section>
+    </main>
 
 </body>
