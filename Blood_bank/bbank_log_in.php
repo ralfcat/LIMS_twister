@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
-    <title>Blood bank Log in</title>
+    <title>Blood Bank Login</title>
     <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
     <script>
@@ -54,7 +54,7 @@
                 <button class="login_button">Log in</button>
             </form>
             <div class="new-user">
-                <p>New user? <a href="/Donor/Donor_reg/create_account.php">Create an account here</a></p>
+                <p>Want to register? <a href="/blood-bank-register.php">Contact us</a></p>
             </div>
         </div>
     </div>

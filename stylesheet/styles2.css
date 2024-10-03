@@ -1,9 +1,9 @@
+/* Default settings */
 @font-face {
     font-family: "Nunito";
     src: url(fonts/Nunito-VariableFont_wght.ttf)
 }
 
-/*Generella regler*/
 html {
     font-size: 105%;
 }
@@ -31,8 +31,25 @@ h3 {
     color: #141414 ; 
     margin-bottom: 1rem;
     margin-top: 1rem;
+    font-size: 1rem;
 }
 
+body {
+    background-color: #f5d5dd;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    background-color: #f1f1f1; 
+    font-size: 14px; 
+    box-sizing: border-box; 
+}
+
+/* Header and navigaton bar */
 header {
     display: flex;
     font-family: "Nunito", Helvetica, sans-serif;
@@ -48,7 +65,7 @@ header {
 }
 
 .logo {
-    height: 50px; /* Adjust the size as needed */
+    height: 50px; 
 }
 
 nav ul {
@@ -79,22 +96,7 @@ nav ul li a {
     font-weight: bold;
 }
 
-body {
-    background-color: #f5d5dd;
-}
-
-input {
-    width: calc(100% - 20px);
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ddd;
-    border-radius: 30px;
-    background-color: #f1f1f1; 
-    font-size: 14px; 
-    box-sizing: border-box; 
-}
-
-/* Login page structure */
+/* Login pages */
 .login-container {
     display: flex;
     justify-content: center;
@@ -156,7 +158,7 @@ input {
 }
 
 .new-user p {
-    font-size: 10.9px ;
+    font-size: 1rem ;
     font-family: Nunito;
     color: #af093c; 
     display: inline; 
@@ -165,8 +167,8 @@ input {
 }
 
 .new-user a {
-    font-size: 10.9px ;
-    color: #af093c; 
+    font-size: 1rem ;
+    color: #bb0f14; 
     font-weight: 800; 
     text-decoration: none;
 }
@@ -175,34 +177,31 @@ input {
     text-decoration: underline; 
 }
 
-/* Styling for the form container */
+
+/* Styling for donor info page */
 .form-container {
-    display: flex;             /* Use flexbox to create columns */
-    justify-content: space-between; /* Space out the columns */
+    display: flex;           
+    justify-content: space-between; 
     padding: 2rem;
-    border-radius: 5px;       /* Rounded corners */
+    border-radius: 5px;       
     margin: 20 0;
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 70rem; 
-    margin-left: 20px; /* Adjust the value as needed */
-    margin-right: 20px; /* Adjust the value as needed */
-    
+    margin-left: 20px; 
+    margin-right: 20px; 
 }
 
-/* Each form column */
 .form-column {
-    flex: 1;                   /* Each column takes equal space */
-    margin-right: 20px;         /* Add some spacing between columns */   
+    flex: 1;                   
+    margin-right: 20px;          
     text-align: left; 
 }
 
 .form-column:last-child {
-    margin-right: 0;                /* Ta bort högermarginalen för den sista kolumnen */
+    margin-right: 0;                
 }
 
-
-/* Button styling */
 .profile-changes-button {
     display: block;
     padding: 10px 20px;
@@ -219,13 +218,12 @@ input {
     background-color: #af093c; /* Darker color on hover */
 }
 
-
+/* My donation page styling*/
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
 
-/* Donation History and Upcoming Donations */
 .donation-history, .upcoming-donations {
     padding: 20px;
     margin: 20px;
@@ -245,6 +243,7 @@ input {
 }
 
 /*Bbank front page structure*/
+/*Blood bank front page*/
 .bbank-container {
     display: grid;
     grid-template-rows: auto;
@@ -260,7 +259,7 @@ input {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/*Donation form bbank*/
+/*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
     padding: 20px;
 

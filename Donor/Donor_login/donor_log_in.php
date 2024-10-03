@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Login</title>
     <link rel="stylesheet" href="/stylesheet/reset.css" />
     <link rel="stylesheet" href="/stylesheet/styles2.css" />
