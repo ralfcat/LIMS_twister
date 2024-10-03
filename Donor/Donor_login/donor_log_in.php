@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blood Donor Log in</title>
+    <title>Donor Login</title>
     <link rel="stylesheet" href="/stylesheet/reset.css" />
     <link rel="stylesheet" href="/stylesheet/styles2.css" />
     <script>
@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
