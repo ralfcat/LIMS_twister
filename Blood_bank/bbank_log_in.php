@@ -54,7 +54,7 @@
                 <button class="login_button">Log in</button>
             </form>
             <div class="new-user">
-                <p>New user? <a href="/Donor/Donor_reg/create_account.php">Create an account here</a></p>
+                <p>Want to register? <a href="/blood-bank-register.php">Contact us</a></p>
             </div>
         </div>
     </div>
