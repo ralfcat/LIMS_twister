@@ -12,21 +12,25 @@ h1, h2, h3 {
     font-family: "Nunito", Helvetica, sans-serif;
     font-weight: 800;
     letter-spacing: 0.055em;
-    color: #bb0f14;
 }
 
 h1 {
     text-transform: uppercase;
+    color: #131313 ;
     font-size: 1.7rem; 
     margin: 1.5rem 0 1.5rem 1.5rem;
 }
 
 h2 {
+    color: #141414 ;
     font-size: 1.5rem;
     margin: 1rem 0 1.2rem 1.2rem;
 }
 
 h3 {
+    color: #0b0b0b; 
+    margin-bottom: 0.7rem;
+    margin-top: 0.7rem;
 }
 
 header {
@@ -60,14 +64,14 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #bb0f14;
+    color: #af093c;
     font-size: 1.2rem;
     font-weight: bold;
 }
 
 .logout-button {
     padding: 10px 20px;
-    background-color: #bb0f14;
+    background-color: #af093c;
     color: white;
     border: none;
     border-radius: 30px;
@@ -134,7 +138,7 @@ input {
 .login_button {
     display: block;
     padding: 10px 30px;
-    background-color: #bb0f14;
+    background-color: #af093c;
     color: white;
     border: none;
     border-radius: 30px;
@@ -154,7 +158,7 @@ input {
 .new-user p {
     font-size: 10.9px ;
     font-family: Nunito;
-    color: #bb0f14; 
+    color: #af093c; 
     display: inline; 
     margin: 20px; 
     
@@ -162,7 +166,7 @@ input {
 
 .new-user a {
     font-size: 10.9px ;
-    color: #bb0f14; 
+    color: #af093c; 
     font-weight: 800; 
     text-decoration: none;
 }
@@ -202,7 +206,7 @@ input {
 .profile-changes-button {
     display: block;
     padding: 10px 20px;
-    background-color: #bb0f14;
+    background-color: #af093c;
     color: white;
     border: none;
     border-radius: 30px;
@@ -212,7 +216,7 @@ input {
 }
 
 .profile-changes-button:hover {
-    background-color: #bb0f14; /* Darker color on hover */
+    background-color: #af093c; /* Darker color on hover */
 }
 
 
@@ -228,6 +232,16 @@ input {
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.donation-history ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.upcoming-donations p {
+    margin-top: 6rem;
+    text-align: center;
 }
 
 /*Bbank front page structure*/
@@ -249,27 +263,46 @@ input {
 /*Donation form bbank*/
 .donation-form-bbank {
     padding: 20px;
-    margin: 20px;
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    flex-direction: column;   
+    align-items: center;    
+    justify-content: center;  
+    padding: 1rem;          
 }
 
 .donation-form-bbank input[type="text"] {
     border: 1px solid #ddd;
-
+    background-color: white;
+    max-width: 30rem;
+    display: block;          
+    margin: 0 auto;          
 }
 
 .add-donation-button {
     display: block;
     padding: 10px 20px;
-    background-color: #bb0f14;
+    background-color: #af093c;
     color: white;
     border: none;
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.save-donation-button {
+    display: block;
+    background-color: #af093c;
+    color: white;
+    border: none;
+    width: 10rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 0 auto;  /* This will center it horizontally */
+    margin-top: 1.2rem;
+
 }
 
 .bbank-container form .input-group {
