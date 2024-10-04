@@ -8,7 +8,7 @@ html {
     font-size: 105%;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-family: "Nunito", Helvetica, sans-serif;
     font-weight: 800;
     letter-spacing: 0.055em;
@@ -22,7 +22,7 @@ h1 {
 }
 
 h2 {
-    color: #141414;
+    color: #af093c;
     font-size: 1.5rem;
     margin: 1rem 0 1.2rem 1.2rem;
 }
@@ -57,7 +57,6 @@ header {
     align-items: center;
     padding: 15px 30px;
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logo-container {
@@ -84,6 +83,18 @@ nav ul li a {
     color: #af093c;
     font-size: 1.2rem;
     font-weight: bold;
+}
+
+nav .active {
+    position: relative; 
+    background-color: #f5d5dd; 
+    color: white; 
+    font-weight: bold; 
+    letter-spacing: 0.15rem; 
+    padding: 10px 20px; 
+    margin-top: -10px;
+    margin-bottom: -33px; 
+    border-radius: 5px;       
 }
 
 .logout-button {
@@ -168,7 +179,7 @@ nav ul li a {
 
 .new-user a {
     font-size: 1rem ;
-    color: #bb0f14; 
+    color: #af093c; 
     font-weight: 800; 
     text-decoration: none;
 }
@@ -214,8 +225,12 @@ nav ul li a {
     margin-top: 10px;
 }
 
+.logout-button:hover, 
+.login_button:hover, 
+.save-donation-button:hover,
+.add-donation-button:hover,
 .profile-changes-button:hover {
-    background-color: #af093c; /* Darker color on hover */
+    background-color: #a00635; 
 }
 
 /* My donation page styling*/
@@ -309,16 +324,4 @@ nav ul li a {
     justify-content: center;  
     align-items: center;       
     gap: 3rem;                 
-}
-
-nav .active {
-    position: relative; 
-    background-color: #f5d5dd; 
-    color: white; 
-    font-weight: bold; 
-    letter-spacing: 0.15rem; 
-    padding: 10px 20px; 
-    margin-top: -10px;
-    margin-bottom: -33px; 
-    border-radius: 5px;       
 }
