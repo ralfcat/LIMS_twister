@@ -236,6 +236,17 @@ nav .active {
     color: #141414;
 }
 
+.logout-button:focus, 
+.login_button:focus, 
+.save-donation-button:focus,
+.add-donation-button:focus,
+.profile-changes-button:focus,
+.save-donation-button:focus,
+.add-donation-button-donor:focus {
+    background-color: #b0627a; 
+    color: #141414;
+}
+
 /* My donation page styling*/
 .dashboard {
     display: grid;
