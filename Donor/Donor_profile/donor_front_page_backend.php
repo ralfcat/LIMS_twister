@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
