@@ -229,8 +229,11 @@ nav .active {
 .login_button:hover, 
 .save-donation-button:hover,
 .add-donation-button:hover,
-.profile-changes-button:hover {
+.profile-changes-button:hover,
+.save-donation-button:hover,
+.add-donation-button-donor:hover {
     background-color: #a00635; 
+    color: #141414;
 }
 
 /* My donation page styling*/
@@ -297,6 +300,7 @@ nav .active {
     background-color: white;
     height: 50px;
     width: 15rem;
+    font-size: 16px;
     display: block;          
     margin: 0 auto;  
 }
@@ -346,8 +350,8 @@ nav .active {
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
-    width: 10rem;
-    height: 2rem;
+    width: 8rem;
+    height: 3rem;
     margin: 10px auto; 
 
 }
