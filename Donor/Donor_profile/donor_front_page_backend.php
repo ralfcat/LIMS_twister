@@ -30,13 +30,13 @@
             <div class="donation-history">
                 <h2>Donation History</h2>
                 <ul>
-                    <li>Item 1</li>
-                    <li>Item 2</li>
-                    <li>Item 3</li>
-                    <li>Item 4</li>
-                    <li>Item 5</li>
-                    <li>Item 6</li>
-                    <li>Item 7</li>
+                    <li>2024-02-29 Bloodcenter A</li>
+                    <li>2023-08-24 Bloodcenter B</li>
+                    <li>2022-12-18 Bloodcenter B</li>
+                    <li>2022-05-25 Bloodcenter A</li>
+                    <li>2021-09-23 Bloodcenter A</li>
+                    <li>2021-02-24 Bloodcenter C</li>
+                    <li>2020-06-20 Bloodcenter A</li>
                 </ul>
             </div>
 
