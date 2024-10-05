@@ -104,17 +104,19 @@ $link->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Dashboard</title>
-    <link rel="stylesheet" href="../../stylesheet/styles.css">
+    <link rel="stylesheet" href="../../stylesheet/reset.css">
+    <link rel="stylesheet" href="../../stylesheet/styles2.css">
 </head>
+
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="donor_front_page_backend.php">My Donations</a></li>
-                <li><a href="../../Donor_info.php">Profile</a></li>
+                <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
+                <li><a href="../../donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>   

@@ -2,10 +2,38 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, sans-serif;
     background-color: #f5d5dd;
     color: #333;
 }
+
+h1 { 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 24px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px; 
+    } 
+
+h3 { 
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 15.4px; } 
+
+p { 
+    font-family: Arial; 
+    font-size: 14px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 400; 
+    line-height: 20px; } 
+    
+blockquote { 
+    font-family: Arial; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Nunito; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
 
 header {
     display: flex;
@@ -109,14 +137,13 @@ h2 {
 /*Donation form bbank*/
 .donation-form-bbank {
     padding: 20px;
-    margin: 20px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.donation-form-bbank input {
-    width: calc(100% - 20px);
+.donation-form-bbank input[type="text"] {
+    width: 20px;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ddd;
@@ -135,20 +162,9 @@ h2 {
     margin-top: 10px;
 }
 
-.save-donation-button{
-    display: block;
-    padding: 10px 20px;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-}
-
 /* Donation Form Styling */
 .donation-form {
+    display: flex;
     padding: 20px;
     background-color: white;
     border-radius: 15px;
@@ -220,25 +236,4 @@ input[type="text"], select {
 
 .profile-changes-button:hover {
     background-color: #af093c; /* Darker color on hover */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .dashboard {
-        grid-template-columns: 1fr;
-    }
-
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .logout-button {
-        margin-top: 10px;
-    }
 }

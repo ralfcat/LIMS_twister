@@ -67,9 +67,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blood Donor Log in</title>
-    <link rel="stylesheet" href="/stylesheet/styles.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
+    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
+    <title>Donor Login</title>
+    <link rel="stylesheet" href="/stylesheet/reset.css" />
+    <link rel="stylesheet" href="/stylesheet/styles2.css" />
     <script>
         function validateForm() {
             let email = document.forms["loginform"]["email"].value;
@@ -96,30 +97,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <div class="box">
-        <h1>Donor Log in</h1>
-        <form name ="loginform" action="donor_log_in.php" method="POST" onsubmit="return validateForm()">
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Type email" />
-            </div>
-            <div id="error-message" style="color:red;">
+    <header>
+        <div class="logo-container">
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../../Blood_bank/bbank_log_in.php">Blood Bank Log in</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class=login-container> 
+        <div class=login-form>
+        <h2>Donor Log in</h2>
+
+            <form name ="loginform" action="donor_log_in.php"  method="POST" onsubmit="return validateForm()">
+                <div class="input-group">
+                <input type="text" id="email" name="email" placeholder="Email" />
+                </div>
+                <div id="error-message" style="color:red;">
                 <?php echo $error_email; ?>
-            </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Type password" />
-            </div>
-            <div id="error-message2" style="color:red;">
+                </div>
+                <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Password" />
+                </div>
+                <div id="error-message2" style="color:red;">
                 <?php echo $error_password; ?>
                 <?php echo $error_activation; ?>
+                </div>
+                <button class="login_button">Log in</button>
+            </form>
+
+            <div class="new-user">
+                <p>New user? <a href="/Donor/Donor_reg/create_account.php">Create an account here</a></p>
             </div>
-            <button type="submit">Log in</button>
-        </form>
-        <!-- New user link on the same line -->
-        <div class="new-user">
-            <p>New user? <a href="/Donor/Donor_reg/create_account.php">Create an account here</a></p>
-            
         </div>
     </div>
 </body>

@@ -130,6 +130,7 @@ $reg_res = $link->query($reg_req);
 
         <label for="donate-date" id="dn"></label>
         <input type="hidden" id="donate-date" name="donateddate"> <br>
+        <input type ="checkbox" id = "chckbx" > I have read and agreed to the <a href ="terms_cond_donor.html" target="blank" rel="noreferrer noopener">Terms and Conditions </a> <br>
 
         <input type="submit" value="Register">
         <p id="demo"></p>
@@ -240,6 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById(id).innerHTML = "";
 
         }
+        const checked_terms = document.getElementById("chckbx").checked;
         var pass = document.getElementById("password").value;
         var repass = document.getElementById("re-password").value;
         var email = document.getElementById("email").value;
@@ -248,8 +250,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         let fname = document.getElementById("fname").value;
         var lname = document.getElementById("lname").value;
    
-
-
 
         if (fname == "") {
 
@@ -301,6 +301,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (pass.length < 6 || !symbols.some(s => pass.includes(s))) {
             document.getElementById("error_msg").innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short</li> <li>The password does not contain a symbol</li></ul>";
             return false;
+        }
+        if (!checked_terms) {
+            document.getElementById("error_msg").innerHTML = "Please read and agree to the terms and conditions";
+            return false;
+
         }
         return true;
 
