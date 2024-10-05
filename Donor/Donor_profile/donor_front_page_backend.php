@@ -67,10 +67,7 @@ if ($result->num_rows > 0) {
             $donations[] = $row; // Store each donation row in the array
         }
             } 
-else {
-    header("Location: /Donor/Donor_login/donor_log_in.php"); // if there is no result, then send them back since they dont have an account
-    exit();
-}
+
 }
 
  //Close the statement and connection
@@ -132,14 +129,15 @@ $link->close();
                 <ul>
                     <?php foreach ($donations as $donation): ?>
                         <li>
-                            <strong>Date:</strong> <?php echo htmlspecialchars($donation['donation_date']); ?><br>
-                            <strong>Blood Bank:</strong> <?php echo htmlspecialchars($donation['name']); ?><br>
-                            <strong>Amount:</strong> <?php echo htmlspecialchars($donation['amount']); ?> L
+                            <span><?php echo htmlspecialchars($donation['donation_date']); ?></span> - 
+                            <span><?php echo htmlspecialchars($donation['name']); ?></span><br>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
-                <p>No donation history available.</p>
+                <ul>
+                    <li>No donation history available.<li>
+                </ul>
             <?php endif; ?>
         </div>
 
