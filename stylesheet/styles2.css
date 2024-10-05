@@ -292,6 +292,22 @@ nav .active {
     margin: 0 auto;          
 }
 
+.donation-form-bbank input[type="date"] {
+    border: 1px solid #ddd;
+    background-color: white;
+    max-width: 30rem;
+    display: block;          
+    margin: 0 auto;          
+}
+
+.donation-form-bbank input[type="select"] {
+    border: 1px solid #ddd;
+    background-color: white;
+    max-width: 30rem;
+    display: block;          
+    margin: 0 auto;          
+}
+
 .add-donation-button {
     display: block;
     padding: 10px 20px;
