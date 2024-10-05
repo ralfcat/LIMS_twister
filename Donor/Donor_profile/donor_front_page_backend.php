@@ -152,7 +152,10 @@ $link->close();
     <section class="donation-form-bbank">
     <h3>Date of Last Donation</h3>
     <form method="POST" action="donor_front_page_backend.php">
+        <!-- Input for donation date -->
         <input type="date" id="donation_date" name="donation_date" required><br>
+
+        <!-- Dropdown for choosing a blood center -->
         <h3>Choose Blood Center</h3>
         <select id="blood_center" name="blood_center" required>
             <option value="">Select a blood center</option>
@@ -161,15 +164,16 @@ $link->close();
                     <?php echo htmlspecialchars($bank['name']); ?>
                 </option>
             <?php endforeach; ?>
-        </select>
+        </select><br>
 
+        <!-- Input for donation amount -->
         <h3>Amount (liters)</h3>
-        <input type="number" id="amount" name="amount" placeholder="Enter amount (liters)" required><br>
+        <input type="number" id="amount" name="amount" step="0.01" placeholder="Enter amount (liters)" required><br>
 
+        <!-- Submit button -->
         <button class="add-donation-button" type="submit">Add Donation</button>
     </form>
 </section>
-
 
 </main>
 </body>
