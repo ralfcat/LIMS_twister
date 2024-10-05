@@ -149,14 +149,11 @@ $link->close();
         </div>
     </section>
 
-    <section class="donation-form">
-    <h3>Enter name of last donation:</h3>
+    <section class="donation-form-bbank">
+    <h3>Date of Last Donation</h3>
     <form method="POST" action="donor_front_page_backend.php">
-    
-        <label for="donation_date">Donation Date:</label>
         <input type="date" id="donation_date" name="donation_date" required><br>
-        
-        <label for="blood_center">Choose Blood Center:</label>
+        <h3>Choose Blood Center</h3>
         <select id="blood_center" name="blood_center" required>
             <option value="">Select a blood center</option>
             <?php foreach ($blood_banks as $bank): ?>
@@ -164,14 +161,15 @@ $link->close();
                     <?php echo htmlspecialchars($bank['name']); ?>
                 </option>
             <?php endforeach; ?>
-        </select><br>
+        </select>
 
-        <label for="amount">Amount (liters):</label>
-        <input type="number" id="amount" name="amount" step="0.01" placeholder="Enter amount (liters)" required><br>
+        <h3>Amount (liters)</h3>
+        <input type="number" id="amount" name="amount" placeholder="Enter amount (liters)" required><br>
 
         <button class="add-donation-button" type="submit">Add Donation</button>
     </form>
 </section>
+
 
 </main>
 </body>
