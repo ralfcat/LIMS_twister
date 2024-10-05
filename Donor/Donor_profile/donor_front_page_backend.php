@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['email'])) {
-    //if the user is not logged in send them to the donor_login
-    header("Location: /Donor/Donor_login/donor_log_in.php");
-    exit();
-}
 
 // Database connection parameters
 $servername = "localhost";
