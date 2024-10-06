@@ -162,6 +162,15 @@ nav .active {
 }
 
 
+.error-message{
+    font-family: "Nunito", Helvetica, sans-serif;
+    color: #af093c; 
+    font-size: 0.9rem;
+    margin: 5px 0;
+    text-align: center; 
+}
+
+
 /* New user link styles */
 .new-user {
     margin-top: 10px;

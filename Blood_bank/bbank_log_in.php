@@ -45,9 +45,11 @@ if (mysqli_connect_error()) {
 
             if (email == "") {
                 document.getElementById("error-message").innerHTML = "Email must be filled out";
+                document.getElementById("error-message").classList.add("error-message");
                 return false;
             } else if (!emailPattern.test(email)) {
                 document.getElementById("error-message").innerHTML = "Please enter a valid email address";
+                document.getElementById("error-message").classList.add("error-message-style");
                 return false;
             }
             if (password == "") {

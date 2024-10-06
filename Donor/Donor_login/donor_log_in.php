@@ -69,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Login</title>
-    <link rel="stylesheet" href="/stylesheet/reset.css" />
-    <link rel="stylesheet" href="/stylesheet/styles2.css" />
+    <link rel="stylesheet" href="../../stylesheet/reset.css" />
+    <link rel="stylesheet" href="../../stylesheet/styles2.css" />
     <script>
         function validateForm() {
             let email = document.forms["loginform"]["email"].value;
@@ -82,13 +82,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             document.getElementById("error-message2").innerHTML = "";
             if (email == "") {
                 document.getElementById("error-message").innerHTML = "Email must be filled out";
+                document.getElementById("error-message").classList.add("error-message");
                 return false;
             } else if (!emailPattern.test(email)) {
                 document.getElementById("error-message").innerHTML = "Please enter a valid email address";
+                document.getElementById("error-message").classList.add("error-message-style");
                 return false;
             }
             if (password == "") {
                 document.getElementById("error-message2").innerHTML = "Password must be filled out";
+                document.getElementById("error-message").classList.add("error-message-style");
                 return false;
             }
             return true;
@@ -116,13 +119,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                 <input type="text" id="email" name="email" placeholder="Email" />
                 </div>
-                <div id="error-message" style="color:red;">
+                <div id="error-message" class="error-message">
                 <?php echo $error_email; ?>
                 </div>
                 <div class="input-group">
                 <input type="password" id="password" name="password" placeholder="Password" />
                 </div>
-                <div id="error-message2" style="color:red;">
+                <div id="error-message2" class="error-message">
                 <?php echo $error_password; ?>
                 <?php echo $error_activation; ?>
                 </div>
@@ -136,5 +139,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
-
 
