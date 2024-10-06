@@ -1,3 +1,10 @@
+<?php 
+
+session_start();
+
+$email = $_SESSION['email'];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,19 +38,20 @@
                 <canvas id="myCanvas" width="500" height="400"></canvas> <!--Beginning of graph, we need to implement backend here-->
             </div>
 
-            <form action="#" method="POST" class="form-bbank"> <!--We need to change this-->
+            <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
+            <input type='hidden' name='mid' value = ''>;
                 <h2>Notification Thresholds</h2>
                 <div class="input-group">
-                    <label>O+<input type="text" name="mname"></label>
-                    <label>O- <input type="text" name="mname"></label>
+                    <label>O+<input type="text" name="O+"></label>
+                    <label>O- <input type="text" name="O-"></label>
                 </div>
                 <div class="input-group">
-                    <label>A+<input type="text" name="mname"></label>
-                    <label>A- <input type="text" name="mname"></label>
+                    <label>A+<input type="text" name="A+"></label>
+                    <label>A- <input type="text" name="A-"></label>
                 </div>
                 <div class="input-group">
-                    <label>B+<input type="text" name="mname"></label>
-                    <label>B- <input type="text" name="mname"></label>
+                    <label>B+<input type="text" name="B+"></label>
+                    <label>B- <input type="text" name="B-"></label>
                 </div>
                 <div class="input-group">
                     <label>AB+<input type="text" name="mname"></label>
