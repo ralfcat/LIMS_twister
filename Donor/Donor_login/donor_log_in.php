@@ -86,12 +86,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return false;
             } else if (!emailPattern.test(email)) {
                 document.getElementById("error-message").innerHTML = "Please enter a valid email address";
-                document.getElementById("error-message").classList.add("error-message-style");
+                document.getElementById("error-message").classList.add("error-message");
                 return false;
             }
             if (password == "") {
                 document.getElementById("error-message2").innerHTML = "Password must be filled out";
-                document.getElementById("error-message").classList.add("error-message-style");
+                document.getElementById("error-message").classList.add("error-message");
                 return false;
             }
             return true;
