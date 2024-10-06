@@ -66,6 +66,28 @@ CREATE TABLE Blood_Stock (
     PRIMARY KEY (blood_bank_id, blood_type),
     FOREIGN KEY (blood_bank_id) REFERENCES Blood_Bank(blood_bank_id)
 );
+
+
+-- This command will create blood stocks automatically upon registering 
+DELIMITER $$
+
+CREATE TRIGGER insert_blood_stock
+AFTER INSERT ON Blood_Bank
+FOR EACH ROW
+BEGIN
+    INSERT INTO Blood_Stock (blood_bank_id, blood_type, stock_level, threshold_level)
+    VALUES (NEW.blood_bank_id, 'A+', 0, 10),
+           (NEW.blood_bank_id, 'A-', 0, 10),
+           (NEW.blood_bank_id, 'B+', 0, 10),
+           (NEW.blood_bank_id, 'B-', 0, 10),
+           (NEW.blood_bank_id, 'AB+', 0, 10),
+           (NEW.blood_bank_id, 'AB-', 0, 10),
+           (NEW.blood_bank_id, 'O+', 0, 10),
+           (NEW.blood_bank_id, 'O-', 0, 10);
+END$$
+
+DELIMITER ;
+
 CREATE TABLE Notification (
     notification_id INT PRIMARY KEY AUTO_INCREMENT,
     notification_method VARCHAR(50),
