@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 
@@ -7,7 +7,8 @@ $username = 'root';
 $password = 'root';
 $dbname = 'twister';
 
-function write_js($data) {
+function write_js($data)
+{
     $output = $data;
     if (is_array($output))
         $output = implode(',', $output);
@@ -21,12 +22,16 @@ $link = mysqli_connect($servername, $username, $password, $dbname);
 if (mysqli_connect_error()) {
     die('Connection failed: ' . mysqli_connect_error());
 }
+
+
+
 ?>
 
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,12 +40,27 @@ if (mysqli_connect_error()) {
     <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
     <script>
+            <?php
+    $errors = [
+        'login-required' => 'You need to be logged in to see the requested page',
+    ];
+    if (isset($errors[$_GET['err']])) {
+
+        $x = $errors[$_GET['err']];
+        echo "document.addEventListener('DOMContentLoaded', function() {";
+        echo "console.log( 'there is a login error $x');";
+        echo "let x = document.getElementById('log-errs');";
+        echo 'x.innerHTML = "' . htmlspecialchars($errors[$_GET['err']]) . '";';
+        echo "});";
+     
+    }
+    ?>
         function validateForm() {
             let email = document.forms["login-form"]["email"].value;
             let password = document.forms["login-form"]["password"].value;
-            
+
             let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            
+
             document.getElementById("error-message").innerHTML = "";
 
             if (email == "") {
@@ -60,7 +80,11 @@ if (mysqli_connect_error()) {
         }
     </script>
 </head>
-<header>
+
+<body>
+
+
+    <header>
         <div class="logo-container">
             <img class="logo" src="../../Logo-and-text.png" alt="Logo">
         </div>
@@ -70,10 +94,12 @@ if (mysqli_connect_error()) {
             </ul>
         </nav>
     </header>
-    <div class=login-container> 
+    <div class=login-container>
+        
         <div class=login-form>
+        <p id="log-errs"></p>
             <h2>Blood Bank Log in</h2>
-            <form action=<?php echo $_SERVER['PHP_SELF'];?> onsubmit="return validateForm();" method="POST" id = "login-form">
+            <form action=<?php echo $_SERVER['PHP_SELF']; ?> onsubmit="return validateForm();" method="POST" id="login-form">
                 <div class="input-group">
                     <input type="text" id="email" name="email" placeholder="Email" />
                 </div>
@@ -89,6 +115,7 @@ if (mysqli_connect_error()) {
         </div>
     </div>
 </body>
+
 </html>
 
 <?php
@@ -105,17 +132,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $row = $res->fetch_assoc();
     $count = $row['COUNT(email)'];
 
-    if ($count == 0) { 
+    if ($count == 0) {
         write_js("console.log('i enetered a non existing email');");
 
         $str = "document.getElementById('error-message').innerHTML = 'The email you entered does not exist.';";
         write_js($str);
-
-
-    } else{
+    } else {
         $email_db = $row['email'];
 
-        write_js("console.log('i enetered a existing email that is present in the databse where the email is " . $email_db."');");
+        write_js("console.log('i enetered a existing email that is present in the databse where the email is " . $email_db . "');");
         $email_req = "SELECT password FROM Blood_Bank WHERE email = '" . $email_db . "'";
         $res = $link->query($email_req);
         $row = $res->fetch_assoc();
@@ -127,15 +152,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             write_js($err);
         } else {
             $_SESSION['email'] = $email_db;
+            $_SESSION['loggedin'] = true;
             header("Location: bbank_front_page.php");
             exit();
         }
-
-
     }
-
-
 }
+
+
 
 
 ?>
