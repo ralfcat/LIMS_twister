@@ -6,7 +6,7 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "twister";
-session_start();
+if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $email = $_SESSION['email'];
 
@@ -24,6 +24,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $units = $_POST['units'];
         update_levels($btype, $units);
         echo "<script>console.log( 'in the post request $btype and $units ');</script>";
+    }
+    else if ($to_do == "update_threshold") {
+        echo "<script>console.log( 'you clicked the update the threshold button');</script>";
+        foreach($_POST as $key => $value) {
+            if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B') ) {
+                echo "<h2>console.log( '$key and the val is $value');</h2>";
+                update_thresholds($key, $value);
+
+            }
+        }
+        header('Location: bbank_front_page.php');
+        
     }
 }
 
@@ -60,17 +72,6 @@ function debug_to_console($data) {
 
 
 
-// $sql_req = "SELECT movies.mid, movies.mname, movies.myear, movies.mgenre, movies.mrating, genres.mgenre FROM Blood_Stock WHERE Blood_Stock.blood_bank_id = " . $mid;
-// $res = $link->query($sql_req);
-// $row = $res->fetch_assoc();
-// $genre_req = "SELECT gid, mgenre FROM genres";
-// $genre_res = $link->query($genre_req);
-
-
-// $mname = $_POST['O+'];
-
-// echo "<h1>". $mname."</h1>";
-// debug_to_console($mname);
 
 function get_stock($email) {
     global $link;
@@ -98,16 +99,6 @@ function get_stock($email) {
 }
 
 
-
-// if (isset($_POST['action'])) {
-//     switch ($_POST['action']) {
-//         case 'update':
-//             update_levels();
-//             break;
-
-//     }
-// }
-
 function get_id(){
     global $email;
     global $link;
@@ -134,8 +125,16 @@ function update_curr($btype, $new_level, $id) {
     $result = $stmt->execute();
     echo "<script>console.log( 'the value was successfully updated');</script>";
 
+}
 
-
+function update_thresholds($btype, $threshold) {
+    global $link;
+    $id = get_id();
+    $update_req = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
+    $stmt = $link->prepare($update_req);
+    $stmt->bind_param("iis", $threshold, $id, $btype);
+    $result = $stmt->execute();
+    echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
 }
 
 function update_levels($btype, $units) {
