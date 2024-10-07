@@ -8,7 +8,16 @@ use FrontEnd\BloodStock as BloodStock;
 
 if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-$email = $_SESSION['email'];
+// User is not logged in 
+if (!isset($_SESSION['loggedin'])) {
+    $yourFlashMessagesObject->addError('You need to be logged in to see the requested page');
+    header('Location: bbank_log_in.php');
+    echo ("<h1>You need to be logged in to access the page</h1>");
+    exit;
+
+}
+
+// $email = $_SESSION['email'];
 $current_levels = get_stock($email);
 $call_lev = 'get_threshold';
 
@@ -41,7 +50,7 @@ $call_lev = 'get_threshold';
                 <li><a href="../../bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button class="logout-button"> <a href = "bb_log_out.php">Log Out</a></button>
     </header>
     <main>
         <h1>Blood level inventory</h1>

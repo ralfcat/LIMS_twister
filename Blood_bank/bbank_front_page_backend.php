@@ -8,6 +8,12 @@ $password = "root";
 $dbname = "twister";
 if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: bbank_log_in.php?err=login-required');
+    echo ("<h1>You need to be logged in to access the page</h1>");
+
+}
+
 $email = $_SESSION['email'];
 
 $link = mysqli_connect($servername, $username, $password, $dbname);
