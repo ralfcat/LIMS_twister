@@ -49,15 +49,11 @@ $call_lev = 'get_threshold';
                     <tr><th>Blood Type</th><th>Current Level</th><th>Current Threshold</th></tr>
                     <?php
 
-
-                        
                         foreach ($current_levels as $level) {
                             $type = $level->blood_type;
                             $stock = $level->current_stock;
                             $thres = $level->thres_level;
                             echo "<tr><td>$type</td><td>$stock</td><td>$thres</td></tr>";
-
-
                         } 
                         
                         ?>
@@ -92,10 +88,22 @@ $call_lev = 'get_threshold';
 
         <section class="donation-form-bbank">
             <h3>Bloodtype</h3>
-            <input type="text" placeholder="Enter Bloodtype"> <!--We should have a dropdown list here-->
+            <select name="btypes">
+
+            <?php 
+            foreach ($current_levels as $level) {
+                $type = $level->blood_type;
+                $stock = $level->current_stock;
+                $thres = $level->thres_level;
+                echo "<option value = '$type'> $type </option>";
+            } 
+            ?>
+
+            </select>
             <h3>Units</h3>
             <input type="text" placeholder="Enter Units">
-            <button class="add-donation-button">Add Donation</button>
+            <!-- I changed Add Donation to Update Levels so that the blood bank can input negative values to remove blood from their stock  -->
+            <button class="add-donation-button">Update Levels</button>
         </section>
     </main>
 
