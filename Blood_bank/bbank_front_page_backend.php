@@ -1,16 +1,30 @@
 <?php 
+
 namespace FrontEnd;
 
 $servername = "localhost";
 $username = "root";
 $password = "root";
 $dbname = "twister";
+session_start();
+
+$email = $_SESSION['email'];
 
 $link = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check if connection is established
 if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $to_do = $_POST["to_do"];
+    if ($to_do == "update_blood") {
+        $btype = $_POST['btypes'];
+        $units = $_POST['units'];
+        update_levels($btype, $units);
+        echo "<script>console.log( 'in the post request $btype and $units ');</script>";
+    }
 }
 
 class BloodStock {
@@ -81,4 +95,55 @@ function get_stock($email) {
     // }
     return $blood_levels;
     
+}
+
+
+
+// if (isset($_POST['action'])) {
+//     switch ($_POST['action']) {
+//         case 'update':
+//             update_levels();
+//             break;
+
+//     }
+// }
+
+function get_id(){
+    global $email;
+    global $link;
+    $email_req = "SELECT blood_bank_id from Blood_Bank WHERE email = '$email'";
+    $res = $link->query($email_req);
+    $row = $res->fetch_assoc();
+    return $row["blood_bank_id"];
+}
+
+function get_curr($btype, $id)  {
+    global $link;
+    $curr_req = "SELECT stock_level from Blood_Stock WHERE blood_type = '$btype' AND blood_bank_id = $id";
+    $res = $link->query($curr_req);
+    $row = $res->fetch_assoc();
+    return $row["stock_level"];
+
+}
+
+function update_curr($btype, $new_level, $id) {
+    global $link;
+    $update_req = "UPDATE Blood_Stock SET stock_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
+    $stmt = $link->prepare($update_req);
+    $stmt->bind_param("iis", $new_level, $id, $btype);
+    $result = $stmt->execute();
+    echo "<script>console.log( 'the value was successfully updated');</script>";
+
+
+
+}
+
+function update_levels($btype, $units) {
+    $bb_id = get_id();
+    $curr_level = get_curr($btype, $bb_id);
+    echo "<script>console.log( 'the blood bank id is $bb_id and the curr level is $curr_level');</script>";
+    $new_level = (int) $curr_level + (int) $units;
+    update_curr($btype, $new_level, $bb_id);
+    header('Location: bbank_front_page.php');
+
 }
