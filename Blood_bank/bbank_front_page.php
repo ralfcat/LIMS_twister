@@ -9,11 +9,11 @@ use FrontEnd\BloodStock as BloodStock;
 if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 // User is not logged in 
-if (!isset($_SESSION['loggedin'])) {
-    header('Location: bbank_log_in.php?err=login-required');
-    exit;
+// if (!isset($_SESSION['loggedin'])) {
+//     header('Location: bbank_log_in.php?msg=login-required');
+//     exit;
 
-}
+// }
 
 // $email = $_SESSION['email'];
 $current_levels = get_stock($email);

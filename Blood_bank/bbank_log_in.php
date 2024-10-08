@@ -3,7 +3,7 @@
 require_once 'bbank_front_page_backend.php';
 
 use function FrontEnd\write_js as write_js;
-session_start();
+
 
 
 $servername = 'localhost';
@@ -41,22 +41,22 @@ if (mysqli_connect_error()) {
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
     <script>
             <?php
-    $errors = [
-        'login-required' => 'You need to be logged in to see the requested page',
-        'logged-out' => 'Successfully logged out',
-        'wrong-password' => 'You have entered the wrong password'
-    ];
+    // $messages = [
+    //     'login-required' => 'You need to be logged in to see the requested page',
+    //     'logged-out' => 'Successfully logged out',
+    //     'wrong-password' => 'You have entered the wrong password'
+    // ];
     // delete this
-    if (isset($errors[$_GET['err']])) {
+    // if (isset($messages[$_GET['msg']])) {
 
-        $x = $errors[$_GET['err']];
-        echo "document.addEventListener('DOMContentLoaded', function() {";
-        echo "console.log( 'there is a login error $x');";
-        echo "let x = document.getElementById('log-errs');";
-        echo 'x.innerHTML = "' . htmlspecialchars($errors[$_GET['err']]) . '";';
-        echo "});";
+    //     $x = $messages[$_GET['msg']];
+    //     echo "document.addEventListener('DOMContentLoaded', function() {";
+    //     echo "console.log( 'there is a login error $x');";
+    //     echo "let x = document.getElementById('log-errs');";
+    //     echo 'x.innerHTML = "' . htmlspecialchars($errors[$_GET['msg']]) . '";';
+    //     echo "});";
      
-    }
+    // }
     ?>
         function validateForm() {
             document.getElementById('log-errs').innerHTML = "";
@@ -124,11 +124,11 @@ if (mysqli_connect_error()) {
 
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    write_js("console.log('a get request occured');");
+// if ($_SERVER["REQUEST_METHOD"] == "GET") {
+//     write_js("console.log('a get request occured');");
 
 
-}
+// }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     write_js("console.log('in the post request fxn right now');");

@@ -8,6 +8,6 @@ session_unset();
 session_destroy();
 
 // Redirect to the login page after logout
-header("Location: bbank_log_in.php?err=logged-out");
+header("Location: bbank_log_in.php?msg=logged-out");
 exit();
 ?>
