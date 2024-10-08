@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
@@ -63,11 +63,12 @@
                     <option value="Other">Other</option>
                 </select>
 
-                <h3>Date of birth:</h3>
-                <input type="text" placeholder="Enter date of birth">
-
                 <h3>Region:</h3>
-                <input type="text" placeholder="Region">
+                <select name="Region">
+                    <option value="" disabled selected>Select your region</option>
+                    <option value="Varmland">Värmland</option>
+                    <option value="etc">etc</option>
+                </select>
             </div>
         </div>
     </section>
