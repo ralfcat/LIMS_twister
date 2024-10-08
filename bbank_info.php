@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
@@ -42,7 +42,11 @@
             <!-- Right Column -->
             <div class="form-column">
                 <h3>Region:</h3>
-                <input type="text" placeholder="Region">
+                <select name="Region">
+                    <option value="" disabled selected>Select region</option>
+                    <option value="Varmland">Värmland</option>
+                    <option value="etc">etc</option>
+                </select>
             </div>
         </div>
 
