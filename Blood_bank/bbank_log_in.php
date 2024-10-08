@@ -43,6 +43,8 @@ if (mysqli_connect_error()) {
             <?php
     $errors = [
         'login-required' => 'You need to be logged in to see the requested page',
+        'logged-out' => 'Successfully logged out',
+        'wrong-password' => 'You have entered the wrong password'
     ];
     if (isset($errors[$_GET['err']])) {
 
@@ -153,8 +155,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $_SESSION['email'] = $email_db;
             $_SESSION['loggedin'] = true;
-            header("Location: bbank_front_page.php");
-            exit();
+            header("Location: ../bbank_front_page.php");
+            exit;
         }
     }
 }
