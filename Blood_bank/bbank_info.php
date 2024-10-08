@@ -4,8 +4,10 @@ require_once 'bbank_front_page_backend.php';
 
 use function FrontEnd\get_account_info as get_account_info;
 use function FrontEnd\get_regions as get_regions;
+use function FrontEnd\curr_region as curr_region;
 use function FrontEnd\write_js as write_js;
-
+use function FrontEnd\write_console as write_console;
+error_reporting(E_ERROR | E_PARSE);
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $account_info = get_account_info();
@@ -24,7 +26,7 @@ if (isset($messages[$_GET['msg']])) {
     $x = $messages[$_GET['msg']];
     echo "document.addEventListener('DOMContentLoaded', function() {";
     echo "console.log( 'there is a login error $x');";
-    echo "let x = document.getElementById('log-errs');";
+    echo "let x = document.getElementById('msgs');";
     echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msgs']]) . '";';
     echo "});";
  
@@ -90,8 +92,18 @@ if (isset($messages[$_GET['msg']])) {
 
                         <?php
                         foreach ($regions as $region) {
-                            $name = $region;
-                            echo "<option value = '$name'> $name </option>";
+                            $x = curr_region();
+                            write_console("the curr region is $x");
+                            if ($region == curr_region()){
+                                echo "<option value = '$region' selected> $region </option>";
+
+                            } else {
+                                echo "<option value = '$region'> $region </option>";
+
+                            }
+                     
+                            
+                            
                         }
                         ?>
 

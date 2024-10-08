@@ -193,13 +193,23 @@ function update_thresholds($btype, $threshold)
     echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
 }
 
+function get_region_id($new_region) {
+    global $link;
+
+    $sql_req = "SELECT rid FROM Region WHERE region = '$new_region'";
+    $res = $link->query($sql_req);
+    $row = $res->fetch_assoc();
+    return $row["rid"];
+
+}
+
 function update_account_info($new_name, $new_email,$new_region){
     global $email;
     $link = open_db();
-    $reg = 4;
+    $rid = (int) get_region_id($new_region);
     $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ? WHERE email = ?";
     $stmt = $link->prepare($update_req);
-    $stmt->bind_param("ssis", $new_name, $new_email, $reg, $email);
+    $stmt->bind_param("ssss", $new_name, $new_email, $rid, $email);
  
     $stmt->execute();
     write_console("I am trying to update account info");
@@ -229,6 +239,17 @@ function get_account_info()
     //     echo "<p>The key os $key and the value is $value</p>";
     // }
     return $row;
+}
+
+function curr_region() {
+    global $link;
+    global $email;
+    $sql_req = "SELECT region FROM Region INNER JOIN Blood_Bank ON Region.rid = Blood_Bank.region_id WHERE Blood_Bank.email = '$email'";
+    $res = $link->query($sql_req);
+    $row = $res->fetch_assoc();
+    return $row['region'];
+
+
 }
 
 
