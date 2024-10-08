@@ -14,6 +14,15 @@ if (!isset($_SESSION['loggedin'])) {
 
 }
 
+function write_js($data)
+{
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>" . $data . "</script>";
+}
+
 $email = $_SESSION['email'];
 
 $link = mysqli_connect($servername, $username, $password, $dbname);
@@ -150,5 +159,38 @@ function update_levels($btype, $units) {
     $new_level = (int) $curr_level + (int) $units;
     update_curr($btype, $new_level, $bb_id);
     header('Location: bbank_front_page.php');
+
+}
+
+function get_account_info() {
+    global $email;
+    global $link;
+    write_js("console.log('I am in teh get account info section')");
+    $sql_req = "SELECT * FROM Blood_Bank WHERE email = '$email'";
+    $res = $link->query($sql_req);
+    $row = $res->fetch_assoc();
+    // foreach($row as $key => $value) {
+    //     echo "<p>The key os $key and the value is $value</p>";
+    // }
+    return $row;
+
+}
+
+
+function get_regions() {
+    global $link;
+    $sql_req = "SELECT region FROM Region";
+    $res = $link->query($sql_req);
+    $regions = array();
+    while ($row = $res->fetch_assoc()){
+        $regions[] = $row['region'];  
+    }
+    return $regions;
+
+
+}
+function close_db() {
+    global $link;
+    $link->close();
 
 }

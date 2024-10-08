@@ -1,4 +1,8 @@
 <?php
+
+require_once 'bbank_front_page_backend.php';
+
+use function FrontEnd\write_js as write_js;
 session_start();
 
 
@@ -7,14 +11,9 @@ $username = 'root';
 $password = 'root';
 $dbname = 'twister';
 
-function write_js($data)
-{
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
 
-    echo "<script>" . $data . "</script>";
-}
+
+
 
 $link = mysqli_connect($servername, $username, $password, $dbname);
 
@@ -22,6 +21,7 @@ $link = mysqli_connect($servername, $username, $password, $dbname);
 if (mysqli_connect_error()) {
     die('Connection failed: ' . mysqli_connect_error());
 }
+
 
 
 
@@ -46,6 +46,7 @@ if (mysqli_connect_error()) {
         'logged-out' => 'Successfully logged out',
         'wrong-password' => 'You have entered the wrong password'
     ];
+    // delete this
     if (isset($errors[$_GET['err']])) {
 
         $x = $errors[$_GET['err']];
@@ -58,6 +59,7 @@ if (mysqli_connect_error()) {
     }
     ?>
         function validateForm() {
+            document.getElementById('log-errs').innerHTML = "";
             let email = document.forms["login-form"]["email"].value;
             let password = document.forms["login-form"]["password"].value;
 
@@ -122,6 +124,12 @@ if (mysqli_connect_error()) {
 
 <?php
 
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    write_js("console.log('a get request occured');");
+
+
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     write_js("console.log('in the post request fxn right now');");
 
@@ -155,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $_SESSION['email'] = $email_db;
             $_SESSION['loggedin'] = true;
-            header("Location: ../bbank_front_page.php");
+            header("Location: bbank_front_page.php");
             exit;
         }
     }
