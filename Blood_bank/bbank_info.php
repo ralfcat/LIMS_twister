@@ -12,6 +12,24 @@ $account_info = get_account_info();
 
 $regions = get_regions();
 
+$messages = [
+    'login-required' => 'You need to be logged in to see the requested page',
+    'logged-out' => 'Successfully logged out',
+    'wrong-password' => 'You have entered the wrong password',
+    'info_changed' => 'Profile information sucessfully changed'
+];
+// delete this
+if (isset($messages[$_GET['msg']])) {
+
+    $x = $messages[$_GET['msg']];
+    echo "document.addEventListener('DOMContentLoaded', function() {";
+    echo "console.log( 'there is a login error $x');";
+    echo "let x = document.getElementById('log-errs');";
+    echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msgs']]) . '";';
+    echo "});";
+ 
+}
+
 
 ?>
 
@@ -44,19 +62,25 @@ $regions = get_regions();
 
     <main>
         <h1>Blood bank ID</h1>
+        <form action="bbank_front_page_backend.php" method="post" class="form-bbank">
         <section class="donation-form">
+        <p id="msgs"></p>
             <div class="form-container">
+
                 <!-- Left Column -->
                 <div class="form-column">
                     <h3>Name:</h3>
-                    <input type="text" placeholder="Enter name" value='<?php echo $account_info['name'] ?>'>
+                    <input type="text" placeholder="Enter name" name = "new-name" value="<?php echo $account_info['name'] ?>">
                     <h3>Email:</h3>
-                    <input type="text" placeholder="Enter email" value='<?php echo $account_info['email'] ?>'>
+                    <input type="text" placeholder="Enter email" name = "new-email" value='<?php echo $account_info['email'] ?>'>
                     <!-- <h3>Password:</h3>
                 <input type="password" placeholder="Enter password">
                 <h3>Repeat password:</h3>
                 <input type="password" placeholder="Enter password"> -->
-                    <button class="profile-changes-button">Save changes</button>
+                    
+                    <input type="hidden" name="to_do" value="update_bb_info" />
+                        <button class="profile-changes-button">Save changes</button>
+                    
                 </div>
 
                 <!-- Right Column -->
@@ -67,7 +91,6 @@ $regions = get_regions();
                         <?php
                         foreach ($regions as $region) {
                             $name = $region;
-                            write_js("console.log('The region is $name')");
                             echo "<option value = '$name'> $name </option>";
                         }
                         ?>
@@ -75,6 +98,7 @@ $regions = get_regions();
                     </select>
                     <p>Want to reset your password? <a href="">Click Here</a>.</p>
                 </div>
+                </form>
 
 
 
