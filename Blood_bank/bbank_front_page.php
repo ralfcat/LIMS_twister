@@ -4,10 +4,11 @@ require_once 'bbank_front_page_backend.php';
 
 use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
+use function FrontEnd\get_regional_levels as get_regional_levels;
 
 use FrontEnd\BloodStock as BloodStock;
 
-if(session_status() !== PHP_SESSION_ACTIVE) session_start();
+if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 // User is not logged in 
 // if (!isset($_SESSION['loggedin'])) {
@@ -17,13 +18,14 @@ if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 // }
 
 // $email = $_SESSION['email'];
-if (!isset($_SESSION['email'])) { 
+if (!isset($_SESSION['email'])) {
     header('Location: bbank_log_in.php?msg=login-required');
     exit;
-
 }
 $current_levels = get_stock($email);
 $call_lev = 'get_threshold';
+
+$regional_levels = get_regional_levels();
 
 ?>
 <!DOCTYPE html>
@@ -55,14 +57,14 @@ $call_lev = 'get_threshold';
                 <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button"> <a href = "bb_log_out.php">Log Out</a></button>
+        <button class="logout-button"> <a href="bb_log_out.php">Log Out</a></button>
     </header>
     <main>
         <h1>Blood level inventory</h1>
 
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
-                <h2>Current Levels</h2> <!--Implement the graph based on inventory levels here-->
+                <h2>Current Local Levels</h2> <!--Implement the graph based on inventory levels here-->
                 <h4>To be replaced with a graph</h4>
                 <table>
                     <tr>
@@ -81,6 +83,28 @@ $call_lev = 'get_threshold';
 
                     ?>
                 </table>
+
+                <h2>Current Regional Levels</h2> <!--Implement the graph based on inventory levels here-->
+                <h4>To be replaced with a graph</h4>
+                <table>
+                    <tr>
+                        <th>Blood Type</th>
+                        <th>Current Level</th>
+
+                    </tr>
+                    <?php
+
+                    foreach ($regional_levels as $level) {
+                        $type = $level['blood_type'];
+                        $stock = $level['SUM(stock_level)'];
+
+                        echo "<tr><td>$type</td><td>$stock</td></tr>";
+                    }
+
+                    ?>
+
+                </table>
+
 
                 <canvas id="myCanvas" width="500" height="400"></canvas> <!--Beginning of graph, we need to implement backend here-->
 
@@ -110,7 +134,7 @@ $call_lev = 'get_threshold';
             </div>
 
             <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
-            <input type="hidden" name="to_do" value="update_threshold" />
+                <input type="hidden" name="to_do" value="update_threshold" />
                 <input type='hidden' name='mid' value=''>
                 <h2>Notification Thresholds</h2>
                 <div class="input-group">

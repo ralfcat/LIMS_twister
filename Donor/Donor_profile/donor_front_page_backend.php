@@ -17,13 +17,12 @@ if ($link->connect_error) {
 }
 
 
-$email = $_SESSION['email'];
+$donor_id_ses = $_SESSION['donor_id'];
 
 
-
-$sql = "SELECT * FROM Donor WHERE email = ?";
+$sql = "SELECT * FROM Donor WHERE donor_id = ?";
 $stmt = $link->prepare($sql);
-$stmt->bind_param('s', $email);
+$stmt->bind_param('i', $donor_id_ses);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -108,7 +107,7 @@ $link->close();
         <nav>
             <ul>
                 <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
-                <li><a href="../../donor_info.php">Profile</a></li>
+                <li><a href="/donor/donor_profile/donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>   
