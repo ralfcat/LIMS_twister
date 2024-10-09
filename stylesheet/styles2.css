@@ -461,3 +461,22 @@ nav .active {
     align-items: center;       
     gap: 3rem;                 
 }
+
+/*Notification log*/
+.notification-log {
+    width: 60%; /* Set width of the table */
+    border-collapse: collapse; /* Collapse borders */
+    background-color: white; /* White background for the table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for aesthetics */
+}
+
+.notification-log th,
+.notification-log td {
+    padding: 15px; /* Add padding for cells */
+    text-align: center; /* Center text in cells */
+    border: 1px solid #dddddd; /* Light grey border for cells */
+}
+
+.notification-log th {
+    background-color: #f2f2f2; /* Light grey background for header */
+}
