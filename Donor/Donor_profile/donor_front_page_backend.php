@@ -168,7 +168,7 @@ $link->close();
 
  <!--Unregister from list-->
 <section class="unsubscribe">
-    <h2>Do you want to temporarily unsubscribe from email-list?</h2>
+    <h2>Temporarily unsubscribe from our email list</h2>
     <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
     
     <form action="/unsubscribe" method="POST"> <!--Backend must be implemented here-->
