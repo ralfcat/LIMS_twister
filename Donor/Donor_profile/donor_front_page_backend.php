@@ -166,6 +166,35 @@ $link->close();
         <button class="add-donation-button-donor" type="submit">Add Donation</button>
     </form>
 </section>
+
+ <!--Unregister from list-->
+<section class="unsubscribe">
+    <h2>Do you want to temporarily unsubscribe from email-list?</h2>
+    <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
+    
+    <form action="/unsubscribe" method="POST"> <!--Backend must be implemented here-->
+        <div class="unsub-form-row">
+            <div class="unsub-form-group-donor">  
+                <label for="email">Enter your email address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="unsub-form-group-donor">  
+                <label for="end-date">End date of temporary unsubscription:</label>
+                <input type="date" id="end-date" name="end-date" required>
+            </div>
+        </div>
+        
+        <label class="unsub-confirmation"> 
+            <input type="checkbox" name="confirm" required>
+            <p>I confirm that I want to temporarily unsubscribe.</p>
+        </label>
+        
+        <button class="add-donation-button-donor" type="submit">Unsubscribe</button>
+    </form>
+</section>
+
+</section>
 </main>
 </body>
 </html>
