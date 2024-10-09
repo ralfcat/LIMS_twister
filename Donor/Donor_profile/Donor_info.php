@@ -18,10 +18,10 @@ if ($link->connect_error) {
     die("Connection failed: " . $link->connect_error);
 }
 
-$email = $_SESSION['email'];
-$sql = "SELECT * FROM Donor WHERE email = ?";
+$donor_id_ses = $_SESSION['donor_id'];
+$sql = "SELECT * FROM Donor WHERE donor_id = ?";
 $stmt = $link->prepare($sql);
-$stmt->bind_param('s', $email);
+$stmt->bind_param('i', $donor_id_ses);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -33,10 +33,9 @@ if ($result->num_rows > 0) {
     $donor_sex = $user['sex'];
     $donor_region = $user['address'];
     $donor_age = $user['age'];
+    $donor_password = $user['password']; // Save the hashed password for later comparison
     $donor_id = $user['donor_id'];
-
 }
-
 
 $sql2 = "SELECT region FROM Region";
 $result2 = $link->query($sql2);
@@ -47,24 +46,62 @@ if ($result2->num_rows > 0) {
     }
 }
 
-
-
+$error_password = "";
+$success_message = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email']; 
-    $old_password = $_POST['old_password'];
-    $new_password = $_POST['new_password'];
-    $confirm_password = $_POST['confirm_password'];
+    $password = $_POST['password'];
+    $repeat_password = $_POST['repeat_password'];
     $blood_type = $_POST['blood_type'];
     $sex = $_POST['sex'];
-    $date_of_birth = $_POST['date_of_birth'];
     $region = $_POST['region'];
+
+    if (empty($password)) {
+        $sql = "UPDATE Donor SET name = ?, email = ?, blood_type = ?, sex = ?, address = ? WHERE donor_id = ?";
+        $stmt = $link->prepare($sql);
+        $stmt->bind_param('sssssi', $name, $email, $blood_type, $sex, $region, $donor_id);
+        $stmt->execute();
+        $success_message ="Information updated successfully";
+    } else {
+        if ($password == $repeat_password) {
+            if (strlen($password) < 6) {
+                $error_password = "Password should be at least 6 characters long";
+            } else if (!preg_match('/[\'^£$%&*()}{@#~?!><>,|=_+¬-]/', $password)) {
+                $error_password = "Password should contain a special symbol";
+            } else {
+                $hashed_password = md5($password);
+                $sql = "UPDATE Donor SET name = ?, email = ?, password = ?, blood_type = ?, sex = ?, address = ? WHERE donor_id = ?";
+                $stmt = $link->prepare($sql);
+                $stmt->bind_param('ssssssi', $name, $email, $hashed_password, $blood_type, $sex, $region, $donor_id);
+                $stmt->execute();
+                $success_message = "Information updated successfully";
+            }
+        } else {
+            $error_password = "Passwords do not match";
+        }
+    }
+    // Fetch the updated data from the database
+    $sql = "SELECT * FROM Donor WHERE donor_id = ?";
+    $stmt = $link->prepare($sql);
+    $stmt->bind_param('i', $donor_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $donor_name = $user['name'];
+        $donor_email = $user['email'];
+        $donor_blood_type = $user['blood_type']; 
+        $donor_sex = $user['sex'];
+        $donor_region = $user['address'];
+        $donor_password = $user['password']; // Save the hashed password for later comparison
+    }
 }
 
-//$stmt->close();
 $link->close();
+$stmt->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -75,11 +112,12 @@ $link->close();
     <title>Donor Dashboard</title>
     <link rel="stylesheet" href="/stylesheet/reset.css">
     <link rel="stylesheet" href="/stylesheet/styles2.css">
+    
 </head>
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="/BloodAlert_logo.png" alt="Logo">
+            <img class="logo" src="/Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
@@ -87,15 +125,15 @@ $link->close();
                 <li class="active"><a href="donor_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button> 
     </header>
 
     <main>
     <!-- SCRIPTS FOR SHOWING/HIDING PASSWORD-->
     <script>
         function togglePassword() {
-            var oldPasswordField = document.getElementById('old_password');
-            var newPasswordField = document.getElementById('new_password');
+            var oldPasswordField = document.getElementById('password');
+            var newPasswordField = document.getElementById('repeat_password');
 
             if (oldPasswordField.type === "password" || newPasswordField.type === "password") {
                 oldPasswordField.type = "text";
@@ -120,17 +158,20 @@ $link->close();
                     
                     <h3>Email:</h3>
                     <input type="text" id="email" name="email" placeholder="Enter email" value="<?php echo htmlspecialchars($donor_email); ?>">
-                    
-                    <h3>Old password:</h3>
-                    <input type="password" id="old_password" name="old_password" placeholder="Enter old password">
-                    
+                    <h3>Password:</h3>
+                    <input type="password" id="password" name="password" placeholder="Enter password">
+                    <p class="error-message"><?php echo $error_password; ?></p>
+                    <button class = "profile-changes-button" type="button" onclick="togglePassword()">Show passwords</button>
                     <h3>New password:</h3>
-                    <input type="password" id="new_password" name="new_password" placeholder="Enter new password">
-                    <h3>Confirm new password:</h3>
-                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm  new password">
-                    <button type="button" onclick="togglePassword()">Show passwords</button>
+                    <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
+
 
                     <button class="profile-changes-button" type="submit">Save changes</button>
+                    <br>
+                    <?php if ($success_message): ?>
+                    <p class="success-message"><?php echo $success_message; ?></p>
+                    <?php endif; ?>
+
                 </div>
 
                 <!-- Right Column -->
@@ -155,9 +196,6 @@ $link->close();
                         <option value="Female" <?php if($donor_sex == 'Female') echo 'selected'; ?>>Female</option>
                         <option value="Other" <?php if($donor_sex == 'Other') echo 'selected'; ?>>Other</option>
                     </select>
-
-                    <h3>Date of birth:</h3>
-                    <input type="date" id="date_of_birth" name="date_of_birth" value="<?php echo htmlspecialchars($donor_age); ?>">
 
                     <h3>Region:</h3>
                     <select name="region">

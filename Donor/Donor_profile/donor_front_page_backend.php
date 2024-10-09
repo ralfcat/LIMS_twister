@@ -17,13 +17,12 @@ if ($link->connect_error) {
 }
 
 
-$email = $_SESSION['email'];
+$donor_id_ses = $_SESSION['donor_id'];
 
 
-
-$sql = "SELECT * FROM Donor WHERE email = ?";
+$sql = "SELECT * FROM Donor WHERE donor_id = ?";
 $stmt = $link->prepare($sql);
-$stmt->bind_param('s', $email);
+$stmt->bind_param('i', $donor_id_ses);
 $stmt->execute();
 $result = $stmt->get_result();
 
