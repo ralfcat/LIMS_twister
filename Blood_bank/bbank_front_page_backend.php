@@ -67,9 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "<script>console.log( 'in the post request $btype and $units ');</script>";
     } else if ($to_do == "update_threshold") {
         echo "<script>console.log( 'you clicked the update the threshold button');</script>";
+        write_console("you are trying to update thresholds");
         foreach ($_POST as $key => $value) {
             if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B')) {
-                echo "<h2>console.log( '$key and the val is $value');</h2>";
+                echo "<script>console.log( '$key and the val is $value');</script>";
                 update_thresholds($key, $value);
             }
         }
@@ -163,6 +164,16 @@ function get_id()
     return $row["blood_bank_id"];
 }
 
+function get_rid()
+{
+    global $email;
+    global $link;
+    $email_req = "SELECT region_id from Blood_Bank WHERE email = '$email'";
+    $res = $link->query($email_req);
+    $row = $res->fetch_assoc();
+    return $row["region_id"];
+}
+
 function get_curr($btype, $id)
 {
     global $link;
@@ -185,10 +196,17 @@ function update_curr($btype, $new_level, $id)
 function update_thresholds($btype, $threshold)
 {
     global $link;
-    $id = get_id();
-    $update_req = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
+    // update the threshold
+    // UPDATE Blood_Stock SET threshold_level = 5 WHERE blood_type = 'A+' AND blood_bank_id IN (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = 1);
+
+    // show the threshold
+    // SELECT blood_type, threshold_level FROM Blood_Stock WHERE blood_bank_id IN( SELECT blood_bank_id FROM Blood_Bank WHERE region_id = 1) AND blood_type = 'A+';
+    
+    write_js("the bloodtype is $btype");
+    $rid = get_rid();
+    $update_req = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_type = ? AND blood_bank_id IN (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ?)";
     $stmt = $link->prepare($update_req);
-    $stmt->bind_param("iis", $threshold, $id, $btype);
+    $stmt->bind_param("isi", $threshold,  $btype, $rid);
     $result = $stmt->execute();
     echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
 }
