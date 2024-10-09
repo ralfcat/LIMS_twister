@@ -88,12 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_region = $_POST['regions'];
         write_console("the new name is $new_name");
         update_account_info($new_name, $new_email, $new_region);
-        // foreach ($_POST as $key => $value) {
-        //     write_console("key = $key and value = $value");
-        // }
-
-
-
     }
 }
 
@@ -143,18 +137,7 @@ function get_stock($email)
     while ($row = $res->fetch_assoc()) {
         $blood_level = new BloodStock($row["blood_type"], $row["stock_level"], $row["threshold_level"]);
         $blood_levels[] = $blood_level;
-
-
-        // $x = implode(" ",$row);
-        // $y = var_dump($row);
-        // echo "the email is $y <br>";
     }
-    // foreach ($blood_levels as $b) {
-    //     $y = var_dump($b);
-    //     echo " $y  in the for each <br>";
-
-
-    // }
     return $blood_levels;
 }
 
