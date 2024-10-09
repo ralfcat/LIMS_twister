@@ -203,6 +203,15 @@ function get_region_id($new_region) {
 
 }
 
+function get_regional_levels() {
+
+// SELECT * FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = 'bloodbank_2244@gmail.com'));
+
+global $link;
+$sql_req = "SELECT blood_type, SUM(stock_level), SUM(threshold_level) FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = 'bloodbank_2244@gmail.com')) GROUP BY blood_type";
+
+}
+
 function update_account_info($new_name, $new_email,$new_region){
     global $email;
     $link = open_db();
