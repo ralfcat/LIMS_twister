@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['donor_id'])) {
+    //if the user is not logged in send them to the donor_login
+    header("Location: /Donor/Donor_login/donor_log_in.php");
+    exit();
+}
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
