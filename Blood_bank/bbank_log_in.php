@@ -5,7 +5,7 @@ require_once 'bbank_front_page_backend.php';
 use function FrontEnd\write_js as write_js;
 use function FrontEnd\write_console as write_console;
 
-
+error_reporting(E_ERROR | E_PARSE);
 
 $servername = 'localhost';
 $username = 'root';
