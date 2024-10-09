@@ -305,7 +305,7 @@ nav .active {
 .add-donation-button:hover,
 .profile-changes-button:hover,
 .save-donation-button:hover,
-.add-donation-button-donor:hover 
+.add-donation-button-donor:hover, 
 .add-donation-button-bbank:hover {
     background-color: #a00635; 
     color: #141414;
@@ -317,7 +317,7 @@ nav .active {
 .add-donation-button:focus,
 .profile-changes-button:focus,
 .save-donation-button:focus,
-.add-donation-button-donor:focus 
+.add-donation-button-donor:focus, 
 .add-donation-button-bbank:focus {
     background-color: #b0627a; 
     color: #141414;
@@ -353,11 +353,13 @@ nav .active {
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
-    padding: 20px;
+    padding: 2px;
 }
 
 .Current_levels, .form-bbank {
+    display: grid;
     padding: 20px;
+    margin: 20px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -365,13 +367,10 @@ nav .active {
 
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
-    padding: 20px;
-    margin: 20px;
     display: flex;
     flex-direction: column;   
     align-items: center;    
     justify-content: center;  
-    padding: 1rem;          
 }
 
 .donation-form-bbank input[type="text"] {
@@ -408,6 +407,11 @@ nav .active {
     font-size: 16px; 
     border-radius: 20px; 
     border: 1px solid #ccc; 
+}
+
+.donation-form-bbank input[type="number"]::placeholder {
+    color: black; 
+    opacity: 1; 
 }
 
 .form-row {
@@ -459,6 +463,7 @@ nav .active {
     color: white;
     border: none;
     width: 10rem;
+    height: 2.5rem;
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
