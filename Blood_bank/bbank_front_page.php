@@ -12,16 +12,16 @@ use FrontEnd\BloodStock as BloodStock;
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $messages = [
-    'blood_info_unchanged' => 'Blood stock cannot be less than 0'
+    'blood_info_unchanged' => 'Blood stock cannot be less than 0',
+    'blood_stock_unchanged' => 'Blood stock cannot be less than 0'
 ];
 if (isset($messages[$_GET['msg']])) {
     $err_msg = htmlspecialchars($messages[$_GET['msg']]);
 
     $js =  "document.addEventListener('DOMContentLoaded', function() {
      let x = document.getElementById('notif-message');
-     x.innerHTML = ' $err_msg'; });" ;
-     write_js($js);
- 
+     x.innerHTML = ' $err_msg'; });";
+    write_js($js);
 }
 
 if (!isset($_SESSION['email'])) {
@@ -69,7 +69,7 @@ $regional_levels = get_regional_levels();
 
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
-                <p id = "notif-message"> </p>
+                <p id="notif-message"> </p>
                 <h2>Current Local Levels</h2> <!--Implement the graph based on inventory levels here-->
                 <h4>To be replaced with a graph</h4>
                 <table>
