@@ -185,8 +185,12 @@ nav .active {
     padding: 12px; 
     margin: 0; 
 }
+.logout-button > a {
+    text-decoration: none;
+    color: white;
+}
 
-.login_button {
+.login_button{
     display: block;
     padding: 10px 30px;
     background-color: #af093c;
@@ -213,6 +217,14 @@ nav .active {
 .new-user {
     margin-top: 10px;
     text-align: center; 
+}
+
+#log-errs {
+    font-size: 1rem ;
+    font-family: Nunito;
+    color: #af093c; 
+    display: inline; 
+    margin: 20px; 
 }
 
 .new-user p {

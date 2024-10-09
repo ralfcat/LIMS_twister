@@ -3,6 +3,7 @@
 require_once 'bbank_front_page_backend.php';
 
 use function FrontEnd\write_js as write_js;
+use function FrontEnd\write_console as write_console;
 
 
 
@@ -10,6 +11,7 @@ $servername = 'localhost';
 $username = 'root';
 $password = 'root';
 $dbname = 'twister';
+
 
 
 
@@ -41,22 +43,23 @@ if (mysqli_connect_error()) {
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
     <script>
             <?php
-    // $messages = [
-    //     'login-required' => 'You need to be logged in to see the requested page',
-    //     'logged-out' => 'Successfully logged out',
-    //     'wrong-password' => 'You have entered the wrong password'
-    // ];
+    $messages = [
+        'login-required' => 'You need to be logged in to see the requested page',
+        'logged-out' => 'Successfully logged out',
+        'wrong-password' => 'You have entered the wrong password'
+    ];
     // delete this
-    // if (isset($messages[$_GET['msg']])) {
+    if (isset($messages[$_GET['msg']])) {
+        echo "console.log( 'you are trying to access a page that cannot be accesse');";
 
-    //     $x = $messages[$_GET['msg']];
-    //     echo "document.addEventListener('DOMContentLoaded', function() {";
-    //     echo "console.log( 'there is a login error $x');";
-    //     echo "let x = document.getElementById('log-errs');";
-    //     echo 'x.innerHTML = "' . htmlspecialchars($errors[$_GET['msg']]) . '";';
-    //     echo "});";
+        // $x = $messages[$_GET['msg']];
+        echo "document.addEventListener('DOMContentLoaded', function() {";
+        // echo "console.log( 'there is a login error $x');";
+        echo "let x = document.getElementById('log-errs');";
+        echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msg']]) . '";';
+        echo "});";
      
-    // }
+    }
     ?>
         function validateForm() {
             document.getElementById('log-errs').innerHTML = "";

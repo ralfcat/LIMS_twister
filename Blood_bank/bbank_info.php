@@ -10,6 +10,12 @@ use function FrontEnd\write_console as write_console;
 error_reporting(E_ERROR | E_PARSE);
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
+if (!isset($_SESSION['email'])) { 
+    header('Location: bbank_log_in.php?msg=login-required');
+    exit;
+
+}
+
 $account_info = get_account_info();
 
 $regions = get_regions();
@@ -59,7 +65,7 @@ if (isset($messages[$_GET['msg']])) {
                 <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button class="logout-button"><a href = "bb_log_out.php">Log Out</a></button>
     </header>
 
     <main>

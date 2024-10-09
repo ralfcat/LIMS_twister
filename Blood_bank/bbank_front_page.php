@@ -17,6 +17,11 @@ if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 // }
 
 // $email = $_SESSION['email'];
+if (!isset($_SESSION['email'])) { 
+    header('Location: bbank_log_in.php?msg=login-required');
+    exit;
+
+}
 $current_levels = get_stock($email);
 $call_lev = 'get_threshold';
 
