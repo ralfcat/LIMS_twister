@@ -5,19 +5,25 @@ require_once 'bbank_front_page_backend.php';
 use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
 use function FrontEnd\get_regional_levels as get_regional_levels;
+use function FrontEnd\write_js as write_js;
 
 use FrontEnd\BloodStock as BloodStock;
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-// User is not logged in 
-// if (!isset($_SESSION['loggedin'])) {
-//     header('Location: bbank_log_in.php?msg=login-required');
-//     exit;
+$messages = [
+    'blood_info_unchanged' => 'Blood stock cannot be less than 0'
+];
+if (isset($messages[$_GET['msg']])) {
+    $err_msg = htmlspecialchars($messages[$_GET['msg']]);
 
-// }
+    $js =  "document.addEventListener('DOMContentLoaded', function() {
+     let x = document.getElementById('notif-message');
+     x.innerHTML = ' $err_msg'; });" ;
+     write_js($js);
+ 
+}
 
-// $email = $_SESSION['email'];
 if (!isset($_SESSION['email'])) {
     header('Location: bbank_log_in.php?msg=login-required');
     exit;
@@ -63,6 +69,7 @@ $regional_levels = get_regional_levels();
 
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
+                <p id = "notif-message"> </p>
                 <h2>Current Local Levels</h2> <!--Implement the graph based on inventory levels here-->
                 <h4>To be replaced with a graph</h4>
                 <table>
@@ -96,8 +103,9 @@ $regional_levels = get_regional_levels();
                     foreach ($regional_levels as $level) {
                         $type = $level['blood_type'];
                         $stock = $level['SUM(stock_level)'];
+                        $thres = $level['MAX(threshold_level)'];
 
-                        echo "<tr><td>$type</td><td>$stock</td></tr>";
+                        echo "<tr><td>$type</td><td>$stock</td><td>$thres</td></tr>";
                     }
 
                     ?>

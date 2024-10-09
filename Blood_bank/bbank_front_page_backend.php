@@ -2,7 +2,7 @@
 
 namespace FrontEnd;
 
-
+error_reporting(E_ERROR | E_PARSE);
 
 $servername = "localhost";
 $username = "root";
@@ -201,7 +201,7 @@ function update_thresholds($btype, $threshold)
 
     // show the threshold
     // SELECT blood_type, threshold_level FROM Blood_Stock WHERE blood_bank_id IN( SELECT blood_bank_id FROM Blood_Bank WHERE region_id = 1) AND blood_type = 'A+';
-    
+
     write_js("the bloodtype is $btype");
     $rid = get_rid();
     $update_req = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_type = ? AND blood_bank_id IN (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ?)";
@@ -228,10 +228,10 @@ function get_regional_levels()
 
     global $link;
     global $email;
-    $sql_req = "SELECT blood_type, SUM(stock_level) FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = '$email')) GROUP BY blood_type";
+    $sql_req = "SELECT blood_type, SUM(stock_level), MAX(threshold_level) FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = '$email')) GROUP BY blood_type";
     $res = $link->query($sql_req);
     $levels = array();
-    while($row = $res->fetch_assoc()) {
+    while ($row = $res->fetch_assoc()) {
         $levels[] = $row;
     }
     return $levels;
@@ -257,8 +257,14 @@ function update_levels($btype, $units)
     $curr_level = get_curr($btype, $bb_id);
     echo "<script>console.log( 'the blood bank id is $bb_id and the curr level is $curr_level');</script>";
     $new_level = (int) $curr_level + (int) $units;
-    update_curr($btype, $new_level, $bb_id);
-    header('Location: bbank_front_page.php?msg=info_changed');
+    if ($new_level < 0) {
+        header('Location: bbank_front_page.php?msg=blood_info_unchanged');
+    } else {
+        update_curr($btype, $new_level, $bb_id);
+        header('Location: bbank_front_page.php?msg=info_changed');
+    }
+
+    
 }
 
 function get_account_info()
