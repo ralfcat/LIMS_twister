@@ -130,7 +130,7 @@ $call_lev = 'get_threshold';
                 <input type="number" placeholder="Enter Units" name="units" required>
             </div>
         </div>
-        <button class="add-donation-button" type="submit" name="update" value="update">Update Levels</button>
+        <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
     </form>
 </section>
 

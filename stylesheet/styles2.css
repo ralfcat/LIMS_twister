@@ -305,7 +305,8 @@ nav .active {
 .add-donation-button:hover,
 .profile-changes-button:hover,
 .save-donation-button:hover,
-.add-donation-button-donor:hover {
+.add-donation-button-donor:hover 
+.add-donation-button-bbank:hover {
     background-color: #a00635; 
     color: #141414;
 }
@@ -316,7 +317,8 @@ nav .active {
 .add-donation-button:focus,
 .profile-changes-button:focus,
 .save-donation-button:focus,
-.add-donation-button-donor:focus {
+.add-donation-button-donor:focus 
+.add-donation-button-bbank:focus {
     background-color: #b0627a; 
     color: #141414;
 }
@@ -426,7 +428,7 @@ nav .active {
     margin-top: 10px;
 }
 
-.add-donation-button-donor {
+.add-donation-button-donor, .add-donation-button-bbank {
     display: block;
     padding: 10px 20px;
     background-color: #af093c;
