@@ -120,23 +120,23 @@ $regional_levels = get_regional_levels();
 
             <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
                 <input type="hidden" name="to_do" value="update_threshold" />
-                <input type='hidden' name='mid' value=''>
+                <!-- <input type='hidden' name='mid' value=''> -->
                 <h2>Notification Thresholds</h2>
                 <div class="input-group">
                     <label>O+<input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>
-                    <label>O- <input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
+                    <label>O-<input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
                 </div>
                 <div class="input-group">
                     <label>A+<input type="text" name="A+" value=<?php echo get_threshold($current_levels, "A+"); ?>></label>
-                    <label>A- <input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
+                    <label>A-<input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
                 </div>
                 <div class="input-group">
                     <label>B+<input type="text" name="B+" value=<?php echo get_threshold($current_levels, "B+"); ?>></label>
-                    <label>B- <input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
+                    <label>B-<input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
                 </div>
                 <div class="input-group">
-                    <label>AB+<input type="text" name="mname" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
-                    <label> AB-<input type="text" name="mname" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
+                    <label>AB+<input type="text" name="AB+" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
+                    <label>AB-<input type="text" name="AB-" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
                 </div>
                 <input class="save-donation-button" type="submit" value="SAVE">
             </form>

@@ -58,20 +58,25 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    write_console("a post request was made");
     $to_do = $_POST["to_do"];
     if ($to_do == "update_blood") {
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         update_levels($btype, $units);
-        echo "<script>console.log( 'in the post request $btype and $units ');</script>";
+        // echo "<script>console.log( 'in the post request $btype and $units ');</script>";
     } else if ($to_do == "update_threshold") {
-        echo "<script>console.log( 'you clicked the update the threshold button');</script>";
+        // echo "<script>console.log( 'you clicked the update the threshold button');</script>";
         write_console("you are trying to update thresholds");
         foreach ($_POST as $key => $value) {
-            if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B')) {
-                echo "<script>console.log( '$key and the val is $value');</script>";
-                update_thresholds($key, $value);
+            write_console("$key and the val is $value");
+            if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B')||   str_starts_with($key, 'AB')) {
+                if ($value < 0) {
+                    header('Location: bbank_front_page.php?msg=blood_stock_unchanged');
+                    exit;
+                }else{
+                write_js("$key and the val is $value");
+                update_thresholds($key, $value);}
             }
         }
         header('Location: bbank_front_page.php');
