@@ -17,13 +17,12 @@ if ($link->connect_error) {
 }
 
 
-$email = $_SESSION['email'];
+$donor_id_ses = $_SESSION['donor_id'];
 
 
-
-$sql = "SELECT * FROM Donor WHERE email = ?";
+$sql = "SELECT * FROM Donor WHERE donor_id = ?";
 $stmt = $link->prepare($sql);
-$stmt->bind_param('s', $email);
+$stmt->bind_param('i', $donor_id_ses);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -108,7 +107,7 @@ $link->close();
         <nav>
             <ul>
                 <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
-                <li><a href="../../donor_info.php">Profile</a></li>
+                <li><a href="/donor/donor_profile/donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>   
@@ -165,6 +164,35 @@ $link->close();
 
         <button class="add-donation-button-donor" type="submit">Add Donation</button>
     </form>
+</section>
+
+ <!--Unregister from list-->
+<section class="unsubscribe">
+    <h2>Do you want to temporarily unsubscribe from email-list?</h2>
+    <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
+    
+    <form action="/unsubscribe" method="POST"> <!--Backend must be implemented here-->
+        <div class="unsub-form-row">
+            <div class="unsub-form-group-donor">  
+                <label for="email">Enter your email address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="unsub-form-group-donor">  
+                <label for="end-date">End date of temporary unsubscription:</label>
+                <input type="date" id="end-date" name="end-date" required>
+            </div>
+        </div>
+        
+        <label class="unsub-confirmation"> 
+            <input type="checkbox" name="confirm" required>
+            <p>I confirm that I want to temporarily unsubscribe.</p>
+        </label>
+        
+        <button class="add-donation-button-donor" type="submit">Unsubscribe</button>
+    </form>
+</section>
+
 </section>
 </main>
 </body>

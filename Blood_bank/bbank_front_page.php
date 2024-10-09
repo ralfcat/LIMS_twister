@@ -58,6 +58,7 @@ $regional_levels = get_regional_levels();
         </div>
         <nav>
             <ul>
+                <li><a href="bbank_notification_log.php">Notification log</a></li>
                 <li class="active"><a href="bbank_front_page.php">Inventory</a></li>
                 <li><a href="bbank_info.php">Profile</a></li>
             </ul>
@@ -141,28 +142,30 @@ $regional_levels = get_regional_levels();
             </form>
         </div>
 
-        <section class="donation-form-bbank">
-            <form action="bbank_front_page_backend.php" method="post">
-                <input type="hidden" name="to_do" value="update_blood" />
+    <section class="donation-form-bbank">
+    <form method="POST" action="bbank_front_page_backend.php">
+        <input type="hidden" name="to_do" value="update_blood" />
+        <div class="form-row">
+            <div class="form-group-bbank">
                 <h3>Bloodtype</h3>
-                <select name="btypes">
-
+                <select name="btypes" required>
                     <?php
                     foreach ($current_levels as $level) {
-                        $type = $level->blood_type;
-                        $stock = $level->current_stock;
-                        $thres = $level->thres_level;
-                        echo "<option value = '$type'> $type </option>";
+                        $type = htmlspecialchars($level->blood_type);
+                        echo "<option value='$type'>$type</option>";
                     }
                     ?>
-
-                </select>
+                </select><br>
+            </div>
+            <div class="form-group-bbank">
                 <h3>Units</h3>
-                <input type="number" placeholder="Enter Units" name="units">
-                <!-- I changed Add Donation to Update Levels so that the blood bank can input negative values to remove blood from their stock  -->
-                <button class="add-donation-button" name="update" value="update">Update Levels</button>
-            </form>
-        </section>
+                <input type="number" placeholder="Enter Units" name="units" required>
+            </div>
+        </div>
+        <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
+    </form>
+</section>
+
     </main>
     <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
 

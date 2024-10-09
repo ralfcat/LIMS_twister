@@ -61,6 +61,7 @@ if (isset($messages[$_GET['msg']])) {
         </div>
         <nav>
             <ul>
+                <li><a href="bbank_notification_log.php">Notification log</a></li>
                 <li><a href="bbank_front_page.php">Inventory</a></li>
                 <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
