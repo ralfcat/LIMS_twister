@@ -137,8 +137,7 @@ $link->close();
         </div>
 
         <div class="upcoming-donations" >
-            <h2>Upcoming Donations</h2>
-            <p>You don't have any upcoming donations, book a new appointment <a href="#">here</a>.</p>
+            <h2>Upcoming Donations</h2> <!--Upcoming donations: BACKEND is needed-->
         </div>
     </section>
 
@@ -172,7 +171,7 @@ $link->close();
 <!--Upcoming donations form-->
 <section class="donation-form-bbank">
 
-<form method="POST" action="donor_front_page_backend.php">
+<form method="POST" action="donor_front_page_backend.php"> <!--We need to change backend here-->
 <div class="form-row">
 <div class="form-group-donor">    
     <h3>Date of upcoming donation</h3>        
