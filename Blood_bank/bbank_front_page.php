@@ -4,11 +4,24 @@ require_once 'bbank_front_page_backend.php';
 
 use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
+
 use FrontEnd\BloodStock as BloodStock;
 
 if(session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-$email = $_SESSION['email'];
+// User is not logged in 
+// if (!isset($_SESSION['loggedin'])) {
+//     header('Location: bbank_log_in.php?msg=login-required');
+//     exit;
+
+// }
+
+// $email = $_SESSION['email'];
+if (!isset($_SESSION['email'])) { 
+    header('Location: bbank_log_in.php?msg=login-required');
+    exit;
+
+}
 $current_levels = get_stock($email);
 $call_lev = 'get_threshold';
 
@@ -19,10 +32,10 @@ $call_lev = 'get_threshold';
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../BloodAlert_logo.png">
+    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Blood Bank front page</title>
-    <link rel="stylesheet" href="../stylesheet/reset.css">
-    <link rel="stylesheet" href="../stylesheet/styles2.css" />
+    <link rel="stylesheet" href="../../stylesheet/reset.css">
+    <link rel="stylesheet" href="../../stylesheet/styles2.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
     </script>
 </head>
@@ -38,10 +51,10 @@ $call_lev = 'get_threshold';
         <nav>
             <ul>
                 <li class="active"><a href="bbank_front_page.php">Inventory</a></li>
-                <li><a href="../../bbank_info.php">Profile</a></li>
+                <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button class="logout-button"> <a href = "bb_log_out.php">Log Out</a></button>
     </header>
     <main>
         <h1>Blood level inventory</h1>
@@ -74,7 +87,7 @@ $call_lev = 'get_threshold';
 
             <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
             <input type="hidden" name="to_do" value="update_threshold" />
-                <input type='hidden' name='mid' value=''>;
+                <input type='hidden' name='mid' value=''>
                 <h2>Notification Thresholds</h2>
                 <div class="input-group">
                     <label>O+<input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>

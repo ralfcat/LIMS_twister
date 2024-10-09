@@ -185,8 +185,12 @@ nav .active {
     padding: 12px; 
     margin: 0; 
 }
+.logout-button > a {
+    text-decoration: none;
+    color: white;
+}
 
-.login_button {
+.login_button{
     display: block;
     padding: 10px 30px;
     background-color: #af093c;
@@ -215,6 +219,14 @@ nav .active {
     text-align: center; 
 }
 
+#log-errs {
+    font-size: 1rem ;
+    font-family: Nunito;
+    color: #af093c; 
+    display: inline; 
+    margin: 20px; 
+}
+
 .new-user p {
     font-size: 1rem ;
     font-family: Nunito;
@@ -240,13 +252,14 @@ nav .active {
 .form-container {
     display: flex;           
     justify-content: space-between; 
+    align-items: stretch;
     padding: 2rem;
-    border-radius: 5px;       
-    margin: 20 0;
+    border-radius: 20px;       
+    margin: 20 ;
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 70rem; 
-    margin-left: 20px; 
+    margin-left: 90px; 
     margin-right: 20px; 
 }
 
@@ -258,6 +271,20 @@ nav .active {
 
 .form-column:last-child {
     margin-right: 0;                
+}
+
+.form-column select {
+    width: 250px; 
+    height: 50px; 
+    border-radius: 30px; 
+    border: 1px solid #ccc; 
+    background-color: #f1f1f1; 
+    color: #777777;
+    font-size: 14px;
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box; 
 }
 
 .profile-changes-button {
