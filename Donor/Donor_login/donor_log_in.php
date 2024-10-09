@@ -24,7 +24,7 @@ $error_activation = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $sql = "SELECT email, password, account_activation_hash FROM donor WHERE email = ?";
+    $sql = "SELECT donor_id, email, password, account_activation_hash FROM donor WHERE email = ?";
     //to prevent sql injections
     $stmt = $link->prepare($sql);
     $stmt -> bind_param('s', $email);
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = $row['password'];
             if (md5($password) == $hashed_password) {
                 //Password matches, log the user in and redirect
-                $_SESSION['email'] = $row['email'];
+                $_SESSION['donor_id'] = $row['donor_id'];
                 header("Location: /Donor/Donor_profile/donor_front_page_backend.php");
                 exit(); 
             } 
