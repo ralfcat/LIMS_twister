@@ -570,3 +570,9 @@ nav .active {
     margin: 0;             
     padding-left: 5px;      
 }
+
+.forms-for-donation {
+    display: flex;
+    justify-content: space-between; 
+    margin: 3rem;
+}

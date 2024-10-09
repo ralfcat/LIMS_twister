@@ -142,6 +142,8 @@ $link->close();
         </div>
     </section>
 
+<div class="forms-for-donation">
+<!--Previous donations form-->
     <section class="donation-form-bbank">
 
     <form method="POST" action="donor_front_page_backend.php">
@@ -166,6 +168,33 @@ $link->close();
         <button class="add-donation-button-donor" type="submit">Add Donation</button>
     </form>
 </section>
+
+<!--Upcoming donations form-->
+<section class="donation-form-bbank">
+
+<form method="POST" action="donor_front_page_backend.php">
+<div class="form-row">
+<div class="form-group-donor">    
+    <h3>Date of upcoming donation</h3>        
+    <input type="date" id="donation_date" name="donation_date" required><br>
+</div>
+<div class="form-group-donor">    
+        <h3>Choose Blood Center</h3>
+        <select id="blood_center" name="blood_center" required>
+            <option value="">Select a blood center</option>
+            <?php foreach ($blood_banks as $bank): ?>
+                <option value="<?php echo htmlspecialchars($bank['blood_bank_id']); ?>">
+                    <?php echo htmlspecialchars($bank['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br>
+</div>
+</div>
+
+    <button class="add-donation-button-donor" type="submit">Add Donation</button>
+</form>
+</section>
+</div> <!--End forms for donation-->
 
  <!--Unregister from list-->
 <section class="unsubscribe">
