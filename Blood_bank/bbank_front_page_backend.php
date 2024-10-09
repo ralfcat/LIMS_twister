@@ -80,13 +80,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $new_name = (string) $new_name;
         $new_email = $_POST['new-email'];
         $new_region = $_POST['regions'];
-        write_console( "the new name is $new_name");
+        write_console("the new name is $new_name");
         update_account_info($new_name, $new_email, $new_region);
         // foreach ($_POST as $key => $value) {
         //     write_console("key = $key and value = $value");
         // }
 
-        
+
 
     }
 }
@@ -193,37 +193,44 @@ function update_thresholds($btype, $threshold)
     echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
 }
 
-function get_region_id($new_region) {
+function get_region_id($new_region)
+{
     global $link;
 
     $sql_req = "SELECT rid FROM Region WHERE region = '$new_region'";
     $res = $link->query($sql_req);
     $row = $res->fetch_assoc();
     return $row["rid"];
-
 }
 
-function get_regional_levels() {
+function get_regional_levels()
+{
 
-// SELECT * FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = 'bloodbank_2244@gmail.com'));
+    // SELECT * FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = 'bloodbank_2244@gmail.com'));
 
-global $link;
-$sql_req = "SELECT blood_type, SUM(stock_level), SUM(threshold_level) FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = 'bloodbank_2244@gmail.com')) GROUP BY blood_type";
-
+    global $link;
+    global $email;
+    $sql_req = "SELECT blood_type, SUM(stock_level) FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = '$email')) GROUP BY blood_type";
+    $res = $link->query($sql_req);
+    $levels = array();
+    while($row = $res->fetch_assoc()) {
+        $levels[] = $row;
+    }
+    return $levels;
 }
 
-function update_account_info($new_name, $new_email,$new_region){
+function update_account_info($new_name, $new_email, $new_region)
+{
     global $email;
     $link = open_db();
     $rid = (int) get_region_id($new_region);
     $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ? WHERE email = ?";
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("ssss", $new_name, $new_email, $rid, $email);
- 
+
     $stmt->execute();
     write_console("I am trying to update account info");
     header('Location: bbank_info.php');
-
 }
 
 function update_levels($btype, $units)
@@ -250,15 +257,14 @@ function get_account_info()
     return $row;
 }
 
-function curr_region() {
+function curr_region()
+{
     global $link;
     global $email;
     $sql_req = "SELECT region FROM Region INNER JOIN Blood_Bank ON Region.rid = Blood_Bank.region_id WHERE Blood_Bank.email = '$email'";
     $res = $link->query($sql_req);
     $row = $res->fetch_assoc();
     return $row['region'];
-
-
 }
 
 
