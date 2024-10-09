@@ -212,6 +212,14 @@ nav .active {
     text-align: center; 
 }
 
+.success-message{
+    font-family: "Nunito", Helvetica, sans-serif;
+    color: #af093c; 
+    font-size: 0.9rem;
+    margin: 5px 0;
+    text-align: center; 
+}
+
 
 /* New user link styles */
 .new-user {
@@ -339,11 +347,17 @@ nav .active {
 
 .donation-history ul li {
     padding: 10px 0;
-    border-bottom: 1px solid #ddd;
 }
 
 .upcoming-donations p {
     text-align: center;
+}
+
+/*Upcoming donations form*/
+.forms-for-donation {
+    display: flex;
+    justify-content: space-between; 
+    margin: 1rem;
 }
 
 /*Bbank front page structure*/
@@ -359,6 +373,7 @@ nav .active {
 .Current_levels, .form-bbank {
     display: grid;
     padding: 20px;
+    padding-bottom: 0;
     margin: 20px;
     background-color: white;
     border-radius: 15px;
@@ -371,7 +386,7 @@ nav .active {
     flex-direction: column;   
     align-items: center;    
     justify-content: center;  
-    margin-bottom: 2rem;
+    margin: 0 auto;
 }
 
 .donation-form-bbank input[type="text"] {
@@ -385,7 +400,7 @@ nav .active {
 .donation-form-bbank input[type="date"] {
     border: 1px solid #ddd;
     background-color: white;
-    height: 50px;
+    height: 40px;
     width: 15rem;
     font-size: 16px;
     display: block;          
@@ -395,7 +410,7 @@ nav .active {
 .donation-form-bbank input[type="number"] {
     border: 1px solid #ddd;
     background-color: white;
-    height: 50px;
+    height: 40px;
     width: 15rem;
     font-size: 16px;
     display: block;          
@@ -404,7 +419,7 @@ nav .active {
 
 .donation-form-bbank select {
     width: 250px; 
-    height: 50px; 
+    height: 40px; 
     font-size: 16px; 
     border-radius: 20px; 
     border: 1px solid #ccc; 
@@ -453,7 +468,7 @@ nav .active {
     cursor: pointer;
     font-weight: bold;
     width: 8rem;
-    height: 3rem;
+    height: 2rem;
     margin: 10px auto; 
 
 }
@@ -464,7 +479,7 @@ nav .active {
     color: white;
     border: none;
     width: 10rem;
-    height: 2.5rem;
+    height: 2rem;
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
@@ -474,10 +489,11 @@ nav .active {
 }
 
 .bbank-container form .input-group {
+    max-height: 1rem;
     display: flex;
     justify-content: center;  
     align-items: center;       
-    gap: 3rem;                 
+    gap: 2rem;   
 }
 
 /*Notification log*/
@@ -570,3 +586,4 @@ nav .active {
     margin: 0;             
     padding-left: 5px;      
 }
+
