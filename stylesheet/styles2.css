@@ -107,6 +107,44 @@ nav .active {
     font-weight: bold;
 }
 
+/* Start page*/
+.main-container {
+    display: grid;
+    grid-template-columns: 3fr 5fr;
+    column-gap: 40px;
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-right: 100px;
+    background-color: #f5d5dd; 
+}
+
+.reg-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    background-color: white; /* White background */
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 70vh;
+}
+
+.quote {
+    font-family: "Nunito", Helvetica, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.055em;
+    color: #a00635;
+    font-size: 2rem;
+    margin: 1rem 0 1.2rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
 /* Login pages */
 .login-container {
     display: flex;
@@ -147,8 +185,12 @@ nav .active {
     padding: 12px; 
     margin: 0; 
 }
+.logout-button > a {
+    text-decoration: none;
+    color: white;
+}
 
-.login_button {
+.login_button{
     display: block;
     padding: 10px 30px;
     background-color: #af093c;
@@ -162,10 +204,27 @@ nav .active {
 }
 
 
+.error-message{
+    font-family: "Nunito", Helvetica, sans-serif;
+    color: #af093c; 
+    font-size: 0.9rem;
+    margin: 5px 0;
+    text-align: center; 
+}
+
+
 /* New user link styles */
 .new-user {
     margin-top: 10px;
     text-align: center; 
+}
+
+#log-errs {
+    font-size: 1rem ;
+    font-family: Nunito;
+    color: #af093c; 
+    display: inline; 
+    margin: 20px; 
 }
 
 .new-user p {
@@ -193,13 +252,14 @@ nav .active {
 .form-container {
     display: flex;           
     justify-content: space-between; 
+    align-items: stretch;
     padding: 2rem;
-    border-radius: 5px;       
-    margin: 20 0;
+    border-radius: 20px;       
+    margin: 20 ;
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 70rem; 
-    margin-left: 20px; 
+    margin-left: 90px; 
     margin-right: 20px; 
 }
 
@@ -211,6 +271,20 @@ nav .active {
 
 .form-column:last-child {
     margin-right: 0;                
+}
+
+.form-column select {
+    width: 250px; 
+    height: 50px; 
+    border-radius: 30px; 
+    border: 1px solid #ccc; 
+    background-color: #f1f1f1; 
+    color: #777777;
+    font-size: 14px;
+    width: calc(100% - 20px);
+    padding: 12px;
+    margin: 8px 0;
+    box-sizing: border-box; 
 }
 
 .profile-changes-button {
@@ -229,8 +303,24 @@ nav .active {
 .login_button:hover, 
 .save-donation-button:hover,
 .add-donation-button:hover,
-.profile-changes-button:hover {
+.profile-changes-button:hover,
+.save-donation-button:hover,
+.add-donation-button-donor:hover 
+.add-donation-button-bbank:hover {
     background-color: #a00635; 
+    color: #141414;
+}
+
+.logout-button:focus, 
+.login_button:focus, 
+.save-donation-button:focus,
+.add-donation-button:focus,
+.profile-changes-button:focus,
+.save-donation-button:focus,
+.add-donation-button-donor:focus 
+.add-donation-button-bbank:focus {
+    background-color: #b0627a; 
+    color: #141414;
 }
 
 /* My donation page styling*/
@@ -253,7 +343,6 @@ nav .active {
 }
 
 .upcoming-donations p {
-    margin-top: 6rem;
     text-align: center;
 }
 
@@ -277,6 +366,7 @@ nav .active {
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
     padding: 20px;
+    margin: 20px;
     display: flex;
     flex-direction: column;   
     align-items: center;    
@@ -284,13 +374,46 @@ nav .active {
     padding: 1rem;          
 }
 
-
 .donation-form-bbank input[type="text"] {
     border: 1px solid #ddd;
     background-color: white;
     max-width: 30rem;
     display: block;          
     margin: 0 auto;          
+}
+
+.donation-form-bbank input[type="date"] {
+    border: 1px solid #ddd;
+    background-color: white;
+    height: 50px;
+    width: 15rem;
+    font-size: 16px;
+    display: block;          
+    margin: 0 auto;  
+}
+
+.donation-form-bbank select {
+    width: 250px; 
+    height: 50px; 
+    font-size: 16px; 
+    border-radius: 20px; 
+    border: 1px solid #ccc; 
+}
+
+.form-row {
+    display: flex;
+    column-gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group-donor h3 {
+    text-align: center;
+}
+
+.form-group-donor {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .add-donation-button {
@@ -303,6 +426,21 @@ nav .active {
     cursor: pointer;
     font-weight: bold;
     margin-top: 10px;
+}
+
+.add-donation-button-donor, .add-donation-button-bbank {
+    display: block;
+    padding: 10px 20px;
+    background-color: #af093c;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 8rem;
+    height: 3rem;
+    margin: 10px auto; 
+
 }
 
 .save-donation-button {
@@ -324,4 +462,29 @@ nav .active {
     justify-content: center;  
     align-items: center;       
     gap: 3rem;                 
+}
+
+/*Notification log*/
+.notification-log {
+    margin: 0 auto;
+    width: 60%; 
+    background-color: white; 
+    border-collapse: collapse;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    border-radius: 10px; 
+    overflow: hidden; 
+}
+
+
+.notification-log th, .notification-log td {
+    padding: 15px; 
+    text-align: center; 
+    
+}
+
+.notification-log th {
+    background-color: #f2f2f2; 
+    font-weight: bold;
+    color:  #141414;
+    
 }
