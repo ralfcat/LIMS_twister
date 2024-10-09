@@ -58,7 +58,42 @@ $call_lev = 'get_threshold';
         <button class="logout-button"> <a href = "bb_log_out.php">Log Out</a></button>
     </header>
     <main>
-        <h1>Notification Log</h1>
+    <body>
+
+<h2>Notification History</h2>
+
+    <table class="notification-log"> <!--Obs: backend is needed here--->
+        <tr>
+            <th>Date</th>
+            <th>Number of People Notified</th>
+        </tr>
+        <tr>
+            <td>2024-10-01</td>
+            <td>150</td>
+        </tr>
+        <tr>
+            <td>2024-09-28</td>
+            <td>230</td>
+        </tr>
+        <tr>
+            <td>2024-09-25</td>
+            <td>180</td>
+        </tr>
+        <tr>
+            <td>2024-09-22</td>
+            <td>210</td>
+        </tr>
+        <tr>
+            <td>2024-09-20</td>
+            <td>170</td>
+        </tr>
+        <tr>
+            <td>2024-09-15</td>
+            <td>190</td>
+        </tr>
+    </table>
+
+    </body>
 
     </main>
     <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
