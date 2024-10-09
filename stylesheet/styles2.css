@@ -305,7 +305,7 @@ nav .active {
 .add-donation-button:hover,
 .profile-changes-button:hover,
 .save-donation-button:hover,
-.add-donation-button-donor:hover 
+.add-donation-button-donor:hover, 
 .add-donation-button-bbank:hover {
     background-color: #a00635; 
     color: #141414;
@@ -317,7 +317,7 @@ nav .active {
 .add-donation-button:focus,
 .profile-changes-button:focus,
 .save-donation-button:focus,
-.add-donation-button-donor:focus 
+.add-donation-button-donor:focus, 
 .add-donation-button-bbank:focus {
     background-color: #b0627a; 
     color: #141414;
@@ -353,11 +353,13 @@ nav .active {
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
     column-gap: 20px;
-    padding: 20px;
+    padding: 2px;
 }
 
 .Current_levels, .form-bbank {
+    display: grid;
     padding: 20px;
+    margin: 20px;
     background-color: white;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -365,13 +367,11 @@ nav .active {
 
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
-    padding: 20px;
-    margin: 20px;
     display: flex;
     flex-direction: column;   
     align-items: center;    
     justify-content: center;  
-    padding: 1rem;          
+    margin-bottom: 2rem;
 }
 
 .donation-form-bbank input[type="text"] {
@@ -408,6 +408,11 @@ nav .active {
     font-size: 16px; 
     border-radius: 20px; 
     border: 1px solid #ccc; 
+}
+
+.donation-form-bbank input[type="number"]::placeholder {
+    color: black; 
+    opacity: 1; 
 }
 
 .form-row {
@@ -459,6 +464,7 @@ nav .active {
     color: white;
     border: none;
     width: 10rem;
+    height: 2.5rem;
     border-radius: 30px;
     cursor: pointer;
     font-weight: bold;
@@ -497,4 +503,70 @@ nav .active {
     font-weight: bold;
     color:  #141414;
     
+}
+
+/*Unsubscribe*/
+.unsubscribe {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 2rem; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.unsubscribe h2 {
+    text-align: center;
+}
+
+.unsubscribe p {
+    max-width: 500px; 
+    font-size: 0.8rem;
+    text-align: center;
+    color: #676666;
+    margin-bottom: 1rem;
+}
+
+.unsubscribe form {
+    max-width: 300px; 
+    width: 100%; 
+    padding: 1rem; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    background-color: #fff; 
+}
+
+.unsubscribe input[type="email"],
+.unsubscribe input[type="date"] {
+    width: 100%; 
+    padding: 0.5rem; 
+    border: 1px solid #ccc; 
+}
+
+.unsub-confirmation {
+    display: flex; 
+    align-items: center; 
+    margin-top: 1em; 
+}
+
+.unsub-confirmation p {
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.unsub-confirmation {
+    display: flex; 
+    align-items: center; 
+}
+
+.unsub-confirmation input[type="checkbox"] {
+    margin: 0;              
+    width: auto;            
+    height: auto;           
+}
+
+.unsub-confirmation p {
+    font-size: 0.8rem;      
+    margin: 0;             
+    padding-left: 5px;      
 }
