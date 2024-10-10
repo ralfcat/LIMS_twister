@@ -44,7 +44,7 @@ function check_level_against_threshold(array $blood_levels, $rid) {
         $type = $level ->blood_type;
 
         if ($curr_stock < $thresh) {
-            send_notification($type, $rid);
+            get_mail_list($type, $rid);
 
         }
 
@@ -52,7 +52,7 @@ function check_level_against_threshold(array $blood_levels, $rid) {
 
 }
 
-function send_notification($btype, $rid) {
+function get_mail_list($btype, $rid) {
     $sql_req = "SELECT name, email, address, is_eligible, blood_type from Donor where address IN (SELECT region from Region WHERE rid = $rid) AND is_eligible = 1 AND blood_type = '$btype'";
 
 }
