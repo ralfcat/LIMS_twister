@@ -1,5 +1,10 @@
 <?php 
 
+
+namespace EmailNotif;
+require_once 'Blood_bank/bbank_front_page_backend.php';
+
+use FrontEnd\BloodStock as BloodStock;
 /*
 
 1. Connect to database
@@ -13,7 +18,6 @@ $dbname = "twister";
 
 $user_query = "SELECT * FROM Donor WHERE address = 'Stockholm'";
 
-echo "Hello <br>";
 $link = mysqli_connect($servername, $username, $password, $dbname);
 
 // Check if connection is established
@@ -33,4 +37,23 @@ while ($row = $user_request->fetch_assoc()) {
 mysqli_close($link);
 
 
+function check_level_against_threshold(array $blood_levels, $rid) {
+        foreach($blood_levels as $level) {
+        $curr_stock = $level->current_stock;
+        $thresh = $level ->thres_level;
+        $type = $level ->blood_type;
+
+        if ($curr_stock < $thresh) {
+            send_notification($type, $rid);
+
+        }
+
+    }
+
+}
+
+function send_notification($btype, $rid) {
+    $sql_req = "SELECT name, email, address, is_eligible, blood_type from Donor where address IN (SELECT region from Region WHERE rid = $rid) AND is_eligible = 1 AND blood_type = '$btype'";
+
+}
 

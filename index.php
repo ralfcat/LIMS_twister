@@ -28,6 +28,7 @@
         <div class="reg-form-container">
         <h2>Create New Account</h2>
         <form name="create_account" action="/Donor/Donor_reg/create_account.php" method="POST">
+        <input type="hidden" name="to_do" value="create_new" />
             <div class="input-group">
                 <input type="text" id="fname" name="fname" placeholder="First Name" />
             </div>
@@ -53,7 +54,7 @@
             </div>
 
             <div class="graph">
-                <select id="region-select" onchange="updateGraph()" style=new>
+                <select id="region-select" onchange="updateGraph();" style=new>
                 <option value="">Select a region</option>
                 </select>
                 <canvas id="bloodStockChart" width="500" height="300"></canvas>
@@ -65,5 +66,3 @@
     <script src="graph/graph_functions.js"></script>
 </body>
 </html>
-
-
