@@ -107,6 +107,34 @@ nav .active {
     font-weight: bold;
 }
 
+footer {
+    background-color: #ccc; /* Dark background */
+    color: #af093c;           /* White text */
+    padding: 20px;          /* Space inside the footer */
+    text-align: center;     /* Center text and links */
+    position: relative;
+    bottom: 0;
+    width: 100%;            /* Ensures the footer spans the entire width of the page */
+  }
+  
+  footer a {
+    color: #ffa500;         /* Link color (e.g., orange) */
+    text-decoration: none;  /* No underline */
+    margin: 0 10px;         /* Adds space between the links */
+  }
+  
+  footer a:hover {
+    text-decoration: underline; /* Underline links on hover */
+  }
+  
+  footer p {
+    margin: 0;              /* Remove default paragraph margin */
+    font-size: 14px;
+  }
+  
+  footer nav {
+    margin-top: 10px;       /* Adds space between the text and links */
+  }
 
 /* Start page*/
 .main-container {
