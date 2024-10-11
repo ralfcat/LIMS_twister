@@ -8,6 +8,11 @@ html {
     font-size: 105%;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+  }
+
 h1, h2, h3, h4 {
     font-family: "Nunito", Helvetica, sans-serif;
     font-weight: 800;
@@ -36,6 +41,8 @@ h3 {
 
 body {
     background-color: #f5d5dd;
+    display: flex;
+    flex-direction: column;
 }
 
 input {
@@ -108,17 +115,18 @@ nav .active {
 }
 
 footer {
-    background-color: #ccc; /* Dark background */
-    color: #af093c;           /* White text */
+    background-color: white; /* Background */
+    color: #af093c;           /* Text */
     padding: 20px;          /* Space inside the footer */
     text-align: center;     /* Center text and links */
     position: relative;
     bottom: 0;
     width: 100%;            /* Ensures the footer spans the entire width of the page */
+    margin-top: auto;
   }
   
   footer a {
-    color: #ffa500;         /* Link color (e.g., orange) */
+    color: #af093c;         /* Link color (e.g., orange) */
     text-decoration: none;  /* No underline */
     margin: 0 10px;         /* Adds space between the links */
   }
