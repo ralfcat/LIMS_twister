@@ -12,6 +12,12 @@ function loadRegions() {
                 option.textContent = region.region; 
                 regionSelect.appendChild(option);
             });
+
+            // Set default to Stockholm (ID 12)
+            regionSelect.value = '12'; // Make sure to set it as a string if the value in options is a string
+
+            // Call updateGraph to load the data for the default region
+            updateGraph();
         })
         .catch(error => {
             console.error('Error loading regions:', error);  
@@ -45,8 +51,9 @@ function updateGraph() {
                     labels: bloodTypes,
                     datasets: [{
                         data: stockLevels.map((level, i) => level / thresholds[i]),
-                        backgroundColor: 'rgba(175, 9, 60, 1)',
-                        borderColor: 'rgba(175, 9, 60, 1)',
+                        backgroundColor: 'rgba(175, 9, 60)',
+                        borderColor: 'rgba(175, 9, 60)',
+                        hoverBackgroundColor: 'rgba(160, 6, 53)',
                         borderWidth: 1,
                         borderRadius: 20,
                         borderSkipped: false
