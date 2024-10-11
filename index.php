@@ -55,8 +55,8 @@
 
             <div class="graph">
                 <canvas id="bloodStockChart" width="500" height="300"></canvas>
-                <select id="region-select" onchange="updateGraph();" style="margin-top: 20px;">
-                    <option value="">Select a region</option>
+                <select id="region-select" onclick="updateGraph();" style="margin-top: 20px;">
+                    <option >Stockholm</option>
                 </select>
             </div>
         </div>
