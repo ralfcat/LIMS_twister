@@ -135,8 +135,8 @@ if (isset($messages[$_GET['msg']])) {
   <p>&copy; 2024 My Website</p>
   <nav>
     <a href="#about">About Us</a> |
-    <a href="#services">Services</a> |
-    <a href="#contact">Contact</a>
+    <a href="#integricity_policy">Integricity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>
 </html>
