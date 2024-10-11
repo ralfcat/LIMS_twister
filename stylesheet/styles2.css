@@ -144,10 +144,6 @@ footer {
     margin-top: 10px;       /* Adds space between the text and links */
   }
 
-  .extra-space {
-    height: 200px; /* Adjust height to add more space */
-  }
-
 /* Start page*/
 .main-container {
     display: grid;
@@ -339,6 +335,7 @@ footer {
     max-width: 70rem; 
     margin-left: 90px; 
     margin-right: 20px; 
+    margin-bottom: 2rem;
 }
 
 .form-column {
