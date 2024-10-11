@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
+    <title>Donor Login</title>
+    <link rel="stylesheet" href="../../stylesheet/reset.css" />
+    <link rel="stylesheet" href="../../stylesheet/styles2.css" />
+    <script>
+        function validateForm() {
+            let email = document.forms["loginform"]["email"].value;
+            let password = document.forms["loginform"]["password"].value;
+            
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+            document.getElementById("error-message").innerHTML = "";
+            document.getElementById("error-message2").innerHTML = "";
+            if (email == "") {
+                document.getElementById("error-message").innerHTML = "Email must be filled out";
+                document.getElementById("error-message").classList.add("error-message");
+                return false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("error-message").innerHTML = "Please enter a valid email address";
+                document.getElementById("error-message").classList.add("error-message");
+                return false;
+            }
+            if (password == "") {
+                document.getElementById("error-message2").innerHTML = "Password must be filled out";
+                document.getElementById("error-message").classList.add("error-message");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.php">Front Page</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>About Us</h1>
+    <section class="donation-form">
+        <div class="form-container">
+            Info about us
+        </div>
+    </section>
+</body>
+
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="about_us.html">About Us</a> |
+    <a href="integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
+</html>
