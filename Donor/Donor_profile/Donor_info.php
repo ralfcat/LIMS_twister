@@ -220,6 +220,7 @@ $stmt->close();
 </main>
 </body>
 
+<div class="extra-space"></div>
 <footer>
   <p>&copy; 2024 Blood Alert</p>
   <nav>
