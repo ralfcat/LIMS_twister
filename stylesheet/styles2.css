@@ -115,8 +115,8 @@ nav .active {
 }
 
 footer {
-    background-color: #ccc; /* Dark background */
-    color: #af093c;           /* White text */
+    background-color: white; /* Background */
+    color: #af093c;           /* Text */
     padding: 20px;          /* Space inside the footer */
     text-align: center;     /* Center text and links */
     position: relative;
