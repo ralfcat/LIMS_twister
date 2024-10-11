@@ -45,6 +45,8 @@ function check_level_against_threshold(array $blood_levels, $rid) {
 
         if ($curr_stock < $thresh) {
             get_mail_list($type, $rid);
+            // send_email();
+            // populate_notif_db();
 
         }
 
@@ -52,8 +54,19 @@ function check_level_against_threshold(array $blood_levels, $rid) {
 
 }
 
+// Get the list of people that will be sent an email as an array, and the number of people that will be sent an email
 function get_mail_list($btype, $rid) {
     $sql_req = "SELECT name, email, address, is_eligible, blood_type from Donor where address IN (SELECT region from Region WHERE rid = $rid) AND is_eligible = 1 AND blood_type = '$btype'";
+
+}
+
+function populate_notif_db($rid) {
+    // get the current date and time
+    $current_date = date('Y-m-d H:i:s');
+
+    // create the message for the log
+
+    $sql_req = "INSERT INTO Notification (notification_date, rid, )";
 
 }
 
