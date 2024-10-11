@@ -68,7 +68,7 @@
   <p>&copy; 2024 Blood Alert</p>
   <nav>
     <a href="#about">About Us</a> |
-    <a href="#integricity_policy">Integricity Policy</a> |
+    <a href="#integrity_policy">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>

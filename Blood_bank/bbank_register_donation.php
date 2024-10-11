@@ -21,8 +21,8 @@
             <ul>
                 <li class="active"><a href="bbank_register_donation.php">Register Donation</a></li>
                 <li><a href="bbank_notification_log.php">Notification log</a></li>
-                <li><a href="Blood_bank/bbank_front_page.php">Inventory</a></li>
-                <li><a href="Blood_bank/bbank_info.php">Profile</a></li>
+                <li><a href="bbank_front_page.php">Inventory</a></li>
+                <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button">Log Out</button>
