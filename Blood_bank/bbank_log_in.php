@@ -123,6 +123,14 @@ if (mysqli_connect_error()) {
     </div>
 </body>
 
+<footer>
+  <p>&copy; 2024 My Website</p>
+  <nav>
+    <a href="#about">About Us</a> |
+    <a href="#integricity_policy">Integricity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>
 
 <?php
