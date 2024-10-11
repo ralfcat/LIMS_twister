@@ -172,7 +172,7 @@ $regional_levels = get_regional_levels();
 </body>
 
 <footer>
-  <p>&copy; 2024 My Website</p>
+  <p>&copy; 2024 Blood Alert</p>
   <nav>
     <a href="#about">About Us</a> |
     <a href="#integricity_policy">Integricity Policy</a> |
