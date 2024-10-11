@@ -107,6 +107,16 @@ nav .active {
     font-weight: bold;
 }
 
+/* Footer */
+footer {
+    background-color: #fff; /* Dark background */
+    color: #af093c;           /* White text */
+    padding: 20px;          /* Space inside the footer */
+    text-align: center;     /* Center text and links */
+    position: relative;
+    bottom: 0;
+    width: 100%;            /* Ensures the footer spans the entire width of the page */
+  }
 
 /* Start page*/
 .main-container {
