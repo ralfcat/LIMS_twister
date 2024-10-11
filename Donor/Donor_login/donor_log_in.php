@@ -144,8 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <footer>
   <p>&copy; 2024 Blood Alert</p>
   <nav>
-    <a href="#about_us.html">About Us</a> |
-    <a href="integrity_policy.html">Integrity Policy</a> |
+    <a href="../../about_us.html">About Us</a> |
+    <a href="../../integrity_policy.html">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>
