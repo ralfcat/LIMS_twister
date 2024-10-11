@@ -24,6 +24,8 @@ $error_activation = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    // salted password 
+    $password = $password . $email;
     $sql = "SELECT donor_id, email, password, account_activation_hash FROM donor WHERE email = ?";
     //to prevent sql injections
     $stmt = $link->prepare($sql);

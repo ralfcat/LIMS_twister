@@ -60,6 +60,19 @@ $reg_req = "SELECT region FROM Region";
 $reg_res = $link->query($reg_req);
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
+    <title>Blood Bank front page</title>
+    <!-- <link rel="stylesheet" href="../../stylesheet/reset.css"> -->
+    <!-- <link rel="stylesheet" href="../../stylesheet/styles2.css" /> -->
+    </script>
+</head>
+
 <body>
 
     <h1>Donor Register Page</h1>
@@ -165,8 +178,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $activation_token_hash = hash("md5", $activation_token);
 
     $password = $_POST["password"];
+    $password_salt = $password . $email;
 
-    $hashed_password = hash('md5', $password);
+    $hashed_password = hash('md5', $password_salt);
 
 
     $btype = $_POST["btype"];
@@ -314,12 +328,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     function last_donated_date() {
         var donated = document.getElementById("donateds").value;
-        if (donated === "No") {
-            document.getElementById("dn").innerHTML = ''
-            document.getElementById("donate-date").type = 'hidden'
-        } else {
+        if (donated === "Yes") {
+            
             document.getElementById("dn").innerHTML = 'When did you last donate?'
             document.getElementById("donate-date").type = 'date'
+        } else {
+            document.getElementById("dn").innerHTML = ''
+            document.getElementById("donate-date").type = 'hidden'
+            
         }
     }
 

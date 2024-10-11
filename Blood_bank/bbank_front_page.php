@@ -5,19 +5,25 @@ require_once 'bbank_front_page_backend.php';
 use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
 use function FrontEnd\get_regional_levels as get_regional_levels;
+use function FrontEnd\write_js as write_js;
 
 use FrontEnd\BloodStock as BloodStock;
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-// User is not logged in 
-// if (!isset($_SESSION['loggedin'])) {
-//     header('Location: bbank_log_in.php?msg=login-required');
-//     exit;
+$messages = [
+    'blood_info_unchanged' => 'Blood stock cannot be less than 0',
+    'blood_stock_unchanged' => 'Blood stock cannot be less than 0'
+];
+if (isset($messages[$_GET['msg']])) {
+    $err_msg = htmlspecialchars($messages[$_GET['msg']]);
 
-// }
+    $js =  "document.addEventListener('DOMContentLoaded', function() {
+     let x = document.getElementById('notif-message');
+     x.innerHTML = ' $err_msg'; });";
+    write_js($js);
+}
 
-// $email = $_SESSION['email'];
 if (!isset($_SESSION['email'])) {
     header('Location: bbank_log_in.php?msg=login-required');
     exit;
@@ -64,6 +70,7 @@ $regional_levels = get_regional_levels();
 
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
+                <p id="notif-message"> </p>
                 <h2>Current Local Levels</h2> <!--Implement the graph based on inventory levels here-->
                 <h4>To be replaced with a graph</h4>
                 <table>
@@ -97,8 +104,9 @@ $regional_levels = get_regional_levels();
                     foreach ($regional_levels as $level) {
                         $type = $level['blood_type'];
                         $stock = $level['SUM(stock_level)'];
+                        $thres = $level['MAX(threshold_level)'];
 
-                        echo "<tr><td>$type</td><td>$stock</td></tr>";
+                        echo "<tr><td>$type</td><td>$stock</td><td>$thres</td></tr>";
                     }
 
                     ?>
@@ -112,23 +120,23 @@ $regional_levels = get_regional_levels();
 
             <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
                 <input type="hidden" name="to_do" value="update_threshold" />
-                <input type='hidden' name='mid' value=''>
+                <!-- <input type='hidden' name='mid' value=''> -->
                 <h2>Notification Thresholds</h2>
                 <div class="input-group">
                     <label>O+<input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>
-                    <label>O- <input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
+                    <label>O-<input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
                 </div>
                 <div class="input-group">
                     <label>A+<input type="text" name="A+" value=<?php echo get_threshold($current_levels, "A+"); ?>></label>
-                    <label>A- <input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
+                    <label>A-<input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
                 </div>
                 <div class="input-group">
                     <label>B+<input type="text" name="B+" value=<?php echo get_threshold($current_levels, "B+"); ?>></label>
-                    <label>B- <input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
+                    <label>B-<input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
                 </div>
                 <div class="input-group">
-                    <label>AB+<input type="text" name="mname" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
-                    <label> AB-<input type="text" name="mname" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
+                    <label>AB+<input type="text" name="AB+" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
+                    <label>AB-<input type="text" name="AB-" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
                 </div>
                 <input class="save-donation-button" type="submit" value="SAVE">
             </form>
