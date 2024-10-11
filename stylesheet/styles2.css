@@ -115,10 +115,11 @@ footer {
     position: relative;
     bottom: 0;
     width: 100%;            /* Ensures the footer spans the entire width of the page */
+    margin-top: auto;
   }
   
   footer a {
-    color: #ffa500;         /* Link color (e.g., orange) */
+    color: #af093c;         /* Link color (e.g., orange) */
     text-decoration: none;  /* No underline */
     margin: 0 10px;         /* Adds space between the links */
   }
