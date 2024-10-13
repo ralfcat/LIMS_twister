@@ -61,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $blood_type = $_POST['blood_type'];
     $sex = $_POST['sex'];
     $region = $_POST['region'];
+    $password_salt = $password . $email;
 
     if (empty($password)) {
         $sql = "UPDATE Donor SET name = ?, email = ?, blood_type = ?, sex = ?, address = ? WHERE donor_id = ?";
@@ -75,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else if (!preg_match('/[\'^£$%&*()}{@#~?!><>,|=_+¬-]/', $password)) {
                 $error_password = "Password should contain a special symbol";
             } else {
-                $hashed_password = md5($password);
+                $hashed_password = hash('md5',$password_salt);
                 $sql = "UPDATE Donor SET name = ?, email = ?, password = ?, blood_type = ?, sex = ?, address = ? WHERE donor_id = ?";
                 $stmt = $link->prepare($sql);
                 $stmt->bind_param('ssssssi', $name, $email, $hashed_password, $blood_type, $sex, $region, $donor_id);
@@ -122,7 +123,8 @@ $stmt->close();
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="/Logo-and-text.png" alt="Logo">
+            <a href="/index.php">
+                <img class="logo" src="/Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
@@ -217,4 +219,13 @@ $stmt->close();
     </section>
 </main>
 </body>
+
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../../about_us.html">About Us</a> |
+    <a href="../../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>

@@ -76,7 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 }else{
                 write_js("$key and the val is $value");
-                update_thresholds($key, $value);}
+                update_thresholds($key, $value);
+                // get the current threshold, and level for each blood type 
+                $curr_levels_array = get_stock($email);
+            }
             }
         }
         header('Location: bbank_front_page.php');

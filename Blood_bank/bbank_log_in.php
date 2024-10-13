@@ -116,13 +116,21 @@ if (mysqli_connect_error()) {
                 <button class="login_button">Log in</button>
             </form>
             <div class="new-user">
-                <p>Want to register? <a href="/blood-bank-register.php">Contact us</a></p> <br>
+                <p>Want to register? <a href="mailto:bloodalert.twister@gmail.com?subject=Request of blood bank account">Contact us</a></p> <br>
                 <p id="error-message"></p>
             </div>
         </div>
     </div>
 </body>
 
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../about_us.html">About Us</a> |
+    <a href="../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>
 
 <?php

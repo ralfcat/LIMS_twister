@@ -18,6 +18,7 @@
         </div>
         <nav>
             <ul>
+                <li><a href="bbank_register_donation.php">Register Donation</a></li>
                 <li class="active"><a href="bbank_notification_log.php">Notification log</a></li>
                 <li><a href="bbank_front_page.php">Inventory</a></li>
                 <li><a href="bbank_info.php">Profile</a></li>
@@ -62,4 +63,14 @@
     </main> 
     
 </body>
+
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../about_us.html">About Us</a> |
+    <a href="../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
+
 </html>
