@@ -116,6 +116,29 @@ $regional_levels = get_regional_levels();
 
                 <canvas id="myCanvas" width="500" height="400"></canvas> <!--Beginning of graph, we need to implement backend here-->
 
+                <section class="donation-form-bbank">
+    <form method="POST" action="bbank_front_page_backend.php">
+        <input type="hidden" name="to_do" value="update_blood" />
+        <div class="form-row">
+            <div class="form-group-bbank">
+                <h3>Bloodtype</h3>
+                <select name="btypes" required>
+                    <?php
+                    foreach ($current_levels as $level) {
+                        $type = htmlspecialchars($level->blood_type);
+                        echo "<option value='$type'>$type</option>";
+                    }
+                    ?>
+                </select><br>
+            </div>
+            <div class="form-group-bbank">
+                <h3>Units</h3>
+                <input type="number" placeholder="Enter Units" name="units" required>
+            </div>
+        </div>
+        <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
+        </form>
+        </section>
             </div>
 
             <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
@@ -142,29 +165,7 @@ $regional_levels = get_regional_levels();
             </form>
         </div>
 
-    <section class="donation-form-bbank">
-    <form method="POST" action="bbank_front_page_backend.php">
-        <input type="hidden" name="to_do" value="update_blood" />
-        <div class="form-row">
-            <div class="form-group-bbank">
-                <h3>Bloodtype</h3>
-                <select name="btypes" required>
-                    <?php
-                    foreach ($current_levels as $level) {
-                        $type = htmlspecialchars($level->blood_type);
-                        echo "<option value='$type'>$type</option>";
-                    }
-                    ?>
-                </select><br>
-            </div>
-            <div class="form-group-bbank">
-                <h3>Units</h3>
-                <input type="number" placeholder="Enter Units" name="units" required>
-            </div>
-        </div>
-        <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
-    </form>
-</section>
+
 
     </main>
     <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
