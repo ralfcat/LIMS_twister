@@ -49,14 +49,15 @@
         <div class="second-column">
             <div class="quote">
             <p>
-                <strong>Your blood can save lives.</strong> Register now, and we'll help you make a difference when it's needed most.
+                <strong style="font-weight: 800;">Your blood can save lives.</strong> Register now, and we'll help you make a difference when it's needed most.
             </p>
             </div>
 
             <div class="graph">
                 <canvas id="bloodStockChart" width="500" height="300"></canvas>
+            
                 <select id="region-select" onclick="updateGraph();" style="margin-top: 20px;">
-                    <option >Stockholm</option>
+                <option value="" disabled selected>Change Region</option>
                 </select>
             </div>
         </div>

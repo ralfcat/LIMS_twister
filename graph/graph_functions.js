@@ -1,7 +1,5 @@
-// Fetch and load regions into the dropdown
 function loadRegions() {
-    console.log('Fetching regions...'); 
-
+    console.log('Fetching regions...');
     fetch('/graph/get_regions.php')
         .then(response => response.json())
         .then(data => {
@@ -12,21 +10,19 @@ function loadRegions() {
                 option.textContent = region.region; 
                 regionSelect.appendChild(option);
             });
-
-            // Set default to Stockholm (ID 12)
-            regionSelect.value = '12'; // Make sure to set it as a string if the value in options is a string
-
-            // Call updateGraph to load the data for the default region
+            regionSelect.value = '12'; 
             updateGraph();
+            regionSelect.addEventListener('change', updateGraph);
         })
         .catch(error => {
             console.error('Error loading regions:', error);  
         });
 }
 
-// Fetch blood stock data for the selected region and update the chart
 function updateGraph() {
-    const regionId = document.getElementById('region-select').value;
+    const regionSelect = document.getElementById('region-select');
+    const regionId = regionSelect.value;
+    const regionName = regionSelect.options[regionSelect.selectedIndex].text; 
 
     if (!regionId) return;  
 
@@ -43,8 +39,9 @@ function updateGraph() {
             const thresholds = data.thresholds;
 
             const ctx = document.getElementById('bloodStockChart').getContext('2d');
-            ctx.font = "30px Nunito";
-
+            if (Chart.getChart("bloodStockChart")) {
+                Chart.getChart("bloodStockChart")?.destroy();
+            }
             window.bloodStockChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -63,15 +60,52 @@ function updateGraph() {
                     responsive: false,  
                     maintainAspectRatio: false,
                     scales: {
-                        y: {beginAtZero: true,
-                            ticks: {display: false},
-                            grid: {display: false}},
+                        y: {
+                            beginAtZero: true,
+                            ticks: { display: false },
+                            grid: { display: false }
+                        },
                         x: {
-                            font: {size: 18,
-                                   Color: 'white'},
-                            grid: {display: false}}},
+                            ticks: {
+                                font: {
+                                    size: 18,
+                                    family: 'Nunito',
+                                    weight: 'bold'    
+                                },
+                                color: 'black'  
+                            },
+                            grid: { display: false }  
+                        }
+                    },
                     plugins: {
                         legend: { display: false },
+                        title: {
+                            display: true,
+                            text: `Blood Stock Levels for Region ${regionName}`, 
+                            font: { size: 18, family: 'Nunito', weight: 'bold' },
+                            color: 'rgba(160, 6, 53)',
+                            padding: { top: 10, bottom: 30 }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const currentUnits = stockLevels[tooltipItem.dataIndex]; 
+                                    const threshold = thresholds[tooltipItem.dataIndex]; 
+                                    return [
+                                        `Current units: ${currentUnits}`,
+                                        `Threshold: ${threshold}`
+                                    ];
+                                }
+                            },
+                            titleFont: {
+                                family: 'Nunito', 
+                                size: 16
+                            },
+                            bodyFont: {
+                                family: 'Nunito',
+                                size: 14
+                            }
+                        },
                         annotation: {
                             annotations: {
                                 thresholdLine: {
@@ -79,20 +113,37 @@ function updateGraph() {
                                     yMax: 1,
                                     borderColor: 'black',  
                                     borderWidth: 3,
-                                    label: {content: 'Threshold',
-                                            enabled: true,
-                                            position: 'end'}}
+                                    label: {
+                                        content: 'Threshold',
+                                        enabled: true,
+                                        position: 'end'
+                                    }
+                                },
+                                thresholdInfo: {
+                                    type: 'label', 
+                                    xValue: 0.5, 
+                                    yValue: 1, 
+                                    content: 'Threshold',
+                                    enabled: true,
+                                    font: {
+                                        size: 15, 
+                                        family: 'Nunito',
+                                        style: 'normal', 
+                                        weight: 'bold'
+                                    },
+                                    color: 'black',
+                                    xAdjust: 10,  
+                                    yAdjust: -10
+                                }
                             }
                         }
                     }
                 }
-            })
+            });
         })
-        
         .catch(error => {
             console.error('Error fetching blood stock data:', error); 
         });
-    }
+}
 
-// Load regions on page load
 window.onload = loadRegions;
