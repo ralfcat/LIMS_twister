@@ -9,12 +9,19 @@ function loadRegions() {
             data.forEach(region => {
                 const option = document.createElement('option');
                 option.value = region.rid;  
+                console.log(`The current region is `);
+
                 option.textContent = region.region; 
+                if (region.rid == 12){
+                    option.setAttribute("selected", "selected");
+
+                }
                 regionSelect.appendChild(option);
             });
 
             // Set default to Stockholm (ID 12)
-            regionSelect.value = '12'; // Make sure to set it as a string if the value in options is a string
+            // regionSelect.value = '12'; // Make sure to set it as a string if the value in options is a string
+
 
             // Call updateGraph to load the data for the default region
             updateGraph();

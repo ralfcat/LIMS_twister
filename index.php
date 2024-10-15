@@ -50,13 +50,16 @@
             <div class="quote">
             <p>
                 <strong>Your blood can save lives.</strong> Register now, and we'll help you make a difference when it's needed most.
+
             </p>
+
             </div>
+            <p id = "delete-later">You are now viewing the blood levels for the region of ... </p>
 
             <div class="graph">
                 <canvas id="bloodStockChart" width="500" height="300"></canvas>
                 <select id="region-select" onclick="updateGraph();" style="margin-top: 20px;">
-                    <option >Stockholm</option>
+                    <!-- <option id = "current-region" selected>Stockholm</option> -->
                 </select>
             </div>
         </div>
