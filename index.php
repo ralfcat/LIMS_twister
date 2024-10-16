@@ -53,7 +53,6 @@
             </p>
 
             </div>
-            <p id = "delete-later">You are now viewing the blood levels for the region of ... </p>
 
             <div class="graph">
                 <canvas id="bloodStockChart" width="500" height="300"></canvas>
