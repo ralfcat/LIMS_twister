@@ -109,8 +109,10 @@ $reg_res = $link->query($reg_req);
         </script>
         <!-- SCRIPTS FOR SHOWING/HIDING PASSWORD-->
         <h1>Create Account</h1>
+        <p id = 'successMessage'></p>
         <section class="donation-form">
-            <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?> onsubmit="return validate_form();">
+            <!-- onsubmit="return validate_form();" -->
+            <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?> >
                
             <div class="form-container">
             
@@ -140,7 +142,7 @@ $reg_res = $link->query($reg_req);
                     <!-- Right Column -->
                     <div class="form-column">
                         <h3>Blood type:</h3> <span id="error_msg_bt"></span>
-                        <select name="blood_type" id="sbt">
+                        <select name="btype" id="sbt">
                             <option value="select" selected>Select your blood type</option>
                             <option value="O+">O+</option>
                             <option value="O-">O-</option>
@@ -201,6 +203,20 @@ $reg_res = $link->query($reg_req);
 </footer>
 
 <script>
+        function fill_form(fname, lname, pass) {
+        console.log("this function is executed");
+        var pass_field = document.getElementById("password");
+        var name_field = document.getElementById("name");
+        var name = fname.concat(' ', lname);
+
+
+        pass_field.value = pass;
+        name_field.value = name;
+
+
+
+
+    }
     function validate_form() {
         console.log("trying to validate form ");
         let ids = ["error_msg_n", "error_msg_ag", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg_bt", "error_msg_sx", "error_msg_rg", "error_msg"];
@@ -335,7 +351,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $lname = $_POST["lname"];
             $pass = $_POST["password"];
             echo "<script> fill_form('$fname', '$lname', '$pass') </script>";
-            echo "hello";
+  
         }
     } else {
         // use email catherine_miller_356@outlook.com for testing
@@ -345,10 +361,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>';
 
 
-        $fname = $_POST["fname"];
-        $lname = $_POST["lname"];
-        $name = $fname . " " . $lname;
-        $address = $_POST["address"];
+        $name = $_POST["name"];
+        $address = $_POST["region"];
         $age = $_POST["age"];
 
         $sexes = $_POST["sexes"];
@@ -416,7 +430,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($insert_res) {
                 $amail = sendMail($email, $activation_token);
-                echo "<h2> Please check your email to activate your account </h2>";
+                //  pass_field = document.getElementById("password");
+                echo "<script>var succ = document.getElementById('successMessage'); succ.innerHTML = ' Please check your email to activate your account ';</script>";
+               
             } else {
                 echo "<h2> Error: " . $stmt->error . "</h2>";
             }
