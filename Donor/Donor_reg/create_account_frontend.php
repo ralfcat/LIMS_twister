@@ -36,17 +36,10 @@ function sendMail($email, $activation_token)
     $mail->AltBody = 'Click <a href="http://localhost:8888/Donor/Donor_reg/activate-account.php?token=' . $activation_token . '"> to activate your account';
 
     if (!$mail->send()) {
-        echo '<h1>EMAIL WAS NOT SENT</h1>';
-        return 'EMAIL WAS NOT SENT';
+        return -1;
     } else {
-        echo '<h1>SUCCESS</h1>';
-        return 'SUCCESS';
-    }
 
-    try {
-        $mail->send();
-    } catch (Exception $e) {
-        echo "Message could not be sent Error:" . $mail->ErrorInfo . "";
+        return 0;
     }
 }
 
@@ -79,7 +72,7 @@ $reg_res = $link->query($reg_req);
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+           <a href = "../../index.php"> <img class="logo" src="../../Logo-and-text.png" alt="Logo"></a>
         </div>
         <nav>
             <ul>
@@ -109,16 +102,16 @@ $reg_res = $link->query($reg_req);
         </script>
         <!-- SCRIPTS FOR SHOWING/HIDING PASSWORD-->
         <h1>Create Account</h1>
-        <p id = 'successMessage'></p>
-        <section class="donation-form">
+        <p id='successMessage'></p>
+        <section class="donation-form" id="donform">
             <!-- onsubmit="return validate_form();" -->
-            <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?>onsubmit="return validate_form();" >
-               
-            <div class="form-container">
-            
+            <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?> onsubmit="return validate_form();">
+
+                <div class="form-container">
+
                     <!-- Left Column -->
                     <div class="form-column">
-                    <p id="error_msg"></p> 
+                        <p id="error_msg"></p>
                         <h3>Name:</h3> <span id="error_msg_n"></span>
                         <input type="text" id="name" name="name" placeholder="Enter name">
 
@@ -168,7 +161,7 @@ $reg_res = $link->query($reg_req);
                         </select> <br>
 
                         <h3>Region:</h3><span id="error_msg_rg"></span>
-                        <select name="region" id = "reg">
+                        <select name="region" id="reg">
                             <option value="select" selected>Select your region</option>
                             <?php while ($row = $reg_res->fetch_assoc()) {
                                 echo "<option value = " . $row['region'] . ">" . $row['region'] . "</option>";
@@ -203,7 +196,7 @@ $reg_res = $link->query($reg_req);
 </footer>
 
 <script>
-        function fill_form(fname, lname, pass) {
+    function fill_form(fname, lname, pass) {
         console.log("this function is executed");
         var pass_field = document.getElementById("password");
         var name_field = document.getElementById("name");
@@ -217,6 +210,7 @@ $reg_res = $link->query($reg_req);
 
 
     }
+
     function validate_form() {
         console.log("trying to validate form ");
         let ids = ["error_msg_n", "error_msg_ag", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg_bt", "error_msg_sx", "error_msg_rg", "error_msg"];
@@ -351,7 +345,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $lname = $_POST["lname"];
             $pass = $_POST["password"];
             echo "<script> fill_form('$fname', '$lname', '$pass') </script>";
-  
         }
     } else {
         // use email catherine_miller_356@outlook.com for testing
@@ -431,10 +424,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($insert_res) {
                 $amail = sendMail($email, $activation_token);
                 //  pass_field = document.getElementById("password");
-                echo "<script>var succ = document.getElementById('successMessage'); succ.innerHTML = ' Please check your email to activate your account ';</script>";
-               
+                // echo "<script>var succ = document.getElementById('successMessage'); 
+                // succ.innerHTML = ' Please check your email to activate your account ';
+                // </script>";
+
+                if ($amail == 0) {
+
+                    echo "<script>
+                const parentElement = document.getElementById('donform');
+                const newChild = document.createElement('h3');
+                newChild.innerHTML = ' Please check your email to activate your account ';
+            parentElement.insertBefore(newChild, parentElement.firstChild);
+                </script>";
+                } else {
+
+                    echo "<script>
+                    const parentElement = document.getElementById('donform');
+                    const newChild = document.createElement('h3');
+                    newChild.innerHTML = 'An error occcured and your account could not be created. Please try again';
+                parentElement.insertBefore(newChild, parentElement.firstChild);
+                    </script>";
+                }
             } else {
-                echo "<h2> Error: " . $stmt->error . "</h2>";
+                echo "<script>
+                const parentElement = document.getElementById('donform');
+                const newChild = document.createElement('h3');
+                newChild.innerHTML = ' Error: $stmt->error';
+            parentElement.insertBefore(newChild, parentElement.firstChild);
+                </script>";
             }
         }
     }
