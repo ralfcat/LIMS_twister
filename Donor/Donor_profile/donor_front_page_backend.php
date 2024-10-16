@@ -17,13 +17,12 @@ if ($link->connect_error) {
 }
 
 
-$email = $_SESSION['email'];
+$donor_id_ses = $_SESSION['donor_id'];
 
 
-
-$sql = "SELECT * FROM Donor WHERE email = ?";
+$sql = "SELECT * FROM Donor WHERE donor_id = ?";
 $stmt = $link->prepare($sql);
-$stmt->bind_param('s', $email);
+$stmt->bind_param('i', $donor_id_ses);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -103,12 +102,13 @@ $link->close();
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+            <a href="/index.php">
+                <img class="logo" src="../../Logo-and-text.png" alt="Logo">
         </div>
         <nav>
             <ul>
                 <li class="active"><a href="donor_front_page_backend.php">My Donations</a></li>
-                <li><a href="../../donor_info.php">Profile</a></li>
+                <li><a href="/donor/donor_profile/donor_info.php">Profile</a></li>
             </ul>
         </nav>
         <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>   
@@ -137,11 +137,12 @@ $link->close();
         </div>
 
         <div class="upcoming-donations" >
-            <h2>Upcoming Donations</h2>
-            <p>You don't have any upcoming donations, book a new appointment <a href="#">here</a>.</p>
+            <h2>Upcoming Donations</h2> <!--Upcoming donations: BACKEND is needed-->
         </div>
     </section>
 
+<div class="forms-for-donation">
+<!--Previous donations form-->
     <section class="donation-form-bbank">
 
     <form method="POST" action="donor_front_page_backend.php">
@@ -166,6 +167,71 @@ $link->close();
         <button class="add-donation-button-donor" type="submit">Add Donation</button>
     </form>
 </section>
+
+<!--Upcoming donations form-->
+<section class="donation-form-bbank">
+
+<form method="POST" action="donor_front_page_backend.php"> <!--We need to change backend here-->
+<div class="form-row">
+<div class="form-group-donor">    
+    <h3>Date of upcoming donation</h3>        
+    <input type="date" id="donation_date" name="donation_date" required><br>
+</div>
+<div class="form-group-donor">    
+        <h3>Choose Blood Center</h3>
+        <select id="blood_center" name="blood_center" required>
+            <option value="">Select a blood center</option>
+            <?php foreach ($blood_banks as $bank): ?>
+                <option value="<?php echo htmlspecialchars($bank['blood_bank_id']); ?>">
+                    <?php echo htmlspecialchars($bank['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select><br>
+</div>
+</div>
+
+    <button class="add-donation-button-donor" type="submit">Add Donation</button>
+</form>
+</section>
+</div> <!--End forms for donation-->
+
+ <!--Unregister from list-->
+<section class="unsubscribe">
+    <h2>Temporarily unsubscribe from our email list</h2>
+    <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
+    
+    <form action="/unsubscribe" method="POST"> <!--Backend must be implemented here-->
+        <div class="unsub-form-row">
+            <div class="unsub-form-group-donor">  
+                <label for="email">Enter your email address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="unsub-form-group-donor">  
+                <label for="end-date">End date of temporary unsubscription:</label>
+                <input type="date" id="end-date" name="end-date" required>
+            </div>
+        </div>
+        
+        <label class="unsub-confirmation"> 
+            <input type="checkbox" name="confirm" required>
+            <p>I confirm that I want to temporarily unsubscribe.</p>
+        </label>
+        
+        <button class="add-donation-button-donor" type="submit">Unsubscribe</button>
+    </form>
+</section>
+
+</section>
 </main>
 </body>
+
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../../about_us.html">About Us</a> |
+    <a href="../../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>

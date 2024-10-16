@@ -24,7 +24,9 @@ $error_activation = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $sql = "SELECT email, password, account_activation_hash FROM donor WHERE email = ?";
+    // salted password 
+    $password = $password . $email;
+    $sql = "SELECT donor_id, email, password, account_activation_hash FROM donor WHERE email = ?";
     //to prevent sql injections
     $stmt = $link->prepare($sql);
     $stmt -> bind_param('s', $email);
@@ -41,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = $row['password'];
             if (md5($password) == $hashed_password) {
                 //Password matches, log the user in and redirect
-                $_SESSION['email'] = $row['email'];
+                $_SESSION['donor_id'] = $row['donor_id'];
                 header("Location: /Donor/Donor_profile/donor_front_page_backend.php");
                 exit(); 
             } 
@@ -133,10 +135,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
 
             <div class="new-user">
-                <p>New user? <a href="/Donor/Donor_reg/create_account.php">Create an account here</a></p>
+                <p>New user? <a href="../../index.php">Create an account here</a></p>
             </div>
         </div>
     </div>
 </body>
+
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../../about_us.html">About Us</a> |
+    <a href="../../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>
 
