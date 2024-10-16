@@ -80,7 +80,7 @@ def get_password(bb:BloodBank):
     np_count = np.asarray(len(characters) * [1])
     np_urn = np.repeat(characters, np_count)
     generate_password = np.random.choice(np_urn, size = pass_length, replace = True)
-    passwrd = ''.join(generate_password)
+    passwrd = f"{''.join(generate_password)}{bb.email}"
     hashed_passwrd = hashlib.md5(passwrd.encode())
     hashed_passwrd = hashed_passwrd.hexdigest()
     bb.password = passwrd
