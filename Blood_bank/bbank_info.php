@@ -7,13 +7,13 @@ use function FrontEnd\get_regions as get_regions;
 use function FrontEnd\curr_region as curr_region;
 use function FrontEnd\write_js as write_js;
 use function FrontEnd\write_console as write_console;
+
 error_reporting(E_ERROR | E_PARSE);
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
-if (!isset($_SESSION['email'])) { 
+if (!isset($_SESSION['email'])) {
     header('Location: bbank_log_in.php?msg=login-required');
     exit;
-
 }
 
 $account_info = get_account_info();
@@ -35,7 +35,6 @@ if (isset($messages[$_GET['msg']])) {
     echo "let x = document.getElementById('msgs');";
     echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msgs']]) . '";';
     echo "});";
- 
 }
 
 
@@ -67,78 +66,100 @@ if (isset($messages[$_GET['msg']])) {
                 <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button"><a href = "bb_log_out.php">Log Out</a></button>
+        <button class="logout-button"><a href="bb_log_out.php">Log Out</a></button>
     </header>
 
     <main>
         <h1>Blood bank ID</h1>
         <form action="bbank_front_page_backend.php" method="post" class="form-bbank-info">
-        <section class="donation-form">
-        <p id="msgs"></p>
-            <div class="form-container">
+            <section class="donation-form">
+                <p id="msgs"></p>
+                <div class="form-container">
 
-                <!-- Left Column -->
-                <div class="form-column">
-                    <h3>Name:</h3>
-                    <input type="text" placeholder="Enter name" name = "new-name" value="<?php echo $account_info['name'] ?>">
-                    <h3>Email:</h3>
-                    <input type="text" placeholder="Enter email" name = "new-email" value='<?php echo $account_info['email'] ?>'>
-                    <!-- <h3>Password:</h3>
-                <input type="password" placeholder="Enter password">
-                <h3>Repeat password:</h3>
-                <input type="password" placeholder="Enter password"> -->
-                    
-                    <input type="hidden" name="to_do" value="update_bb_info" />
+                    <!-- Left Column -->
+                    <div class="form-column">
+                        <h3>Name:</h3>
+                        <input type="text" placeholder="Enter name" name="new-name" value="<?php echo $account_info['name'] ?>">
+                        <h3>Email:</h3>
+                        <input type="text" placeholder="Enter email" name="new-email" value='<?php echo $account_info['email'] ?>'>
+                        <p class="error-message"><?php echo $error_password; ?></p>
+                        
+                        <h3>Password:</h3>
+                    <input type="password" id="password" name="password" placeholder="Enter password">
+                    <p class="error-message"><?php echo $error_password; ?></p>
+                        <button class="profile-changes-button" type="button" onclick="togglePassword()">Show passwords</button>
+                        <h3>New password:</h3>
+                        <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
+
+                        <input type="hidden" name="to_do" value="update_bb_info" />
                         <button class="profile-changes-button">Save changes</button>
-                    
-                </div>
+                        <br>
+                        <?php if ($success_message): ?>
+                    <p class="success-message"><?php echo $success_message; ?></p>
+                    <?php endif; ?>
+                  
+                    </div>
 
-                <!-- Right Column -->
-                <div class="form-column">
-                    <h3>Region:</h3>
-                    <select name="regions">
+                    <!-- Right Column -->
+                    <div class="form-column">
+                        <h3>Region:</h3>
+                        <select name="regions">
 
-                        <?php
-                        foreach ($regions as $region) {
-                            $x = curr_region();
-                            write_console("the curr region is $x");
-                            if ($region == curr_region()){
-                                echo "<option value = '$region' selected> $region </option>";
-
-                            } else {
-                                echo "<option value = '$region'> $region </option>";
-
+                            <?php
+                            foreach ($regions as $region) {
+                                $x = curr_region();
+                                write_console("the curr region is $x");
+                                if ($region == curr_region()) {
+                                    echo "<option value = '$region' selected> $region </option>";
+                                } else {
+                                    echo "<option value = '$region'> $region </option>";
+                                }
                             }
-                     
-                            
-                            
-                        }
-                        ?>
+                            ?>
 
-                    </select>
-                    <p>Want to reset your password? <a href="">Click Here</a>.</p>
-                </div>
-                </form>
+                        </select>
+
+                    </div>
+        </form>
 
 
 
 
-            </div>
+        </div>
 
 
 
 
         </section>
     </main>
-</body>
+    </body>
 
-<footer>
-  <p>&copy; 2024 Blood Alert</p>
-  <nav>
-    <a href="../about_us.html">About Us</a> |
-    <a href="../integrity_policy.html">Integrity Policy</a> |
-    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
-  </nav>
-</footer>
+<!-- <footer>
+    <p>&copy; 2024 Blood Alert</p>
+    <nav>
+        <a href="../about_us.html">About Us</a> |
+        <a href="../integrity_policy.html">Integrity Policy</a> |
+        <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+    </nav>
+</footer> -->
+
+
+<script>
+        function togglePassword() {
+            var oldPasswordField = document.getElementById('password');
+            var newPasswordField = document.getElementById('repeat_password');
+
+            if (oldPasswordField.type === "password" || newPasswordField.type === "password") {
+                oldPasswordField.type = "text";
+                newPasswordField.type = "text";
+                button.textContent = "Hide passwords";
+            } else {
+                oldPasswordField.type = "password";
+                newPasswordField.type = "password";
+                button.textContent = "Show passwords";
+            }
+        }
+    </script>
+
 </html>
-</html>
+
