@@ -112,7 +112,7 @@ $reg_res = $link->query($reg_req);
         <p id = 'successMessage'></p>
         <section class="donation-form">
             <!-- onsubmit="return validate_form();" -->
-            <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?> >
+            <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?>onsubmit="return validate_form();" >
                
             <div class="form-container">
             
