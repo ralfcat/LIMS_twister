@@ -27,7 +27,7 @@
     <div class="main-container">
         <div class="reg-form-container">
         <h2>Create New Account</h2>
-        <form name="create_account" action="/Donor/Donor_reg/create_account.php" method="POST">
+        <form name="create_account" action="/Donor/Donor_reg/create_account_frontend.php" method="POST">
         <input type="hidden" name="to_do" value="create_new" />
             <div class="input-group">
                 <input type="text" id="fname" name="fname" placeholder="First Name" />
