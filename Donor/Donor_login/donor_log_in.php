@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
 
             <div class="new-user">
-                <p>New user? <a href="/Donor/Donor_reg/create_account.php">Create an account here</a></p>
+                <p>New user? <a href="../../index.php">Create an account here</a></p>
             </div>
         </div>
     </div>
