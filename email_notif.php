@@ -56,12 +56,12 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$user_request = $link->query($user_query);
 
 
 
 
-mysqli_close($link);
+
+
 
 function send_emails(array $blood_levels, $rid) {
     $mail_list = check_level_against_threshold($blood_levels, $rid);
