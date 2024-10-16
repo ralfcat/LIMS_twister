@@ -104,13 +104,24 @@ $link->close();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($donations as $donation): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($donation['donation_date']); ?></td>
-                                <td><?php echo htmlspecialchars($donation['name']); ?></td>
-                                <td><?php echo htmlspecialchars($donation['amount']); ?> L</td>
-                            </tr>
-                        <?php endforeach; ?>
+                        <?php foreach ($donations as $donation):  
+                           
+                            
+                            if (strtotime($don_date) < strtotime($curr_date)) {
+                                
+                                $date = $donation['donation_date'];
+                                $name = $donation['name'];
+                                $am = $donation['amount'];
+
+                                echo "<tr>
+                                <td>$date</td>
+                                <td>$name></td>
+                                <td>$am </td>
+                            </tr>";
+                            
+                            ?>
+                            
+                        <?php  }endforeach; ?>
                     </tbody>
                 </table>
             <?php else: ?>

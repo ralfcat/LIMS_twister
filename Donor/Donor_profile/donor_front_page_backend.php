@@ -122,12 +122,19 @@ $link->close();
             <h2>Donation History</h2>
             <?php if (!empty($donations)): ?>
                 <ul>
-                    <?php foreach ($donations as $donation): ?>
+                    <?php foreach ($donations as $donation): 
+         
+                            $curr_date = date("Y-m-d");
+                            $don_date = $donation['donation_date'];
+                        
+                            if ($don_date < $curr_date) {
+                            
+                            ?>
                         <li>
                             <span><?php echo htmlspecialchars($donation['donation_date']); ?></span> - 
                             <span><?php echo htmlspecialchars($donation['name']); ?></span><br>
                         </li>
-                    <?php endforeach; ?>
+                    <?php }endforeach; ?>
                 </ul>
             <?php else: ?>
                 <ul>
@@ -138,6 +145,27 @@ $link->close();
 
         <div class="upcoming-donations" >
             <h2>Upcoming Donations</h2> <!--Upcoming donations: BACKEND is needed-->
+            <?php if (!empty($donations)): ?>
+                <ul id="id01">
+                    <?php foreach ($donations as $donation): 
+         
+                            $curr_date = date("Y-m-d");
+                            $don_date = $donation['donation_date'];
+                        
+                            if ($don_date >= $curr_date) {
+                            
+                            ?>
+                        <li>
+                            <span><?php echo htmlspecialchars($donation['donation_date']); ?></span> - 
+                            <span><?php echo htmlspecialchars($donation['name']); ?></span><br>
+                        </li>
+                    <?php }endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <ul>
+                    <li>No upcoming donations.<li>
+                </ul>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -234,4 +262,6 @@ $link->close();
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>
+
+
 </html>
