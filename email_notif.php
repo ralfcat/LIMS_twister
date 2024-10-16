@@ -47,8 +47,7 @@ $username = "root";
 $password = "root";
 $dbname = "twister";
 
-// Select the donors where the address is Stockholm (change this for the region)
-$user_query = "SELECT * FROM Donor WHERE address = 'Stockholm'";
+
 
 $link = mysqli_connect($servername, $username, $password, $dbname);
 
