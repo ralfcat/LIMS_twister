@@ -1,6 +1,9 @@
 <?php
 
 namespace FrontEnd;
+require_once '../email_notif.php';
+
+use function EmailNotif\check_level_against_threshold as check_level_against_threshold;
 
 error_reporting(E_ERROR | E_PARSE);
 
@@ -155,6 +158,16 @@ function get_id()
     return $row["blood_bank_id"];
 }
 
+function get_user_id($user_mail)
+{
+    global $link;
+    $email_req = "SELECT donor_id from Donor WHERE email = '$user_mail'";
+    $res = $link->query($email_req);
+    $row = $res->fetch_assoc();
+    echo '<h1>the value of id is'.$row["donor_id"] .'</h1><br>';
+    return $row["donor_id"];
+}
+
 function get_rid()
 {
     global $email;
@@ -187,6 +200,7 @@ function update_curr($btype, $new_level, $id)
 function update_thresholds($btype, $threshold)
 {
     global $link;
+    global $email;
     // update the threshold
     // UPDATE Blood_Stock SET threshold_level = 5 WHERE blood_type = 'A+' AND blood_bank_id IN (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = 1);
 
@@ -199,6 +213,9 @@ function update_thresholds($btype, $threshold)
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("isi", $threshold,  $btype, $rid);
     $result = $stmt->execute();
+    $curr_level = get_stock($email);
+    check_level_against_threshold($curr_level, $rid);
+
     echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
 }
 
