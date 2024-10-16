@@ -110,4 +110,51 @@ INSERT INTO Blood_bank (name, region_id, email, password) VALUES
 ('Lidköping Blood Center', 19, 'LidkopingBloodCenter@gmail.com', 'N7v9t4m1b8'),
 
 -- Region 21: Östergötaland
-('Linköping Blood Center', 21, 'LinkopingBloodCenter@gmail.com', 'b739b80b1bff8f11b2d76e7d911e5d37');
+('Linköping Blood Center', 21, 'LinkopingBloodCenter@gmail.com', 'b739b80b1bff8f11b2d76e7d911e5d37');INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 13,'bloodbank_1173@yahoo.com', 'a62942ca725e50535140605c12cf22d0');
+
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 9,'bloodbank_1378@yahoo.com', 'da44e69f6e8a3b5ebd2735d24707e5f8');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 3,'bloodbank_576@outlook.com', 'dd4832c87dce625f395d8cc09499a251');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 2', 6,'bloodbank_3937@yahoo.com', '91e3352fe09ab54e128b826a2e548b35');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 3', 19,'bloodbank_2797@gmail.com', '02cdd51484eea87eff194fa65347a1ab');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 4', 4,'bloodbank_1790@gmail.com', '40f68bf48ae7b4b6a3c4edc7e310da37');
+
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 10,'bloodbank_3943@gmail.com', '8382983481c10567d0dc2af14b7a6d51');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 17,'bloodbank_1577@outlook.com', '1f50a1a09afc802c4bacf8a8f616b5b8');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 2', 6,'bloodbank_432@yahoo.com', 'ad2aca661991315285f5fad45bb8d7bd');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 3', 5,'bloodbank_2867@outlook.com', 'c274e6011ca63e9a81061dd95588616e');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 4', 20,'bloodbank_1576@gmail.com', 'e22f320528c020e26eaf4b6edad28095');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 5', 9,'bloodbank_2139@outlook.com', '04ecc3be6f82ef096f291b03c18219a1');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 6', 10,'bloodbank_1226@gmail.com', 'e53cae87fd41ff9beb2be3ef86201cb1');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 7', 8,'bloodbank_738@yahoo.com', 'e26447fba1e1733131ca78c88a031111');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 8', 4,'bloodbank_3876@yahoo.com', '3d13cc5a3633bbc60ab5a60baa1b03de');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 9', 15,'bloodbank_159@yahoo.com', '07f9c6e69151f6018b8fd6d6939d3d42');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 10', 10,'bloodbank_2866@outlook.com', '98a8663d2f4a714d6e242da2c95e87f2');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 11', 19,'bloodbank_3173@outlook.com', '389c0c4a1c4c1c7dab7f7c501da0739a');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 12', 13,'bloodbank_577@gmail.com', '033e6e29212594f296696eaf853546b4');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 13', 1,'bloodbank_4228@outlook.com', '414d31bd550316a588fe003de2914d6f');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 14', 3,'bloodbank_3809@gmail.com', 'd9ca40afeb4addeb1a2c51fbcad813dc');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 15', 5,'bloodbank_567@yahoo.com', '8f141438ef4804774abed7dc71708b0b');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 16', 14,'bloodbank_2208@gmail.com', '306c2379bc1711bf61cac8b91d6b8c43');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 17', 1,'bloodbank_4891@outlook.com', 'b956ad3dabd7c8fa83b616e4f5c2bf40');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 18', 2,'bloodbank_440@outlook.com', '53668d3f871876ae8c65cfc0683b1543');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 19', 12,'bloodbank_2465@outlook.com', '62745035f0725ea0578684398922e3d1');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 5,'bloodbank_428@gmail.com', '8bd53e76f53142a2f77390614a24dd25');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 5,'bloodbank_1595@yahoo.com', '27ebb925ac276997e93f16fee69e3209');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 2', 5,'bloodbank_4775@gmail.com', '831e3835ff91ba74bb54b9dc0b200b52');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 3', 5,'bloodbank_2279@gmail.com', 'e5256f7b53a47c6cc5ca55111a1eb086');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 4', 5,'bloodbank_611@outlook.com', '5380b3f8b6d3f6f7daa1c534af3794fd');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 5', 5,'bloodbank_4109@gmail.com', 'e0e7bdd0bb19a10e31b5d004df19cd6f');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 6', 5,'bloodbank_1229@outlook.com', '7814c3b4cf6089cf1a67ad083d659376');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 7', 5,'bloodbank_3366@gmail.com', '5d1ec959419e8bc53e20fe69f04d2320');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 8', 5,'bloodbank_4884@outlook.com', '2ca61d8f92cbc0fbe71b6068573c8804');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 9', 5,'bloodbank_3820@yahoo.com', 'eceffb292773023ed97a2dcf37e963cd');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 10', 5,'bloodbank_4475@yahoo.com', '776da3544a8d847fbf861e52082656d1');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 11', 5,'bloodbank_1005@yahoo.com', '7e3b3c2bab5d99030be36fb249378ec2');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 12', 5,'bloodbank_3494@yahoo.com', '9c19f4f1ecd06ed23ca68d06a843936a');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 13', 5,'bloodbank_1897@yahoo.com', 'd02f865ae72b05876780f5481cd45b19');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 14', 5,'bloodbank_4527@yahoo.com', 'c32878818381420bd7aedddb0b1ee7ca');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 15', 5,'bloodbank_3383@outlook.com', 'ab2478db1f0e757003513e18b4f8c928');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 16', 5,'bloodbank_342@yahoo.com', 'fd51f8ecd006742d3d4757a6e8c1c34f');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 17', 5,'bloodbank_1579@outlook.com', '5d46404a71bf33c7fa11849929f04ce9');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 18', 5,'bloodbank_1497@outlook.com', '82627de821cb2b5f5aab4cb41910e3ef');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 19', 5,'bloodbank_4043@yahoo.com', 'd3a945b003aa283f847ae163f09a8e11');

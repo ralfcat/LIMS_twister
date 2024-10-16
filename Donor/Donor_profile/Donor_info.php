@@ -161,7 +161,7 @@ $stmt->close();
                 <!-- Left Column -->
                 <div class="form-column">
                     <h3>Name:</h3>
-                    <input type="text" id="name" name="name" placeholder="Enter name" value="<?php echo htmlspecialchars($donor_name); ?>">
+                    <input type="text" id="name" name="name" placeholder="Enter name" value="<?php echo $donor_name; ?>">
                     
                     <h3>Email:</h3>
                     <input type="text" id="email" name="email" placeholder="Enter email" value="<?php echo htmlspecialchars($donor_email); ?>">

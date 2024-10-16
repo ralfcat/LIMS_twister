@@ -34,13 +34,13 @@ class BloodBank:
 
 
 
-def get_bb_name(i):
+def get_bb_name(i, r):
     
     basename = "Blood Bank No. "
     bbname = basename + str(i)
     new_bank = BloodBank(bbname)
     get_email(new_bank)
-    get_address(new_bank)
+    get_address(new_bank, r)
     get_password(new_bank)
     
     return new_bank
@@ -57,7 +57,7 @@ def get_email(bb: BloodBank):
 
 
 
-def get_address(bb:BloodBank):
+def get_address(bb:BloodBank, r):
     regions = []
     try:
         with open('../counties.csv', 'r') as c:
@@ -69,8 +69,14 @@ def get_address(bb:BloodBank):
                     regions.append(region[1])
     except FileNotFoundError:
         print("The file you are trying to open does not exist")
-    n = np.random.randint(1, len(regions))
-    bb.region = n
+    if r  > 21:
+        
+        n = np.random.randint(1, len(regions))
+        bb.region = n
+        
+    else:
+        bb.region = r
+        
     return 1
 
 def get_password(bb:BloodBank):
@@ -80,21 +86,22 @@ def get_password(bb:BloodBank):
     np_count = np.asarray(len(characters) * [1])
     np_urn = np.repeat(characters, np_count)
     generate_password = np.random.choice(np_urn, size = pass_length, replace = True)
-    passwrd = f"{''.join(generate_password)}{bb.email}"
-    hashed_passwrd = hashlib.md5(passwrd.encode())
+    passwrd = ''.join(generate_password)
+    salt = f"{''.join(generate_password)}{bb.email}"
+    hashed_passwrd = hashlib.md5(salt.encode())
     hashed_passwrd = hashed_passwrd.hexdigest()
     bb.password = passwrd
     bb.hashed_password = hashed_passwrd
     return passwrd, hashed_passwrd
 
-def create_sql(N):
+def create_sql(N, r):
     blood_banks: list[BloodBank] = []
     sql_file_name = "insert_blood_banks.sql"
 
 
     for i in range(N):
 
-        bbname = get_bb_name(i)
+        bbname = get_bb_name(i, r)
         blood_banks.append(bbname)
     
     for bb in blood_banks:
@@ -118,6 +125,7 @@ def create_sql(N):
 class Args(NamedTuple):
     """ Command-line arguments """
     n: int
+    r: int
 
 def get_args() -> Args:
     """ Get command-line arguments """
@@ -129,15 +137,24 @@ def get_args() -> Args:
     # because there is no default, then it must have a value
     parser.add_argument('n', metavar='n', help='The number of fake donors to create',
                         type=int)
+    parser.add_argument(
+        "-r",
+        "--region",
+        metavar="REGION",
+        help="Create from a region",
+        type=int,
+        default=40,
+    )
     args = parser.parse_args()
-    return Args(args.n)
+    return Args(args.n, args.region)
 
 def main() -> None:
 
     args = get_args()
     n = args.n
+    r = args.r
 
-    create_sql(n)
+    create_sql(n, r)
 
 
 if __name__ == '__main__':
