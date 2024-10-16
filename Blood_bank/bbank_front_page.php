@@ -2,6 +2,7 @@
 
 require_once 'bbank_front_page_backend.php';
 
+
 use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
 use function FrontEnd\get_regional_levels as get_regional_levels;

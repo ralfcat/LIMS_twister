@@ -2,6 +2,10 @@
 
 namespace FrontEnd;
 
+require_once '../email_notif.php';
+
+use function EmailNotif\send_emails as send_emails;
+
 error_reporting(E_ERROR | E_PARSE);
 
 $servername = "localhost";
@@ -70,18 +74,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         write_console("you are trying to update thresholds");
         foreach ($_POST as $key => $value) {
             write_console("$key and the val is $value");
-            if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B')||   str_starts_with($key, 'AB')) {
+            if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B') ||   str_starts_with($key, 'AB')) {
                 if ($value < 0) {
                     header('Location: bbank_front_page.php?msg=blood_stock_unchanged');
                     exit;
-                }else{
-                write_js("$key and the val is $value");
-                update_thresholds($key, $value);
-                // get the current threshold, and level for each blood type 
-                $curr_levels_array = get_stock($email);
-            }
+                } else {
+    
+                    update_thresholds($key, $value);
+
+
+                }
             }
         }
+        $rid = get_rid();
+        $curr_levels_array = get_stock($email);
+        send_emails($curr_levels_array, $rid);
         header('Location: bbank_front_page.php');
     } else if ($to_do == "update_bb_info") {
         write_console("you are trying to update your blood bank info");
@@ -155,6 +162,16 @@ function get_id()
     return $row["blood_bank_id"];
 }
 
+function get_user_id($user_mail)
+{
+    global $link;
+    $email_req = "SELECT donor_id from Donor WHERE email = '$user_mail'";
+    $res = $link->query($email_req);
+    $row = $res->fetch_assoc();
+    echo '<h1>the value of id is' . $row["donor_id"] . '</h1><br>';
+    return (int) $row["donor_id"];
+}
+
 function get_rid()
 {
     global $email;
@@ -187,18 +204,21 @@ function update_curr($btype, $new_level, $id)
 function update_thresholds($btype, $threshold)
 {
     global $link;
+    global $email;
     // update the threshold
     // UPDATE Blood_Stock SET threshold_level = 5 WHERE blood_type = 'A+' AND blood_bank_id IN (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = 1);
 
     // show the threshold
     // SELECT blood_type, threshold_level FROM Blood_Stock WHERE blood_bank_id IN( SELECT blood_bank_id FROM Blood_Bank WHERE region_id = 1) AND blood_type = 'A+';
 
-    write_js("the bloodtype is $btype");
+    write_console("the bloodtype is $btype");
     $rid = get_rid();
     $update_req = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_type = ? AND blood_bank_id IN (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ?)";
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("isi", $threshold,  $btype, $rid);
-    $result = $stmt->execute();
+    $stmt->execute();
+
+
     echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
 }
 
@@ -254,8 +274,6 @@ function update_levels($btype, $units)
         update_curr($btype, $new_level, $bb_id);
         header('Location: bbank_front_page.php?msg=info_changed');
     }
-
-    
 }
 
 function get_account_info()

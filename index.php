@@ -51,7 +51,9 @@
             <p>
                 <strong style="font-weight: 800;">Your blood can save lives.</strong> Register now, and we'll help you make a difference when it's needed most.
             </p>
+
             </div>
+            <p id = "delete-later">You are now viewing the blood levels for the region of ... </p>
 
             <div class="graph">
                 <canvas id="bloodStockChart" width="500" height="300"></canvas>

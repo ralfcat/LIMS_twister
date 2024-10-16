@@ -7,7 +7,13 @@ function loadRegions() {
             data.forEach(region => {
                 const option = document.createElement('option');
                 option.value = region.rid;  
+                console.log(`The current region is `);
+
                 option.textContent = region.region; 
+                if (region.rid == 12){
+                    option.setAttribute("selected", "selected");
+
+                }
                 regionSelect.appendChild(option);
             });
             regionSelect.value = '12'; 
