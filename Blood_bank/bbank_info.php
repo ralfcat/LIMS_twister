@@ -72,7 +72,7 @@ if (isset($messages[$_GET['msg']])) {
 
     <main>
         <h1>Blood bank ID</h1>
-        <form action="bbank_front_page_backend.php" method="post" class="form-bbank">
+        <form action="bbank_front_page_backend.php" method="post" class="form-bbank-info">
         <section class="donation-form">
         <p id="msgs"></p>
             <div class="form-container">

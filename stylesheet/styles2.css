@@ -447,6 +447,15 @@ footer {
     height: 30rem;
 }
 
+.Current_levels, .form-bbank-info {
+    display: grid;
+    padding: 1.5rem;
+    padding-bottom: 0;
+    margin: 2rem;
+    border-radius: 1rem;
+    height: 30rem;
+}
+
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
     display: flex;
