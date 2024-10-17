@@ -25,7 +25,7 @@
                 <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button>Log Out</button>
     </header>
 
     <main>
@@ -34,12 +34,12 @@
         <form action="/register_donation" method="POST"> <!--Backend must be implemented here-->
             <div class="regdon-form-row">
                 <div class="regdon-form-group-donor">  
-                    <label for="email">Enter donor's email address:</label>
+                    <h4> Enter donor's email address:</h4>
                     <input type="email" id="email" name="email" required>
                 </div>
                 
                 <div class="regdon-form-group-donor">  
-                    <label for="donation-date">Date of donation:</label>
+                    <h4>Date of donation:</h4>
                     <input type="date" id="donation-date" name="donation-date" required>
                 </div>
             </div>

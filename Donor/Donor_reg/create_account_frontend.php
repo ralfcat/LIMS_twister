@@ -76,8 +76,8 @@ $reg_res = $link->query($reg_req);
         </div>
         <nav>
             <ul>
-                <li><a href="Donor/Donor_login/donor_log_in.php">Donor Login</a></li>
-                <li><a href="Blood_bank/bbank_log_in.php">Blood Bank Login</a></li>
+                <li><a href="/Donor/Donor_login/donor_log_in.php">Donor Login</a></li>
+                <li><a href="/Blood_bank/bbank_log_in.php">Blood Bank Login</a></li>
             </ul>
         </nav>
     </header>
@@ -125,7 +125,10 @@ $reg_res = $link->query($reg_req);
                         <h3>Re-enter password:</h3><span id="error_msg_rps"></span>
                         <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
 
-                        <input type="checkbox" id="chckbx"> I have read and agreed to the <a href="terms_cond_donor.html" target="blank" rel="noreferrer noopener">Terms and Conditions </a>
+                        <label class="terms-condition"> 
+                            <input type="checkbox" name="confirm" required>
+                            <p> I have read and agreed to the <a href="terms_cond_donor.html" target="blank" rel="noreferrer noopener">Terms and Conditions </a> </p>
+                        </label>
                         <button class="profile-changes-button" type="submit">Create Account</button>
                         <br>
 

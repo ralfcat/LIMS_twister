@@ -9,6 +9,7 @@ html {
 }
 
 html, body {
+    font-family: "Nunito", Helvetica, sans-serif;
     height: 100%;
     margin: 0;
   }
@@ -39,22 +40,52 @@ h3 {
     font-size: 1rem;
 }
 
+b {
+    font-family: "Nunito", Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    color: #141414 ;
+}
+
 body {
     background-color: #f5d5dd;
     display: flex;
     flex-direction: column;
 }
 
-input {
+input, select {
     width: calc(100% - 20px);
-    padding: 0.9rem;
+    padding: 0.7rem;
     margin: 0.5rem 0;
-    border: 0.1rem solid #ddd;
+    border: 0.05rem solid #ddd;
     border-radius: 1.5rem;
     background-color: #f1f1f1; 
     font-size: 0.9rem; 
     box-sizing: border-box; 
     color: #777777;
+}
+
+select {
+    width: 15rem; 
+}
+
+input:hover, select:hover {
+    background-color: #e1e1e1; 
+}
+
+input:focus, select:focus {
+    outline: none;            
+    border-color: #a00635;  
+    background-color: #e1e1e1;   
+}
+
+label {
+    font-family: "Nunito", Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    color: #141414 ; 
+    margin-top: 1rem;
+    font-size: 1rem;
 }
 
 /* Header and navigaton bar */
@@ -105,7 +136,7 @@ nav .active {
     border-radius: 0.2rem;       
 }
 
-.logout-button {
+button {
     padding: 0.7rem 1.2rem;
     background-color: #af093c;
     color: white;
@@ -113,14 +144,35 @@ nav .active {
     border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
+    min-width: 1.5rem;
+    font-size: 0.8rem;
+}
+
+button > a {
+    text-decoration: none;
+    color: white;
+}
+
+button:focus {
+    background-color: #b0627a; 
+    color: #141414;
+}
+
+button:hover {
+    background-color: #a00635; 
+    color: #141414;
 }
 
 footer {
+    font-family: "Nunito", Helvetica, sans-serif;
+    letter-spacing: 0.055em;
     background-color: white; /* Background */
-    color: #af093c;           /* Text */
-    padding: 1.3rem;          /* Space inside the footer */
+    color: #af093c;           
+    padding: 1.5rem;          /* Space inside the footer */
     text-align: center;     /* Center text and links */
     position: relative;
+    bottom: 0;
+    width: 100%;            
     margin-top: auto;
   }
   
@@ -185,27 +237,12 @@ footer {
 .graph {
     margin: 0 auto; 
     height: auto; 
+    padding:0.9rem
 }
 
 .graph select {
-    height: 1.5rem; 
-    width: 30%;
-    border-radius: 1.5rem; 
-    border: 1px solid #ccc; 
-    background-color: #f1f1f1; 
-    font-size: 0.9rem;
+    height: auto;
     text-align: center;
-    box-sizing: border-box; 
-}
-
-.graph select:hover {
-    background-color: #e1e1e1;
-}
-
-.graph select:focus {
-    outline: none; 
-    border-color: #a00635; 
-    background-color: #fff; 
 }
 
 /* Login pages */
@@ -230,40 +267,6 @@ footer {
     margin-bottom: 0.3rem; 
     font-size: 0.9rem; 
     text-align: left;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 0.9rem;
-    margin: 0.5rem 0;
-    border: 0.05rem solid #ddd;
-    border-radius: 1.5rem;
-    background-color: #f1f1f1; 
-    font-size: 0.7rem; 
-    box-sizing: border-box; 
-}
-
-.login-form input[type="email"],
-.login-form input[type="password"] {
-    padding: 0.7rem; 
-    margin: 0; 
-}
-.logout-button > a {
-    text-decoration: none;
-    color: white;
-}
-
-.login_button{
-    display: block;
-    padding: 0.7rem 1.7rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 2rem;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 0.7rem;
-    margin: 1.5rem auto 0;;
 }
 
 
@@ -321,12 +324,9 @@ footer {
 
 /* Styling for donor info page */
 .form-container {
-    display: flex;           
-    justify-content: space-between; 
-    align-items: stretch;
+    display: flex;  
     padding: 2rem;
-    border-radius: 1.5rem;       
-    margin: 20 ;
+    border-radius: 1.5rem; 
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 70rem; 
@@ -346,53 +346,17 @@ footer {
 }
 
 .form-column select {
-    width: 17rem; 
-    height: 3rem; 
-    border-radius: 1.5rem; 
-    border: 1px solid #ccc; 
-    background-color: #f1f1f1; 
-    color: #777777;
-    font-size: 0.8rem;
     width: calc(100% - 20px);
-    padding: 0.8rem;
-    margin: 0.5rem 0;
-    box-sizing: border-box; 
+}
+.checkbox-container {
+    display: flex;
+    font-family: "Nunito", Helvetica, sans-serif;
 }
 
-.profile-changes-button {
-    display: block;
-    padding: 0.7rem 1rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 0.8rem;
-}
-
-.logout-button:hover, 
-.login_button:hover, 
-.save-donation-button:hover,
-.add-donation-button:hover,
-.profile-changes-button:hover,
-.save-donation-button:hover,
-.add-donation-button-donor:hover, 
-.add-donation-button-bbank:hover {
-    background-color: #a00635; 
+.checkbox-label {
+    font-size: 0.9rem;
     color: #141414;
-}
-
-.logout-button:focus, 
-.login_button:focus, 
-.save-donation-button:focus,
-.add-donation-button:focus,
-.profile-changes-button:focus,
-.save-donation-button:focus,
-.add-donation-button-donor:focus, 
-.add-donation-button-bbank:focus {
-    background-color: #b0627a; 
-    color: #141414;
+    font-weight: 600;
 }
 
 /* My donation page styling*/
@@ -428,31 +392,26 @@ footer {
 /*Blood bank front page*/
 .bbank-container {
     display: grid;
+    max-width: 100%;
+    overflow: hidden;
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
     column-gap: 1.5rem;
     padding: 0.1rem;
 }
 
-.Current_levels, .form-bbank {
+.Current_levels, .form-bbank, .form-bbank-info {
     display: grid;
     padding: 1.5rem;
     padding-bottom: 0;
-    margin: 2rem;
+    margin-left: 2rem;
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     height: 30rem;
 }
 
-.Current_levels, .form-bbank-info {
-    display: grid;
-    padding: 1.5rem;
-    padding-bottom: 0;
-    margin: 2rem;
-    border-radius: 1rem;
-    height: 30rem;
-}
+
 
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
@@ -460,91 +419,45 @@ footer {
     flex-direction: column;   
     align-items: center;    
     justify-content: center;  
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
-.donation-form-bbank input[type="text"] {
-    border: 0.05rem solid #ddd;
-    background-color: white;
-    max-width: 30rem;
-    display: block;          
-    margin: 0 auto;          
-}
-
-.donation-form-bbank input[type="date"] {
-    border: 0.05rem solid #ddd;
-    background-color: white;
-    height: 2.4rem;
-    width: 15rem;
-    font-size: 0.9rem;
-    display: block;          
-    margin: 0 auto;  
-}
-
-.donation-form-bbank input[type="number"] {
-    border: 0.05rem solid #ddd;
-    background-color: white;
-    height: 2.4rem;
-    width: 15rem;
-    font-size: 0.9rem;
-    display: block;          
-    margin: 0 auto;  
-}
-
-.donation-form-bbank select {
-    width: 15rem; 
-    height: 2.4rem; 
-    font-size: 0.9rem; 
-    border-radius: 1.5rem; 
-    border: 0.05rem solid #ccc; 
-}
-
-.donation-form-bbank input[type="number"]::placeholder {
-    color: black; 
-    opacity: 1; 
-}
 
 .form-row {
     display: flex;
+    justify-content: space-between; /* Distributes space evenly between items */
     column-gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    align-items: center; /* Aligns items vertically in the center */
+    margin: 0 auto; /* Centers the entire row */
+    max-width: 600px; /* Set a max width for the form row */
 }
 
-.form-group-donor h3 {
-    text-align: center;
+.form-group {
+    flex: 1; /* Allows each group to take equal space */
+    margin: 0 10px; /* Adds margin between the groups */
 }
 
-.form-group-donor {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.form-group:last-child {
+    margin-right: 0;
 }
 
 .add-donation-button {
     display: block;
-    padding: 0.25rem 0.5rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
     margin-top: 1rem;
 }
 
 .add-donation-button-donor, .add-donation-button-bbank {
     display: block;
     padding: 0.25rem 0.5rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
     width: 8rem;
     height: 2rem;
     margin: 1rem auto; 
+}
 
+.profile-changes-button {
+    display: block;
+    margin-top: 0.8rem;
+    width: 9rem;
 }
 
 .save-donation-button {
@@ -554,21 +467,37 @@ footer {
     border: none;
     width: 10rem;
     height: 2rem;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
     margin: 0 auto;  
     text-align: center;
     line-height: 0.5rem;
+    padding: 0.7rem 1.2rem;
+}
 
+.save-donation-button:focus {
+    background-color: #b0627a; 
+    color: #141414;
+}
+
+.save-donation-button:hover {
+    background-color: #a00635; 
+    color: #141414;
 }
 
 .bbank-container form .input-group {
-    max-height: 2.5rem;
+    max-height: 1rem;
     display: flex;
     justify-content: center;  
     align-items: center;       
-    gap: 3rem;   
+    gap: 2rem;   
+}
+
+.bbank-container form .input-item {
+    display: flex;
+    flex-direction: column; 
+    flex: 1;
 }
 
 /*Notification log*/
@@ -580,20 +509,19 @@ footer {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
     border-radius: 1rem; 
     overflow: hidden; 
+    table-layout: fixed;
 }
 
-
 .notification-log th, .notification-log td {
+    font-family: "Nunito", Helvetica, sans-serif;
     padding: 1rem; 
     text-align: center; 
-    
 }
 
 .notification-log th {
     background-color: #f2f2f2; 
     font-weight: bold;
     color:  #141414;
-    
 }
 
 /*Unsubscribe*/
@@ -611,7 +539,7 @@ footer {
 
 .unsubscribe p {
     max-width: 37.5rem; 
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
     color: #676666;
     margin-bottom: 1rem;
@@ -633,20 +561,21 @@ footer {
     border: 0.1rem solid #ccc; 
 }
 
-.unsub-confirmation {
+.unsub-confirmation, .terms-condition  {
     display: flex; 
     align-items: center; 
-    margin-top: 1em; 
 }
 
 .unsub-confirmation p {
-    font-size: 0.8rem;
-    text-align: left;
+    font-size: 0.8rem;      
+    margin: 0;             
+    padding-left: 0.5rem;      
 }
 
-.unsub-confirmation {
-    display: flex; 
-    align-items: center; 
+.terms-condition p {
+    font-size: 1rem;      
+    margin: 0;             
+    padding-left: 0.5rem;   
 }
 
 .unsub-confirmation input[type="checkbox"] {
@@ -655,10 +584,10 @@ footer {
     height: auto;           
 }
 
-.unsub-confirmation p {
-    font-size: 0.8rem;      
-    margin: 0;             
-    padding-left: 0.5rem;      
+.terms-condition input[type="checkbox"] {
+    margin: 0;              
+    width: auto;            
+    height: auto;           
 }
 
 /* Terms and conditions */
@@ -772,6 +701,6 @@ footer {
     border-radius: 1.5rem;
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    max-width: 79rem;            /* Reduce width to a reasonable single-column size */
+    max-width: 60rem;            /* Reduce width to a reasonable single-column size */
     margin: 2rem auto;           /* Center the container horizontally with auto margins */
 }

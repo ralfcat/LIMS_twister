@@ -20,7 +20,7 @@
                 <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button>Log Out</button>
     </header>
 
     <main>
@@ -29,14 +29,14 @@
         <div class="form-container">
             <!-- Left Column -->
             <div class="form-column">
-                <h3>Name:</h3>
-                <input type="text" placeholder="Enter name">
-                <h3>Email:</h3>
-                <input type="text" placeholder="Enter email">
-                <h3>Password:</h3>
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Enter name">
+                <label for="email">Email</label>
+                <input type="text" name="email" placeholder="Enter email">
+                <label for="password">Password</label>
                 <input type="text" placeholder="Enter password">
-                <h3>Repeat password:</h3>
-                <input type="text" placeholder="Enter password">
+                <label for="new-password">New password:</label>
+                <input type="text" name="new-password" placeholder="Enter password">
             <button class="profile-changes-button">Save changes</button>
             </div>
 
@@ -54,4 +54,13 @@
     </section>
 </main>
 </body>
+
 </html>
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="about_us.html">About Us</a> |
+    <a href="integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
