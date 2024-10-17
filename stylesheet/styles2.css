@@ -9,6 +9,7 @@ html {
 }
 
 html, body {
+    font-family: "Nunito", Helvetica, sans-serif;
     height: 100%;
     margin: 0;
   }
@@ -411,7 +412,7 @@ footer {
     flex-direction: column;   
     align-items: center;    
     justify-content: center;  
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 
@@ -531,7 +532,7 @@ footer {
 
 .unsubscribe p {
     max-width: 37.5rem; 
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
     color: #676666;
     margin-bottom: 1rem;
@@ -553,20 +554,21 @@ footer {
     border: 0.1rem solid #ccc; 
 }
 
-.unsub-confirmation {
+.unsub-confirmation, .terms-condition  {
     display: flex; 
     align-items: center; 
-    margin-top: 1em; 
 }
 
 .unsub-confirmation p {
-    font-size: 0.8rem;
-    text-align: left;
+    font-size: 0.8rem;      
+    margin: 0;             
+    padding-left: 0.5rem;      
 }
 
-.unsub-confirmation {
-    display: flex; 
-    align-items: center; 
+.terms-condition p {
+    font-size: 1rem;      
+    margin: 0;             
+    padding-left: 0.5rem;   
 }
 
 .unsub-confirmation input[type="checkbox"] {
@@ -575,10 +577,10 @@ footer {
     height: auto;           
 }
 
-.unsub-confirmation p {
-    font-size: 0.8rem;      
-    margin: 0;             
-    padding-left: 0.5rem;      
+.terms-condition input[type="checkbox"] {
+    margin: 0;              
+    width: auto;            
+    height: auto;           
 }
 
 /* Terms and conditions */
