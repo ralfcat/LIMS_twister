@@ -121,8 +121,6 @@ footer {
     padding: 1.3rem;          /* Space inside the footer */
     text-align: center;     /* Center text and links */
     position: relative;
-    bottom: 0;
-    width: 100%;            /* Ensures the footer spans the entire width of the page */
     margin-top: auto;
   }
   
