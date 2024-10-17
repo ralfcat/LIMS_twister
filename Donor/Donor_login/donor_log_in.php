@@ -119,19 +119,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form name ="loginform" action="donor_log_in.php"  method="POST" onsubmit="return validateForm()">
                 <div class="input-group">
-                <input type="text" id="email" name="email" placeholder="Email" />
+                    <input type="text" id="email" name="email" placeholder="Email" />
                 </div>
                 <div id="error-message" class="error-message">
-                <?php echo $error_email; ?>
+                    <?php echo $error_email; ?>
                 </div>
+
                 <div class="input-group">
-                <input type="password" id="password" name="password" placeholder="Password" />
+                    <input type="password" id="password" name="password" placeholder="Password" />
                 </div>
                 <div id="error-message2" class="error-message">
-                <?php echo $error_password; ?>
-                <?php echo $error_activation; ?>
+                    <?php echo $error_password; ?>
+                    <?php echo $error_activation; ?>
                 </div>
-                <button class="login_button">Log in</button>
+                
+                <button>Log in</button>
             </form>
 
             <div class="new-user">
@@ -149,5 +151,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>
+
 </html>
 

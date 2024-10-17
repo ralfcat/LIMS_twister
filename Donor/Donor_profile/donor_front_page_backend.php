@@ -111,7 +111,7 @@ $link->close();
                 <li><a href="/donor/donor_profile/donor_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>   
+        <button onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>   
     </header>
 
     <main>

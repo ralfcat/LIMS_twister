@@ -45,16 +45,39 @@ body {
     flex-direction: column;
 }
 
-input {
+input, select {
     width: calc(100% - 20px);
-    padding: 0.9rem;
+    padding: 0.7rem;
     margin: 0.5rem 0;
-    border: 0.1rem solid #ddd;
+    border: 0.05rem solid #ddd;
     border-radius: 1.5rem;
     background-color: #f1f1f1; 
     font-size: 0.9rem; 
     box-sizing: border-box; 
     color: #777777;
+}
+
+select {
+    width: 15rem; 
+}
+
+input:hover, select:hover {
+    background-color: #e1e1e1; 
+}
+
+input:focus, select:focus {
+    outline: none;            
+    border-color: #a00635;  
+    background-color: #e1e1e1;   
+}
+
+label {
+    font-family: "Nunito", Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    color: #141414 ; 
+    margin-top: 1rem;
+    font-size: 1rem;
 }
 
 /* Header and navigaton bar */
@@ -105,7 +128,7 @@ nav .active {
     border-radius: 0.2rem;       
 }
 
-.logout-button {
+button {
     padding: 0.7rem 1.2rem;
     background-color: #af093c;
     color: white;
@@ -113,6 +136,22 @@ nav .active {
     border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
+    min-width: 1.5rem;
+}
+
+button > a {
+    text-decoration: none;
+    color: white;
+}
+
+button:focus {
+    background-color: #b0627a; 
+    color: #141414;
+}
+
+button:hover {
+    background-color: #a00635; 
+    color: #141414;
 }
 
 footer {
@@ -187,27 +226,12 @@ footer {
 .graph {
     margin: 0 auto; 
     height: auto; 
+    padding:0.9rem
 }
 
 .graph select {
-    height: 1.5rem; 
-    width: 30%;
-    border-radius: 1.5rem; 
-    border: 1px solid #ccc; 
-    background-color: #f1f1f1; 
-    font-size: 0.9rem;
+    height: auto;
     text-align: center;
-    box-sizing: border-box; 
-}
-
-.graph select:hover {
-    background-color: #e1e1e1;
-}
-
-.graph select:focus {
-    outline: none; 
-    border-color: #a00635; 
-    background-color: #fff; 
 }
 
 /* Login pages */
@@ -232,40 +256,6 @@ footer {
     margin-bottom: 0.3rem; 
     font-size: 0.9rem; 
     text-align: left;
-}
-
-.login-form input {
-    width: 100%;
-    padding: 0.9rem;
-    margin: 0.5rem 0;
-    border: 0.05rem solid #ddd;
-    border-radius: 1.5rem;
-    background-color: #f1f1f1; 
-    font-size: 0.7rem; 
-    box-sizing: border-box; 
-}
-
-.login-form input[type="email"],
-.login-form input[type="password"] {
-    padding: 0.7rem; 
-    margin: 0; 
-}
-.logout-button > a {
-    text-decoration: none;
-    color: white;
-}
-
-.login_button{
-    display: block;
-    padding: 0.7rem 1.7rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 2rem;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 0.7rem;
-    margin: 1.5rem auto 0;;
 }
 
 
@@ -348,53 +338,13 @@ footer {
 }
 
 .form-column select {
-    width: 17rem; 
-    height: 3rem; 
-    border-radius: 1.5rem; 
-    border: 1px solid #ccc; 
-    background-color: #f1f1f1; 
-    color: #777777;
-    font-size: 0.8rem;
     width: calc(100% - 20px);
-    padding: 0.8rem;
-    margin: 0.5rem 0;
-    box-sizing: border-box; 
 }
 
 .profile-changes-button {
     display: block;
-    padding: 0.7rem 1rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
     margin-top: 0.8rem;
-}
-
-.logout-button:hover, 
-.login_button:hover, 
-.save-donation-button:hover,
-.add-donation-button:hover,
-.profile-changes-button:hover,
-.save-donation-button:hover,
-.add-donation-button-donor:hover, 
-.add-donation-button-bbank:hover {
-    background-color: #a00635; 
-    color: #141414;
-}
-
-.logout-button:focus, 
-.login_button:focus, 
-.save-donation-button:focus,
-.add-donation-button:focus,
-.profile-changes-button:focus,
-.save-donation-button:focus,
-.add-donation-button-donor:focus, 
-.add-donation-button-bbank:focus {
-    background-color: #b0627a; 
-    color: #141414;
+    width: 9rem;
 }
 
 /* My donation page styling*/
@@ -465,62 +415,25 @@ footer {
     margin: 0 auto;
 }
 
-.donation-form-bbank input[type="text"] {
-    border: 0.05rem solid #ddd;
-    background-color: white;
-    max-width: 30rem;
-    display: block;          
-    margin: 0 auto;          
-}
-
-.donation-form-bbank input[type="date"] {
-    border: 0.05rem solid #ddd;
-    background-color: white;
-    height: 2.4rem;
-    width: 15rem;
-    font-size: 0.9rem;
-    display: block;          
-    margin: 0 auto;  
-}
-
-.donation-form-bbank input[type="number"] {
-    border: 0.05rem solid #ddd;
-    background-color: white;
-    height: 2.4rem;
-    width: 15rem;
-    font-size: 0.9rem;
-    display: block;          
-    margin: 0 auto;  
-}
-
-.donation-form-bbank select {
-    width: 15rem; 
-    height: 2.4rem; 
-    font-size: 0.9rem; 
-    border-radius: 1.5rem; 
-    border: 0.05rem solid #ccc; 
-}
-
-.donation-form-bbank input[type="number"]::placeholder {
-    color: black; 
-    opacity: 1; 
-}
 
 .form-row {
     display: flex;
+    justify-content: space-between; /* Distributes space evenly between items */
     column-gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    align-items: center; /* Aligns items vertically in the center */
+    margin: 0 auto; /* Centers the entire row */
+    max-width: 600px; /* Set a max width for the form row */
 }
 
-.form-group-donor h3 {
-    text-align: center;
+.form-group {
+    flex: 1; /* Allows each group to take equal space */
+    margin: 0 10px; /* Adds margin between the groups */
 }
 
-.form-group-donor {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+.form-group:last-child {
+    margin-right: 0;
 }
+
 
 .add-donation-button {
     display: block;
@@ -562,15 +475,20 @@ footer {
     margin: 0 auto;  
     text-align: center;
     line-height: 0.5rem;
-
 }
 
 .bbank-container form .input-group {
-    max-height: 2.5rem;
+    max-height: 1rem;
     display: flex;
     justify-content: center;  
     align-items: center;       
-    gap: 3rem;   
+    gap: 2rem;   
+}
+
+.bbank-container form .input-item {
+    display: flex;
+    flex-direction: column; 
+    flex: 1;
 }
 
 /*Notification log*/

@@ -86,7 +86,7 @@ $link->close();
             <ul>
                 <li class="active"><a href="donor_front_page.php">My donations</a></li>
                 <li><a href="">Profile</a></li>
-                <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>
+                <button onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button>
             </ul>
     </nav>
     </header>

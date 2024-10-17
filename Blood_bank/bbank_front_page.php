@@ -65,11 +65,10 @@ $regional_levels = get_regional_levels();
                 <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button"> <a href="bb_log_out.php">Log Out</a></button>
+        <button> <a href="bb_log_out.php">Log Out</a></button>
     </header>
     <main>
         <h1>Blood level inventory</h1>
-
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
                 <p id="notif-message"> </p>
@@ -120,51 +119,80 @@ $regional_levels = get_regional_levels();
 
                 
             </div>
-
-            <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--We need to change this-->
+            <form action="bbank_front_page_backend.php" method="POST" class="form-bbank">
                 <input type="hidden" name="to_do" value="update_threshold" />
-                <!-- <input type='hidden' name='mid' value=''> -->
                 <h2>Notification Thresholds</h2>
+
                 <div class="input-group">
-                    <label>O+<input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>
-                    <label>O-  <input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
+                    <div class="input-item">
+                        <label for="O+">O+</label>
+                        <input type="text" name="O+" id="O+" value="<?php echo get_threshold($current_levels, "O+"); ?>">
+                    </div>
+                    <div class="input-item">
+                        <label for="O-">O-</label>
+                        <input type="text" name="O-" id="O-" value="<?php echo get_threshold($current_levels, "O-"); ?>">
+                    </div>
                 </div>
+
                 <div class="input-group">
-                    <label>A+<input type="text" name="A+" value=<?php echo get_threshold($current_levels, "A+"); ?>></label>
-                    <label>A-  <input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
+                    <div class="input-item">
+                        <label for="A+">A+</label>
+                        <input type="text" name="A+" id="A+" value="<?php echo get_threshold($current_levels, "A+"); ?>">
+                    </div>
+                    <div class="input-item">
+                        <label for="A-">A-</label>
+                        <input type="text" name="A-" id="A-" value="<?php echo get_threshold($current_levels, "A-"); ?>">
+                    </div>
                 </div>
+
                 <div class="input-group">
-                    <label>B+<input type="text" name="B+" value=<?php echo get_threshold($current_levels, "B+"); ?>></label>
-                    <label>B-  <input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
+                    <div class="input-item">
+                        <label for="B+">B+</label>
+                        <input type="text" name="B+" id="B+" value="<?php echo get_threshold($current_levels, "B+"); ?>">
+                    </div>
+                    <div class="input-item">
+                        <label for="B-">B-</label>
+                        <input type="text" name="B-" id="B-" value="<?php echo get_threshold($current_levels, "B-"); ?>">
+                    </div>
                 </div>
+
                 <div class="input-group">
-                    <label>AB+<input type="text" name="AB+" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
-                    <label>AB-  <input type="text" name="AB-" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
+                    <div class="input-item">
+                        <label for="AB+">AB+</label>
+                        <input type="text" name="AB+" id="AB+" value="<?php echo get_threshold($current_levels, "AB+"); ?>">
+                    </div>
+                    <div class="input-item">
+                        <label for="AB-">AB-</label>
+                        <input type="text" name="AB-" id="AB-" value="<?php echo get_threshold($current_levels, "AB-"); ?>">
+                    </div>
                 </div>
-                <input class="save-donation-button" type="submit" value="SAVE">
+
+                <input class="save-donation-button" type="submit" value="Save">
             </form>
         </div>
         
         <section class="donation-form-bbank">
     <form method="POST" action="bbank_front_page_backend.php">
         <input type="hidden" name="to_do" value="update_blood" />
+
         <div class="form-row">
-            <div class="form-group-bbank">
-                <h3>Bloodtype</h3>
-                <select name="btypes" required>
-                    <?php
+    <div class="form-group">
+        <label for="bloodType">Blood Type:</label>
+        <select name="bloodType" id="bloodType" required>
+            <option value="">Select Blood Type</option>
+            <?php
                     foreach ($current_levels as $level) {
                         $type = htmlspecialchars($level->blood_type);
                         echo "<option value='$type'>$type</option>";
                     }
                     ?>
-                </select><br>
-            </div>
-            <div class="form-group-bbank">
-                <h3>Units</h3>
-                <input type="number" placeholder="Enter Units" name="units" required>
-            </div>
-        </div>
+        </select><br>
+    </div>
+    <div class="form-group">
+        <label for="units">Units:</label>
+        <input type="number" name="units" id="units" required placeholder="Enter Units">
+    </div>
+</div>
         <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
         </form>
         </section>

@@ -132,7 +132,7 @@ $stmt->close();
                 <li class="active"><a href="donor_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button> 
+        <button class="button" onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button> 
     </header>
 
     <main>

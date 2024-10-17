@@ -20,7 +20,7 @@
                 <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button">Log Out</button>
+        <button class="button">Log Out</button>
     </header>
 
     <main>

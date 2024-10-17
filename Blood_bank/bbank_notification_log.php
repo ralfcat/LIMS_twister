@@ -24,7 +24,7 @@
                 <li><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="logout-button"><a href="bb_log_out.php">Log Out</a></button>
+        <button><a href="bb_log_out.php">Log Out</a></button>
     </header>
 
     <main> <!-- Added <main> tag to encompass main content -->
