@@ -694,6 +694,6 @@ footer {
     border-radius: 1.5rem;
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    max-width: 79rem;            /* Reduce width to a reasonable single-column size */
+    max-width: 60rem;            /* Reduce width to a reasonable single-column size */
     margin: 2rem auto;           /* Center the container horizontally with auto margins */
 }

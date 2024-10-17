@@ -76,8 +76,8 @@ $reg_res = $link->query($reg_req);
         </div>
         <nav>
             <ul>
-                <li><a href="Donor/Donor_login/donor_log_in.php">Donor Login</a></li>
-                <li><a href="Blood_bank/bbank_log_in.php">Blood Bank Login</a></li>
+                <li><a href="/Donor/Donor_login/donor_log_in.php">Donor Login</a></li>
+                <li><a href="/Blood_bank/bbank_log_in.php">Blood Bank Login</a></li>
             </ul>
         </nav>
     </header>
