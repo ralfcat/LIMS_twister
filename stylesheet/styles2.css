@@ -126,7 +126,8 @@ nav .active {
     padding: 0.7rem 1.2rem; 
     margin-top: -0.7rem;
     margin-bottom: -2rem; 
-    border-radius: 0.2rem;       
+    border-radius: 0.2rem;     
+    
 }
 
 button {
@@ -413,8 +414,13 @@ footer {
     align-items: center;    
     justify-content: center;  
     margin: 1rem auto;
-}
 
+/*Form blood bank inventory input style*/    
+}
+.donation-form-bbank input, .donation-form-bbank select{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+}
 .form-group-bbank input[type="number"] {
     width: 15rem;
 }
@@ -422,7 +428,7 @@ footer {
 .donation-form-bbank .form-group-donor input[type="date"], .form-group-donor select {
     width: 14rem;
     height: 2.5rem;
-    border: 0.02rem solid #333; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
 }
 
