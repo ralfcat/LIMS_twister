@@ -8,8 +8,7 @@ include 'db_connection.php';
 
 
 
-    echo "<script>console.log('hello')</script>";
-    $email = $_GET['email'];
+    // $email = $_GET['email'];
     $email = 'admin@admin.com';
     
 

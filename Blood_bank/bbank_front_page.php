@@ -77,10 +77,11 @@ $region = curr_region();
                 <div class="graph">
                     <canvas id="bloodStockChart" width="500" height="300"></canvas>
 
-                    <select id="area-select" onchange="updateGraph('<?php echo $email; ?>', <?php echo get_rid(); ?> , '<?php echo $region; ?>');" style="margin-top: 20px;">
+                    <select id="area-select" onchange="updateGraph('<?php echo $email; ?>', '<?php echo $region; ?>');" style="margin-top: 20px;">
                         <!-- <option value="" disabled selected>Change Area</option> -->
-                        <option value="local">Local Levels</option>
                         <option value="region" selected>Regional Levels</option>
+                        <option value="local">Local Levels</option>
+                        
                     </select>
                 </div>
 
@@ -143,17 +144,18 @@ $region = curr_region();
 
     </main>
     <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
-    <script src="graph/graph_functions.js"></script>
+    <script src="graphs/graph_functions.js"></script>
     <script>
         window.onload = function() {
             console.log('I am here');
 
 
 
-            updateGraph('<?php echo $email; ?>', <?php echo get_rid(); ?>, '<?php echo $region; ?>');
+            updateGraph('<?php echo $email; ?>','<?php echo $region; ?>' );
             console.log('I am now here');
         };
     </script>
+   
 </body>
 
 <footer>
