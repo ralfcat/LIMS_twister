@@ -373,7 +373,7 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.donation-history ul li {
+.donation-history ul li, .upcoming-donations ul li  {
     padding: 0.8rem 0;
 }
 
@@ -398,6 +398,7 @@ footer {
     grid-template-columns: 1fr 1fr;
     column-gap: 1.5rem;
     padding: 0.1rem;
+    margin-right: 1.5rem;
 }
 
 .Current_levels, .form-bbank, .form-bbank-info {
@@ -411,8 +412,6 @@ footer {
     height: 30rem;
 }
 
-
-
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
     display: flex;
@@ -422,14 +421,24 @@ footer {
     margin: 1rem auto;
 }
 
+.form-group-bbank input[type="number"] {
+    width: 15rem;
+}
+/*Forms on my donations page*/
+.donation-form-bbank .form-group-donor input[type="date"], .form-group-donor select {
+    width: 14rem;
+    height: 2.5rem;
+    border: 0.02rem solid #333; 
+
+}
 
 .form-row {
     display: flex;
-    justify-content: space-between; /* Distributes space evenly between items */
+    justify-content: space-between; 
     column-gap: 1.5rem;
-    align-items: center; /* Aligns items vertically in the center */
-    margin: 0 auto; /* Centers the entire row */
-    max-width: 600px; /* Set a max width for the form row */
+    align-items: center; 
+    margin: 0 auto; 
+    max-width: 30rem; 
 }
 
 .form-group {
