@@ -24,7 +24,8 @@ $error_password = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $password_hash = hash("md5", $password);
+    $salted = $password . $email;
+    $password_hash = hash("md5", $salted);
 
     // Use prepared statements to prevent SQL injection
     $email_req = "SELECT email, password FROM Blood_Bank WHERE email = ?";
