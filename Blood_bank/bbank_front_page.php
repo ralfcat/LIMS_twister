@@ -195,13 +195,13 @@ $regional_levels = get_regional_levels();
     </main>
     <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
 
+    <footer>
+        <p>&copy; 2024 Blood Alert</p>
+        <nav>
+            <a href="../about_us.html">About Us</a> |
+            <a href="../integrity_policy.html">Integrity Policy</a> |
+            <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+        </nav>
+    </footer>
 </body>
 
-<footer>
-  <p>&copy; 2024 Blood Alert</p>
-  <nav>
-    <a href="../about_us.html">About Us</a> |
-    <a href="../integrity_policy.html">Integrity Policy</a> |
-    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
-  </nav>
-</footer>

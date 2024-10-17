@@ -34,11 +34,8 @@ if (isset($messages[$_GET['msg']])) {
     echo "<script> document.addEventListener('DOMContentLoaded', function() {";
     echo "let x = document.getElementById('msgs');";
     echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msg']]) . '";';
-    echo "}); </script>";
-    
+    echo "}); </script>";   
 }
-
-
 ?>
 
 
@@ -71,8 +68,61 @@ if (isset($messages[$_GET['msg']])) {
     </header>
 
     <main>
+        <script>
+            function togglePassword() {
+                var oldPasswordField = document.getElementById('password');
+                var newPasswordField = document.getElementById('repeat_password');
+
+                if (oldPasswordField.type === "password" || newPasswordField.type === "password") {
+                    oldPasswordField.type = "text";
+                    newPasswordField.type = "text";
+                    button.textContent = "Hide passwords";
+                } else {
+                    oldPasswordField.type = "password";
+                    newPasswordField.type = "password";
+                    button.textContent = "Show passwords";
+                }
+            }
+    
+            function validate_form() {
+                var new_pass = document.getElementById('password').value;
+                var renew_pass = document.getElementById('repeat_password').value;
+                var email = document.getElementById('email').value;
+                var msg = document.getElementById('msgs');
+                msg.innerHTML = '';
+
+                let symbols = "!@#$%^&*()_+";
+                symbols = [...symbols];
+
+                if (new_pass.innerHTML != "") {
+                    if (renew_pass.innerHTML == "") {
+                        msg.innerHTML = "Please fill in both password fields";
+                        return false;
+                    }
+                    else if (new_pass != renew_pass) {
+                        msg.innerHTML = "Passwords must match";
+                        return false;
+
+                    }
+
+                }
+
+                if (new_pass.length < 6 || !symbols.some(s => new_pass.includes(s))) {
+                    msg.innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short (min. 6 characters)</li> <li>The password does not contain a symbol</li></ul>";
+                    return false;
+                }
+                if (!email.includes('@')) {
+                    msg.innerHTML = "Please enter a valid email";
+                    return false;
+                }
+
+
+
+            }
+        </script>
+
         <h1>Blood bank ID</h1>
-        <form action="bbank_front_page_backend.php" method="post" class="form-bbank-info" onsubmit = "return validate_form();">
+        <form action="bbank_front_page_backend.php" method="post"  onsubmit = "return validate_form();">
             <section class="donation-form">
         
                 <div class="form-container">
@@ -84,26 +134,24 @@ if (isset($messages[$_GET['msg']])) {
                         <h3>Email:</h3>
                         <input type="text" id = "email" placeholder="Enter email" name="new-email" value='<?php echo $account_info['email'] ?>'>
                         <p class="error-message"><?php echo $error_password; ?></p>
-                        
                         <h3>Password:</h3>
-                    <input type="password" id="password" name="password" placeholder="Enter password">
-                    <p class="error-message"><?php echo $error_password; ?></p>
-                        <button class="profile-changes-button" type="button" onclick="togglePassword()">Show passwords</button>
-                        <h3>New password:</h3>
-                        <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
+                            <input type="password" id="password" name="password" placeholder="Enter password">
+                            <p class="error-message"><?php echo $error_password; ?></p>
+                                <button class="profile-changes-button" type="button" onclick="togglePassword()">Show passwords</button>
+                                <h3>New password:</h3>
+                                <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
 
-                        <input type="hidden" name="to_do" value="update_bb_info" />
-                        <button class="profile-changes-button">Save changes</button>
-                        <br>
-                       
-                    <p class="success-message" id = "msgs"></p>
-                    
-                  
+                                <input type="hidden" name="to_do" value="update_bb_info" />
+                                <button class="profile-changes-button">Save changes</button>
+                                <br>
+                        
+                            <p class="success-message" id = "msgs"></p>
+
                     </div>
 
                     <!-- Right Column -->
                     <div class="form-column">
-                        <h3>Region:</h3>
+                    <h3>Region:</h3>
                         <select name="regions">
 
                             <?php
@@ -117,87 +165,23 @@ if (isset($messages[$_GET['msg']])) {
                                 }
                             }
                             ?>
-
                         </select>
-
+                        
                     </div>
+                </div>
+            </section>
         </form>
-
-
-
-
-        </div>
-
-
-
-
-        </section>
     </main>
-    </body>
+</body>
 
-<!-- <footer>
-    <p>&copy; 2024 Blood Alert</p>
-    <nav>
-        <a href="../about_us.html">About Us</a> |
-        <a href="../integrity_policy.html">Integrity Policy</a> |
-        <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
-    </nav>
-</footer> -->
-
-
-<script>
-        function togglePassword() {
-            var oldPasswordField = document.getElementById('password');
-            var newPasswordField = document.getElementById('repeat_password');
-
-            if (oldPasswordField.type === "password" || newPasswordField.type === "password") {
-                oldPasswordField.type = "text";
-                newPasswordField.type = "text";
-                button.textContent = "Hide passwords";
-            } else {
-                oldPasswordField.type = "password";
-                newPasswordField.type = "password";
-                button.textContent = "Show passwords";
-            }
-        }
-    
-    
-    function validate_form() {
-        var new_pass = document.getElementById('password').value;
-        var renew_pass = document.getElementById('repeat_password').value;
-        var email = document.getElementById('email').value;
-        var msg = document.getElementById('msgs');
-        msg.innerHTML = '';
-
-        let symbols = "!@#$%^&*()_+";
-        symbols = [...symbols];
-
-        if (new_pass.innerHTML != "") {
-            if (renew_pass.innerHTML == "") {
-                msg.innerHTML = "Please fill in both password fields";
-                return false;
-            }
-            else if (new_pass != renew_pass) {
-                msg.innerHTML = "Passwords must match";
-                return false;
-
-            }
-
-        }
-
-        if (new_pass.length < 6 || !symbols.some(s => new_pass.includes(s))) {
-            msg.innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short (min. 6 characters)</li> <li>The password does not contain a symbol</li></ul>";
-            return false;
-        }
-        if (!email.includes('@')) {
-            msg.innerHTML = "Please enter a valid email";
-            return false;
-        }
-
-
-
-    }
-    </script>
-
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../../about_us.html">About Us</a> |
+    <a href="../../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>
+
 

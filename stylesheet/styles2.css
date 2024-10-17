@@ -156,13 +156,15 @@ button:hover {
 }
 
 footer {
+    font-family: "Nunito", Helvetica, sans-serif;
+    letter-spacing: 0.055em;
     background-color: white; /* Background */
-    color: #af093c;           /* Text */
-    padding: 1.3rem;          /* Space inside the footer */
+    color: #af093c;           
+    padding: 1.5rem;          /* Space inside the footer */
     text-align: center;     /* Center text and links */
     position: relative;
     bottom: 0;
-    width: 100%;            /* Ensures the footer spans the entire width of the page */
+    width: 100%;            
     margin-top: auto;
   }
   
@@ -314,12 +316,9 @@ footer {
 
 /* Styling for donor info page */
 .form-container {
-    display: flex;           
-    justify-content: space-between; 
-    align-items: stretch;
+    display: flex;  
     padding: 2rem;
-    border-radius: 1.5rem;       
-    margin: 20 ;
+    border-radius: 1.5rem; 
     background-color: white;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     max-width: 70rem; 
@@ -341,7 +340,16 @@ footer {
 .form-column select {
     width: calc(100% - 20px);
 }
+.checkbox-container {
+    display: flex;
+    font-family: "Nunito", Helvetica, sans-serif;
+}
 
+.checkbox-label {
+    font-size: 0.9rem;
+    color: #141414;
+    font-weight: 600;
+}
 
 /* My donation page styling*/
 .dashboard {
@@ -376,31 +384,26 @@ footer {
 /*Blood bank front page*/
 .bbank-container {
     display: grid;
+    max-width: 100%;
+    overflow: hidden;
     grid-template-rows: auto;
     grid-template-columns: 1fr 1fr;
     column-gap: 1.5rem;
     padding: 0.1rem;
 }
 
-.Current_levels, .form-bbank {
+.Current_levels, .form-bbank, .form-bbank-info {
     display: grid;
     padding: 1.5rem;
     padding-bottom: 0;
-    margin: 2rem;
+    margin-left: 2rem;
     background-color: white;
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     height: 30rem;
 }
 
-.Current_levels, .form-bbank-info {
-    display: grid;
-    padding: 1.5rem;
-    padding-bottom: 0;
-    margin: 2rem;
-    border-radius: 1rem;
-    height: 30rem;
-}
+
 
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
@@ -498,20 +501,19 @@ footer {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
     border-radius: 1rem; 
     overflow: hidden; 
+    table-layout: fixed;
 }
 
-
 .notification-log th, .notification-log td {
+    font-family: "Nunito", Helvetica, sans-serif;
     padding: 1rem; 
     text-align: center; 
-    
 }
 
 .notification-log th {
     background-color: #f2f2f2; 
     font-weight: bold;
     color:  #141414;
-    
 }
 
 /*Unsubscribe*/

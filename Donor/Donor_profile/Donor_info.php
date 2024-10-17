@@ -135,7 +135,7 @@ $stmt->close();
         <button onclick="window.location.href='/Donor/Donor_login/donor_log_out.php';">Log Out</button> 
     </header>
 
-    <main>
+ <main>
     <!-- SCRIPTS FOR SHOWING/HIDING PASSWORD-->
     <script>
         function togglePassword() {
