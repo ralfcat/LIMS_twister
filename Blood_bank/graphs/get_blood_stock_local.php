@@ -1,7 +1,7 @@
 <?php
 include 'db_connection.php';
 include '../bbank_front_page_backend.php';
-use function FrontEnd\get_stock as get_stock;
+use function FrontEnd\get_stocks as get_stocks;
 use function FrontEnd\get_regional_levels as get_regional_levels;
 
 
@@ -47,27 +47,27 @@ if ($_GET['area'] == 'region') {
 } 
 
 else {
-    echo "Hello";
+    echo "<script>console.log('hello')</script>";
     $email = $_GET['email'];
     
 
-    $current_levels = get_stock($email);
+    $current_levels = get_stocks();
 
     $blood_types = [];
     $stock_levels = [];
     $thresholds = [];
 
-    foreach ($current_levels as $level) {
-        $blood_types[] = $level->blood_type;
-        $stock_levels[] =  (int)$level->current_stock;
-        $thresholds[] = (int) $level->thres_level;
+    foreach ($current_levels as $l) {
+        $blood_types[] = $l['blood_type'];
+        $stock_levels[] =  (int)$l['stock_level'];
+        $thresholds[] = $l['threshold_level'];
    
     }
 
      // Return the data as a JSON object
      echo json_encode([
-        'blood_types' => $blood_types,
-        'stock_levels' => $stock_levels,
-        'thresholds' => $thresholds
+        'blood_types_local' => $blood_types,
+        'stock_levels_local' => $stock_levels,
+        'thresholds_local' => $thresholds
     ]);
 }

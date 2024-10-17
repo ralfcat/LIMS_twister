@@ -3,8 +3,8 @@ function updateGraph(email, regionId, region) {
   console.log(`The value of area select is ${areaSelect}`);
 
   if (areaSelect == "region") {
-    console.log(`The region id is where areaselect is region ${regionId}`);
-    fetch(`/graph/get_blood_stock.php?area=region&email=${email}&rid=${regionId}`)
+    console.log('Fetching regional levels...');
+    fetch(`/graph/get_blood_stock_region.php?email=${email}`) 
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -127,7 +127,7 @@ function updateGraph(email, regionId, region) {
         console.error("Error fetching blood stock data:", error);
       });
   } else {
-    console.log(`The giuhohio ${regionId}`);
+    console.log(`The giuhohio ${email}`);
     fetch(`/graph/get_blood_stock.php?area=local&email=${email}&rid=${regionId}`)
       .then((response) => {
         if (!response.ok) {
@@ -136,10 +136,11 @@ function updateGraph(email, regionId, region) {
         return response.json();
       })
       .then((data) => {
+        console.log(`in the local place `);
         const bloodTypes = data.blood_types;
         const stockLevels = data.stock_levels;
         const thresholds = data.thresholds;
-        console.log(`The region id is  ${regionId}`);
+        
 
         const ctx = document.getElementById("bloodStockChart").getContext("2d");
         if (Chart.getChart("bloodStockChart")) {
@@ -186,7 +187,7 @@ function updateGraph(email, regionId, region) {
               legend: { display: false },
               title: {
                 display: true,
-                text: `Local Blood Stock Levels`,
+                text: `Regional Blood Stock Levels in ${region}`,
                 font: { size: 18, family: "Nunito", weight: "bold" },
                 color: "rgba(160, 6, 53)",
                 padding: { top: 10, bottom: 30 },
