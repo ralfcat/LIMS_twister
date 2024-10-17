@@ -31,7 +31,8 @@ function updateGraph(email, curr_region) {
                 data: {
                     labels: bloodTypes,
                     datasets: [{
-                        data: stockLevels.map((level, i) => level / thresholds[i]),
+                        // data: stockLevels.map((level, i) => level / thresholds[i]),
+                        data: stockLevels,
                         backgroundColor: 'rgba(175, 9, 60)',
                         borderColor: 'rgba(175, 9, 60)',
                         hoverBackgroundColor: 'rgba(160, 6, 53)',
@@ -120,9 +121,38 @@ function updateGraph(email, curr_region) {
                                     yAdjust: -10
                                 }
                             }
-                        }
+                        },
+                        
+                    },
+                    
+                },
+                plugins: [{
+                    // Plugin to draw threshold lines
+                    id: 'thresholdLines',
+                    afterDatasetsDraw: function(chart) {
+                        const ctx = chart.ctx;
+                        const xAxis = chart.scales.x;
+                        const yAxis = chart.scales.y;
+            
+                        ctx.save();
+            
+                        thresholds.forEach((threshold, i) => {
+                            const x = xAxis.getPixelForValue(i);
+                            const y = yAxis.getPixelForValue(threshold);
+            
+                            // Draw horizontal line at the threshold value
+                            ctx.beginPath();
+                            ctx.moveTo(x - (xAxis.width / stockLevels.length) / 2, y);
+                            ctx.lineTo(x + (xAxis.width / stockLevels.length) / 2, y);
+                            ctx.strokeStyle = 'black';  // Change the color of the threshold line
+                            ctx.lineWidth = 2;
+                            ctx.stroke();
+                            ctx.closePath();
+                        });
+            
+                        ctx.restore();
                     }
-                }
+                }]
             });
         })
         .catch(error => {
@@ -151,7 +181,7 @@ function updateGraph(email, curr_region) {
                     data: {
                         labels: bloodTypes,
                         datasets: [{
-                            data: stockLevels.map((level, i) => level / thresholds[i]),
+                            data: stockLevels,
                             backgroundColor: 'rgba(175, 9, 60)',
                             borderColor: 'rgba(175, 9, 60)',
                             hoverBackgroundColor: 'rgba(160, 6, 53)',
@@ -242,7 +272,34 @@ function updateGraph(email, curr_region) {
                                 }
                             }
                         }
-                    }
+                    },
+                    plugins: [{
+                        // Plugin to draw threshold lines
+                        id: 'thresholdLines',
+                        afterDatasetsDraw: function(chart) {
+                            const ctx = chart.ctx;
+                            const xAxis = chart.scales.x;
+                            const yAxis = chart.scales.y;
+                
+                            ctx.save();
+                
+                            thresholds.forEach((threshold, i) => {
+                                const x = xAxis.getPixelForValue(i);
+                                const y = yAxis.getPixelForValue(threshold);
+                
+                                // Draw horizontal line at the threshold value
+                                ctx.beginPath();
+                                ctx.moveTo(x - (xAxis.width / stockLevels.length) / 2, y);
+                                ctx.lineTo(x + (xAxis.width / stockLevels.length) / 2, y);
+                                ctx.strokeStyle = 'black';  // Change the color of the threshold line
+                                ctx.lineWidth = 2;
+                                ctx.stroke();
+                                ctx.closePath();
+                            });
+                
+                            ctx.restore();
+                        }
+                    }]
                 });
             })
             .catch(error => {
