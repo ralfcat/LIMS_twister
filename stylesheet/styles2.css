@@ -121,8 +121,6 @@ footer {
     padding: 1.3rem;          /* Space inside the footer */
     text-align: center;     /* Center text and links */
     position: relative;
-    bottom: 0;
-    width: 100%;            /* Ensures the footer spans the entire width of the page */
     margin-top: auto;
   }
   
@@ -411,7 +409,7 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.donation-history ul li {
+.donation-history ul li, .upcoming-donations ul li  {
     padding: 0.8rem 0;
 }
 
