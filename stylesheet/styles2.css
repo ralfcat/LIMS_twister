@@ -412,7 +412,6 @@ footer {
 }
 
 
-
 /*Form settings for both my donations and blood bank front page */
 .donation-form-bbank {
     display: flex;
@@ -422,14 +421,21 @@ footer {
     margin: 1rem auto;
 }
 
+/*Forms on my donations page*/
+.donation-form-bbank .form-group-donor input[type="date"], .form-group-donor select {
+    width: 14rem;
+    height: 2.5rem;
+    border: 0.02rem solid #333; 
+
+}
 
 .form-row {
     display: flex;
-    justify-content: space-between; /* Distributes space evenly between items */
+    justify-content: space-between; 
     column-gap: 1.5rem;
-    align-items: center; /* Aligns items vertically in the center */
-    margin: 0 auto; /* Centers the entire row */
-    max-width: 600px; /* Set a max width for the form row */
+    align-items: center; 
+    margin: 0 auto; 
+    max-width: 30rem; 
 }
 
 .form-group {
