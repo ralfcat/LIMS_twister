@@ -4,6 +4,7 @@ namespace FrontEnd;
 
 require_once '../email_notif.php';
 
+
 use function EmailNotif\send_emails as send_emails;
 
 error_reporting(E_ERROR | E_PARSE);
@@ -79,10 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header('Location: bbank_front_page.php?msg=blood_stock_unchanged');
                     exit;
                 } else {
-    
+
                     update_thresholds($key, $value);
-
-
                 }
             }
         }
@@ -93,11 +92,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else if ($to_do == "update_bb_info") {
         write_console("you are trying to update your blood bank info");
         $new_name = $_POST['new-name'];
+        $new_pass = $_POST['password'];
         $new_name = (string) $new_name;
         $new_email = $_POST['new-email'];
         $new_region = $_POST['regions'];
         write_console("the new name is $new_name");
-        update_account_info($new_name, $new_email, $new_region);
+        update_account_info($new_name, $new_email, $new_region, $new_pass);
     }
 }
 
@@ -248,18 +248,46 @@ function get_regional_levels()
     return $levels;
 }
 
-function update_account_info($new_name, $new_email, $new_region)
+function update_account_info($new_name, $new_email, $new_region, $new_password)
 {
     global $email;
+    global $success_message;
+    write_js("console.log('I am in the update_account_info account info section');");
+  
     $link = open_db();
     $rid = (int) get_region_id($new_region);
-    $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ? WHERE email = ?";
-    $stmt = $link->prepare($update_req);
-    $stmt->bind_param("ssss", $new_name, $new_email, $rid, $email);
+    if ($new_password == "") {
+        $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ? WHERE email = ?";
+        $stmt = $link->prepare($update_req);
+        $stmt->bind_param("ssss", $new_name, $new_email, $rid, $email);
 
-    $stmt->execute();
-    write_console("I am trying to update account info");
-    header('Location: bbank_info.php');
+        if($stmt->execute()) {
+            header('Location: bbank_info.php?msg=info_changed');
+
+        } else {
+            header('Location: bbank_info.php?msg=info_unchanged');
+            
+        }
+
+    } else {
+        $pass_salt = $new_password . $new_email;
+        $hashed_password = hash('md5', $pass_salt);
+        $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ?, password = ? WHERE email = ?";
+        $stmt = $link->prepare($update_req);
+        $stmt->bind_param("sssss", $new_name, $new_email, $rid,$hashed_password, $email);
+
+        if($stmt->execute()) {
+            header('Location: bbank_info.php?msg=info_changed');
+
+        } else {
+            header('Location: bbank_info.php?msg=info_unchanged');
+            
+        }
+    }
+    
+
+
+    
 }
 
 function update_levels($btype, $units)
@@ -280,7 +308,7 @@ function get_account_info()
 {
     global $email;
     global $link;
-    write_js("console.log('I am in the get account info section')");
+    write_js("console.log('I am in the get account info section');");
     $sql_req = "SELECT * FROM Blood_Bank WHERE email = '$email'";
     $res = $link->query($sql_req);
     $row = $res->fetch_assoc();

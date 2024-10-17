@@ -24,17 +24,18 @@ $messages = [
     'login-required' => 'You need to be logged in to see the requested page',
     'logged-out' => 'Successfully logged out',
     'wrong-password' => 'You have entered the wrong password',
-    'info_changed' => 'Profile information sucessfully changed'
+    'info_changed' => 'Profile information sucessfully changed',
+    'info_unchanged' => 'An error occured and profile information was unchanged. PLease try again'
 ];
 // delete this
 if (isset($messages[$_GET['msg']])) {
 
     $x = $messages[$_GET['msg']];
-    echo "document.addEventListener('DOMContentLoaded', function() {";
-    echo "console.log( 'there is a login error $x');";
+    echo "<script> document.addEventListener('DOMContentLoaded', function() {";
     echo "let x = document.getElementById('msgs');";
-    echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msgs']]) . '";';
-    echo "});";
+    echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msg']]) . '";';
+    echo "}); </script>";
+    
 }
 
 
@@ -71,9 +72,9 @@ if (isset($messages[$_GET['msg']])) {
 
     <main>
         <h1>Blood bank ID</h1>
-        <form action="bbank_front_page_backend.php" method="post" class="form-bbank-info">
+        <form action="bbank_front_page_backend.php" method="post" class="form-bbank-info" onsubmit = "return validate_form();">
             <section class="donation-form">
-                <p id="msgs"></p>
+        
                 <div class="form-container">
 
                     <!-- Left Column -->
@@ -81,7 +82,7 @@ if (isset($messages[$_GET['msg']])) {
                         <h3>Name:</h3>
                         <input type="text" placeholder="Enter name" name="new-name" value="<?php echo $account_info['name'] ?>">
                         <h3>Email:</h3>
-                        <input type="text" placeholder="Enter email" name="new-email" value='<?php echo $account_info['email'] ?>'>
+                        <input type="text" id = "email" placeholder="Enter email" name="new-email" value='<?php echo $account_info['email'] ?>'>
                         <p class="error-message"><?php echo $error_password; ?></p>
                         
                         <h3>Password:</h3>
@@ -94,9 +95,9 @@ if (isset($messages[$_GET['msg']])) {
                         <input type="hidden" name="to_do" value="update_bb_info" />
                         <button class="profile-changes-button">Save changes</button>
                         <br>
-                        <?php if ($success_message): ?>
-                    <p class="success-message"><?php echo $success_message; ?></p>
-                    <?php endif; ?>
+                       
+                    <p class="success-message" id = "msgs"></p>
+                    
                   
                     </div>
 
@@ -108,7 +109,7 @@ if (isset($messages[$_GET['msg']])) {
                             <?php
                             foreach ($regions as $region) {
                                 $x = curr_region();
-                                write_console("the curr region is $x");
+                    
                                 if ($region == curr_region()) {
                                     echo "<option value = '$region' selected> $region </option>";
                                 } else {
@@ -159,6 +160,43 @@ if (isset($messages[$_GET['msg']])) {
                 button.textContent = "Show passwords";
             }
         }
+    
+    
+    function validate_form() {
+        var new_pass = document.getElementById('password').value;
+        var renew_pass = document.getElementById('repeat_password').value;
+        var email = document.getElementById('email').value;
+        var msg = document.getElementById('msgs');
+        msg.innerHTML = '';
+
+        let symbols = "!@#$%^&*()_+";
+        symbols = [...symbols];
+
+        if (new_pass.innerHTML != "") {
+            if (renew_pass.innerHTML == "") {
+                msg.innerHTML = "Please fill in both password fields";
+                return false;
+            }
+            else if (new_pass != renew_pass) {
+                msg.innerHTML = "Passwords must match";
+                return false;
+
+            }
+
+        }
+
+        if (new_pass.length < 6 || !symbols.some(s => new_pass.includes(s))) {
+            msg.innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short (min. 6 characters)</li> <li>The password does not contain a symbol</li></ul>";
+            return false;
+        }
+        if (!email.includes('@')) {
+            msg.innerHTML = "Please enter a valid email";
+            return false;
+        }
+
+
+
+    }
     </script>
 
 </html>
