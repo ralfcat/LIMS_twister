@@ -6,6 +6,8 @@ use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
 use function FrontEnd\get_regional_levels as get_regional_levels;
 use function FrontEnd\write_js as write_js;
+use function FrontEnd\get_rid as get_rid;
+use function FrontEnd\curr_region as curr_region;
 
 use FrontEnd\BloodStock as BloodStock;
 
@@ -32,6 +34,7 @@ $current_levels = get_stock($email);
 $call_lev = 'get_threshold';
 
 $regional_levels = get_regional_levels();
+$region = curr_region();
 
 ?>
 <!DOCTYPE html>
@@ -44,7 +47,8 @@ $regional_levels = get_regional_levels();
     <title>Blood Bank front page</title>
     <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="../../stylesheet/styles2.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
     </script>
 </head>
 
@@ -67,48 +71,19 @@ $regional_levels = get_regional_levels();
         <h1>Blood level inventory</h1>
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
+            <h2>Current Blood Stock Levels</h2>
                 <p id="notif-message"> </p>
-                <h2>Current Local Levels</h2> <!--Implement the graph based on inventory levels here-->
-                <h4>To be replaced with a graph</h4>
-                <table>
-                    <tr>
-                        <th>Blood Type</th>
-                        <th>Current Level</th>
-                        <th>Current Threshold</th>
-                    </tr>
-                    <?php
 
-                    foreach ($current_levels as $level) {
-                        $type = $level->blood_type;
-                        $stock = $level->current_stock;
-                        $thres = $level->thres_level;
-                        echo "<tr><td>$type</td><td>$stock</td><td>$thres</td></tr>";
-                    }
+                <div class="graph">
+                    <canvas id="bloodStockChart" width="500" height="300"></canvas>
 
-                    ?>
-                </table>
+                    <select id="area-select" onchange="updateGraph('<?php echo $email; ?>', <?php echo get_rid(); ?> , '<?php echo $region; ?>');" style="margin-top: 20px;">
+                        <!-- <option value="" disabled selected>Change Area</option> -->
+                        <option value="local">Local Levels</option>
+                        <option value="region" selected>Regional Levels</option>
+                    </select>
+                </div>
 
-                <h2>Current Regional Levels</h2> <!--Implement the graph based on inventory levels here-->
-                <h4>To be replaced with a graph</h4>
-                <table>
-                    <tr>
-                        <th>Blood Type</th>
-                        <th>Current Level</th>
-                    </tr>
-                    <?php
-
-                    foreach ($regional_levels as $level) {
-                        $type = $level['blood_type'];
-                        $stock = $level['SUM(stock_level)'];
-                        $thres = $level['MAX(threshold_level)'];
-
-                        echo "<tr><td>$type</td><td>$stock</td><td>$thres</td></tr>";
-                    }
-                    ?>
-
-                </table>
-                <canvas id="myCanvas" width="500" height="400"></canvas> <!--Beginning of graph, we need to implement backend here-->
-       
             </div>
         
 
@@ -118,90 +93,74 @@ $regional_levels = get_regional_levels();
                 <h2>Notification Thresholds</h2>
 
                 <div class="input-group">
-                    <div class="input-item">
-                        <label for="O+">O+</label>
-                        <input type="text" name="O+" id="O+" value="<?php echo get_threshold($current_levels, "O+"); ?>">
-                    </div>
-                    <div class="input-item">
-                        <label for="O-">O-</label>
-                        <input type="text" name="O-" id="O-" value="<?php echo get_threshold($current_levels, "O-"); ?>">
-                    </div>
+                    <label>O+<input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>
+                    <label>O- <input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
                 </div>
 
                 <div class="input-group">
-                    <div class="input-item">
-                        <label for="A+">A+</label>
-                        <input type="text" name="A+" id="A+" value="<?php echo get_threshold($current_levels, "A+"); ?>">
-                    </div>
-                    <div class="input-item">
-                        <label for="A-">A-</label>
-                        <input type="text" name="A-" id="A-" value="<?php echo get_threshold($current_levels, "A-"); ?>">
-                    </div>
+                    <label>A+<input type="text" name="A+" value=<?php echo get_threshold($current_levels, "A+"); ?>></label>
+                    <label>A- <input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
                 </div>
 
                 <div class="input-group">
-                    <div class="input-item">
-                        <label for="B+">B+</label>
-                        <input type="text" name="B+" id="B+" value="<?php echo get_threshold($current_levels, "B+"); ?>">
-                    </div>
-                    <div class="input-item">
-                        <label for="B-">B-</label>
-                        <input type="text" name="B-" id="B-" value="<?php echo get_threshold($current_levels, "B-"); ?>">
-                    </div>
+                    <label>B+<input type="text" name="B+" value=<?php echo get_threshold($current_levels, "B+"); ?>></label>
+                    <label>B- <input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
                 </div>
 
                 <div class="input-group">
-                    <div class="input-item">
-                        <label for="AB+">AB+</label>
-                        <input type="text" name="AB+" id="AB+" value="<?php echo get_threshold($current_levels, "AB+"); ?>">
-                    </div>
-                    <div class="input-item">
-                        <label for="AB-">AB-</label>
-                        <input type="text" name="AB-" id="AB-" value="<?php echo get_threshold($current_levels, "AB-"); ?>">
-                    </div>
+                    <label>AB+<input type="text" name="AB+" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
+                    <label>AB- <input type="text" name="AB-" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
                 </div>
 
                 <input class="save-donation-button" type="submit" value="Save changes"> 
             </form>
         </div>
-        
-        <section class="donation-form-bbank">
-    <form method="POST" action="bbank_front_page_backend.php">
-        <input type="hidden" name="to_do" value="update_blood" />
 
-        <div class="form-row">
-            <div class="form-group">
-                <label for="bloodType">Blood Type:</label>
-                <select name="bloodType" id="bloodType" required>
-                    <option value="">Select Blood Type</option>
-                    <?php
+        <section class="donation-form-bbank">
+            <form method="POST" action="bbank_front_page_backend.php">
+                <input type="hidden" name="to_do" value="update_blood" />
+                <div class="form-row">
+                    <div class="form-group-bbank">
+                        <h3>Bloodtype</h3>
+                        <select name="btypes" required>
+                            <?php
                             foreach ($current_levels as $level) {
                                 $type = htmlspecialchars($level->blood_type);
                                 echo "<option value='$type'>$type</option>";
                             }
                             ?>
-                </select><br>
-            </div>
-            <div class="form-group">
-                <label for="units">Units:</label>
-                <input type="number" name="units" id="units" required placeholder="Enter Units">
-            </div>
-        </div>
-        <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
-        </form>
+                        </select><br>
+                    </div>
+                    <div class="form-group-bbank">
+                        <h3>Units</h3>
+                        <input type="number" placeholder="Enter Units" name="units" required>
+                    </div>
+                </div>
+                <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
+            </form>
         </section>
 
 
     </main>
     <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
+    <script src="graph/graph_functions.js"></script>
+    <script>
+        window.onload = function() {
+            console.log('I am here');
 
-    <footer>
-        <p>&copy; 2024 Blood Alert</p>
-        <nav>
-            <a href="../about_us.html">About Us</a> |
-            <a href="../integrity_policy.html">Integrity Policy</a> |
-            <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
-        </nav>
-    </footer>
+
+
+            updateGraph('<?php echo $email; ?>', <?php echo get_rid(); ?>, '<?php echo $region; ?>');
+            console.log('I am now here');
+        };
+    </script>
 </body>
 
+<footer>
+    <p>&copy; 2024 Blood Alert</p>
+    <nav>
+        <a href="../about_us.html">About Us</a> |
+        <a href="../integrity_policy.html">Integrity Policy</a> |
+        <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+    </nav>
+</footer>

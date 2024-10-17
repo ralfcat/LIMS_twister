@@ -49,6 +49,8 @@ if (isset($messages[$_GET['msg']])) {
     <title>Donor Dashboard</title>
     <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 </head>
 
 <body>
@@ -118,8 +120,9 @@ if (isset($messages[$_GET['msg']])) {
 
 
 
-            }
-        </script>
+    }
+    </script>
+    <script src="../graph/graph_functions.js"></script>
 
         <h1>Blood bank ID</h1>
         <form action="bbank_front_page_backend.php" method="post"  onsubmit = "return validate_form();">
