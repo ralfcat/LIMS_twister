@@ -54,7 +54,6 @@ if (mysqli_connect_error()) {
 
         // $x = $messages[$_GET['msg']];
         echo "document.addEventListener('DOMContentLoaded', function() {";
-        // echo "console.log( 'there is a login error $x');";
         echo "let x = document.getElementById('log-errs');";
         echo 'x.innerHTML = "' . htmlspecialchars($messages[$_GET['msg']]) . '";';
         echo "});";
@@ -93,7 +92,7 @@ if (mysqli_connect_error()) {
 
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+            <a href = "../index.php"><img class="logo" src="../../Logo-and-text.png" alt="Logo"></a>
         </div>
         <nav>
             <ul>
@@ -146,7 +145,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $password_hash = hash("md5", $password);
+    $password_salt = $password . $email;
+    $password_hash = hash("md5", $password_salt);
 
     $email_req = "SELECT COUNT(email), email FROM Blood_Bank WHERE email = '" . $email . "'";
     $res = $link->query($email_req);
