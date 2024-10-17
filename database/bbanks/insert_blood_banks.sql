@@ -158,3 +158,13 @@ INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No
 INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 17', 5,'bloodbank_1579@outlook.com', '5d46404a71bf33c7fa11849929f04ce9');
 INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 18', 5,'bloodbank_1497@outlook.com', '82627de821cb2b5f5aab4cb41910e3ef');
 INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 19', 5,'bloodbank_4043@yahoo.com', 'd3a945b003aa283f847ae163f09a8e11');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 1,'bloodbank_3886@outlook.com', '6f8478cff903316e90dd2699265327e4');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 1,'bloodbank_1998@gmail.com', '4579c8b3cd533eb3963d48498b9936e7');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 2', 1,'bloodbank_1310@yahoo.com', '34f0e02388a6f5d91bf5e3214bd91855');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 3', 1,'bloodbank_1803@yahoo.com', 'ce2214cba3fd9153f926b79f254fc454');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 4', 1,'bloodbank_4470@yahoo.com', '69a774ea4e639736e6d7401344084a08');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 5', 1,'bloodbank_4573@gmail.com', 'c70ba9f63a6b5e161ec5e2d13bef0f9d');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 6', 1,'bloodbank_3070@gmail.com', '2f0f908504222b6886c44f214bab20cc');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 7', 1,'bloodbank_4326@outlook.com', '6d1e10ffb45ed44ec565ca94e8c6bb13');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 8', 1,'bloodbank_1812@yahoo.com', '33a69ae9f4b819bf808fcedc462dda81');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 9', 1,'bloodbank_374@outlook.com', '407234d079a3385fbc207f59210e4198');
