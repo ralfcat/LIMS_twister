@@ -559,17 +559,18 @@ footer {
     border-radius: 2rem;
     cursor: pointer;
     font-weight: bold;
-    margin: 0 auto;  /* This will center it horizontally */
-    margin-top: 1rem;
+    margin: 0 auto;  
+    text-align: center;
+    line-height: 0.5rem;
 
 }
 
 .bbank-container form .input-group {
-    max-height: 1rem;
+    max-height: 2.5rem;
     display: flex;
     justify-content: center;  
     align-items: center;       
-    gap: 2rem;   
+    gap: 3rem;   
 }
 
 /*Notification log*/
