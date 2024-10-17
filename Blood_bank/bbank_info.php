@@ -109,7 +109,7 @@ if (isset($messages[$_GET['msg']])) {
 
                 }
 
-                if (new_pass.length < 6 || !symbols.some(s => new_pass.includes(s))) {
+                if (new_pass != "" && new_pass == renew_pass && (new_pass.length < 6 || !symbols.some(s => new_pass.includes(s)))) {
                     msg.innerHTML = "Your password does not fulfil the password requirements:<br><ul><li>The password is too short (min. 6 characters)</li> <li>The password does not contain a symbol</li></ul>";
                     return false;
                 }
