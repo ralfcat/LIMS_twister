@@ -40,6 +40,13 @@ h3 {
     font-size: 1rem;
 }
 
+b {
+    font-family: "Nunito", Helvetica, sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    color: #141414 ;
+}
+
 body {
     background-color: #f5d5dd;
     display: flex;
