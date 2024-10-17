@@ -2,7 +2,6 @@
 
 require_once 'bbank_front_page_backend.php';
 
-
 use function FrontEnd\get_stock as get_stock;
 use function FrontEnd\get_threshold as get_threshold;
 use function FrontEnd\get_regional_levels as get_regional_levels;
@@ -50,9 +49,6 @@ $regional_levels = get_regional_levels();
 </head>
 
 <body>
-    <script>
-
-    </script>
     <header>
         <div class="logo-container">
             <img class="logo" src="../../Logo-and-text.png" alt="Logo">
@@ -98,7 +94,6 @@ $regional_levels = get_regional_levels();
                     <tr>
                         <th>Blood Type</th>
                         <th>Current Level</th>
-
                     </tr>
                     <?php
 
@@ -109,17 +104,16 @@ $regional_levels = get_regional_levels();
 
                         echo "<tr><td>$type</td><td>$stock</td><td>$thres</td></tr>";
                     }
-
                     ?>
 
                 </table>
-
-
                 <canvas id="myCanvas" width="500" height="400"></canvas> <!--Beginning of graph, we need to implement backend here-->
-
-                
+       
             </div>
+        
+
             <form action="bbank_front_page_backend.php" method="POST" class="form-bbank">
+
                 <input type="hidden" name="to_do" value="update_threshold" />
                 <h2>Notification Thresholds</h2>
 
@@ -167,7 +161,7 @@ $regional_levels = get_regional_levels();
                     </div>
                 </div>
 
-                <input class="save-donation-button" type="submit" value="Save">
+                <input class="save-donation-button" type="submit" value="Save changes"> 
             </form>
         </div>
         
@@ -176,23 +170,23 @@ $regional_levels = get_regional_levels();
         <input type="hidden" name="to_do" value="update_blood" />
 
         <div class="form-row">
-    <div class="form-group">
-        <label for="bloodType">Blood Type:</label>
-        <select name="bloodType" id="bloodType" required>
-            <option value="">Select Blood Type</option>
-            <?php
-                    foreach ($current_levels as $level) {
-                        $type = htmlspecialchars($level->blood_type);
-                        echo "<option value='$type'>$type</option>";
-                    }
-                    ?>
-        </select><br>
-    </div>
-    <div class="form-group">
-        <label for="units">Units:</label>
-        <input type="number" name="units" id="units" required placeholder="Enter Units">
-    </div>
-</div>
+            <div class="form-group">
+                <label for="bloodType">Blood Type:</label>
+                <select name="bloodType" id="bloodType" required>
+                    <option value="">Select Blood Type</option>
+                    <?php
+                            foreach ($current_levels as $level) {
+                                $type = htmlspecialchars($level->blood_type);
+                                echo "<option value='$type'>$type</option>";
+                            }
+                            ?>
+                </select><br>
+            </div>
+            <div class="form-group">
+                <label for="units">Units:</label>
+                <input type="number" name="units" id="units" required placeholder="Enter Units">
+            </div>
+        </div>
         <button class="add-donation-button-bbank" type="submit" name="update" value="update">Update Levels</button>
         </form>
         </section>

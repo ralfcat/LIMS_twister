@@ -137,6 +137,7 @@ button {
     cursor: pointer;
     font-weight: bold;
     min-width: 1.5rem;
+    font-size: 0.8rem;
 }
 
 button > a {
@@ -341,11 +342,6 @@ footer {
     width: calc(100% - 20px);
 }
 
-.profile-changes-button {
-    display: block;
-    margin-top: 0.8rem;
-    width: 9rem;
-}
 
 /* My donation page styling*/
 .dashboard {
@@ -434,32 +430,23 @@ footer {
     margin-right: 0;
 }
 
-
 .add-donation-button {
     display: block;
-    padding: 0.25rem 0.5rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
     margin-top: 1rem;
 }
 
 .add-donation-button-donor, .add-donation-button-bbank {
     display: block;
     padding: 0.25rem 0.5rem;
-    background-color: #af093c;
-    color: white;
-    border: none;
-    border-radius: 1.5rem;
-    cursor: pointer;
-    font-weight: bold;
     width: 8rem;
     height: 2rem;
     margin: 1rem auto; 
+}
 
+.profile-changes-button {
+    display: block;
+    margin-top: 0.8rem;
+    width: 9rem;
 }
 
 .save-donation-button {
@@ -469,12 +456,23 @@ footer {
     border: none;
     width: 10rem;
     height: 2rem;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     cursor: pointer;
     font-weight: bold;
     margin: 0 auto;  
     text-align: center;
     line-height: 0.5rem;
+    padding: 0.7rem 1.2rem;
+}
+
+.save-donation-button:focus {
+    background-color: #b0627a; 
+    color: #141414;
+}
+
+.save-donation-button:hover {
+    background-color: #a00635; 
+    color: #141414;
 }
 
 .bbank-container form .input-group {

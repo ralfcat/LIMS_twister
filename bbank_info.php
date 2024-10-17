@@ -20,7 +20,7 @@
                 <li class="active"><a href="bbank_info.php">Profile</a></li>
             </ul>
         </nav>
-        <button class="button">Log Out</button>
+        <button>Log Out</button>
     </header>
 
     <main>
@@ -54,4 +54,12 @@
     </section>
 </main>
 </body>
+<footer>
+  <p>&copy; 2024 Blood Alert</p>
+  <nav>
+    <a href="../about_us.html">About Us</a> |
+    <a href="../integrity_policy.html">Integrity Policy</a> |
+    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
+  </nav>
+</footer>
 </html>
