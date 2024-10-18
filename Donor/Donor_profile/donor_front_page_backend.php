@@ -177,7 +177,7 @@ $link->close();
     <div class="form-row">
     <div class="form-group-donor">    
         <h3>Date of Last Donation</h3>        
-        <input type="date" id="donation_date" name="donation_date" required><br>
+        <input type="date" id="donation_date" max="<?php echo date("Y-m-d", strtotime('-1 day', time())); ?>" name="donation_date" required><br>
     </div>
     <div class="form-group-donor">    
             <h3>Choose Blood Center</h3>
@@ -203,7 +203,7 @@ $link->close();
 <div class="form-row">
 <div class="form-group-donor">    
     <h3>Date of upcoming donation</h3>        
-    <input type="date" id="donation_date" name="donation_date" required><br>
+    <input type="date" id="donation_date" min="<?php echo date("Y-m-d"); ?>" name="donation_date" required ><br>
 </div>
 <div class="form-group-donor">    
         <h3>Choose Blood Center</h3>
