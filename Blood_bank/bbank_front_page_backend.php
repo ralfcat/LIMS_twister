@@ -152,6 +152,21 @@ function get_stock($email)
 }
 
 
+function get_stocks()
+{
+    global $link;
+    global $email;
+    $bs_req = "SELECT Blood_Stock.* FROM Blood_Bank LEFT JOIN Blood_Stock ON Blood_Stock.blood_bank_id = Blood_Bank.blood_bank_id WHERE Blood_Bank.email = '$email'";
+    $res = $link->query($bs_req);
+    $levels = array();
+    while ($row = $res->fetch_assoc()) {
+        $levels[] = $row;
+    }
+    return $levels;
+}
+
+
+
 function get_id()
 {
     global $email;
@@ -237,7 +252,7 @@ function get_regional_levels()
 
     // SELECT * FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = 'bloodbank_2244@gmail.com'));
 
-    global $link;
+    $link = open_db();
     global $email;
     $sql_req = "SELECT blood_type, SUM(stock_level), MAX(threshold_level) FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id = ANY (SELECT region_id FROM Blood_Bank where email = '$email')) GROUP BY blood_type";
     $res = $link->query($sql_req);
@@ -245,6 +260,7 @@ function get_regional_levels()
     while ($row = $res->fetch_assoc()) {
         $levels[] = $row;
     }
+    close_db($link);
     return $levels;
 }
 
@@ -340,8 +356,8 @@ function get_regions()
     }
     return $regions;
 }
-function close_db()
+function close_db($link)
 {
-    global $link;
+    
     $link->close();
 }

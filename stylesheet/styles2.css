@@ -40,13 +40,6 @@ h3 {
     font-size: 1rem;
 }
 
-b {
-    font-family: "Nunito", Helvetica, sans-serif;
-    font-weight: 800;
-    letter-spacing: 0.055em;
-    color: #141414 ;
-}
-
 body {
     background-color: #f5d5dd;
     display: flex;
@@ -166,16 +159,17 @@ button:hover {
 footer {
     font-family: "Nunito", Helvetica, sans-serif;
     letter-spacing: 0.055em;
-    background-color: white; /* Background */
-    color: #af093c;           
-    padding: 1.5rem;          /* Space inside the footer */
-    text-align: center;     /* Center text and links */
-    position: relative;
+    background-color: white;
+    color: #af093c;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center; 
+    align-items: center;      
+    flex-direction: column;   
     bottom: 0;
-    width: 100%;            
     margin-top: auto;
-  }
-  
+}
+
   footer a {
     color: #af093c;         /* Link color (e.g., orange) */
     text-decoration: none;  /* No underline */
