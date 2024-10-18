@@ -127,7 +127,6 @@ nav .active {
     margin-top: -0.7rem;
     margin-bottom: -2rem; 
     border-radius: 0.2rem;     
-    
 }
 
 button {
@@ -539,12 +538,19 @@ footer {
     flex-direction: column; 
     align-items: center; 
     padding: 2rem; 
+    
+    
+}
+
+.unsubscribe form {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .unsubscribe h2 {
     text-align: center;
     color: #141414;
 }
+
 
 .unsubscribe p {
     max-width: 37.5rem; 
