@@ -63,13 +63,13 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    write_console("a post request was made");
     $to_do = $_POST["to_do"];
     if ($to_do == "update_blood") {
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         update_levels($btype, $units);
-        // echo "<script>console.log( 'in the post request $btype and $units ');</script>";
+        header('Location: bbank_front_page.php?msg=info_changed');
+      
     } else if ($to_do == "update_threshold") {
         // echo "<script>console.log( 'you clicked the update the threshold button');</script>";
         write_console("you are trying to update thresholds");
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $rid = get_rid();
         $curr_levels_array = get_stock($email);
         send_emails($curr_levels_array, $rid);
-        header('Location: bbank_front_page.php');
+        header('Location: bbank_front_page.php?msg=thresholds_changed');
     } else if ($to_do == "update_bb_info") {
         write_console("you are trying to update your blood bank info");
         $new_name = $_POST['new-name'];
