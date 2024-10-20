@@ -1,7 +1,8 @@
 <?php
 include 'db_connection.php';
 
-$region_id = intval($_GET['rid']); 
+// $region_id = intval($_GET['rid']); 
+$region_id = 1; 
 
 // Blood stock levels for each blood type in the selected region
 $sql = "
