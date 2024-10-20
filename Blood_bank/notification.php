@@ -1,271 +1,107 @@
 <?php
-
 namespace notification;
 
-
-
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "twister";
+// Start the session and check if the user is logged in
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-
-if (isset($_SESSION['loggedin'])) {
-    $email = $_SESSION['email'];
+if (!isset($_SESSION['loggedin'])) {
+    header('Location: bb_log_out.php');
+    exit();
 }
 
-function open_db()
-{
+// Get the email from the session
+$email = $_SESSION['email'] ?? null;
+
+// Database connection function
+function open_db() {
     $servername = "localhost";
     $username = "root";
     $password = "root";
     $dbname = "twister";
 
-    $link = mysqli_connect($servername, $username, $password, $dbname);
+    $link = new mysqli($servername, $username, $password, $dbname);
 
-    // Check if connection is established
-    if (mysqli_connect_error()) {
-        die("Connection failed: " . mysqli_connect_error());
-    } else {
-        return $link;
+    // Check if connection is successful
+    if ($link->connect_error) {
+        die("Connection failed: " . $link->connect_error);
     }
+    return $link;
 }
 
-function write_js($data)
-{
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
+// Fetch notification log from database
+function get_notification_log() {
+    $link = open_db();
+    $query = "SELECT notification_date, people_notified FROM Notification_Log ORDER BY notification_date DESC";
+    $result = $link->query($query);
 
-    echo "<script>" . $data . "</script>";
+    $notifications = [];
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $notifications[] = $row;
+        }
+    }
+    $link->close();
+    return $notifications;
 }
 
-function write_console($data)
-{
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script> console.log( '$data');</script>";
+// Debug function to log data in the console
+function write_console($data) {
+    $output = json_encode($data);
+    echo "<script>console.log($output);</script>";
 }
 
-
-
-$link = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check if connection is established
-if (mysqli_connect_error()) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+// Check if a POST request is made to update thresholds or notifications
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     $to_do = $_POST["to_do"];
     if ($to_do == "update_notification") {
-        $Confirm = $_POST['Confirm'];
-        $UnConfirmed = $_POST['UnConfirmed'];
-        update_levels($Confirm, $UnConfirmed);
-        echo "<script>console.log( 'in the post request $Confirm and $UnConfirmed');</script>";
-    } else if ($to_do == "update_threshold") {
-        echo "<script>console.log( 'you clicked the update the threshold button');</script>";
+        $confirm = $_POST['Confirm'] ?? null;
+        $unconfirmed = $_POST['UnConfirmed'] ?? null;
+        update_notification_log($confirm, $unconfirmed);
+    } elseif ($to_do == "update_threshold") {
         foreach ($_POST as $key => $value) {
-            if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B')) {
-                echo "<h2>console.log( '$key and the val is $value');</h2>";
+            if (preg_match('/^(O|A|B)/', $key)) {
                 update_thresholds($key, $value);
             }
         }
-        header('Location: notification.php');
-    } else if ($to_do == "update_notification") {
-        write_console("you are trying to update your notification");
-        $new_name = $_POST['new-name'];
-        $new_name = (string) $new_name;
-        $new_email = $_POST['new-email'];
-        $new_region = $_POST['regions'];
-        write_console( "the new name is $new_name");
-        update_account_info($new_name, $new_email, $new_region);
-        // foreach ($_POST as $key => $value) {
-        //     write_console("key = $key and value = $value");
-        // }
-
-        
-
+        header('Location: bbank_notification_log.php');
+        exit();
     }
 }
 
-class Notification
-{
-    public $previous;
-    public $current;
-    public $thres_level;
-
-    public function __construct($previous, $current, $thres_level)
-    {
-        $this->previous = $previous;
-        $this->current = $current;
-        $this->thres_level = $thres_level;
-    }
-}
-// -1 is returned as an error 
-function get_threshold(array $current_levels, $target_Notification)
-{
-    foreach ($current_levels as $level) {
-        if ($level->notification == $target_Notification) {
-            return "$level->thres_level";
-        }
-    }
-    return '-1';
+// Function to update notification log
+function update_notification_log($confirmed, $unconfirmed) {
+    // Logic to update notification log based on confirmed and unconfirmed counts
+    write_console("Notification updated: Confirmed $confirmed, Unconfirmed $unconfirmed");
 }
 
-function debug_to_console($data)
-{
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}
-
-
-
-
-/*function get_stock($email)
-{
-    global $link;
-    $bs_req = "SELECT Blood_Stock.* FROM Blood_Bank LEFT JOIN Blood_Stock ON Blood_Stock.blood_bank_id = Blood_Bank.blood_bank_id WHERE Blood_Bank.email = '$email'";
-
-    $res = $link->query($bs_req);
-    $blood_levels = array();
-    while ($row = $res->fetch_assoc()) {
-        $blood_level = new BloodStock($row["blood_type"], $row["stock_level"], $row["threshold_level"]);
-        $blood_levels[] = $blood_level;
-
-
-        // $x = implode(" ",$row);
-        // $y = var_dump($row);
-        // echo "the email is $y <br>";
-    }
-    // foreach ($blood_levels as $b) {
-    //     $y = var_dump($b);
-    //     echo " $y  in the for each <br>"; 
-
-
-    // }
-    return $blood_levels;*/
-}
-
-
-function get_id()
-{
-    global $email;
-    global $link;
-    $email_req = "SELECT blood_bank_id from Blood_Bank WHERE email = '$email'";
-    $res = $link->query($email_req);
-    $row = $res->fetch_assoc();
-    return $row["blood_bank_id"];
-}
-
-function get_curr($btype, $id)
-{
-    global $link;
-    $curr_req = "SELECT stock_level from Blood_Stock WHERE blood_type = '$btype' AND blood_bank_id = $id";
-    $res = $link->query($curr_req);
-    $row = $res->fetch_assoc();
-    return $row["stock_level"];
-}
-
-function update_curr($btype, $new_level, $id)
-{
-    global $link;
-    $update_req = "UPDATE Blood_Stock SET stock_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
-    $stmt = $link->prepare($update_req);
-    $stmt->bind_param("iis", $new_level, $id, $btype);
-    $result = $stmt->execute();
-    echo "<script>console.log( 'the value was successfully updated');</script>";
-}
-
-function update_thresholds($btype, $threshold)
-{
-    global $link;
+// Function to update blood type thresholds
+function update_thresholds($blood_type, $threshold) {
+    $link = open_db();
     $id = get_id();
-    $update_req = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
-    $stmt = $link->prepare($update_req);
-    $stmt->bind_param("iis", $threshold, $id, $btype);
-    $result = $stmt->execute();
-    echo "<script>console.log( 'the threshold levels was successfully updated');</script>";
+    $query = "UPDATE Blood_Stock SET threshold_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
+    $stmt = $link->prepare($query);
+    $stmt->bind_param("iis", $threshold, $id, $blood_type);
+    $stmt->execute();
+    $stmt->close();
+    $link->close();
+    write_console("Threshold for $blood_type updated to $threshold");
 }
 
-function get_region_id($new_region) {
-    global $link;
-
-    $sql_req = "SELECT rid FROM Region WHERE region = '$new_region'";
-    $res = $link->query($sql_req);
-    $row = $res->fetch_assoc();
-    return $row["rid"];
-
-}
-
-function update_account_info($new_name, $new_email,$new_region){
+// Function to get the blood bank ID
+function get_id() {
     global $email;
     $link = open_db();
-    $rid = (int) get_region_id($new_region);
-    $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ? WHERE email = ?";
-    $stmt = $link->prepare($update_req);
-    $stmt->bind_param("ssss", $new_name, $new_email, $rid, $email);
- 
+    $query = "SELECT blood_bank_id FROM Blood_Bank WHERE email = ?";
+    $stmt = $link->prepare($query);
+    $stmt->bind_param("s", $email);
     $stmt->execute();
-    write_console("I am trying to update account info");
-    header('Location: bbank_info.php');
-
-}
-
-function update_levels($btype, $units)
-{
-    $bb_id = get_id();
-    $curr_level = get_curr($btype, $bb_id);
-    echo "<script>console.log( 'the blood bank id is $bb_id and the curr level is $curr_level');</script>";
-    $new_level = (int) $curr_level + (int) $units;
-    update_curr($btype, $new_level, $bb_id);
-    header('Location: bbank_front_page.php?msg=info_changed');
-}
-
-function get_account_info()
-{
-    global $email;
-    global $link;
-    write_js("console.log('I am in the get account info section')");
-    $sql_req = "SELECT * FROM Blood_Bank WHERE email = '$email'";
-    $res = $link->query($sql_req);
-    $row = $res->fetch_assoc();
-    // foreach($row as $key => $value) {
-    //     echo "<p>The key os $key and the value is $value</p>";
-    // }
-    return $row;
-}
-
-function curr_region() {
-    global $link;
-    global $email;
-    $sql_req = "SELECT region FROM Region INNER JOIN Blood_Bank ON Region.rid = Blood_Bank.region_id WHERE Blood_Bank.email = '$email'";
-    $res = $link->query($sql_req);
-    $row = $res->fetch_assoc();
-    return $row['region'];
-
-
-}
-
-
-function get_regions()
-{
-    global $link;
-    $sql_req = "SELECT region FROM Region";
-    $res = $link->query($sql_req);
-    $regions = array();
-    while ($row = $res->fetch_assoc()) {
-        $regions[] = $row['region'];
-    }
-    return $regions;
-}
-function close_db()
-{
-    global $link;
+    $stmt->bind_result($id);
+    $stmt->fetch();
+    $stmt->close();
     $link->close();
+    return $id;
 }
+
+// Fetch the notification log data
+$notifications = get_notification_log();
+?>
+
