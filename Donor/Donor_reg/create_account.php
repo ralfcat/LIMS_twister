@@ -7,6 +7,8 @@ $username = "root";
 $password = "root";
 $dbname = "twister";
 
+
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -71,6 +73,7 @@ $reg_res = $link->query($reg_req);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Blood Bank front page</title>
+    
     <!-- <link rel="stylesheet" href="../../stylesheet/reset.css"> -->
     <!-- <link rel="stylesheet" href="../../stylesheet/styles2.css" /> -->
 
