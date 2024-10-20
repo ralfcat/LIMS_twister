@@ -15,15 +15,17 @@ if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
 $messages = [
     'blood_info_unchanged' => 'Blood stock cannot be less than 0',
-    'blood_stock_unchanged' => 'Blood stock cannot be less than 0'
+    'blood_stock_unchanged' => 'Blood stock cannot be less than 0',
+    'thresholds_changed' => 'Thresholds changed',
+    'info_changed' => 'Blood levels updated'
 ];
 if (isset($messages[$_GET['msg']])) {
     $err_msg = htmlspecialchars($messages[$_GET['msg']]);
 
-    $js =  "document.addEventListener('DOMContentLoaded', function() {
-     let x = document.getElementById('notif-message');
-     x.innerHTML = ' $err_msg'; });";
-    write_js($js);
+    $notifmsg =  "document.addEventListener('DOMContentLoaded', function() {
+     let note_msg = document.getElementById('msgs');
+     note_msg.innerHTML = ' $err_msg'; });";
+    write_js($notifmsg);
 }
 
 if (!isset($_SESSION['email'])) {
@@ -72,7 +74,7 @@ $region = curr_region();
         <div class="bbank-container"> <!-- New container -->
             <div class="Current_levels">
             <h2>Current Blood Stock Levels</h2>
-                <p id="notif-message"> </p>
+            <p class="success-message" id = "msgs"></p>
 
                 <div class="graph">
                     <canvas id="bloodStockChart" width="500" height="300"></canvas>
@@ -143,16 +145,10 @@ $region = curr_region();
 
 
     </main>
-    <!-- <iframe name="hiddenFrame" width="0" height="0"  style="display: none;"></iframe> -->
     <script src="graphs/graph_functions.js"></script>
     <script>
         window.onload = function() {
-            console.log('I am here');
-
-
-
             updateGraph('<?php echo $email; ?>','<?php echo $region; ?>' );
-            console.log('I am now here');
         };
     </script>
    
