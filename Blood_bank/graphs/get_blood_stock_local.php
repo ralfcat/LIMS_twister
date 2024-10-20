@@ -8,8 +8,8 @@ include 'db_connection.php';
 
 
 
-    // $email = $_GET['email'];
-    $email = 'admin@admin.com';
+    $email = $_GET['email'];
+
     
 
     $sql = "SELECT Blood_Stock.* 

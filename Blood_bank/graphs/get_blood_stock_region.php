@@ -6,8 +6,8 @@ include 'db_connection.php';
 
 
 // Blood stock levels for each blood type in the selected region
-// $email = $_GET['email']; 
-$email = 'admin@admin.com';
+$email = $_GET['email']; 
+
 
 $sql = "SELECT blood_type, SUM(stock_level), MAX(threshold_level) 
 FROM Blood_Stock WHERE blood_bank_id = ANY (SELECT blood_bank_id FROM Blood_Bank WHERE region_id 
