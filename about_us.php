@@ -98,7 +98,7 @@ if (isset($_SESSION['bbloggedin'])) {
   <p>&copy; 2024 Blood Alert</p>
   <nav>
     <a href="about_us.php">About Us</a> |
-    <a href="integrity_policy.html">Integrity Policy</a> |
+    <a href="integrity_policy.php">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>
