@@ -1,4 +1,4 @@
-<?php
+   <?php
 namespace notification;
 
 // Start the session and check if the user is logged in
@@ -104,4 +104,3 @@ function get_id() {
 // Fetch the notification log data
 $notifications = get_notification_log();
 ?>
-
