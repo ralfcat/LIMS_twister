@@ -3,9 +3,11 @@
 namespace FrontEnd;
 
 require_once '../email_notif.php';
+require_once '../unsubscribe.php';
 
 
 use function EmailNotif\send_emails as send_emails;
+use function Unsubscribe\remove_unsub;
 
 error_reporting(E_ERROR | E_PARSE);
 
@@ -68,6 +70,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         update_levels($btype, $units);
+        remove_unsub();
+        $rid = get_rid();
+        $curr_levels_array = get_stock($email);
+        send_emails($curr_levels_array, $rid);
         header('Location: bbank_front_page.php?msg=info_changed');
       
     } else if ($to_do == "update_threshold") {
@@ -81,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 } else {
 
+                    // remove_unsub();
                     update_thresholds($key, $value);
                 }
             }
