@@ -1,4 +1,5 @@
 <?php
+
 namespace Unsubscribe;
 // Functions related to donor temporarily unsubscribing from email notifs
 function remove_unsub()
@@ -18,8 +19,13 @@ function remove_unsub()
                 $update_req = "UPDATE Donor SET unsubscribe_date = NULL
                             WHERE email = ?";
                 $stmt = $link->prepare($update_req);
-                $stmt->bind_param("s", $email); 
-                $stmt->execute();
+                $stmt->bind_param("s", $email);
+                if ($stmt->execute()) {
+                    header("Location: " . $_SERVER['PHP_SELF']);
+                    exit();
+                } else {
+                    echo "Error: " . $stmt->error;
+                }
             }
         }
     }
@@ -35,27 +41,29 @@ function set_unsub_date($email, $date)
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("ss", $date, $email);
     $stmt->execute();
-    $link->close();
+    return;
+  
 }
 
-function get_unsub_date($email) {
+function get_unsub_date($email)
+{
     include 'graph/db_connection.php';
 
     $sql = "SELECT unsubscribe_date FROM `Donor` WHERE email = '$email'";
     $result = $link->query($sql);
 
-    if ($result->num_rows > 0) { 
+    if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $unsub_date = $row['unsubscribe_date'];
             if ($unsub_date == null) {
+                $link->close();
+   
                 return -1;
             } else {
-                return $unsub_date; 
+                $link->close();
+
+                return $unsub_date;
             }
         }
-
     }
-
-    $link->close();
-
 }

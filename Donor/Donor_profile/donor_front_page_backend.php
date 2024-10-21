@@ -24,6 +24,9 @@ $email_ses = $_SESSION['email'];
 $donor_id_ses = $_SESSION['donor_id'];
 
 
+
+
+
 $sql = "SELECT * FROM Donor WHERE donor_id = ?";
 $stmt = $link->prepare($sql);
 $stmt->bind_param('i', $donor_id_ses);
@@ -41,6 +44,7 @@ if ($result->num_rows > 0) {
     $donor_eligible = $user['is_eligible'];
     $donor_age = $user['age'];
     $donor_id = $user['donor_id'];
+    $donor_unsubdate = $user['unsubscribe_date'];
 
     $sql = "SELECT donation.donation_date, donation.amount, blood_bank.name FROM donation JOIN blood_bank ON donation.blood_bank_id = blood_bank.blood_bank_id WHERE donor_id = ? ORDER BY donation.donation_date DESC";
     $stmt = $link->prepare($sql);
@@ -67,8 +71,42 @@ if ($result->num_rows > 0) {
     }
 }
 
-//Close the statement and connection
+$success_message = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $to_do = $_POST["to_do"];
+
+    if ($to_do = "unsubscribe") {
+        $email = $email_ses;
+        $date = $_POST["end-date"];
+
+        set_unsub_date($email, $date);
+
+        $donor_unsubdate = $date;
+        $success_message = "Unsubscription date changed to $donor_unsubdate";
+    } else {
+        echo "<script> rmv_msg(); </script>";
+        $donation_date = $_POST['donation_date'];
+        $blood_center = $_POST['blood_center'];
+        $amount = $_POST['amount'];
+
+        $sql3 = "INSERT INTO Donation (donor_id, blood_bank_id, amount, donation_date) VALUES (?, ?, ?, ?)";
+
+        $stmt = $link->prepare($sql3);
+        $stmt->bind_param('iids', $donor_id, $blood_center, $amount, $donation_date);
+
+        if ($stmt->execute()) {
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+    }
+}
+
+
+$link->close();
+$stmt->close();
 
 ?>
 
@@ -101,7 +139,9 @@ if ($result->num_rows > 0) {
 
     <main>
         <h1>My donations</h1>
-        <p id="err-msg"></p>
+        <?php if ($success_message): ?>
+            <p class="success-message"><?php echo $success_message; ?></p>
+        <?php endif; ?>
 
         <section class="dashboard">
             <div class="donation-history">
@@ -132,7 +172,7 @@ if ($result->num_rows > 0) {
             </div>
 
             <div class="upcoming-donations">
-                <h2>Upcoming Donations</h2> <!--Upcoming donations: BACKEND is needed-->
+                <h2>Upcoming Donations</h2> 
                 <?php if (!empty($donations)): ?>
                     <ul id="id01">
                         <?php foreach ($donations as $donation):
@@ -189,7 +229,7 @@ if ($result->num_rows > 0) {
             <!--Upcoming donations form-->
             <section class="donation-form-bbank">
 
-                <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>"> <!--We need to change backend here-->
+                <form method="POST" action="donor_front_page_backend.php"> <!--We need to change backend here-->
                     <div class="form-row">
                         <div class="form-group-donor">
                             <h3>Date of upcoming donation</h3>
@@ -215,26 +255,19 @@ if ($result->num_rows > 0) {
 
         <section class="unsubscribe">
             <h2>Temporarily unsubscribe from our email list</h2>
-            <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
-
-            <?php
-            $unsubbed_date = get_unsub_date($email_ses);
-            if ($unsubbed_date != -1) {
-                echo "<p id='is_unsub'> You are currently unsubscribed from our email list until: $unsubbed_date </p>";
-            } else {
-                echo "<p id='is_unsub'>  You are currently subscribed to our mail list </p>";
-            }
+            <p id="unsub_des">By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
+            <?php if ($donor_unsubdate) : ?>
+                <p> You are currently unsubscribed from our email list until: <?php echo $donor_unsubdate; ?></p>
+            <?php else : ?>
+                <p>You are currently subscribed to our mail list </p>
+            <?php endif; ?>
 
 
-            ?>
 
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!--Backend must be implemented here-->
                 <input type="hidden" name="to_do" value="unsubscribe" />
                 <div class="unsub-form-row">
-                    <div class="unsub-form-group-donor">
-                        <label for="email">Enter your email address:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
+
 
                     <div class="unsub-form-group-donor">
                         <label for="end-date">End date of temporary unsubscription:</label>
@@ -266,65 +299,6 @@ if ($result->num_rows > 0) {
 </footer>
 
 
-<script>
-    const rmv_msg = () => {
-        const msg = document.getElementById('err-msg');
-        msg.innerHTML = '';
-    }
-
-    const add_msg = () => {
-        const msg = document.getElementById('err-msg');
-        msg.innerHTML = 'The email you entered in not your own';
-    }
-
-    
-</script>
 
 </html>
 
-<?php
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $to_do = $_POST["to_do"];
-
-    if ($to_do = "unsubscribe") {
-        $email = $_POST["email"];
-        $date = $_POST["end-date"];
-        if ($email_ses == $email) {
-            set_unsub_date($email, $date);
-        } else {
-            echo "  
-            <script>
-            console.log('trying');
-            document.addEventListener('DOMContentLoaded', add_msg());
-            
-            
-            </script>
-            
-            ";
-        }
-    } else {
-        echo "<script> rmv_msg(); </script>";
-        $donation_date = $_POST['donation_date'];
-        $blood_center = $_POST['blood_center'];
-        $amount = $_POST['amount'];
-
-        $sql3 = "INSERT INTO Donation (donor_id, blood_bank_id, amount, donation_date) VALUES (?, ?, ?, ?)";
-
-        $stmt = $link->prepare($sql3);
-        $stmt->bind_param('iids', $donor_id, $blood_center, $amount, $donation_date);
-
-        if ($stmt->execute()) {
-            header("Location: " . $_SERVER['PHP_SELF']);
-            exit();
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-    }
-}
-
-$stmt->close();
-$link->close();
-?>

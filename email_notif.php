@@ -133,7 +133,8 @@ function get_mail_list($btype, $rid)
 {
     global $link;
     $sql_que = "SELECT blood_type, donor_id, name, email, address, is_eligible, blood_type from Donor 
-    where address IN (SELECT region from Region WHERE rid = $rid) AND is_eligible = 1 AND blood_type = '$btype'";
+    where address IN (SELECT region from Region WHERE rid = $rid) AND is_eligible = 1 AND blood_type = '$btype'
+    AND unsubscribe_date IS NULL";
     echo $sql_que;
     $sql_request = $link->query($sql_que);
 
