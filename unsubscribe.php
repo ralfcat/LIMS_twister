@@ -45,6 +45,20 @@ function set_unsub_date($email, $date)
   
 }
 
+function subscribe($email)
+{
+    include 'graph/db_connection.php';
+
+    $update_req = "UPDATE Donor SET unsubscribe_date = null
+                            WHERE email = ?";
+    $stmt = $link->prepare($update_req);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+
+    return;
+  
+}
+
 function get_unsub_date($email)
 {
     include 'graph/db_connection.php';

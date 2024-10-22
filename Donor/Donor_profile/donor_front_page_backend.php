@@ -4,6 +4,7 @@ require_once '../../unsubscribe.php';
 
 use function Unsubscribe\set_unsub_date;
 use function Unsubscribe\get_unsub_date;
+use function Unsubscribe\subscribe;
 
 
 // Database connection parameters
@@ -45,6 +46,11 @@ if ($result->num_rows > 0) {
     $donor_age = $user['age'];
     $donor_id = $user['donor_id'];
     $donor_unsubdate = $user['unsubscribe_date'];
+    if (!isset($donor_unsubdate)) {
+        $subscribed = true;
+    } else {
+        $subscribed = false;
+    }
 
     $sql = "SELECT donation.donation_date, donation.amount, blood_bank.name FROM donation JOIN blood_bank ON donation.blood_bank_id = blood_bank.blood_bank_id WHERE donor_id = ? ORDER BY donation.donation_date DESC";
     $stmt = $link->prepare($sql);
@@ -72,19 +78,35 @@ if ($result->num_rows > 0) {
 }
 
 $success_message = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $to_do = $_POST["to_do"];
 
-    if ($to_do = "unsubscribe") {
+
+    if ($to_do == "unsubscribe") {
         $email = $email_ses;
+        
         $date = $_POST["end-date"];
 
         set_unsub_date($email, $date);
 
         $donor_unsubdate = $date;
         $success_message = "Unsubscription date changed to $donor_unsubdate";
-    } else {
+  
+        $subscribed = false;
+    } else if ($to_do == "resubscribe") {
+        $email = $email_ses;
+
+        
+        subscribe($email);
+        $success_message = "You are now subscribed to our mail list";
+
+        $subscribed = true;
+
+    }
+    
+    else {
         echo "<script> rmv_msg(); </script>";
         $donation_date = $_POST['donation_date'];
         $blood_center = $_POST['blood_center'];
@@ -172,7 +194,7 @@ $stmt->close();
             </div>
 
             <div class="upcoming-donations">
-                <h2>Upcoming Donations</h2> 
+                <h2>Upcoming Donations</h2>
                 <?php if (!empty($donations)): ?>
                     <ul id="id01">
                         <?php foreach ($donations as $donation):
@@ -253,38 +275,66 @@ $stmt->close();
             </section>
         </div> <!--End forms for donation-->
 
-        <section class="unsubscribe">
-            <h2>Temporarily unsubscribe from our email list</h2>
-            <p id="unsub_des">By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
-            <?php if ($donor_unsubdate) : ?>
-                <p> You are currently unsubscribed from our email list until: <?php echo $donor_unsubdate; ?></p>
-            <?php else : ?>
-                <p>You are currently subscribed to our mail list </p>
-            <?php endif; ?>
+        <?php if ($subscribed): ?>
+
+            <!-- start here -->
+
+            <section class="unsubscribe">
+                <h2>Temporarily unsubscribe from our email list</h2>
+                <p id="unsub_des">By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
+
+                    <p>You are currently subscribed to our mail list </p>
+            
 
 
 
-            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!--Backend must be implemented here-->
-                <input type="hidden" name="to_do" value="unsubscribe" />
-                <div class="unsub-form-row">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!--Backend must be implemented here-->
+                    <input type="hidden" name="to_do" value="unsubscribe" />
+                    <div class="unsub-form-row">
 
 
-                    <div class="unsub-form-group-donor">
-                        <label for="end-date">End date of temporary unsubscription:</label>
-                        <input type="date" id="end-date" name="end-date" min="<?php echo date("Y-m-d"); ?>" required>
+                        <div class="unsub-form-group-donor">
+                            <label for="end-date">End date of temporary unsubscription:</label>
+                            <input type="date" id="end-date" name="end-date" min="<?php echo date("Y-m-d"); ?>" required>
+                        </div>
                     </div>
-                </div>
 
-                <label class="unsub-confirmation">
-                    <input type="checkbox" name="confirm" required>
-                    <p>I confirm that I want to temporarily unsubscribe.</p>
-                </label>
+                    <label class="unsub-confirmation">
+                        <input type="checkbox" name="confirm" required>
+                        <p>I confirm that I want to temporarily unsubscribe.</p>
+                    </label>
 
-                <button class="add-donation-button-donor" type="submit">Unsubscribe</button>
-            </form>
-        </section>
+                    <button class="add-donation-button-donor" type="submit">Unsubscribe</button>
+                </form>
+            </section>
 
-        </section>
+        <?php elseif (!$subscribed): ?>
+            <section class="unsubscribe">
+                <h2>Resubscribe to our email list</h2>
+                <p id="unsub_des"> By subscribing, you will receive any updates about blood donation. </p>
+               
+             
+                    <p> You are currently unsubscribed from our email list until: <?php echo $donor_unsubdate; ?></p>
+            
+
+
+
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST"> <!--Backend must be implemented here-->
+                    <input type="hidden" name="to_do" value="resubscribe" />
+
+
+                    <label class="unsub-confirmation">
+                        <input type="checkbox" name="confirm" required>
+                        <p>I confirm that I want to resubscribe.</p>
+                    </label>
+
+                    <button class="add-donation-button-donor" type="submit">Subscribe</button>
+                </form>
+            </section>
+            <!-- end here -->
+        <?php endif; ?>
+
+
     </main>
 
 </body>
@@ -301,4 +351,3 @@ $stmt->close();
 
 
 </html>
-
