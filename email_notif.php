@@ -57,12 +57,6 @@ if (mysqli_connect_error()) {
 }
 
 
-
-
-
-
-
-
 function send_emails(array $blood_levels, $rid) {
     $mail_list = check_level_against_threshold($blood_levels, $rid);
     foreach ($mail_list as $user) {
@@ -120,7 +114,6 @@ function check_level_against_threshold(array $blood_levels, $rid)
 
         if ($curr_stock < $thresh) {
             $mail_list = get_mail_list($type, $rid);
-            // send_email();
             populate_notif_db($mail_list);
         }
     }
