@@ -2,3 +2,9 @@ INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No
 INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 1,'bloodbank_3174@gmail.com', 'e9587e40943ebf8ead17fdd926dd5972');
 INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 1,'bloodbank_787@gmail.com', '8b19acdadb0af89170582da4a71f80e8');
 INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 1,'bloodbank_3964@yahoo.com', '167152a249a9dd2088c0ada3222b50f0');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 19,'bloodbank_3723@outlook.com', '1ff4d7a1f98ce5a74f97441948d430e4');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 19,'bloodbank_1329@gmail.com', '9304e158cfe1604ccb51285fd2973fbd');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 2', 19,'bloodbank_3617@gmail.com', 'b4377de5baf269077df5140db2dbc9e8');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 0', 15,'bloodbank_648@outlook.com', '5f502ef3757ec737d572d40c33bab810');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 1', 15,'bloodbank_2830@yahoo.com', 'b4ee70b9ac924737d9bef900b6426bbc');
+INSERT INTO Blood_Bank (name, region_id, email, password) VALUES ('Blood Bank No. 2', 15,'bloodbank_951@gmail.com', '8c5a89cb9fb2e1152a4ef460b04fd26f');

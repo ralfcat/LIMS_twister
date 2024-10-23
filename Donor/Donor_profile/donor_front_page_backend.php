@@ -88,6 +88,7 @@ $stmt->close();
 $link->close();
 ?>
 
+<!--Structure My donations page-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,12 +96,13 @@ $link->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Dashboard</title>
+    <!--Reset file-->
     <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
 </head>
 
 <body>
-    <header>
+    <header> <!--Navigation-->
         <div class="logo-container">
             <a href="/index.php">
                 <img class="logo" src="../../Logo-and-text.png" alt="Logo">
@@ -118,7 +120,7 @@ $link->close();
     <h1>My donations</h1>
 
     <section class="dashboard">
-        <div class="donation-history">
+        <div class="donation-history">  <!--View donation history-->
             <h2>Donation History</h2>
             <?php if (!empty($donations)): ?>
                 <ul>
@@ -143,8 +145,8 @@ $link->close();
             <?php endif; ?>
         </div>
 
-        <div class="upcoming-donations" >
-            <h2>Upcoming Donations</h2> <!--Upcoming donations: BACKEND is needed-->
+        <div class="upcoming-donations" >  <!--View upcoming donations-->
+            <h2>Upcoming Donations</h2> 
             <?php if (!empty($donations)): ?>
                 <ul id="id01">
                     <?php foreach ($donations as $donation): 
@@ -169,8 +171,7 @@ $link->close();
         </div>
     </section>
 
-<div class="forms-for-donation">
-<!--Previous donations form-->
+<div class="forms-for-donation">  <!--Add previous donation - form-->
     <section class="donation-form-bbank">
 
     <form method="POST" action="donor_front_page_backend.php">
@@ -196,10 +197,10 @@ $link->close();
     </form>
 </section>
 
-<!--Upcoming donations form-->
-<section class="donation-form-bbank">
 
-<form method="POST" action="donor_front_page_backend.php"> <!--We need to change backend here-->
+<section class="donation-form-bbank"> <!--Add upcoming donation - form-->
+
+<form method="POST" action="donor_front_page_backend.php"> 
 <div class="form-row">
 <div class="form-group-donor">    
     <h3>Date of upcoming donation</h3>        
@@ -223,12 +224,12 @@ $link->close();
 </section>
 </div> <!--End forms for donation-->
 
- <!--Unregister from list-->
-<section class="unsubscribe">
+ 
+<section class="unsubscribe"> <!--Unsubscribe from list-->
     <h2>Temporarily unsubscribe from our email list</h2>
     <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
     
-    <form action="/unsubscribe" method="POST"> <!--Backend must be implemented here-->
+    <form action="/unsubscribe" method="POST">
         <div class="unsub-form-row">
             <div class="unsub-form-group-donor">  
                 <label for="email">Enter your email address:</label>
@@ -254,7 +255,7 @@ $link->close();
 </main>
 </body>
 
-<footer>
+<footer> <!--Footer-->
   <p>&copy; 2024 Blood Alert</p>
   <nav>
     <a href="../../about_us.html">About Us</a> |
