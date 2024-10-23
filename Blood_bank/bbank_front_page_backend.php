@@ -65,19 +65,22 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $bid = get_id();
     $to_do = $_POST["to_do"];
     if ($to_do == "update_blood") {
+        echo "<script>console.log( 'you clicked the update the blood button');</script>";
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         update_levels($btype, $units);
         remove_unsub();
         $rid = get_rid();
+        
         $curr_levels_array = get_stock($email);
-        send_emails($curr_levels_array, $rid);
+        send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=info_changed');
       
     } else if ($to_do == "update_threshold") {
-        // echo "<script>console.log( 'you clicked the update the threshold button');</script>";
+        
         write_console("you are trying to update thresholds");
         foreach ($_POST as $key => $value) {
             write_console("$key and the val is $value");
@@ -94,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $rid = get_rid();
         $curr_levels_array = get_stock($email);
-        send_emails($curr_levels_array, $rid);
+        send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=thresholds_changed');
     } else if ($to_do == "update_bb_info") {
         write_console("you are trying to update your blood bank info");
