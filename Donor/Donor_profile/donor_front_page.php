@@ -68,6 +68,7 @@ $stmt->close();
 $link->close();
 ?>
 
+<!--Structure My donations page-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
