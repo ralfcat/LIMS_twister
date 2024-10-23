@@ -51,10 +51,12 @@ if (mysqli_connect_error()) {
 }
 
 
-function send_emails(array $blood_levels, $rid, $bid) {
+function send_emails(array $blood_levels, $rid, $bid)
+{
     $mail_list = check_level_against_threshold($blood_levels, $rid, $bid);
     foreach ($mail_list as $user) {
-    sendMail($user);}
+        sendMail($user);
+    }
 }
 
 
@@ -62,7 +64,7 @@ function sendMail($user)
 {
     $name = $user->name;
     $btype = $user->blood_type;
-    $address = $user -> address;
+    $address = $user->address;
     $email = $user->email;
     $mail = new PHPMailer(true);
     $mail->isHTML(true);
@@ -89,7 +91,6 @@ function sendMail($user)
     } catch (Exception $e) {
         echo '<h1>EMAIL WAS NOT SENT</h1>';
         echo "Message could not be sent Error:" . $mail->ErrorInfo . "";
-
     }
 }
 
@@ -124,7 +125,7 @@ function get_mail_list($btype, $rid)
     $mail_list = array();
     while ($row = $sql_request->fetch_assoc()) {
         $id = $row["donor_id"];
-        
+
         $reci = new Recipient($id, date('Y-m-d H:i:s'), $row['address'], $row['name'], $row['blood_type'], $row['email']);
         $mail_list[] = $reci;
     }
@@ -148,7 +149,7 @@ function populate_notif_db($mail_list, $bid)
         $stmt = $link->prepare($sql_req);
         write_console("Theh donor id is {$user_id}");
 
-        $stmt->bind_param("siii", $date, $rid, $user_id, $bid );
+        $stmt->bind_param("siii", $date, $rid, $user_id, $bid);
         $stmt->execute();
     }
 }

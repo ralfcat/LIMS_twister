@@ -76,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $bid = get_id();
         
         $curr_levels_array = get_stock($email);
-        echo "$curr_levels_array";
         send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=info_changed');
       
@@ -91,12 +90,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 } else {
 
-                    // remove_unsub();
+                    remove_unsub();
                     update_thresholds($key, $value);
                 }
             }
         }
         $rid = get_rid();
+        $bid = get_id();
         $curr_levels_array = get_stock($email);
         send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=thresholds_changed');
@@ -224,6 +224,7 @@ function update_curr($btype, $new_level, $id)
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("iis", $new_level, $id, $btype);
     $stmt->execute();
+    return;
    
  
 }
