@@ -105,3 +105,28 @@ CREATE TABLE DonorNotification (
     FOREIGN KEY (donor_id) REFERENCES Donor(donor_id),
     FOREIGN KEY (notification_id) REFERENCES Notification(notification_id)
 );
+
+
+
+INSERT INTO notification (notification_id, notification_method, notification_date, blood_bank_id, donor_id)
+VALUES 
+(1, 'email', '2024-10-20', 1, 1),
+(2, 'email', '2024-10-20', 1, 2),
+(3, 'email', '2024-10-20', 1, 3),
+(4, 'email', '2024-10-20', 1, 4),
+(5, 'email', '2024-10-21', 1, 5),
+(6, 'email', '2024-10-21', 1, 1),
+(7, 'email', '2024-10-02', 1, 2),
+(8, 'email', '2024-10-02', 1, 3),
+(9, 'email', '2024-10-02', 1, 4),
+(10, 'email', '2024-10-02', 1, 5),
+(11, 'email', '2024-10-20', 1, 1),
+(12, 'email', '2024-10-20', 1, 2),
+(13, 'email', '2024-10-20', 1, 3),
+(14, 'email', '2024-10-20', 1, 4),
+(15, 'email', '2024-10-21', 1, 5),
+(16, 'email', '2024-10-21', 1, 1),
+(17, 'email', '2024-10-02', 1, 2),
+(18, 'email', '2024-10-02', 1, 3),
+(19, 'email', '2024-10-02', 1, 4),
+(20, 'email', '2024-10-02', 1, 5);
