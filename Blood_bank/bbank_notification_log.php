@@ -66,7 +66,8 @@ $link->close();
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        <a href="bbank_front_page.php"> 
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo"></a>
         </div>
         <nav>
             <ul>
@@ -102,8 +103,8 @@ $link->close();
 <footer>
   <p>&copy; 2024 Blood Alert</p>
   <nav>
-    <a href="../about_us.html">About Us</a> |
-    <a href="../integrity_policy.html">Integrity Policy</a> |
+    <a href="../about_us.php">About Us</a> |
+    <a href="../integrity_policy.php">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>

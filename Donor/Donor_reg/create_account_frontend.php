@@ -104,7 +104,7 @@ $reg_res = $link->query($reg_req);
         <h1>Create Account</h1>
         <p id='successMessage'></p>
         <section class="donation-form" id="donform">
-            <!-- onsubmit="return validate_form();" -->
+        
             <form method="POST" action=<?php echo $_SERVER['PHP_SELF']; ?> onsubmit="return validate_form();">
 
                 <div class="form-container">
@@ -115,9 +115,9 @@ $reg_res = $link->query($reg_req);
                         <h3>Name:</h3> <span id="error_msg_n"></span>
                         <input type="text" id="name" name="name" placeholder="Enter name">
 
-                        <h3>Age:</h3><input type="number" id="age" name="age"><span id="error_msg_ag"></span> <br>
+                    
 
-                        <h3>Email:</h3> <span id="error_msg_em"></span><br>
+                        <h3>Email:</h3> <span id="error_msg_em"></span>
                         <input type="text" id="email" name="email" placeholder="Enter email">
                         <h3>Password:</h3><span id="error_msg_ps"></span>
                         <input type="password" id="password" name="password" placeholder="Enter password">
@@ -126,7 +126,7 @@ $reg_res = $link->query($reg_req);
                         <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
 
                         <label class="terms-condition"> 
-                            <input type="checkbox" name="confirm" required>
+                            <input id = "chckbx" type="checkbox" name="confirm" required>
                             <p> I have read and agreed to the <a href="terms_cond_donor.html" target="blank" rel="noreferrer noopener">Terms and Conditions </a> </p>
                         </label>
                         <button class="profile-changes-button" type="submit">Create Account</button>
@@ -161,7 +161,7 @@ $reg_res = $link->query($reg_req);
                         <select hidden id="preg" name="preg" value="No">
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
-                        </select> <br>
+                        </select> 
 
                         <h3>Region:</h3><span id="error_msg_rg"></span>
                         <select name="region" id="reg">
@@ -192,8 +192,8 @@ $reg_res = $link->query($reg_req);
 <footer>
     <p>&copy; 2024 Blood Alert</p>
     <nav>
-        <a href="../../about_us.html">About Us</a> |
-        <a href="../../integrity_policy.html">Integrity Policy</a> |
+        <a href="../../about_us.php">About Us</a> |
+        <a href="../../integrity_policy.php">Integrity Policy</a> |
         <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
     </nav>
 </footer>
@@ -216,7 +216,7 @@ $reg_res = $link->query($reg_req);
 
     function validate_form() {
         console.log("trying to validate form ");
-        let ids = ["error_msg_n", "error_msg_ag", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg_bt", "error_msg_sx", "error_msg_rg", "error_msg"];
+        let ids = ["error_msg_n", "error_msg_em", "error_msg_ps", "error_msg_rps", "error_msg_bt", "error_msg_sx", "error_msg_rg", "error_msg"];
         let symbols = "!@#$%^&*()_+";
         symbols = [...symbols];
         for (id of ids) {
@@ -227,8 +227,7 @@ $reg_res = $link->query($reg_req);
         var pass = document.getElementById("password").value;
         var repass = document.getElementById("repeat_password").value;
         var email = document.getElementById("email").value;
-        var age = document.getElementById('age').value;
-        age = Number(age);
+
         let name = document.getElementById("name").value;
         var btype = document.getElementById("sbt").value;
         var sex = document.getElementById("sexes").value;
@@ -242,10 +241,7 @@ $reg_res = $link->query($reg_req);
             return false;
         }
 
-        if (age == "") {
-            document.getElementById("error_msg_ag").innerHTML = "Please fill in the field";
-            return false;
-        }
+
         if (email === "") {
             document.getElementById("error_msg_em").innerHTML = "Please fill in the field";
             return false;
@@ -278,14 +274,6 @@ $reg_res = $link->query($reg_req);
             return false;
         }
 
-        if (age < 18) {
-            document.getElementById("error_msg").innerHTML = "You are too young to register";
-            return false;
-        }
-        if (age > 60) {
-            document.getElementById("error_msg").innerHTML = "You are too old to register";
-            return false;
-        }
 
         if (pass !== repass) {
             document.getElementById("error_msg").innerHTML = "Passwords do not match";
@@ -359,7 +347,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $name = $_POST["name"];
         $address = $_POST["region"];
-        $age = $_POST["age"];
+   
 
         $sexes = $_POST["sexes"];
         $preg = $_POST["preg"];
@@ -399,13 +387,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $eli = false;
             }
 
-            $insert_sql = "INSERT INTO Donor (name, age, sex, address, email, password, blood_type, last_donation_date, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?, ?)";
+            $insert_sql = "INSERT INTO Donor (name, sex, address, email, password, blood_type, last_donation_date, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?)";
             $stmt = $link->prepare($insert_sql);
-            $stmt->bind_param("sissssssss", $name, $age, $sexes, $address, $email, $hashed_password, $btype, $donateddate, $eli, $activation_token_hash);
+            $stmt->bind_param("sssssssss", $name, $sexes, $address, $email, $hashed_password, $btype, $donateddate, $eli, $activation_token_hash);
         } else {
-            $insert_sql = "INSERT INTO Donor (name, age, sex, address, email, password, blood_type, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?)";
+            $insert_sql = "INSERT INTO Donor (name, sex, address, email, password, blood_type, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?)";
             $stmt = $link->prepare($insert_sql);
-            $stmt->bind_param("sisssssis", $name, $age, $sexes, $address, $email, $hashed_password, $btype, $eli, $activation_token_hash);
+            $stmt->bind_param("ssssssis", $name, $sexes, $address, $email, $hashed_password, $btype, $eli, $activation_token_hash);
         }
 
 

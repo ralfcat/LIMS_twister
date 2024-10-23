@@ -44,6 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (md5($password) == $hashed_password) {
                 //Password matches, log the user in and redirect
                 $_SESSION['donor_id'] = $row['donor_id'];
+                $_SESSION['email'] = $email;
+                $_SESSION['donorlogged'] = true;
+            
                 header("Location: /Donor/Donor_profile/donor_front_page_backend.php");
                 exit(); 
             } 
@@ -146,8 +149,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <footer>
   <p>&copy; 2024 Blood Alert</p>
   <nav>
-    <a href="../../about_us.html">About Us</a> |
-    <a href="../../integrity_policy.html">Integrity Policy</a> |
+    <a href="../../about_us.php">About Us</a> |
+    <a href="../../integrity_policy.php">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>

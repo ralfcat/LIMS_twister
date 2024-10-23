@@ -1,3 +1,18 @@
+<?php
+session_start();
+$frontpage = "";
+if (isset($_SESSION['bbloggedin'])) {
+    $frontpage = "Blood_bank/bbank_front_page.php";
+} else if (isset($_SESSION['donorlogged'])) {
+    $frontpage = "Donor/Donor_profile/donor_front_page_backend.php";
+} else {
+    $frontpage = "index.php";
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,11 +53,11 @@
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        <a href=<?php echo $frontpage?>> <img class="logo" src="../../Logo-and-text.png" alt="Logo"> </a>
         </div>
         <nav>
             <ul>
-                <li><a href="index.php">Front Page</a></li>
+                <li><a href=<?php echo $frontpage?>>Front Page</a></li>
             </ul>
         </nav>
     </header>
@@ -82,8 +97,8 @@
 <footer>
   <p>&copy; 2024 Blood Alert</p>
   <nav>
-    <a href="about_us.html">About Us</a> |
-    <a href="integrity_policy.html">Integrity Policy</a> |
+    <a href="about_us.php">About Us</a> |
+    <a href="integrity_policy.php">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>
