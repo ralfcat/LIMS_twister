@@ -10,6 +10,7 @@ CREATE TABLE Donor (
     last_donation_date DATE,
     is_eligible BOOLEAN,
     account_activation_hash VARCHAR(64) UNIQUE
+    unsubscribe_date DATE
 );
 
 CREATE TABLE Region (
