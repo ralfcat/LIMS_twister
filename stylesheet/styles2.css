@@ -4,6 +4,7 @@
     src: url(fonts/Nunito-VariableFont_wght.ttf)
 }
 
+/*Default size of html window 105%*/
 html {
     font-size: 105%;
 }
@@ -40,12 +41,14 @@ h3 {
     font-size: 1rem;
 }
 
+/*Web page background and structure*/
 body {
     background-color: #f5d5dd;
     display: flex;
     flex-direction: column;
 }
 
+/*Settings for input fields*/
 input, select {
     width: calc(100% - 20px);
     padding: 0.7rem;
@@ -91,6 +94,7 @@ header {
     background-color: #fff;
 }
 
+/*Logo settings*/
 .logo-container {
     flex: 1;
 }
@@ -99,6 +103,7 @@ header {
     height: 3.2rem; 
 }
 
+/*Nav list*/
 nav ul {
     display: flex;
     list-style: none;
@@ -117,6 +122,7 @@ nav ul li a {
     font-weight: bold;
 }
 
+/*Navigation marker - marks where the users are*/
 nav .active {
     position: relative; 
     background-color: #f5d5dd; 
@@ -129,6 +135,7 @@ nav .active {
     border-radius: 0.2rem;     
 }
 
+/*Settings for buttons*/
 button {
     padding: 0.7rem 1.2rem;
     background-color: #af093c;
@@ -156,6 +163,7 @@ button:hover {
     color: #141414;
 }
 
+/*Footer style*/
 footer {
     font-family: "Nunito", Helvetica, sans-serif;
     letter-spacing: 0.055em;
@@ -382,8 +390,7 @@ footer {
     margin: 1rem;
 }
 
-/*Bbank front page structure*/
-/*Blood bank front page*/
+/*Blood bank front page structure*/
 .bbank-container {
     display: grid;
     max-width: 100%;
@@ -441,8 +448,8 @@ footer {
 }
 
 .form-group {
-    flex: 1; /* Allows each group to take equal space */
-    margin: 0 10px; /* Adds margin between the groups */
+    flex: 1; 
+    margin: 0 10px; 
 }
 
 .form-group:last-child {
