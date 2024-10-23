@@ -186,7 +186,7 @@ function updateGraph(email, curr_region) {
               legend: { display: false },
               title: {
                 display: true,
-                text: `Blood Stock Levels for Region ${regionName}`,
+                text: `Local Blood Stock Levels`,
                 font: { size: 18, family: "Nunito", weight: "bold" },
                 color: "rgba(160, 6, 53)",
                 padding: { top: 10, bottom: 30 },

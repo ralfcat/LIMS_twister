@@ -20,6 +20,15 @@ if (!$link) {
 
 $error_email = "";
 $error_password = "";
+$display_message = "";
+$messages = [
+    'logged-out' => 'Logged out succcessfully',
+    'login-required' => 'You need to be logged in to see this page',
+    
+];
+if (isset($messages[$_GET['msg']])) {
+    $display_message = htmlspecialchars($messages[$_GET['msg']]);
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -48,6 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['email'] = $row['email'];
             $_SESSION['loggedin'] = true;
+            $_SESSION['bbloggedin'] = true;
             header("Location: bbank_front_page.php");
             exit;
         }
@@ -98,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+            <a href = "../index.php"><img class="logo" src="../../Logo-and-text.png" alt="Logo">  </a>
         </div>
         <nav>
             <ul>
@@ -110,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="login-container">
         <div class="login-form">
             <h2>Blood Bank Log in</h2>
+            <p id="msgs"><?php echo $display_message; ?></p>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return validateForm();" method="POST" id="login-form">
                 <div class="input-group">
                     <input type="text" id="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" />
@@ -138,8 +149,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <footer>
     <p>&copy; 2024 Blood Alert</p>
     <nav>
-        <a href="../about_us.html">About Us</a> |
-        <a href="../integrity_policy.html">Integrity Policy</a> |
+        <a href="../about_us.php">About Us</a> |
+        <a href="../integrity_policy.php">Integrity Policy</a> |
         <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
     </nav>
 </footer>

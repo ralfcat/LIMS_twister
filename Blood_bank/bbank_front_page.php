@@ -13,6 +13,7 @@ use FrontEnd\BloodStock as BloodStock;
 
 if (session_status() !== PHP_SESSION_ACTIVE) session_start();
 
+$display_message = "";
 $messages = [
     'blood_info_unchanged' => 'Blood stock cannot be less than 0',
     'blood_stock_unchanged' => 'Blood stock cannot be less than 0',
@@ -20,12 +21,8 @@ $messages = [
     'info_changed' => 'Blood levels updated'
 ];
 if (isset($messages[$_GET['msg']])) {
-    $err_msg = htmlspecialchars($messages[$_GET['msg']]);
+    $display_message = htmlspecialchars($messages[$_GET['msg']]);
 
-    $notifmsg =  "document.addEventListener('DOMContentLoaded', function() {
-     let note_msg = document.getElementById('msgs');
-     note_msg.innerHTML = ' $err_msg'; });";
-    write_js($notifmsg);
 }
 
 if (!isset($_SESSION['email'])) {
@@ -59,7 +56,8 @@ $region = curr_region();
 <body>
     <header> <!--Navigation-->
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        <a href="bbank_front_page.php"> 
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo"></a>
         </div>
         <nav>
             <ul>
@@ -76,7 +74,7 @@ $region = curr_region();
         <div class="bbank-container"> 
             <div class="Current_levels"> <!--Current blood levels graph-->
             <h2>Current Blood Stock Levels</h2>
-            <p class="success-message" id = "msgs"></p>
+            <p class="success-message" id = "msgs"><?php echo $display_message; ?></p>
 
                 <div class="graph">
                     <canvas id="bloodStockChart" width="500" height="300"></canvas>
@@ -121,7 +119,7 @@ $region = curr_region();
             </form>
         </div>
 
-        <section class="donation-form-bbank"> <!--Add bloodlevels to graph-->
+        <section class="donation-form-bbank"> <!--Add blood levels to graph-->
             <form method="POST" action="bbank_front_page_backend.php">
                 <input type="hidden" name="to_do" value="update_blood" />
                 <div class="form-row">
@@ -159,8 +157,8 @@ $region = curr_region();
 <footer> <!--Footer-->
     <p>&copy; 2024 Blood Alert</p>
     <nav>
-        <a href="../about_us.html">About Us</a> |
-        <a href="../integrity_policy.html">Integrity Policy</a> |
+        <a href="../about_us.php">About Us</a> |
+        <a href="../integrity_policy.php">Integrity Policy</a> |
         <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
     </nav>
 </footer>

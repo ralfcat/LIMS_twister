@@ -1,3 +1,55 @@
+<?php
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "twister";
+
+// Create connection
+$link = mysqli_connect($servername, $username, $password, $dbname);
+
+// Check if connection is established
+if (mysqli_connect_error()) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// Fetch blood bank ID using the email from the session
+$blood_bank_email = $_SESSION['email'];
+$sql = "SELECT blood_bank_id FROM Blood_Bank WHERE email = ?";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('s', $blood_bank_email);
+$stmt->execute();
+$stmt->bind_result($blood_bank_id);
+$stmt->fetch();
+$stmt->close();
+
+// Fetch notification logs
+$sql = "SELECT notification_date, COUNT(donor_id) AS number_notified 
+        FROM Notification 
+        WHERE blood_bank_id = ? 
+        GROUP BY notification_date
+        ORDER BY notification_date DESC";
+$stmt = $link->prepare($sql);
+$stmt->bind_param('i', $blood_bank_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$notification_logs = [];
+while ($row = $result->fetch_assoc()) {
+    $notification_logs[] = $row;
+}
+
+$stmt->close();
+$link->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +66,8 @@
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        <a href="bbank_front_page.php"> 
+            <img class="logo" src="../../Logo-and-text.png" alt="Logo"></a>
         </div>
         <nav>
             <ul>
@@ -27,48 +80,31 @@
         <button><a href="bb_log_out.php">Log Out</a></button>
     </header>
 
-    <main> <!-- Added <main> tag to encompass main content -->
+    <main>
         <h1>Notification Log</h1>
-
-        <table class="notification-log">
-            <tr>
-                <th>Date</th>
-                <th>Number of People Notified</th>
-            </tr>
-            <tr>
-                <td>2024-10-01</td>
-                <td>150</td>
-            </tr>
-            <tr>
-                <td>2024-09-28</td>
-                <td>230</td>
-            </tr>
-            <tr>
-                <td>2024-09-25</td>
-                <td>180</td>
-            </tr>
-            <tr>
-                <td>2024-09-22</td>
-                <td>210</td>
-            </tr>
-            <tr>
-                <td>2024-09-20</td>
-                <td>170</td>
-            </tr>
-            <tr>
-                <td>2024-09-15</td>
-                <td>190</td>
-            </tr>
-        </table>
-    </main> 
+        <section class="notification-log">
+            <table class="notification-log">
+                <tr>
+                    <th>Date</th>
+                    <th>Number of People Notified</th>
+                </tr>
+                <?php foreach ($notification_logs as $log): ?>
+                    <tr>
+                        <td><?php echo htmlspecialchars($log['notification_date']); ?></td>
+                        <td><?php echo htmlspecialchars($log['number_notified']); ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </section>
+    </main>
     
 </body>
 
 <footer>
   <p>&copy; 2024 Blood Alert</p>
   <nav>
-    <a href="../about_us.html">About Us</a> |
-    <a href="../integrity_policy.html">Integrity Policy</a> |
+    <a href="../about_us.php">About Us</a> |
+    <a href="../integrity_policy.php">Integrity Policy</a> |
     <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
   </nav>
 </footer>

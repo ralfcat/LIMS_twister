@@ -3,9 +3,11 @@
 namespace FrontEnd;
 
 require_once '../email_notif.php';
+require_once '../unsubscribe.php';
 
 
 use function EmailNotif\send_emails as send_emails;
+use function Unsubscribe\remove_unsub;
 
 error_reporting(E_ERROR | E_PARSE);
 
@@ -63,15 +65,22 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     $to_do = $_POST["to_do"];
     if ($to_do == "update_blood") {
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         update_levels($btype, $units);
+        remove_unsub();
+        $rid = get_rid();
+        $bid = get_id();
+        
+        $curr_levels_array = get_stock($email);
+        send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=info_changed');
       
     } else if ($to_do == "update_threshold") {
-        // echo "<script>console.log( 'you clicked the update the threshold button');</script>";
+        
         write_console("you are trying to update thresholds");
         foreach ($_POST as $key => $value) {
             write_console("$key and the val is $value");
@@ -81,13 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit;
                 } else {
 
+                    remove_unsub();
                     update_thresholds($key, $value);
                 }
             }
         }
         $rid = get_rid();
+        $bid = get_id();
         $curr_levels_array = get_stock($email);
-        send_emails($curr_levels_array, $rid);
+        send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=thresholds_changed');
     } else if ($to_do == "update_bb_info") {
         write_console("you are trying to update your blood bank info");
@@ -152,18 +163,18 @@ function get_stock($email)
 }
 
 
-function get_stocks()
-{
-    global $link;
-    global $email;
-    $bs_req = "SELECT Blood_Stock.* FROM Blood_Bank LEFT JOIN Blood_Stock ON Blood_Stock.blood_bank_id = Blood_Bank.blood_bank_id WHERE Blood_Bank.email = '$email'";
-    $res = $link->query($bs_req);
-    $levels = array();
-    while ($row = $res->fetch_assoc()) {
-        $levels[] = $row;
-    }
-    return $levels;
-}
+// function get_stocks()
+// {
+//     global $link;
+//     global $email;
+//     $bs_req = "SELECT Blood_Stock.* FROM Blood_Bank LEFT JOIN Blood_Stock ON Blood_Stock.blood_bank_id = Blood_Bank.blood_bank_id WHERE Blood_Bank.email = '$email'";
+//     $res = $link->query($bs_req);
+//     $levels = array();
+//     while ($row = $res->fetch_assoc()) {
+//         $levels[] = $row;
+//     }
+//     return $levels;
+// }
 
 
 
@@ -212,8 +223,10 @@ function update_curr($btype, $new_level, $id)
     $update_req = "UPDATE Blood_Stock SET stock_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("iis", $new_level, $id, $btype);
-    $result = $stmt->execute();
-    echo "<script>console.log( 'the value was successfully updated');</script>";
+    $stmt->execute();
+    return;
+   
+ 
 }
 
 function update_thresholds($btype, $threshold)
@@ -316,7 +329,7 @@ function update_levels($btype, $units)
         header('Location: bbank_front_page.php?msg=blood_info_unchanged');
     } else {
         update_curr($btype, $new_level, $bb_id);
-        header('Location: bbank_front_page.php?msg=info_changed');
+
     }
 }
 
