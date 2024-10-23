@@ -36,6 +36,8 @@ $regional_levels = get_regional_levels();
 $region = curr_region();
 
 ?>
+
+<!--Structure of Inventory page-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +54,7 @@ $region = curr_region();
 </head>
 
 <body>
-    <header>
+    <header> <!--Navigation-->
         <div class="logo-container">
         <a href="bbank_front_page.php"> 
             <img class="logo" src="../../Logo-and-text.png" alt="Logo"></a>
@@ -68,9 +70,9 @@ $region = curr_region();
         <button> <a href="bb_log_out.php">Log Out</a></button>
     </header>
     <main>
-        <h1>Blood level inventory</h1>
-        <div class="bbank-container"> <!-- New container -->
-            <div class="Current_levels">
+        <h1>Blood level inventory</h1> 
+        <div class="bbank-container"> 
+            <div class="Current_levels"> <!--Current blood levels graph-->
             <h2>Current Blood Stock Levels</h2>
             <p class="success-message" id = "msgs"><?php echo $display_message; ?></p>
 
@@ -88,36 +90,36 @@ $region = curr_region();
             </div>
         
 
-            <form action="bbank_front_page_backend.php" method="POST" class="form-bbank">
+            <form action="bbank_front_page_backend.php" method="POST" class="form-bbank"> <!--Set notification thresholds-->
 
                 <input type="hidden" name="to_do" value="update_threshold" />
                 <h2>Notification Thresholds</h2>
 
                 <div class="input-group">
-                    <label>O+<input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>
-                    <label>O- <input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
+                    <label>O+  <input type="text" name="O+" value=<?php echo get_threshold($current_levels, "O+"); ?>></label>
+                    <label>O-   <input type="text" name="O-" value=<?php echo get_threshold($current_levels, "O-"); ?>></label>
                 </div>
 
                 <div class="input-group">
-                    <label>A+<input type="text" name="A+" value=<?php echo get_threshold($current_levels, "A+"); ?>></label>
-                    <label>A- <input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
+                    <label>A+  <input type="text" name="A+" value=<?php echo get_threshold($current_levels, "A+"); ?>></label>
+                    <label>A-   <input type="text" name="A-" value=<?php echo get_threshold($current_levels, "A-"); ?>></label>
                 </div>
 
                 <div class="input-group">
-                    <label>B+<input type="text" name="B+" value=<?php echo get_threshold($current_levels, "B+"); ?>></label>
-                    <label>B- <input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
+                    <label>B+  <input type="text" name="B+" value=<?php echo get_threshold($current_levels, "B+"); ?>></label>
+                    <label>B-   <input type="text" name="B-" value=<?php echo get_threshold($current_levels, "B-"); ?>></label>
                 </div>
 
                 <div class="input-group">
                     <label>AB+<input type="text" name="AB+" value=<?php echo get_threshold($current_levels, "AB+"); ?>></label>
-                    <label>AB- <input type="text" name="AB-" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
+                    <label>AB-<input type="text" name="AB-" value=<?php echo get_threshold($current_levels, "AB-"); ?>></label>
                 </div>
 
                 <input class="save-donation-button" type="submit" value="Save changes"> 
             </form>
         </div>
 
-        <section class="donation-form-bbank">
+        <section class="donation-form-bbank"> <!--Add bloodlevels to graph-->
             <form method="POST" action="bbank_front_page_backend.php">
                 <input type="hidden" name="to_do" value="update_blood" />
                 <div class="form-row">
@@ -152,7 +154,7 @@ $region = curr_region();
    
 </body>
 
-<footer>
+<footer> <!--Footer-->
     <p>&copy; 2024 Blood Alert</p>
     <nav>
         <a href="../about_us.php">About Us</a> |

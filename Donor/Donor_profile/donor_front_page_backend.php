@@ -132,6 +132,7 @@ $stmt->close();
 
 ?>
 
+<!--Structure My donations page-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -140,12 +141,13 @@ $stmt->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../../BloodAlert_logo.png">
     <title>Donor Dashboard</title>
+    <!--Reset file-->
     <link rel="stylesheet" href="../../stylesheet/reset.css">
     <link rel="stylesheet" href="../../stylesheet/styles2.css">
 </head>
 
 <body>
-    <header>
+    <header> <!--Navigation-->
         <div class="logo-container">
             <a href="donor_front_page_backend.php">
                 <img class="logo" src="../../Logo-and-text.png" alt="Logo"> </a>
