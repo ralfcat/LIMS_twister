@@ -82,18 +82,14 @@ function sendMail($user)
 
     $mail->AltBody = "Hej! We are running low on $btype in $address! Visit your local blood center to donate";
 
-    if (!$mail->send()) {
-        echo '<h1>EMAIL WAS NOT SENT</h1>';
-        return 'EMAIL WAS NOT SENT';
-    } else {
-        echo '<h1>SUCCESS</h1>';
-        return 'SUCCESS';
-    }
 
     try {
         $mail->send();
+        echo '<h1>SUCCESS</h1>';
     } catch (Exception $e) {
+        echo '<h1>EMAIL WAS NOT SENT</h1>';
         echo "Message could not be sent Error:" . $mail->ErrorInfo . "";
+
     }
 }
 
@@ -152,7 +148,7 @@ function populate_notif_db($mail_list, $bid)
         $stmt = $link->prepare($sql_req);
         write_console("Theh donor id is {$user_id}");
 
-        $stmt->bind_param("sii", $date, $rid, $user_id, $bid );
+        $stmt->bind_param("siii", $date, $rid, $user_id, $bid );
         $stmt->execute();
     }
 }

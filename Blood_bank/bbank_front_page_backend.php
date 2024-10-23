@@ -65,17 +65,18 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $bid = get_id();
+    
     $to_do = $_POST["to_do"];
     if ($to_do == "update_blood") {
-        echo "<script>console.log( 'you clicked the update the blood button');</script>";
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         update_levels($btype, $units);
         remove_unsub();
         $rid = get_rid();
+        $bid = get_id();
         
         $curr_levels_array = get_stock($email);
+        echo "$curr_levels_array";
         send_emails($curr_levels_array, $rid, $bid);
         header('Location: bbank_front_page.php?msg=info_changed');
       
@@ -162,18 +163,18 @@ function get_stock($email)
 }
 
 
-function get_stocks()
-{
-    global $link;
-    global $email;
-    $bs_req = "SELECT Blood_Stock.* FROM Blood_Bank LEFT JOIN Blood_Stock ON Blood_Stock.blood_bank_id = Blood_Bank.blood_bank_id WHERE Blood_Bank.email = '$email'";
-    $res = $link->query($bs_req);
-    $levels = array();
-    while ($row = $res->fetch_assoc()) {
-        $levels[] = $row;
-    }
-    return $levels;
-}
+// function get_stocks()
+// {
+//     global $link;
+//     global $email;
+//     $bs_req = "SELECT Blood_Stock.* FROM Blood_Bank LEFT JOIN Blood_Stock ON Blood_Stock.blood_bank_id = Blood_Bank.blood_bank_id WHERE Blood_Bank.email = '$email'";
+//     $res = $link->query($bs_req);
+//     $levels = array();
+//     while ($row = $res->fetch_assoc()) {
+//         $levels[] = $row;
+//     }
+//     return $levels;
+// }
 
 
 
@@ -222,8 +223,9 @@ function update_curr($btype, $new_level, $id)
     $update_req = "UPDATE Blood_Stock SET stock_level = ? WHERE blood_bank_id = ? AND blood_type = ?";
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("iis", $new_level, $id, $btype);
-    $result = $stmt->execute();
-    echo "<script>console.log( 'the value was successfully updated');</script>";
+    $stmt->execute();
+   
+ 
 }
 
 function update_thresholds($btype, $threshold)
@@ -326,7 +328,7 @@ function update_levels($btype, $units)
         header('Location: bbank_front_page.php?msg=blood_info_unchanged');
     } else {
         update_curr($btype, $new_level, $bb_id);
-        header('Location: bbank_front_page.php?msg=info_changed');
+
     }
 }
 
