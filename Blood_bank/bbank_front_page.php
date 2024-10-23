@@ -119,7 +119,7 @@ $region = curr_region();
             </form>
         </div>
 
-        <section class="donation-form-bbank"> <!--Add bloodlevels to graph-->
+        <section class="donation-form-bbank"> <!--Add blood levels to graph-->
             <form method="POST" action="bbank_front_page_backend.php">
                 <input type="hidden" name="to_do" value="update_blood" />
                 <div class="form-row">
