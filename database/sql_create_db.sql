@@ -95,8 +95,10 @@ CREATE TABLE Notification (
     notification_date DATE,
     blood_bank_id INT,
     donor_id INT,
+    rid INT,
     FOREIGN KEY (blood_bank_id) REFERENCES Blood_Bank(blood_bank_id),
-    FOREIGN KEY (donor_id) REFERENCES Donor(donor_id)
+    FOREIGN KEY (donor_id) REFERENCES Donor(donor_id),
+    FOREIGN KEY (rid) REFERENCES Region(rid)
 );
 CREATE TABLE DonorNotification (
     donor_id INT,
