@@ -181,8 +181,8 @@ $stmt->close();
 
                         ?>
                                 <li>
-                                    <span><?php echo htmlspecialchars($donation['donation_date']); ?></span> -
-                                    <span><?php echo htmlspecialchars($donation['name']); ?></span><br>
+                                    <span><?php echo ($donation['donation_date']); ?></span> -
+                                    <span><?php echo ($donation['name']); ?></span><br>
                                 </li>
                         <?php }
                         endforeach; ?>
@@ -238,8 +238,8 @@ $stmt->close();
                             <select id="blood_center" name="blood_center" required>
                                 <option value="">Select a blood center</option>
                                 <?php foreach ($blood_banks as $bank): ?>
-                                    <option value="<?php echo htmlspecialchars($bank['blood_bank_id']); ?>">
-                                        <?php echo htmlspecialchars($bank['name']); ?>
+                                    <option value="<?php echo ($bank['blood_bank_id']); ?>">
+                                        <?php echo ($bank['name']); ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select><br>
@@ -341,15 +341,6 @@ $stmt->close();
 
 </body>
 
-<<<<<<< HEAD
-<footer> <!--Footer-->
-  <p>&copy; 2024 Blood Alert</p>
-  <nav>
-    <a href="../../about_us.html">About Us</a> |
-    <a href="../../integrity_policy.html">Integrity Policy</a> |
-    <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
-  </nav>
-=======
 <footer>
     <p>&copy; 2024 Blood Alert</p>
     <nav>
@@ -357,7 +348,6 @@ $stmt->close();
         <a href="../../integrity_policy.php">Integrity Policy</a> |
         <a href="mailto:bloodalert.twister@gmail.com">Contact Us</a>
     </nav>
->>>>>>> d3499823c1eb784f681170a47b7e26069a9942f1
 </footer>
 
 

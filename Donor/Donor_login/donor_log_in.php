@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <header>
         <div class="logo-container">
-            <img class="logo" src="../../Logo-and-text.png" alt="Logo">
+        <a href = "../../index.php">  <img class="logo" src="../../Logo-and-text.png" alt="Logo"> </a>
         </div>
         <nav>
             <ul>
