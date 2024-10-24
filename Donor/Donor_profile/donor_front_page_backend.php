@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../unsubscribe.php';
+require '../../unsubscribe.php';
 
 use function Unsubscribe\set_unsub_date;
 use function Unsubscribe\get_unsub_date;
@@ -174,29 +174,11 @@ $stmt->close();
                     <ul>
                         <?php foreach ($donations as $donation):
 
-<<<<<<< HEAD
-    <section class="dashboard">
-        <div class="donation-history">  <!--View donation history-->
-            <h2>Donation History</h2>
-            <?php if (!empty($donations)): ?>
-                <ul>
-                    <?php foreach ($donations as $donation): 
-         
-=======
->>>>>>> d3499823c1eb784f681170a47b7e26069a9942f1
                             $curr_date = date("Y-m-d");
                             $don_date = $donation['donation_date'];
 
                             if ($don_date < $curr_date) {
 
-<<<<<<< HEAD
-        <div class="upcoming-donations" >  <!--View upcoming donations-->
-            <h2>Upcoming Donations</h2> 
-            <?php if (!empty($donations)): ?>
-                <ul id="id01">
-                    <?php foreach ($donations as $donation): 
-         
-=======
                         ?>
                                 <li>
                                     <span><?php echo htmlspecialchars($donation['donation_date']); ?></span> -
@@ -219,7 +201,6 @@ $stmt->close();
                     <ul id="id01">
                         <?php foreach ($donations as $donation):
 
->>>>>>> d3499823c1eb784f681170a47b7e26069a9942f1
                             $curr_date = date("Y-m-d");
                             $don_date = $donation['donation_date'];
 
@@ -237,87 +218,8 @@ $stmt->close();
                     <ul>
                         <li>No upcoming donations.
                         <li>
-<<<<<<< HEAD
-                            <span><?php echo htmlspecialchars($donation['donation_date']); ?></span> - 
-                            <span><?php echo htmlspecialchars($donation['name']); ?></span><br>
-                        </li>
-                    <?php }endforeach; ?>
-                </ul>
-            <?php else: ?>
-                <ul>
-                    <li>No upcoming donations.<li>
-                </ul>
-            <?php endif; ?>
-        </div>
-    </section>
-
-<div class="forms-for-donation">  <!--Add previous donation - form-->
-    <section class="donation-form-bbank">
-
-    <form method="POST" action="donor_front_page_backend.php">
-    <div class="form-row">
-    <div class="form-group-donor">    
-        <h3>Date of Last Donation</h3>        
-        <input type="date" id="donation_date" max="<?php echo date("Y-m-d", strtotime('-1 day', time())); ?>" name="donation_date" required><br>
-    </div>
-    <div class="form-group-donor">    
-            <h3>Choose Blood Center</h3>
-            <select id="blood_center" name="blood_center" required>
-                <option value="">Select a blood center</option>
-                <?php foreach ($blood_banks as $bank): ?>
-                    <option value="<?php echo htmlspecialchars($bank['blood_bank_id']); ?>">
-                        <?php echo htmlspecialchars($bank['name']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select><br>
-    </div>
-    </div>
-
-        <button class="add-donation-button-donor" type="submit">Add Donation</button>
-    </form>
-</section>
-
-
-<section class="donation-form-bbank"> <!--Add upcoming donation - form-->
-
-<form method="POST" action="donor_front_page_backend.php"> 
-<div class="form-row">
-<div class="form-group-donor">    
-    <h3>Date of upcoming donation</h3>        
-    <input type="date" id="donation_date" min="<?php echo date("Y-m-d"); ?>" name="donation_date" required ><br>
-</div>
-<div class="form-group-donor">    
-        <h3>Choose Blood Center</h3>
-        <select id="blood_center" name="blood_center" required>
-            <option value="">Select a blood center</option>
-            <?php foreach ($blood_banks as $bank): ?>
-                <option value="<?php echo htmlspecialchars($bank['blood_bank_id']); ?>">
-                    <?php echo htmlspecialchars($bank['name']); ?>
-                </option>
-            <?php endforeach; ?>
-        </select><br>
-</div>
-</div>
-
-    <button class="add-donation-button-donor" type="submit">Add Donation</button>
-</form>
-</section>
-</div> <!--End forms for donation-->
-
- 
-<section class="unsubscribe"> <!--Unsubscribe from list-->
-    <h2>Temporarily unsubscribe from our email list</h2>
-    <p>By temporarily unsubscribing, you will not receive any updates about blood donation. This can be helpful if you have recently been pregnant, gotten a tattoo, or have other reasons that prevent you from donating for a while. </p>
-    
-    <form action="/unsubscribe" method="POST">
-        <div class="unsub-form-row">
-            <div class="unsub-form-group-donor">  
-                <label for="email">Enter your email address:</label>
-                <input type="email" id="email" name="email" required>
-=======
                     </ul>
                 <?php endif; ?>
->>>>>>> d3499823c1eb784f681170a47b7e26069a9942f1
             </div>
         </section>
 

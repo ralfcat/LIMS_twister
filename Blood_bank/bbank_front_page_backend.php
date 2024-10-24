@@ -70,14 +70,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($to_do == "update_blood") {
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
-        update_levels($btype, $units);
+        $update = update_levels($btype, $units);
         remove_unsub();
         $rid = get_rid();
         $bid = get_id();
         
         $curr_levels_array = get_stock($email);
         send_emails($curr_levels_array, $rid, $bid);
-        header('Location: bbank_front_page.php?msg=info_changed');
+        if ($update == 0) {
+        header('Location: bbank_front_page.php?msg=info_changed');}
+        else {
+            header('Location: bbank_front_page.php?msg=blood_stock_unchanged');
+        }
       
     } else if ($to_do == "update_threshold") {
         
@@ -86,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             write_console("$key and the val is $value");
             if (str_starts_with($key, 'O') || str_starts_with($key, 'A') ||   str_starts_with($key, 'B') ||   str_starts_with($key, 'AB')) {
                 if ($value < 0) {
-                    header('Location: bbank_front_page.php?msg=blood_stock_unchanged');
+                    header('Location: bbank_front_page.php?msg=blood_thresh_unchanged');
                     exit;
                 } else {
 
@@ -224,7 +228,7 @@ function update_curr($btype, $new_level, $id)
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("iis", $new_level, $id, $btype);
     $stmt->execute();
-    return;
+
    
  
 }
@@ -326,9 +330,11 @@ function update_levels($btype, $units)
     echo "<script>console.log( 'the blood bank id is $bb_id and the curr level is $curr_level');</script>";
     $new_level = (int) $curr_level + (int) $units;
     if ($new_level < 0) {
-        header('Location: bbank_front_page.php?msg=blood_info_unchanged');
+        return -1;
+        // header('Location: bbank_front_page.php?msg=blood_info_unchanged');
     } else {
         update_curr($btype, $new_level, $bb_id);
+        return 0;
 
     }
 }

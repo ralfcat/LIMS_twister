@@ -54,6 +54,127 @@ if (mysqli_connect_error()) {
 $reg_req = "SELECT region FROM Region";
 $reg_res = $link->query($reg_req);
 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if (isset($_POST["to_do"])) {
+        if ($_POST["to_do"] == "create_new") {
+            $fname = $_POST["fname"];
+            $lname = $_POST["lname"];
+            $pass = $_POST["password"];
+            echo "<script> fill_form('$fname', '$lname', '$pass') </script>";
+        }
+    } else {
+        // use email catherine_miller_356@outlook.com for testing
+        echo '<script> type="text/javascript">
+    let err = document.getElementById("error_msg");
+    document.getElementById("error_msg").innerHTML = "";
+    </script>';
+
+
+        $name = $_POST["name"];
+        $address = $_POST["region"];
+   
+
+        $sexes = $_POST["sexes"];
+        $preg = $_POST["preg"];
+        $email = $_POST["email"];
+        $activation_token = bin2hex(random_bytes(16));
+        $activation_token_hash = hash("md5", $activation_token);
+
+        $password = $_POST["password"];
+        $password_salt = $password . $email;
+
+        $hashed_password = hash('md5', $password_salt);
+
+
+        $btype = $_POST["btype"];
+        $donateds = $_POST["donateds"];
+        $donateddate = $_POST["donateddate"];
+        $eli = false;
+        $insert_sql = "";
+
+
+
+        if ($donateds == "Yes") {
+            $donated_date_format = date($donateddate);
+            $donateddate = $donated_date_format;
+            $today = getdate();
+            $day = $today['mday'];
+            $mon = $today['mon'];
+            $year = $today['year'];
+            $date_str = $year . "-" . $mon . "-" . $day;
+            $todays_date = date_create($date_str);
+            $six_mon_ago = date_sub($todays_date, date_interval_create_from_date_string('6 months'));
+            $six_mon_ago = $six_mon_ago->format('Y-m-d');
+
+            if (($donated_date_format >= $six_mon_ago) && ($donated_date_format <= $date_str)) {
+                $eli = true;
+            } else {
+                $eli = false;
+            }
+
+            $insert_sql = "INSERT INTO Donor (name, sex, address, email, password, blood_type, last_donation_date, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?)";
+            $stmt = $link->prepare($insert_sql);
+            $stmt->bind_param("sssssssss", $name, $sexes, $address, $email, $hashed_password, $btype, $donateddate, $eli, $activation_token_hash);
+        } else {
+            $insert_sql = "INSERT INTO Donor (name, sex, address, email, password, blood_type, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?)";
+            $stmt = $link->prepare($insert_sql);
+            $stmt->bind_param("ssssssis", $name, $sexes, $address, $email, $hashed_password, $btype, $eli, $activation_token_hash);
+        }
+
+
+
+
+
+        $sql_req = "SELECT COUNT(email) FROM Donor WHERE email = '" . $email . "'";
+        $res = $link->query($sql_req);
+        $row = $res->fetch_assoc();
+        $count = $row['COUNT(email)'];
+
+        if ($count > 0) {
+            $msg = 'The email you entered already exists';
+        } else {
+
+
+            $insert_res = $stmt->execute();
+
+            if ($insert_res) {
+                $amail = sendMail($email, $activation_token);
+
+
+                if ($amail == 0) {
+
+                    echo "<script>
+                const parentElement = document.getElementById('donform');
+                const newChild = document.createElement('h3');
+                newChild.innerHTML = ' Please check your email to activate your account ';
+            parentElement.insertBefore(newChild, parentElement.firstChild);
+                </script>";
+
+                $msg = ' Please check your email to activate your account ';
+                } else {
+
+                    echo "<script>
+                    const parentElement = document.getElementById('donform');
+                    const newChild = document.createElement('h3');
+                    newChild.innerHTML = 'An error occcured and your account could not be created. Please try again';
+                parentElement.insertBefore(newChild, parentElement.firstChild);
+                    </script>";
+                }
+            } else {
+                echo "<script>
+                const parentElement = document.getElementById('donform');
+                const newChild = document.createElement('h3');
+                newChild.innerHTML = ' Error: $stmt->error';
+            parentElement.insertBefore(newChild, parentElement.firstChild);
+                </script>";
+            }
+        }
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -102,6 +223,11 @@ $reg_res = $link->query($reg_req);
         </script>
         <!-- SCRIPTS FOR SHOWING/HIDING PASSWORD-->
         <h1>Create Account</h1>
+
+        <?php if (isset($msg)): ?>
+            <h3> <?php echo $msg; ?></h3>
+
+            <?php endif; ?>
         <p id='successMessage'></p>
         <section class="donation-form" id="donform">
         
@@ -300,11 +426,14 @@ $reg_res = $link->query($reg_req);
         var donated = document.getElementById("donateds").value;
         if (donated === "Yes") {
 
-            document.getElementById("dn").innerHTML = 'When did you last donate?'
-            document.getElementById("donate-date").type = 'date'
+            document.getElementById("dn").innerHTML = 'When did you last donate?';
+            document.getElementById("donate-date").type = 'date';
+            document.getElementById("donate-date").setAttribute("required", "required");
         } else {
             document.getElementById("dn").innerHTML = ''
-            document.getElementById("donate-date").type = 'hidden'
+            document.getElementById("donate-date").type = 'hidden';
+            document.getElementById("donate-date").removeAttribute("required");
+           
 
         }
     }
@@ -327,126 +456,3 @@ $reg_res = $link->query($reg_req);
 
 </html>
 
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    if (isset($_POST["to_do"])) {
-        if ($_POST["to_do"] == "create_new") {
-            $fname = $_POST["fname"];
-            $lname = $_POST["lname"];
-            $pass = $_POST["password"];
-            echo "<script> fill_form('$fname', '$lname', '$pass') </script>";
-        }
-    } else {
-        // use email catherine_miller_356@outlook.com for testing
-        echo '<script> type="text/javascript">
-    let err = document.getElementById("error_msg");
-    document.getElementById("error_msg").innerHTML = "";
-    </script>';
-
-
-        $name = $_POST["name"];
-        $address = $_POST["region"];
-   
-
-        $sexes = $_POST["sexes"];
-        $preg = $_POST["preg"];
-        $email = $_POST["email"];
-        $activation_token = bin2hex(random_bytes(16));
-        $activation_token_hash = hash("md5", $activation_token);
-
-        $password = $_POST["password"];
-        $password_salt = $password . $email;
-
-        $hashed_password = hash('md5', $password_salt);
-
-
-        $btype = $_POST["btype"];
-        $donateds = $_POST["donateds"];
-        $donateddate = $_POST["donateddate"];
-        $eli = false;
-        $insert_sql = "";
-
-
-
-        if ($donateds == "Yes") {
-            $donated_date_format = date($donateddate);
-            $donateddate = $donated_date_format;
-            $today = getdate();
-            $day = $today['mday'];
-            $mon = $today['mon'];
-            $year = $today['year'];
-            $date_str = $year . "-" . $mon . "-" . $day;
-            $todays_date = date_create($date_str);
-            $six_mon_ago = date_sub($todays_date, date_interval_create_from_date_string('6 months'));
-            $six_mon_ago = $six_mon_ago->format('Y-m-d');
-
-            if (($donated_date_format >= $six_mon_ago) && ($donated_date_format <= $date_str)) {
-                $eli = true;
-            } else {
-                $eli = false;
-            }
-
-            $insert_sql = "INSERT INTO Donor (name, sex, address, email, password, blood_type, last_donation_date, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?,?)";
-            $stmt = $link->prepare($insert_sql);
-            $stmt->bind_param("sssssssss", $name, $sexes, $address, $email, $hashed_password, $btype, $donateddate, $eli, $activation_token_hash);
-        } else {
-            $insert_sql = "INSERT INTO Donor (name, sex, address, email, password, blood_type, is_eligible, account_activation_hash) VALUES (?,?,?,?,?,?,?,?)";
-            $stmt = $link->prepare($insert_sql);
-            $stmt->bind_param("ssssssis", $name, $sexes, $address, $email, $hashed_password, $btype, $eli, $activation_token_hash);
-        }
-
-
-
-
-
-        $sql_req = "SELECT COUNT(email) FROM Donor WHERE email = '" . $email . "'";
-        $res = $link->query($sql_req);
-        $row = $res->fetch_assoc();
-        $count = $row['COUNT(email)'];
-
-        if ($count > 0) {
-            echo '<p id=error_msg>The email you entered already exists</p>';
-        } else {
-
-
-            $insert_res = $stmt->execute();
-
-            if ($insert_res) {
-                $amail = sendMail($email, $activation_token);
-                //  pass_field = document.getElementById("password");
-                // echo "<script>var succ = document.getElementById('successMessage'); 
-                // succ.innerHTML = ' Please check your email to activate your account ';
-                // </script>";
-
-                if ($amail == 0) {
-
-                    echo "<script>
-                const parentElement = document.getElementById('donform');
-                const newChild = document.createElement('h3');
-                newChild.innerHTML = ' Please check your email to activate your account ';
-            parentElement.insertBefore(newChild, parentElement.firstChild);
-                </script>";
-                } else {
-
-                    echo "<script>
-                    const parentElement = document.getElementById('donform');
-                    const newChild = document.createElement('h3');
-                    newChild.innerHTML = 'An error occcured and your account could not be created. Please try again';
-                parentElement.insertBefore(newChild, parentElement.firstChild);
-                    </script>";
-                }
-            } else {
-                echo "<script>
-                const parentElement = document.getElementById('donform');
-                const newChild = document.createElement('h3');
-                newChild.innerHTML = ' Error: $stmt->error';
-            parentElement.insertBefore(newChild, parentElement.firstChild);
-                </script>";
-            }
-        }
-    }
-}
-
-
-?>

@@ -18,7 +18,8 @@ $messages = [
     'blood_info_unchanged' => 'Blood stock cannot be less than 0',
     'blood_stock_unchanged' => 'Blood stock cannot be less than 0',
     'thresholds_changed' => 'Thresholds changed',
-    'info_changed' => 'Blood levels updated'
+    'info_changed' => 'Blood levels updated',
+    'blood_thresh_unchanged' => 'Thresholds cannot be less than 0'
 ];
 if (isset($messages[$_GET['msg']])) {
     $display_message = htmlspecialchars($messages[$_GET['msg']]);

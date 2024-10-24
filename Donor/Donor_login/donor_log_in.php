@@ -51,14 +51,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit(); 
             } 
             else {
-                $error_password = "Invalid password.";
+                $error_password = "The email or password you entered is incorrect.";
             }
         }
         else {
             $error_activation = "You need to activate your account. Please check your email for further instructions.";
         }
     } else {
-        $error_email = "No user found with that email.";
+        $error_email = "The email or password you entered is incorrect.";
     }  
 
     $stmt->close();
