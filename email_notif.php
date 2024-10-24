@@ -95,7 +95,7 @@ function sendMail(Recipient $user)
     
     $mail->Subject = "Running low on $btype in $address";
     $mail->Body = notif_email($btype, $address);
-    $mail->AltBody = 'This is a test please remove';
+    $mail->AltBody = 'Hej! We are running low on ' . $btype . ' in ' . $address . '! Visit your local blood center to donate';
     
     if (!$mail->send()) {
         return -1;
