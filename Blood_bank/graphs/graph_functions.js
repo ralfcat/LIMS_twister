@@ -2,7 +2,6 @@ function updateGraph(email, curr_region) {
   const regionSelect = document.getElementById("area-select");
   const regionId = regionSelect.value;
   const regionName = curr_region;
-  console.log(email);
 
   if (!regionId) return;
 

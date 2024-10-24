@@ -82,8 +82,9 @@ $region = curr_region();
 
                     <select id="area-select" onchange="updateGraph('<?php echo $email; ?>', '<?php echo $region; ?>');" style="margin-top: 20px;">
                         <!-- <option value="" disabled selected>Change Area</option> -->
-                        <option value="region" selected>Regional Levels</option>
-                        <option value="local">Local Levels</option>
+                        <option value="local" selected>Local Levels</option>
+                        <option value="region" >Regional Levels</option>
+                       
                         
                     </select>
                 </div>

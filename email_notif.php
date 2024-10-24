@@ -7,6 +7,8 @@ require 'Donor/Donor_reg/PHPMailer/src/Exception.php';
 require 'Donor/Donor_reg/PHPMailer/src/PHPMailer.php';
 require 'Donor/Donor_reg/PHPMailer/src/SMTP.php';
 require 'Donor/Donor_reg/config.php';
+require_once 'templates/notif_template.php';
+
 
 use FrontEnd\BloodStock as BloodStock;
 use function FrontEnd\get_user_id as get_user_id;
@@ -15,6 +17,7 @@ use function FrontEnd\write_console as write_console;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
+use function NotifTemplate\notif_email;
 
 class Recipient
 {
@@ -53,51 +56,6 @@ if (mysqli_connect_error()) {
 
 function send_emails(array $blood_levels, $rid, $bid)
 {
-    $mail_list = check_level_against_threshold($blood_levels, $rid, $bid);
-    foreach ($mail_list as $user) {
-        sendMail($user);
-    }
-}
-
-
-function sendMail($user)
-{
-    $name = $user->name;
-    $btype = $user->blood_type;
-    $address = $user->address;
-    $email = $user->email;
-    $mail = new PHPMailer(true);
-    $mail->isHTML(true);
-    $mail->isSMTP();
-    $mail->SMTPAuth = true;
-    $mail->Host = MAILHOST;
-    $mail->Username = USERNAME;
-    $mail->Password = PASSWORD;
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
-    $mail->setFrom(SEND_FROM, SEND_FROM_NAME);
-    $mail->addAddress($email);
-    $mail->addReplyTo(REPLY_TO, REPLY_TO_NAME);
-    $mail->isHTML(false);
-    $mail->Subject = "Running low on $btype in $address";
-    $mail->Body = "Hej! We are running low on $btype in $address! Visit your local blood center to donate";
-
-    $mail->AltBody = "Hej! We are running low on $btype in $address! Visit your local blood center to donate";
-
-
-    try {
-        $mail->send();
-        echo '<h1>SUCCESS</h1>';
-    } catch (Exception $e) {
-        echo '<h1>EMAIL WAS NOT SENT</h1>';
-        echo "Message could not be sent Error:" . $mail->ErrorInfo . "";
-    }
-}
-
-
-function check_level_against_threshold(array $blood_levels, $rid, $bid)
-{
-
     foreach ($blood_levels as $level) {
         $curr_stock = $level->current_stock;
         $thresh = $level->thres_level;
@@ -108,9 +66,45 @@ function check_level_against_threshold(array $blood_levels, $rid, $bid)
             populate_notif_db($mail_list, $bid);
         }
     }
-
-    return $mail_list;
+   
+  
+    
 }
+
+
+function sendMail(Recipient $user)
+{
+
+    $btype = $user->blood_type;
+    $address = $user->address;
+    $email = $user->email;
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Host = MAILHOST;
+    $mail->Username = USERNAME;
+    $mail->Password = PASSWORD;
+    $mail->SMTPSecure = 'tls';
+
+    $mail->Port = 587;
+    $mail->setFrom(SEND_FROM, SEND_FROM_NAME);
+    $mail->addAddress($email);
+    $mail->addReplyTo(REPLY_TO, REPLY_TO_NAME);
+    $mail -> CharSet = 'UTF-8';
+    $mail->isHTML(true);
+    
+    $mail->Subject = "Running low on $btype in $address";
+    $mail->Body = notif_email($btype, $address);
+    $mail->AltBody = 'This is a test please remove';
+    
+    if (!$mail->send()) {
+        return -1;
+    } else {
+
+        return 0;
+    }
+}
+
 
 // Get the list of people that will be sent an email as an array, and the number of people that will be sent an email
 function get_mail_list($btype, $rid)
@@ -136,10 +130,10 @@ function get_mail_list($btype, $rid)
 function populate_notif_db($mail_list, $bid)
 {
     global $link;
-    write_console("the donor id is ");
 
     // create the message for the log
     foreach ($mail_list as $mailer) {
+        sendMail($mailer);
         $user_id = $mailer->userid;
         $date = $mailer->date;
         $rid = get_region_id($mailer->address);
@@ -147,9 +141,10 @@ function populate_notif_db($mail_list, $bid)
 
         $sql_req = "INSERT INTO Notification (notification_date, rid, donor_id, blood_bank_id) VALUES (?,?,?, ?)";
         $stmt = $link->prepare($sql_req);
-        write_console("Theh donor id is {$user_id}");
 
         $stmt->bind_param("siii", $date, $rid, $user_id, $bid);
         $stmt->execute();
     }
+
+    return;
 }

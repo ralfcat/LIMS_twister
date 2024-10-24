@@ -65,26 +65,27 @@ if (mysqli_connect_error()) {
     die("Connection failed: " . mysqli_connect_error());
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+
     $to_do = $_POST["to_do"];
     if ($to_do == "update_blood") {
         $btype = $_POST['btypes'];
         $units = $_POST['units'];
         $update = update_levels($btype, $units);
-        remove_unsub();
-        $rid = get_rid();
-        $bid = get_id();
-        
-        $curr_levels_array = get_stock($email);
-        send_emails($curr_levels_array, $rid, $bid);
+
         if ($update == 0) {
-        header('Location: bbank_front_page.php?msg=info_changed');}
-        else {
+            // Resubscribes all the users who were unsubscribed and their unsubbed date passed
+            remove_unsub();
+            // Get region and blood bank ID
+            $rid = get_rid();
+            $bid = get_id();
+            $curr_levels_array = get_stock($email);
+            send_emails($curr_levels_array, $rid, $bid);
+            header('Location: bbank_front_page.php?msg=info_changed');
+        } else {
             header('Location: bbank_front_page.php?msg=blood_stock_unchanged');
         }
-      
     } else if ($to_do == "update_threshold") {
-        
+
         write_console("you are trying to update thresholds");
         foreach ($_POST as $key => $value) {
             write_console("$key and the val is $value");
@@ -151,7 +152,7 @@ function debug_to_console($data)
 
 
 
-
+// Get local blood stocks
 function get_stock($email)
 {
     global $link;
@@ -228,9 +229,6 @@ function update_curr($btype, $new_level, $id)
     $stmt = $link->prepare($update_req);
     $stmt->bind_param("iis", $new_level, $id, $btype);
     $stmt->execute();
-
-   
- 
 }
 
 function update_thresholds($btype, $threshold)
@@ -275,6 +273,7 @@ function get_regional_levels()
     $res = $link->query($sql_req);
     $levels = array();
     while ($row = $res->fetch_assoc()) {
+        
         $levels[] = $row;
     }
     close_db($link);
@@ -286,7 +285,7 @@ function update_account_info($new_name, $new_email, $new_region, $new_password)
     global $email;
     global $success_message;
     write_js("console.log('I am in the update_account_info account info section');");
-  
+
     $link = open_db();
     $rid = (int) get_region_id($new_region);
     if ($new_password == "") {
@@ -294,48 +293,36 @@ function update_account_info($new_name, $new_email, $new_region, $new_password)
         $stmt = $link->prepare($update_req);
         $stmt->bind_param("ssss", $new_name, $new_email, $rid, $email);
 
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             header('Location: bbank_info.php?msg=info_changed');
-
         } else {
             header('Location: bbank_info.php?msg=info_unchanged');
-            
         }
-
     } else {
         $pass_salt = $new_password . $new_email;
         $hashed_password = hash('md5', $pass_salt);
         $update_req = "UPDATE Blood_Bank SET name = ?, email = ? , region_id = ?, password = ? WHERE email = ?";
         $stmt = $link->prepare($update_req);
-        $stmt->bind_param("sssss", $new_name, $new_email, $rid,$hashed_password, $email);
+        $stmt->bind_param("sssss", $new_name, $new_email, $rid, $hashed_password, $email);
 
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             header('Location: bbank_info.php?msg=info_changed');
-
         } else {
             header('Location: bbank_info.php?msg=info_unchanged');
-            
         }
     }
-    
-
-
-    
 }
 
 function update_levels($btype, $units)
 {
     $bb_id = get_id();
     $curr_level = get_curr($btype, $bb_id);
-    echo "<script>console.log( 'the blood bank id is $bb_id and the curr level is $curr_level');</script>";
     $new_level = (int) $curr_level + (int) $units;
     if ($new_level < 0) {
         return -1;
-        // header('Location: bbank_front_page.php?msg=blood_info_unchanged');
     } else {
         update_curr($btype, $new_level, $bb_id);
         return 0;
-
     }
 }
 
@@ -377,6 +364,6 @@ function get_regions()
 }
 function close_db($link)
 {
-    
+
     $link->close();
 }
