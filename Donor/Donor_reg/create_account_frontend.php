@@ -54,15 +54,17 @@ if (mysqli_connect_error()) {
 $reg_req = "SELECT region FROM Region";
 $reg_res = $link->query($reg_req);
 
-
+$fullname = '';
+$pass = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (isset($_POST["to_do"])) {
         if ($_POST["to_do"] == "create_new") {
             $fname = $_POST["fname"];
             $lname = $_POST["lname"];
+            $fullname = $fname . ' '. $lname;
             $pass = $_POST["password"];
-            echo "<script> fill_form('$fname', '$lname', '$pass') </script>";
+
         }
     } else {
         // use email catherine_miller_356@outlook.com for testing
@@ -239,14 +241,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="form-column">
                         <p id="error_msg"></p>
                         <h3>Name:</h3> <span id="error_msg_n"></span>
-                        <input type="text" id="name" name="name" placeholder="Enter name">
+                        <input type="text" id="name" name="name" placeholder="Enter name" value = '<?php echo $fullname ?>' >
 
                     
 
                         <h3>Email:</h3> <span id="error_msg_em"></span>
                         <input type="text" id="email" name="email" placeholder="Enter email">
                         <h3>Password:</h3><span id="error_msg_ps"></span>
-                        <input type="password" id="password" name="password" placeholder="Enter password">
+                        <input type="password" id="password" name="password" placeholder="Enter password" value = '<?php echo $pass ?>'>
 
                         <h3>Re-enter password:</h3><span id="error_msg_rps"></span>
                         <input type="password" id="repeat_password" name="repeat_password" placeholder="Repeat password">
@@ -332,8 +334,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         var name = fname.concat(' ', lname);
 
 
-        pass_field.value = pass;
-        name_field.value = name;
+        pass_field.innerHTML = pass;
+        name_field.innerHTML = name;
 
 
 

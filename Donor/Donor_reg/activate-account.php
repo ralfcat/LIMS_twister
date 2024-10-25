@@ -22,7 +22,7 @@ if ($user === null) {
     die('token not found');
 }
 
-$change_sql = "UPDATE Donor SET account_activation_hash = NULL WHERE donor_id = ? " ;
+$change_sql = "UPDATE Donor SET account_activation_hash = NULL, is_eligible = 1 WHERE donor_id = ? " ;
 $stmt = $link->prepare($change_sql);
 $stmt->bind_param("i", $user["donor_id"]);
 $stmt->execute();   
